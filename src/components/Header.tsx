@@ -63,7 +63,7 @@ const Header: React.FC = () => {
                     <nav className="mt-2">
                         <ul className="flex space-x-5">
                             <li><NavLink href="/">Главная</NavLink></li>
-                            <li><NavLink href="/products">Продукты</NavLink></li>
+                            <li><NavLink href="/product">Продукты</NavLink></li>
                             <li><NavLink href="/about-us">О бренде</NavLink></li>
                             <li><NavLink href="/blog">Блог</NavLink></li>
                             <li><NavLink href="/contact">Контакты</NavLink></li>

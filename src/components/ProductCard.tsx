@@ -44,13 +44,13 @@ const ProductCard = ({
                 <p className="text-white text-md  mt-12 mb-5">{description}</p>
                 <div className="mt-4 flex justify-start items-center gap-5">
                     <Link
-                        href={`/products/${id}`}
+                        href={`/product/${id}`}
                         style={{ color: activeColor }}
                         className="bg-white font-bold px-4 py-2 rounded-lg transition-all"
                     >
                         Купить
                     </Link>
-                    <Link href={`/products/${id}`} className="text-white font-semibold bg-transparent underline p-5">
+                    <Link href={`/product/${id}`} className="text-white font-semibold bg-transparent underline p-5">
                         Подробнее
                     </Link>
                 </div>

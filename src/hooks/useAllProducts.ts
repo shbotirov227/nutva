@@ -1,11 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-import { apiClient } from '@/lib/apiClient';
-import { GetAllProducts } from '@/types/products/getAllProducts';
+// import { useQuery } from '@tanstack/react-query';
+// import { apiClient } from '@/lib/apiClient';
+// import { GetAllProductsType } from '@/types/products/getAllProducts';
 
-const getAllProducts = async (): Promise<GetAllProducts> => {
-  const { data } = await apiClient.get('/Product');
-  return data;
-};
+// const getAllProducts = async (): Promise<GetAllProductsType> => {
+//   const { data } = await apiClient.getAllProducts('/Product');
+//   return data;
+// };
 
-export const useAllProducts = () =>
-  useQuery({ queryKey: ['products'], queryFn: getAllProducts });
+// export const useAllProducts = () =>
+//   useQuery({ queryKey: ['products'], queryFn: getAllProducts });
