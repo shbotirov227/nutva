@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 
 import Blogs from "@/containers/Blogs";
 import HeroSection from "@/containers/HeroSection";

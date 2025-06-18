@@ -48,12 +48,11 @@ const Blogs = () => {
     isLoading,
   } = useQuery({
     queryKey: ["blogs"],
-    queryFn: apiClient.getAllBlogs,
+    queryFn: () => apiClient.getAllBlogs("en"),
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
   });
 
-  // filter qilingan bloglarni tayyorlaymiz
   const filteredBlogs = [...blogs]
     .sort((a, b) => {
       if (active === "popular") {
@@ -87,7 +86,7 @@ const Blogs = () => {
       </div>
 
       {/* Bloglar grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 gap-6">
         {isLoading
           ? Array.from({ length: 4 }).map((_, idx) => (
             <div
@@ -114,8 +113,7 @@ const Blogs = () => {
                 >
                   <BlogCard
                     id={blog.id}
-                    url={`/blog/${blog.id}`}
-                    imgUrl={blog.imageUrls}
+                    imgUrl={blog.imageUrls > 0 ? blog.imageUrls[0] : ""}
                     title={blog.title}
                     content={blog.content}
                   />

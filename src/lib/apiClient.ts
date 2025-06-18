@@ -34,12 +34,12 @@ import axios from "axios";
 // import { getToken } from "next-auth/jwt";
 
 const api = axios.create({
-	baseURL: "/api",
-	headers: {
-		"Content-Type": "application/json",
-		Accept: "application/json",
-	},
-	withCredentials: true,
+  baseURL: "/api",
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+  withCredentials: true,
 });
 
 // api.interceptors.request.use(async (config) => {
@@ -52,44 +52,48 @@ const api = axios.create({
 
 // Exported API functions
 export const apiClient = {
-	getAllProducts: async (lng: string) => {
-		// const session = await getSession();
-		// const token = session?.user?.token;
+  getAllProducts: async (lng: string) => {
+    // const session = await getSession();
+    // const token = session?.user?.token;
 
-		const res = await api.get("/Product", {
-			// headers: token ? { Authorization: `Bearer ${token}` } : {},
-            params: {
-                lang: lng,
-            }
-		});
-		return res.data;
-	},
-	getOneProduct: async (id: string) => {
-		const res = await api.get<GetAllProductsType>(`/Product/${id}`);
-		return res.data;
-	},
-	createProduct: async (data: CreateProductType, token: string) => {
-		const res = await fetch("/Product", {
-			method: "POST",
-			headers: {
-				"Content-Type": "multipart/form-data",
-				"Authorization": `Bearer ${token}`,
-			},
-			body: JSON.stringify(data),
-		});
-		return res.json();
-	},
+    const res = await api.get("/Product", {
+      // headers: token ? { Authorization: `Bearer ${token}` } : {},
+      params: {
+        lang: lng,
+      }
+    });
+    return res.data;
+  },
+  getOneProduct: async (id: string) => {
+    const res = await api.get<GetAllProductsType>(`/Product/${id}`);
+    return res.data;
+  },
+  createProduct: async (data: CreateProductType, token: string) => {
+    const res = await fetch("/Product", {
+      method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+    return res.json();
+  },
 
-	getAllBlogs: async () => {
-		const res = await api.get("/BlogPost");
-		return res.data;
-	},
-	getOneBlog: async (id: string) => {
-		const res = await api.get(`/Blog/${id}`);
-		return res.data;
-	},
-	createBlog: async (data: CreateBlogType) => {
-		const res = await api.post("/Blog", data);
-		return res.data;
-	},
+  getAllBlogs: async (lng: string) => {
+    const res = await api.get("/BlogPost", {
+      params: {
+        lang: lng
+      }
+    });
+    return res.data;
+  },
+  getOneBlog: async (id: string) => {
+    const res = await api.get(`/Blog/${id}`);
+    return res.data;
+  },
+  createBlog: async (data: CreateBlogType) => {
+    const res = await api.post("/Blog", data);
+    return res.data;
+  },
 };

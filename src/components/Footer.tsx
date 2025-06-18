@@ -83,7 +83,7 @@ const Footer = () => {
 							</ul>
 						</li>
 
-						<li className="mb-3">Эл. адрес:
+						<li className="mb-3">Эл. адрес: {" "}
 							<Link
 								className="border-b-1 border-white"
 								href="mailto:info@nutva.uz">

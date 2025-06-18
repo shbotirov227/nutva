@@ -58,11 +58,13 @@ export default function ProductPage() {
         <div
           className="absolute h-full w-full inset-0 -z-10 mx-auto px-4 sm:px-6 lg:px-8 py-10 overflow-hidden duration-500 bg-cover bg-center"
           style={{
-            backgroundImage: `url(${activeBgImage})`,
+            // backgroundImage: `url(${activeBgImage})`,
             transition: "background-image 0.5s ease-in-out",
           }}
         ></div>
-        <Image src={activeProduct?.image?.url} alt="Product" width={500} height={500} />
+        {/* <Image src={activeProduct?.image?.url} alt="Product" width={500} height={500} /> */}
+
+        <h1>Products page</h1>
       </Container>
     </div>
   );
