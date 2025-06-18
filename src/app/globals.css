@@ -141,3 +141,26 @@ body {
     @apply bg-background text-foreground;
 	}
 }
+.custom-phone-input {
+  position: relative;
+}
+
+.custom-phone-input input {
+  @apply w-full h-12 px-4 text-sm border border-[#33739D] rounded bg-white focus:outline-none focus:ring-2 focus:ring-[#33739D];
+}
+
+.custom-phone-input .react-phone-number-input__country {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  background: transparent;
+}
+
+.custom-phone-input .react-phone-number-input__icon {
+  margin-left: 10px;
+}

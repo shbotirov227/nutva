@@ -58,26 +58,25 @@ const BlogCard = ({ id, media, title, content, icon }: BlogCardProps) => {
         </div>
       </Link>
 
-      <CardHeader className="px-6 pt-2">
+      <CardHeader className="px-6 pt-3 pb-2">
         <CardTitle>
-          <h2 className="line-clamp-3 text-2xl text-[#1C1917] font-semibold leading-7">
+          <h2 className="text-xl sm:text-2xl font-semibold text-[#1C1917] leading-8 line-clamp-3">
             {title}
           </h2>
         </CardTitle>
       </CardHeader>
 
-      <CardContent className=" p-2 px-6 pb-4 text-[#44403C] text-lg flex-grow">
+      <CardContent className="px-6 pb-2 text-[#44403C] text-base sm:text-lg flex-grow">
         <p className="line-clamp-3">{content}</p>
       </CardContent>
 
-      <CardFooter>
+      <CardFooter className="px-6 pb-6 mt-auto">
         <Link
           href={`/blog/${id}`}
           rel="noopener noreferrer"
-          className="flex items-center justify-between text-sm py-2 px-3 bg-[#218A4F] text-white hover:bg-[#365343] transition-all cursor-pointer rounded-md mt-auto"
+          className="inline-block text-sm py-2 px-4 bg-[#218A4F] text-white hover:bg-[#365343] transition-all rounded-lg font-medium focus:outline-none focus-visible:ring-2 ring-[#218A4F] mt-auto"
         >
           Read More
-          {icon && <span className="text-sm font-semibold ml-2"><ArrowUpRight size={17} /></span>}
         </Link>
       </CardFooter>
     </Card>

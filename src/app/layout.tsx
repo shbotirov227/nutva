@@ -6,6 +6,7 @@ import { QueryProvider } from "@/providers/queryProvider";
 import { AuthProvider } from "@/providers/sessionProvider";
 import 'react-toastify/dist/ReactToastify.css';
 import "./globals.css";
+import 'react-phone-number-input/style.css';
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",

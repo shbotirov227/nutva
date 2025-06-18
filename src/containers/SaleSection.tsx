@@ -4,74 +4,53 @@ import React, { useState } from "react";
 import Container from "@/components/Container";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-// import { formatPhoneNumber } from "@/lib/utils";
-import MaskedInput from "react-text-mask";
-
-type PhoneInputMaskProps = {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
-
-const PhoneInputMask = ({ value, onChange }: PhoneInputMaskProps) => {
-  return (
-    <MaskedInput
-      mask={[
-        "+",
-        "9",
-        "9",
-        "8",
-        " ",
-        "(",
-        /[1-9]/,
-        /\d/,
-        ")",
-        " ",
-        /\d/,
-        /\d/,
-        /\d/,
-        "-",
-        /\d/,
-        /\d/,
-        "-",
-        /\d/,
-        /\d/,
-      ]}
-      guide={false}
-      value={value}
-      onChange={onChange}
-      render={(ref, props) => (
-        <Input
-          {...props}
-          ref={ref as React.Ref<HTMLInputElement>}
-          placeholder="Номер телефона"
-          className="w-[35%] mx-auto mt-4 border-[#33739D] bg-white focus-visible:border-[#33739D] ring-[#33739D]"
-        />
-      )}
-    />
-  )
-}
+import PhoneInput from "react-phone-number-input";
+import 'react-phone-number-input/style.css';
 
 const SaleSection = () => {
-
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState<string | undefined>("");
+  const [name, setName] = useState("");
 
   return (
-    <Container className="py-15">
-      <div className="bg-[#BAE2FD] py-20 text-center rounded-xl max-w-[80%] mx-auto shadow-[10px_10px_10px_rgba(0,0,0,0.1),_10px_10px_10px_rgba(0,0,0,0.1)]">
-        <h2 className="text-2xl font-bold text-center text-[#075385]">ПОЛУЧИТЕ СКИДКУ УЖЕ СЕЙЧАС!</h2>
-        <p className="w-[35%] mx-auto text-center text-[#0362A1] mt-4">
-          NUTVA — натуральные комплексы для поддержки суставов, костей, пищеварения и иммунитета. Оформите заявку и получите скидку на курс оздоровления уже сегодня.
+    <Container className="py-16">
+      <div className="bg-[#BAE2FD] py-20 px-4 text-center rounded-xl max-w-3xl mx-auto">
+        <h2 className="text-2xl font-bold text-[#075385]">
+          ПОЛУЧИТЕ СКИДКУ УЖЕ СЕЙЧАС!
+        </h2>
+        <p className="text-[#0362A1] mt-4 leading-relaxed">
+          NUTVA — натуральные комплексы для поддержки суставов, костей, пищеварения и иммунитета.
+          Оформите заявку и получите скидку на курс оздоровления уже сегодня.
         </p>
-        <Input type="text" placeholder="Ваше имя" className="w-[35%] mx-auto mt-8 border-[#33739D] bg-white !focus-visible:border-[#33739D] ring-[#33739D]" />
-        <PhoneInputMask
-          value={phone}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
+
+        {/* Имя */}
+        <Input
+          type="text"
+          placeholder="Ваше имя"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full sm:w-[80%] md:w-[60%] lg:w-[50%] mx-auto mt-8 border-[#33739D] bg-white focus-visible:border-[#33739D] ring-[#33739D]"
         />
 
-        <Button className="bg-[#075385] hover:bg-[#074265] mx-auto mt-8 cursor-pointer">Отправить заявку</Button>
+        {/* Telefon raqam */}
+        <div className="w-full sm:w-[80%] md:w-[60%] lg:w-[50%] mx-auto mt-4">
+          <PhoneInput
+            international
+            defaultCountry="UZ"
+            value={phone}
+            onChange={setPhone}
+            placeholder="Номер телефона"
+            className="custom-phone-input w-full"
+            countries={["UZ", "KZ", "RU", "KG", "TJ", "TM", "AZ", "AM", "UA", "BY", "GE", "TR", "AE", "DE", "PL", "US"]}
+            // Agar faqat SNG + boshqa davlatlar bo‘lsin desang, yuqoridagi countries propsni yoz.
+          />
+        </div>
+
+        <Button className="bg-[#075385] hover:bg-[#074265] mx-auto mt-8">
+          Отправить заявку
+        </Button>
       </div>
     </Container>
-  )
-}
+  );
+};
 
 export default SaleSection;
