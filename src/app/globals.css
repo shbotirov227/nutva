@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "react-datepicker/dist/react-datepicker.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -163,4 +164,62 @@ body {
 
 .custom-phone-input .react-phone-number-input__icon {
   margin-left: 10px;
+}
+
+
+
+
+/* :global(.form-control) {
+  border-color: #FD902B !important;
+  padding: 1.5rem !important;
+  border-radius: 1rem !important;
+  font-weight: bold;
+  color: #6F6F6F;
+  font-size: 15px;
+} */
+
+.react-tel-input .flag-dropdown {
+  left: 10px !important;
+  /* width: calc(100% - 50px) !important; */
+  border-radius: 0 0.75rem 0.75rem 0 !important;
+  height: 90%;
+  margin: auto;
+}
+
+.react-tel-input .country {
+  padding: 15px 15px;
+  font-size: 15px;
+  color: #333;
+  transition: background-color 0.2s;
+  border-radius: 8px;
+  margin: 2px 10px;
+}
+
+.react-tel-input .country:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.react-tel-input .selected-flag {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.react-tel-input .country-list {
+  margin-top: 5px !important;
+}
+
+.custom-phone-dropdown .country {
+  padding: 13px !important;
+  font-size: 15px !important;
+}
+
+.custom-phone-dropdown .country:hover {
+  background-color: #f5f5f5;
+}
+
+.react-tel-input .search {
+  width: 100% !important;
+  margin-bottom: 10px !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 0, 0, 0.2);
 }

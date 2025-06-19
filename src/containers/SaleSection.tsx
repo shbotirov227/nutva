@@ -19,12 +19,21 @@ const SaleSection = () => {
 
   return (
     <Container className="py-15">
-      <div className="bg-[#BAE2FD] py-20 text-center rounded-xl max-w-[80%] mx-auto">
+      <div className="bg-[#BAE2FD] py-20 text-center rounded-xl max-w-[80%] mx-auto shadow-[10px_10px_10px_rgba(0,0,0,0.1),_10px_10px_10px_rgba(0,0,0,0.1)]">
         <h2 className="text-2xl font-bold text-center text-[#075385]">ПОЛУЧИТЕ СКИДКУ УЖЕ СЕЙЧАС!</h2>
         <p className="w-[35%] mx-auto text-center text-[#0362A1] mt-4">
           NUTVA — натуральные комплексы для поддержки суставов, костей, пищеварения и иммунитета. Оформите заявку и получите скидку на курс оздоровления уже сегодня.
         </p>
-        <Input type="text" placeholder="Ваше имя" className="w-[35%] mx-auto mt-8 border-[#33739D] bg-white !focus-visible:border-[#33739D] ring-[#33739D]" />
+        <Input
+          type="text"
+          placeholder="Ваше имя"
+          className="w-[35%] mx-auto mt-8 mb-3
+          !ring-[1px] !ring-blue-400
+          focus:!ring-[#33739D]
+          focus:!shadow-[0_0_8px_rgba(0,0,0,0.1),_0_0_5px_rgba(0,0,0,0.5)]
+          !transition-all bg-white"
+        />
+
         <FormInputWrapper error={errors.phone}>
           <PhoneField
             placeholder={"Ваш номер телефона"}

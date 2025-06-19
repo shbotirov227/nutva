@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { CalendarDays, Search, CheckCircle, ChartNoAxesCombined } from "lucide-react";
-import { cn } from "@/lib/utils"; // Tailwind clsx yoki cn funksiyasi
+import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import DatePicker from "./DatePicker";
 
 const categories = [
   { id: "most-popular", label: "Most views", icon: <CheckCircle size={16} /> },
@@ -10,7 +11,7 @@ const categories = [
 
 export default function FilterBar() {
   const [search, setSearch] = useState("");
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedCats, setSelectedCats] = useState<string[]>([]);
 
   const toggleCategory = (id: string) => {
@@ -21,18 +22,15 @@ export default function FilterBar() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-      {/* Date Filter */}
       <div className="w-full relative">
-        <Input
-          type="date"
+        <DatePicker
           value={selectedDate}
-          onChange={(e) => setSelectedDate(e.target.value)}
-          className="w-full"
+          onChange={setSelectedDate}
+          placeholder="Date"
         />
         <CalendarDays className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" />
       </div>
 
-      {/* Text Search */}
       <div className="w-full relative">
         <Input
           placeholder="Qidirish..."
@@ -43,7 +41,6 @@ export default function FilterBar() {
         <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" />
       </div>
 
-      {/* Category Checkbox Filter */}
       <div className="flex flex-wrap gap-2">
         {categories.map((cat) => (
           <Button
