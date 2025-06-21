@@ -1,30 +1,35 @@
 'use client';
 
-import clsx from "clsx";
 import { useTranslation } from "react-i18next";
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 
-const languages = ["uz", "ru", "en"];
+const languages = [
+	{ label: "UZ", value: "uz" },
+	{ label: "RU", value: "ru" },
+	{ label: "EN", value: "en" },
+];
 
 export default function LanguageSwitcher() {
 	const { i18n } = useTranslation();
 
-	const changeLanguage = (lng: string) => {
-		i18n.changeLanguage(lng)
-	}
+	const currentLang = i18n.language;
+
+	const handleChange = (value: string) => {
+		i18n.changeLanguage(value);
+	};
 
 	return (
-		<div className="flex items-center gap-1 ml-15">
-			{languages.map((lng) => (
-				<button
-					key={lng}
-					onClick={() => changeLanguage(lng)}
-					className={clsx(
-						"text-white text-lg border-white p-1 rounded cursor-pointer transition-colors duration-300",
-					)}
-				>
-					{lng.toUpperCase()}
-				</button>
-			))}
-		</div>
+		<Select value={currentLang} onValueChange={handleChange}>
+			<SelectTrigger className="border-none max-w-[70px] cursor-pointer text-white relative">
+				<SelectValue placeholder="Lang" />
+			</SelectTrigger>
+			<SelectContent position="popper" className="bg-[rgba(20,20,20,0.7)] backdrop-blur-xl text-white right-15">
+				{languages.map((lang) => (
+					<SelectItem key={lang.value} value={lang.value} className="hover:bg-[rgba(255,255,255,0.1)] cursor-pointer transition-all">
+						{lang.label}
+					</SelectItem>
+				))}
+			</SelectContent>
+		</Select>
 	);
 }
