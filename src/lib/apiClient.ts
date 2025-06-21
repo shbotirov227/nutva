@@ -80,10 +80,10 @@ export const apiClient = {
     return res.json();
   },
 
-  getAllBlogs: async (lng: string) => {
+  getAllBlogs: async (lang: string) => {
     const res = await api.get("/BlogPost", {
       params: {
-        lang: lng
+        lang: lang
       }
     });
     return res.data;

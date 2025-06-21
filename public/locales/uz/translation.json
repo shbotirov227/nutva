@@ -9,7 +9,8 @@
         "confirm": "Tasdiqlash",
         "yes": "Ha",
         "no": "Yo'q",
-        "ok": "OK"
+        "ok": "OK",
+        "loading": "Yuklanmoqda..."
     },
     "errors": {
         "notFound": "Sahifa topilmadi",
@@ -32,9 +33,10 @@
 	"blog": {
 		"date": "Sana",
 		"search": "Qidirish...",
-		"mostViews": "Eng ko'p ko'rilgan postlar",
+		"mostViews": "Eng ko'p ko'rilganlar",
 		"clearFilter": "Filtrni tozalash",
 		"noResults": "Natija topilmadi",
-		"loadMore": "Ko'proq yuklash"
+		"loadMore": "Ko'proq yuklash",
+        "noBlogs": "Bloglar mavjud emas"
 	}
 }

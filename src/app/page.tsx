@@ -6,7 +6,6 @@ import Products from "@/containers/Products";
 import AboutBrandSection from "@/containers/AboutBrandSection";
 import Reviews from "@/containers/Reviews";
 import SaleSection from "@/containers/SaleSection";
-import "@/i18n";
 
 // export const metadata = {
 //     title: "Nutva Complex",

@@ -10,6 +10,7 @@ import {
 	// useState
 } from "react";
 import { queryClient } from "@/lib/queryClient";
+import "@/i18n";
 
 export function QueryProvider({ children }: { children: ReactNode }) {
 	// const [client] = useState(() => new QueryClient());

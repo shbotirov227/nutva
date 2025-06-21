@@ -2,6 +2,7 @@
 
 import { useTranslation } from "react-i18next";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
+import Cookies from "js-cookie";
 
 const languages = [
 	{ label: "UZ", value: "uz" },
@@ -9,12 +10,14 @@ const languages = [
 	{ label: "EN", value: "en" },
 ];
 
-export default function LanguageSwitcher() {
+export default function LanguageSwitcher () {
 	const { i18n } = useTranslation();
 
 	const currentLang = i18n.language;
 
-	const handleChange = (value: string) => {
+  const handleChange = (value: string) => {
+    Cookies.set("lang", value);
+    localStorage.setItem("lang", value);
 		i18n.changeLanguage(value);
 	};
 

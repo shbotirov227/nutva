@@ -3,8 +3,6 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import type { JWT } from "next-auth/jwt"
 import type { Session, User } from "next-auth"
 
-// User tipini kengaytirish
-
 interface ExtendedUser extends User {
 	token?: string;
 	refreshToken?: string;
@@ -44,14 +42,12 @@ export const authOptions: NextAuthOptions = {
 					console.log("API Response status:", res.status)
 					console.log("API Response headers:", Object.fromEntries(res.headers.entries()))
 
-					// Check if response is ok
 					if (!res.ok) {
 						const errorText = await res.text()
 						console.error("API Error Response:", errorText)
 						return null
 					}
 
-					// Check if response is JSON
 					const contentType = res.headers.get("content-type")
 					if (!contentType || !contentType.includes("application/json")) {
 						const responseText = await res.text()
@@ -62,13 +58,11 @@ export const authOptions: NextAuthOptions = {
 					const user = await res.json()
 					console.log("Login successful, user data:", user)
 
-					// To'g'ri tekshirish va qiymatlarni berish
 					if (user && (user.token || user.accessToken)) {
 						return {
 							id: user.id || user.email,
 							email: user.email,
 							name: user.name,
-							// Har doim tokenni accessToken sifatida ishlatamiz
 							token: user.token ?? user.accessToken,
 							refreshToken: user.refreshToken,
 							role: user.role,
@@ -87,7 +81,7 @@ export const authOptions: NextAuthOptions = {
 	],
 	session: {
 		strategy: "jwt",
-		maxAge: 24 * 60 * 60, // 24 soat
+		maxAge: 24 * 60 * 60,
 	},
 	pages: {
 		signIn: "/login",
@@ -97,7 +91,7 @@ export const authOptions: NextAuthOptions = {
 		async jwt({ token, user }: { token: JWT; user?: ExtendedUser }) {
 			console.log("JWT callback", token, user);
 			if (user) {
-				token.accessToken = user.token // Bu endi har doim bo'ladi
+				token.accessToken = user.token
 				token.refreshToken = user.refreshToken
 				token.role = user.role
 				token.id = user.id
@@ -106,7 +100,7 @@ export const authOptions: NextAuthOptions = {
 		},
 		async session({ session, token }: { session: Session; token: JWT }) {
 			console.log("SESSION callback", session, token);
-			// Sessionga token ma'lumotlarini qo'shish
+			
 			return {
 				...session,
 				// accessToken: token.accessToken,

@@ -20,11 +20,13 @@ export default function BlogPage() {
   const [search, setSearch] = useState("");
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedCats, setSelectedCats] = useState<string[]>([]);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const lang = i18n.language || "uz";
 
   const { data: blogs = [] as GetAllBlogsType, isLoading } = useQuery({
-    queryKey: ["blogs"],
-    queryFn: () => apiClient.getAllBlogs("uz"),
+    queryKey: ["blogs", lang],
+    queryFn: () => apiClient.getAllBlogs(lang),
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
   });
@@ -43,8 +45,6 @@ export default function BlogPage() {
       : true;
     return matchSearch && matchDate && matchCategory;
   });
-
-  console.log("Filtered Blogs:", filteredBlogs);
 
   return (
     <div className="pt-32">
@@ -73,7 +73,7 @@ export default function BlogPage() {
             ))
             : (
               <AnimatePresence mode="popLayout">
-                {filteredBlogs.map((blog: GetOneBlogType) => (
+                {filteredBlogs?.map((blog: GetOneBlogType) => (
                   <motion.div
                     key={blog.id}
                     layout
@@ -96,7 +96,7 @@ export default function BlogPage() {
             )}
         </div>
 
-        {filteredBlogs.length && (
+        {filteredBlogs.length ? (
           <Button
             onClick={handleLoadMore}
             size="lg"
@@ -108,6 +108,10 @@ export default function BlogPage() {
             {t("blog.loadMore")}
 
           </Button>
+        ) : (
+          <div className="text-center text-gray-500 my-10">
+            {t("blog.noBlogs")}
+          </div>
         )}
       </Container>
     </div>

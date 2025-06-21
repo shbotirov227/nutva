@@ -19,10 +19,6 @@ interface FilterBarProps {
   setSelectedCats: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const categories = [
-  { id: "most-popular", label: "Most views", icon: <CheckCircle size={16} /> },
-];
-
 export default function FilterBar({
   search,
   setSearch,
@@ -31,8 +27,13 @@ export default function FilterBar({
   selectedCats,
   setSelectedCats,
 }: FilterBarProps) {
-  const { t } = useTranslation();
   
+  const { t } = useTranslation();
+
+  const categories = [
+    { id: "most-popular", label: t("blog.mostViews"), icon: <CheckCircle size={16} /> },
+  ];
+
   const toggleCategory = (id: string) => {
     setSelectedCats((prev: string[]) =>
       prev.includes(id) ? prev.filter((c: string) => c !== id) : [...prev, id]
@@ -40,11 +41,11 @@ export default function FilterBar({
   };
 
   return (
-    <div className="grid grid-cols-8 md:grid-cols-4 gap-4 mb-8">
+    <div className="flex items-center gap-4 mb-8">
 
-      <div className="w-full relative">
+      <div className="w-[30%] relative">
         <Input
-          placeholder="Qidirish..."
+          placeholder={t("blog.search")}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full text-xl bg-white border-gray-300 focus:border-blue-500 focus:ring-blue-500 pl-4 pr-3 py-6 rounded-md shadow-sm text-semibold"
@@ -52,11 +53,11 @@ export default function FilterBar({
         <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" />
       </div>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex justify-between gap-2">
         <DatePicker
           value={selectedDate}
           onChange={setSelectedDate}
-          placeholder="Date"
+          placeholder={t("blog.date")}
           className="max-w-1/2"
         />
 
@@ -83,12 +84,12 @@ export default function FilterBar({
           setSelectedDate(undefined);
           setSelectedCats([]);
         }}
-        variant="outline"
+        variant="default"
         color="gray"
         disabled={!search && !selectedDate && selectedCats.length === 0}
         className={clsx(
           !search && !selectedDate && selectedCats.length === 0 ? "hidden" : "",
-          "px-3 py-6 rounded-md border transition-all cursor-pointer text-semibold col-span-2 md:col-span-1"
+          "px-3 py-6 !text-white rounded-md border transition-all cursor-pointer text-semibold col-span-2 md:col-span-1"
         )}
       >
         {t("blog.clearFilter")}

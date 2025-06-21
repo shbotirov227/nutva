@@ -33,9 +33,11 @@
     "blog": {
         "date": "Date",
         "search": "Search...",
-        "mostViews": "Most Viewed Posts",
+        "mostViews": "Most Views",
         "clearFilter": "Clear Filter",
         "noResults": "No results found",
-        "loadMore": "Load More"
+        "loadMore": "Load More",
+        "noBlogs": "No blogs available"
+
     }
 }
