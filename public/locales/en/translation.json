@@ -1,4 +1,35 @@
 {
+    "common": {
+        "cancel": "Cancel",
+        "save": "Save",
+        "delete": "Delete",
+        "edit": "Edit",
+        "add": "Add",
+        "close": "Close",
+        "confirm": "Confirm",
+        "yes": "Yes",
+        "no": "No",
+        "ok": "OK"
+    },
+
+    "errors": {
+        "notFound": "Page not found",
+        "serverError": "Internal server error",
+        "unauthorized": "You are not authorized",
+        "forbidden": "Access forbidden",
+        "badRequest": "Invalid request",
+        "validationError": "Validation error",
+        "networkError": "Network error"
+    },
+
+    "nav": {
+        "home": "Home",
+        "about": "About Us",
+        "products": "Products",
+        "blog": "Blog",
+        "contact": "Contact Us"
+    },
+
     "blog": {
         "date": "Date",
         "search": "Search...",

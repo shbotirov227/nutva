@@ -137,8 +137,8 @@ const Header: React.FC = () => {
                   </li>
                 ))}
               </ul>
-              <LanguageSwitcher />
             </nav>
+              <LanguageSwitcher />
             <button
               className="md:hidden flex items-center justify-center p-2"
               onClick={() => setMobileMenu(true)}

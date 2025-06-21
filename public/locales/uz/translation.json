@@ -1,4 +1,34 @@
 {
+    "common": {
+        "cancel": "Bekor qilish",
+        "save": "Saqlash",
+        "delete": "O'chirish",
+        "edit": "Tahrirlash",
+        "add": "Qo'shish",
+        "close": "Yopish",
+        "confirm": "Tasdiqlash",
+        "yes": "Ha",
+        "no": "Yo'q",
+        "ok": "OK"
+    },
+    "errors": {
+        "notFound": "Sahifa topilmadi",
+        "serverError": "Ichki server xatosi",
+        "unauthorized": "Siz avtorizatsiyadan o'tmagansiz",
+        "forbidden": "Kirish taqiqlangan",
+        "badRequest": "Noto'g'ri so'rov",
+        "validationError": "Validatsiya xatosi",
+        "networkError": "Internet xatosi"
+    },
+
+    "nav": {
+        "home": "Bosh sahifa",
+        "about": "Biz haqimizda",
+        "products": "Mahsulotlar",
+        "blog": "Blog",
+        "contact": "Aloqa"
+    },
+    
 	"blog": {
 		"date": "Sana",
 		"search": "Qidirish...",
