@@ -17,7 +17,7 @@ export type BlogMediaType = {
   file: File | null;
   caption: string | null;
   altText: string | null;
-  mediaType: "Image" | "Video";
+  mediaType: "Image" | "Video" | "YoutubeUrl" | "ImageUrl";
 };
 
 export type GetOneBlogType = {

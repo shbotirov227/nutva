@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface StructuredDataProps {
-  type: "Article" | "Organization" | "WebSite" | "BreadcrumbList"
-  data: any
+  type: "Article" | "Organization" | "WebSite" | "BreadcrumbList";
+  data: any;
 }
 
 export function StructuredData({ type, data }: StructuredDataProps) {
@@ -8,7 +9,7 @@ export function StructuredData({ type, data }: StructuredDataProps) {
     "@context": "https://schema.org",
     "@type": type,
     ...data,
-  }
+  };
 
   return (
     <script
@@ -17,7 +18,7 @@ export function StructuredData({ type, data }: StructuredDataProps) {
         __html: JSON.stringify(structuredData),
       }}
     />
-  )
+  );
 }
 
 // Foydalanish misoli:
@@ -28,11 +29,11 @@ export function ArticleStructuredData({
   publishDate,
   image,
 }: {
-  title: string
-  description: string
-  author: string
-  publishDate: string
-  image?: string
+  title: string;
+  description: string;
+  author: string;
+  publishDate: string;
+  image?: string;
 }) {
   const articleData = {
     headline: title,
@@ -44,7 +45,7 @@ export function ArticleStructuredData({
     datePublished: publishDate,
     dateModified: publishDate,
     image: image ? [image] : undefined,
-  }
+  };
 
-  return <StructuredData type="Article" data={articleData} />
+  return <StructuredData type="Article" data={articleData} />;
 }

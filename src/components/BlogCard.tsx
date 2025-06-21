@@ -1,14 +1,21 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "./ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "./ui/card";
 import { BlogMediaType } from "@/types/blogs/getOneBlog";
 import DefaultImg from "@/assets/images/default-img.png";
-import { ArrowUpRight } from "lucide-react";
+// import { ArrowUpRight } from "lucide-react";
 
 type BlogCardProps = {
   id: string;
   // url: string;
+  imgUrl?: string;
   media: BlogMediaType | null;
   title: string;
   content: string;
@@ -25,15 +32,24 @@ function convertYouTubeLinkToEmbed(url: string) {
   return url;
 }
 
-const BlogCard = ({ id, media, title, content, icon }: BlogCardProps) => {
-
+const BlogCard = ({
+  id,
+  media,
+  title,
+  content,
+}: // icon
+BlogCardProps) => {
   const isYouTube = media?.mediaType === "YoutubeUrl";
   const isImage =
     media?.mediaType === "Image" || media?.mediaType === "ImageUrl";
-  
+
   return (
     <Card className="bg-[#FFF7ED] w-full min-h-full shadow-[10px_10px_10px_rgba(0,0,0,0.1),_10px_10px_10px_rgba(0,0,0,0.1)] rounded-xl hover:shadow-[10px_10px_10px_rgba(0,0,0,0.2),_10px_10px_10px_rgba(0,0,0,0.2)] transition-shadow duration-300 border-1 box-border">
-      <Link href={`/blog/${id}`} rel="noopener noreferrer" className="block rounded-xl mx-5 border overflow-hidden">
+      <Link
+        href={`/blog/${id}`}
+        rel="noopener noreferrer"
+        className="block rounded-xl mx-5 border overflow-hidden"
+      >
         <div className="w-full h-[200px]">
           {isYouTube && media?.url && (
             <iframe

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import Container from "@/components/Container";
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/lib/apiClient";
@@ -23,23 +23,26 @@ const productBgImages: Record<ProductName, string> = {
 };
 
 export default function ProductPage() {
+  const [
+    activeIndex,
+    // setActiveIndex
+  ] = useState<number>(0);
 
-    const [activeIndex, setActiveIndex] = useState<number>(0);
-
-  const {
-    data: products = [] as GetAllProductsType[],
-    isLoading
-  } = useQuery({
+  const { data: products = [] as GetAllProductsType[] } = useQuery({
     queryKey: ["products"],
     queryFn: () => apiClient.getAllProducts("en"),
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
   });
 
-  const activeProduct = useMemo(() => products?.[activeIndex], [products, activeIndex]);
+  const activeProduct = useMemo(
+    () => products?.[activeIndex],
+    [products, activeIndex]
+  );
 
   const { activeColor, activeBgImage } = useMemo(() => {
-    const color = productBgColors[activeProduct?.name as ProductName] ?? "#218A4F";
+    const color =
+      productBgColors[activeProduct?.name as ProductName] ?? "#218A4F";
     const bgImage = productBgImages[activeProduct?.name as ProductName] ?? "";
 
     return {
@@ -48,9 +51,8 @@ export default function ProductPage() {
     };
   }, [activeProduct]);
 
-  console.log(activeProduct);
-  console.log(activeProduct?.image?.url)
-
+  console.log(activeProduct, activeColor, activeBgImage);
+  console.log(activeProduct?.image?.url);
 
   return (
     <div className="pt-32">

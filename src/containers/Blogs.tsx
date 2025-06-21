@@ -43,10 +43,7 @@ const ActiveButton = ({
 const Blogs = () => {
   const [active, setActive] = useState<ButtonType>("popular");
 
-  const {
-    data: blogs = [] as GetAllBlogsType[],
-    isLoading,
-  } = useQuery({
+  const { data: blogs = [] as GetAllBlogsType[], isLoading } = useQuery({
     queryKey: ["blogs"],
     queryFn: () => apiClient.getAllBlogs("en"),
     refetchOnWindowFocus: false,
@@ -58,7 +55,9 @@ const Blogs = () => {
       if (active === "popular") {
         return (b.views ?? 0) - (a.views ?? 0);
       } else {
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
       }
     })
     .slice(0, 4);
@@ -87,8 +86,8 @@ const Blogs = () => {
 
       {/* Bloglar grid */}
       <div className="grid grid-cols-1 xl:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 gap-6">
-        {isLoading
-          ? Array.from({ length: 4 }).map((_, idx) => (
+        {isLoading ? (
+          Array.from({ length: 4 }).map((_, idx) => (
             <div
               key={idx}
               className="w-full h-[300px] rounded-xl flex flex-col gap-4 p-4 bg-gray-200 border border-gray-300 shadow-[10px_10px_10px_rgba(0,0,0,0.1),_10px_10px_10px_rgba(0,0,0,0.1)]"
@@ -99,28 +98,29 @@ const Blogs = () => {
               <Skeleton className="w-5/6 h-4" />
             </div>
           ))
-          : (
-            <AnimatePresence mode="popLayout">
-              {filteredBlogs.map((blog) => (
-                <motion.div
-                  key={blog.id}
-                  layout
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="w-full rounded-xl flex flex-col gap-4 px-5"
-                >
-                  <BlogCard
-                    id={blog.id}
-                    imgUrl={blog.imageUrls > 0 ? blog.imageUrls[0] : ""}
-                    title={blog.title}
-                    content={blog.content}
-                  />
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          )}
+        ) : (
+          <AnimatePresence mode="popLayout">
+            {filteredBlogs.map((blog) => (
+              <motion.div
+                key={blog.id}
+                layout
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="w-full rounded-xl flex flex-col gap-4 px-5"
+              >
+                <BlogCard
+                  id={blog.id}
+                  imgUrl={blog.imageUrls > 0 ? blog.imageUrls[0] : ""}
+                  title={blog.title}
+                  content={blog.content}
+                  media={null}
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        )}
       </div>
     </Container>
   );
