@@ -1,0 +1,10 @@
+{
+    "blog": {
+        "date": "Date",
+        "search": "Search...",
+        "mostViews": "Most Viewed Posts",
+        "clearFilter": "Clear Filter",
+        "noResults": "No results found",
+        "loadMore": "Load More"
+    }
+}

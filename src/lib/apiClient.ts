@@ -89,11 +89,11 @@ export const apiClient = {
     return res.data;
   },
   getOneBlog: async (id: string) => {
-    const res = await api.get(`/Blog/${id}`);
+    const res = await api.get(`/BlogPost/${id}`);
     return res.data;
   },
   createBlog: async (data: CreateBlogType) => {
-    const res = await api.post("/Blog", data);
+    const res = await api.post("/BlogPost", data);
     return res.data;
   },
 };

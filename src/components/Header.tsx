@@ -5,15 +5,8 @@ import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Container from "./Container";
 import { Menu, X } from "lucide-react";
-
-const navLinks = [
-  { href: "/", label: "Главная" },
-  { href: "/product", label: "Продукты" },
-  { href: "/about-us", label: "О бренде" },
-  { href: "/blog", label: "Блог" },
-  { href: "/contact", label: "Контакты" },
-  { href: "/admin", label: "Admin" },
-];
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const NavLink = ({
   href,
@@ -49,7 +42,17 @@ const Header: React.FC = () => {
   const firstNavRef = useRef<HTMLAnchorElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // Header hide/show on scroll
+  const { t } = useTranslation();
+
+  const navLinks = [
+    { href: "/", label: t("nav.home") },
+    { href: "/product", label: t("nav.products") },
+    { href: "/about-us", label: t("nav.about") },
+    { href: "/blog", label: t("nav.blog") },
+    { href: "/contact", label: t("nav.contact") },
+    // { href: "/admin", label: "Admin" },
+  ];
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -62,7 +65,6 @@ const Header: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Body scroll lock when menu is open
   useEffect(() => {
     document.body.style.overflow = mobileMenu ? "hidden" : "";
     return () => {
@@ -70,7 +72,6 @@ const Header: React.FC = () => {
     };
   }, [mobileMenu]);
 
-  // Focus trap, esc close
   useEffect(() => {
     if (!mobileMenu) return;
     setTimeout(() => firstNavRef.current?.focus(), 100);
@@ -102,7 +103,6 @@ const Header: React.FC = () => {
 
   return (
     <>
-      {/* Accessibility: skip to content */}
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[10000] bg-white text-black px-4 py-2 rounded"
@@ -114,7 +114,7 @@ const Header: React.FC = () => {
           fixed top-0 w-full box-border text-white py-4 shadow-md z-50
           bg-[rgba(20,20,20,0.7)] backdrop-blur-xl
           transition-transform duration-300
-          ${visible ? 'translate-y-0' : '-translate-y-full'}
+          ${visible ? "translate-y-0" : "-translate-y-full"}
         `}
       >
         <Container>
@@ -124,13 +124,12 @@ const Header: React.FC = () => {
                 src="/nutva-logo.png"
                 alt="Logo"
                 width={120}
-                height={40} // Aspect ratio 3:1 (moslashtir)
+                height={40}
                 className="inline-block mr-2 w-[120px] h-auto"
                 priority
               />
             </Link>
-            {/* Desktop nav */}
-            <nav className="hidden md:block mt-2">
+            <nav className="hidden md:flex mt-2 items-center">
               <ul className="flex space-x-5">
                 {navLinks.map((item) => (
                   <li key={item.href}>
@@ -138,8 +137,8 @@ const Header: React.FC = () => {
                   </li>
                 ))}
               </ul>
+              <LanguageSwitcher />
             </nav>
-            {/* Mobile burger */}
             <button
               className="md:hidden flex items-center justify-center p-2"
               onClick={() => setMobileMenu(true)}
@@ -150,7 +149,6 @@ const Header: React.FC = () => {
           </div>
         </Container>
       </header>
-      {/* Mobile Overlay */}
       {mobileMenu && (
         <div
           ref={menuRef}
@@ -192,17 +190,23 @@ const Header: React.FC = () => {
                 {item.label}
               </NavLink>
             ))}
+            <LanguageSwitcher />
           </nav>
         </div>
       )}
-      {/* Overlay animatsiyasi */}
       <style jsx global>{`
         @keyframes fadein {
-          from { opacity: 0; transform: translateY(-20px);}
-          to { opacity: 1; transform: translateY(0);}
+          from {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
         .animate-fadein {
-          animation: fadein 0.35s cubic-bezier(.7,0,.2,1);
+          animation: fadein 0.35s cubic-bezier(0.7, 0, 0.2, 1);
         }
       `}</style>
     </>
