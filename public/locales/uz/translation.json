@@ -38,5 +38,14 @@
 		"noResults": "Natija topilmadi",
 		"loadMore": "Ko'proq yuklash",
         "noBlogs": "Bloglar mavjud emas"
-	}
+	},
+
+    "product": {
+        "tab": {
+            "1": "Tavsif",
+            "2": "Tarkibi",
+            "3": "Ko'rsatmalar",
+            "4": "Sertifikatlar"
+        }
+    }
 }

@@ -10,6 +10,7 @@ import { apiClient } from "@/lib/apiClient";
 import Container from "@/components/Container";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLang } from "@/context/LangContext";
 
 type ButtonType = "popular" | "latest";
 
@@ -42,10 +43,11 @@ const ActiveButton = ({
 
 const Blogs = () => {
   const [active, setActive] = useState<ButtonType>("popular");
+  const { lang } = useLang();
 
   const { data: blogs = [] as GetAllBlogsType[], isLoading } = useQuery({
     queryKey: ["blogs"],
-    queryFn: () => apiClient.getAllBlogs("en"),
+    queryFn: () => apiClient.getAllBlogs(lang),
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
   });

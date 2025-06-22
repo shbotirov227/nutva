@@ -8,16 +8,17 @@ import { QueryProvider } from "@/providers/queryProvider";
 import { AuthProvider } from "@/providers/sessionProvider";
 import 'react-toastify/dist/ReactToastify.css';
 import "./globals.css";
+import { LangProvider } from "@/context/LangContext";
 // import "../i18n";
 
 const geistSans = Geist({
-	variable: "--font-geist-sans",
-	subsets: ["latin"],
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
 });
 
 // export const metadata: Metadata = {
@@ -26,25 +27,27 @@ const geistMono = Geist_Mono({
 // };
 
 export default function RootLayout({
-	children,
+  children,
 }: Readonly<{
-	children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
 
-	return (
-		<html lang="en">
-			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-			>
-				<AuthProvider>
-					<QueryProvider>
-						<Layout>
-							{children}
-							<ToastContainer />
-						</Layout>
-					</QueryProvider>
-				</AuthProvider>
-			</body>
-		</html>
-	);
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <AuthProvider>
+          <QueryProvider>
+            <LangProvider>
+              <Layout>
+                {children}
+                <ToastContainer />
+              </Layout>
+            </LangProvider>
+          </QueryProvider>
+        </AuthProvider>
+      </body>
+    </html>
+  );
 }

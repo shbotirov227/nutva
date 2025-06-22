@@ -25,11 +25,32 @@ export type GetOneBlogType = {
   createdAt: Date | null;
   updatedAt: Date | null;
   published: boolean;
-  title: string;
-  subtitle: string;
-  content: string;
-  metaTitle: string;
-  metaDescription: string;
-  metaKeywords: string;
+
+  en: {
+    title: string;
+    subtitle: string;
+    content: string;
+    metaTitle: string;
+    metaDescription: string;
+    metaKeywords: string;
+  };
+
+  uz: {
+    title: string;
+    subtitle: string;
+    content: string;
+    metaTitle: string;
+    metaDescription: string;
+    metaKeywords: string;
+  };
+
+  ru: {
+    title: string;
+    subtitle: string;
+    content: string;
+    metaTitle: string;
+    metaDescription: string;
+    metaKeywords: string;
+  };
   media: BlogMediaType[];
 };

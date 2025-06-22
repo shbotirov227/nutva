@@ -38,6 +38,13 @@
         "noResults": "No results found",
         "loadMore": "Load More",
         "noBlogs": "No blogs available"
-
+    },
+    "product": {
+        "tab": {
+            "1": "Description",
+            "2": "Composition",
+            "3": "Instructions",
+            "4": "Certification"
+        }
     }
 }

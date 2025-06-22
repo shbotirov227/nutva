@@ -1,8 +1,9 @@
 import Container from "@/components/Container";
-import Image from "next/image";
+// import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { GetOneBlogType } from "@/types/blogs/getOneBlog";
+import BlogDetail from "./BlogDetail";
 
 type Props = {
   params: {
@@ -78,7 +79,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <Container className="pt-32">
-      <div className="space-y-6">
+      {/* <div className="space-y-6">
         <h1 className="text-4xl font-bold">{post.title}</h1>
 
         {post.createdAt && (
@@ -91,7 +92,6 @@ export default async function BlogPostPage({ params }: Props) {
           </p>
         )}
 
-        {/* Barcha rasmni ko‘rsatish */}
         {post.imageUrls?.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {post.imageUrls.map((img, index) => (
@@ -118,8 +118,10 @@ export default async function BlogPostPage({ params }: Props) {
             dangerouslySetInnerHTML={{ __html: JSON.stringify(post.content) }}
           />
         ) : (
-          // <p className="text-red-500 font-semibold">Kontent mavjud emas.</p>
-          <pre>{JSON.stringify(post, null, 2)}</pre>
+            <>
+              <p className="text-red-500 font-semibold">Kontent mavjud emas.</p>
+              <pre>{JSON.stringify(post, null, 2)}</pre>
+            </>
         )}
         {post.metaKeywords && (
           <div className="mt-4">
@@ -127,7 +129,8 @@ export default async function BlogPostPage({ params }: Props) {
             <p className="text-gray-600">{post.metaKeywords}</p>
           </div>
         )}
-      </div>
+      </div> */}
+      <BlogDetail />
     </Container>
   );
 }

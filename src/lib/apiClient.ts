@@ -28,8 +28,11 @@
 
 // lib/apiClient.ts
 import { CreateBlogType } from "@/types/blogs/createBlog";
+import { GetAllBlogsType } from "@/types/blogs/getAllBlogs";
+import { GetOneBlogType } from "@/types/blogs/getOneBlog";
 import { CreateProductType } from "@/types/products/createProduct";
 import { GetAllProductsType } from "@/types/products/getAllProducts";
+import { GetOneProductType } from "@/types/products/getOneProduct";
 import axios from "axios";
 // import { getToken } from "next-auth/jwt";
 
@@ -68,6 +71,16 @@ export const apiClient = {
     const res = await api.get<GetAllProductsType>(`/Product/${id}`);
     return res.data;
   },
+
+  getOneProductById: async (id: string, lang: string) => {
+    const res = await api.get<GetOneProductType>(`/Product/${id}`, {
+      params: {
+        lang: lang
+      }
+    });
+    return res.data;
+  },
+
   createProduct: async (data: CreateProductType, token: string) => {
     const res = await fetch("/Product", {
       method: "POST",
@@ -81,7 +94,7 @@ export const apiClient = {
   },
 
   getAllBlogs: async (lang: string) => {
-    const res = await api.get("/BlogPost", {
+    const res = await api.get<GetAllBlogsType>("/BlogPost", {
       params: {
         lang: lang
       }
@@ -89,9 +102,10 @@ export const apiClient = {
     return res.data;
   },
   getOneBlog: async (id: string) => {
-    const res = await api.get(`/BlogPost/${id}`);
+    const res = await api.get<GetOneBlogType>(`/BlogPost/${id}`);
     return res.data;
   },
+
   createBlog: async (data: CreateBlogType) => {
     const res = await api.post("/BlogPost", data);
     return res.data;

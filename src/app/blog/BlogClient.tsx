@@ -5,6 +5,7 @@ import Container from "@/components/Container";
 import FilterBar from "@/components/FilterBar";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useLang } from "@/context/LangContext";
 import { apiClient } from "@/lib/apiClient";
 import { GetAllBlogsType } from "@/types/blogs/getAllBlogs";
 import { GetOneBlogType } from "@/types/blogs/getOneBlog";
@@ -14,15 +15,15 @@ import { ArrowDown } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export default function BlogPage() {
+export default function BlogClient() {
 
   const [, setVisibleCount] = useState(6);
   const [search, setSearch] = useState("");
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedCats, setSelectedCats] = useState<string[]>([]);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
-  const lang = i18n.language || "uz";
+  const { lang } = useLang();
 
   const { data: blogs = [] as GetAllBlogsType, isLoading } = useQuery({
     queryKey: ["blogs", lang],
@@ -34,15 +35,22 @@ export default function BlogPage() {
   const handleLoadMore = () => setVisibleCount((prev) => prev + 6);
 
   const filteredBlogs = blogs.filter((blog: GetOneBlogType) => {
-    const matchSearch = blog.title.toLowerCase().includes(search.toLowerCase())
-      || blog.content.toLowerCase().includes(search.toLowerCase())
-      || blog.subtitle.toLowerCase().includes(search.toLowerCase())
+    const translation = blog[lang as "uz" | "ru" | "en"];
+    const matchSearch =
+      translation.title.toLowerCase().includes(search.toLowerCase()) ||
+      translation.content.toLowerCase().includes(search.toLowerCase()) ||
+      translation.subtitle.toLowerCase().includes(search.toLowerCase());
+
     const matchDate = selectedDate
       ? new Date(blog.createdAt!).toDateString() === selectedDate.toDateString()
       : true;
+
     const matchCategory = selectedCats.length
-      ? selectedCats.every(cat => blog.metaKeywords.toLowerCase().includes(cat))
+      ? selectedCats.every((cat) =>
+        translation.metaKeywords.toLowerCase().includes(cat)
+      )
       : true;
+
     return matchSearch && matchDate && matchCategory;
   });
 
@@ -73,25 +81,28 @@ export default function BlogPage() {
             ))
             : (
               <AnimatePresence mode="popLayout">
-                {filteredBlogs?.map((blog: GetOneBlogType) => (
-                  <motion.div
-                    key={blog.id}
-                    layout
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-full rounded-xl flex flex-col gap-4 px-5"
-                  >
-                    <BlogCard
-                      id={blog.id}
-                      title={blog.title}
-                      content={blog.subtitle}
-                      media={blog.media[0] || null}
-                      icon
-                    />
-                  </motion.div>
-                ))}
+                {filteredBlogs?.map((blog: GetOneBlogType) => {
+                  const translation = blog[lang as "uz" | "ru" | "en"];
+                  return (
+                    <motion.div
+                      key={blog.id}
+                      layout
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-full rounded-xl flex flex-col gap-4 px-5"
+                    >
+                      <BlogCard
+                        id={blog.id}
+                        title={translation.title}
+                        content={translation.subtitle}
+                        media={blog.media[0] || null}
+                        icon
+                      />
+                    </motion.div>
+                  )
+                })}
               </AnimatePresence>
             )}
         </div>

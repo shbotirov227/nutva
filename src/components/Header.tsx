@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import Image from "next/image";
 import Container from "./Container";
 import { Menu, X } from "lucide-react";
@@ -44,14 +44,14 @@ const Header: React.FC = () => {
 
   const { t } = useTranslation();
 
-  const navLinks = [
+  const navLinks = useMemo(() => [
     { href: "/", label: t("nav.home") },
     { href: "/product", label: t("nav.products") },
     { href: "/about-us", label: t("nav.about") },
     { href: "/blog", label: t("nav.blog") },
     { href: "/contact", label: t("nav.contact") },
     // { href: "/admin", label: "Admin" },
-  ];
+  ], [t]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -138,7 +138,7 @@ const Header: React.FC = () => {
                 ))}
               </ul>
             </nav>
-              <LanguageSwitcher />
+            <LanguageSwitcher />
             <button
               className="md:hidden flex items-center justify-center p-2"
               onClick={() => setMobileMenu(true)}
