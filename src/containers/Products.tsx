@@ -86,7 +86,7 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
     <div className="relative w-full py-10">
       {isAviableBackground ? (
         <div
-          className="absolute h-full w-full inset-0 -z-10 mx-auto px-4 sm:px-6 lg:px-8 py-10 overflow-hidden duration-500 bg-cover bg-center"
+          className="absolute h-full w-full inset-0 -z-10 mx-auto px-4 sm:px-6 lg:px-8 py-10 overflow-hidden duration-500 bg-cover bg-center bg-no-repeat"
           style={{
             background: `url(${activeBgImage})`,
             transition: "background-image 0.5s ease-in-out",

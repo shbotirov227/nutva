@@ -12,7 +12,7 @@ export default function ProductDetailSkeleton() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
             <div className="flex">
-              <Skeleton className={`w-[300px] h-[300px] rounded-xl ${commonClass}`} />
+              <Skeleton className={`w-[600px] h-[300px] rounded-xl ${commonClass}`} />
             </div>
             <div className="flex flex-col gap-4">
               <Skeleton className={`h-10 w-1/2 ${commonClass}`} />

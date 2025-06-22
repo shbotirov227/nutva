@@ -1,5 +1,6 @@
 {
     "common": {
+        "buy": "Sotib olish",
         "cancel": "Bekor qilish",
         "save": "Saqlash",
         "delete": "O'chirish",

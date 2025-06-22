@@ -16,13 +16,13 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProductsComponent from "@/containers/Products";
 import SaleSection from "@/containers/SaleSection";
-import { Skeleton } from "@/components/ui/skeleton";
 import ProductImage from "@/assets/images/product-green.png";
 import ProductDetailImage from "@/assets/images/product-detail-img.png";
 import DefaultVideoImg from "@/assets/images/reviewcard-img.png";
 import GinsengImg from "@/assets/images/ginseng.png";
 import CertificateImg from "@/assets/images/certificate-img.png";
 import ProductDetailSkeleton from "@/components/ProductDetailSkleton";
+import { GetOneProductType } from "@/types/products/getOneProduct";
 
 export default function ProductDetailPage() {
   const [activeTab, setActiveTab] = useState("1");
@@ -30,7 +30,7 @@ export default function ProductDetailPage() {
   const { lang } = useLang();
   const { t } = useTranslation();
 
-  const { data: product, isLoading } = useQuery({
+  const { data: product = {} as GetOneProductType, isLoading } = useQuery({
     queryKey: ["product", id, lang],
     queryFn: () => apiClient.getOneProductById(id as string, lang),
     enabled: !!id,
@@ -52,8 +52,6 @@ export default function ProductDetailPage() {
     return <ProductDetailSkeleton />;
   }
 
-  console.log("Product details:", product, id);
-
   return (
     <div className="relative pt-32 overflow-hidden">
       <div
@@ -70,7 +68,7 @@ export default function ProductDetailPage() {
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-2 mb-8">
             <Image
-              src={ProductImage}
+              src={ product?.imageUrls[0] || ProductImage}
               alt={localizedProduct?.name || "Product Image"}
               width={500}
               height={500}

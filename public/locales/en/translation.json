@@ -1,5 +1,6 @@
 {
     "common": {
+        "buy": "Buy",
         "cancel": "Cancel",
         "save": "Save",
         "delete": "Delete",
