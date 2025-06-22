@@ -56,57 +56,60 @@ const PhoneLink = ({ title, url, className }: { title: string; url: string; clas
 
 const Footer = () => {
   return (
-    <footer className="bg-[#2B2B2B] text-white pt-20 pb-25 mt-8">
-      <Container className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-25 justify-between ">
+    <footer className="bg-[#2B2B2B] text-white pt-16 pb-10 mt-8">
+      <Container className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+
         <div>
           <Image
             src="/nutva-logo.png"
             alt="logo"
-            width={0}
-            height={0}
-            className="inline-block mr-2 w-[200px] lg:h-[50px] md:h-[60px] mb-10"
+            width={200}
+            height={50}
+            className="mb-6"
           />
-          <p className="text-white text-sm md:text-base md:leading-relaxed">
-            NUTVA Complex - это натуральный и экологически чистый продукт высокого качества, созданный из трав Средней Азии и Европы по рецептам народной медицины.
+          <p className="text-sm leading-relaxed text-white/80">
+            NUTVA Complex — это натуральный и экологически чистый продукт высокого качества, созданный из трав Средней Азии и Европы по рецептам народной медицины.
           </p>
         </div>
 
+        {/* CONTACTS */}
         <div>
-          <h4 className="text-2xl font-bold text-white mb-10">Контакты</h4>
-          <ul className="mt-4 text-white text-sm md:text-base md:leading-relaxed">
+          <h4 className="text-xl font-semibold mb-4">Контакты</h4>
+          <ul className="text-sm space-y-3 text-white/80">
 
-            <li className="mb-3">
-              Колл-центр:
-              <ul className="text-white text-sm md:text-base md:leading-relaxed ml-5">
+            <li>
+              <span className="block font-medium text-white">Колл-центр:</span>
+              <ul className="ml-4 space-y-1">
                 <PhoneLink title="1294" url="tel:1294" />
-                <PhoneLink title="+998 71 211-11-12" url="tel:+998 71 211-11-12" />
+                <PhoneLink title="+998 71 211-11-12" url="tel:+998712111112" />
               </ul>
             </li>
 
-            <li className="mb-3">Эл. адрес: {" "}
-              <Link
-                className="border-b-1 border-white"
-                href="mailto:info@nutva.uz">
+            <li>
+              <span className="block font-medium text-white">Эл. адрес:</span>
+              <Link href="mailto:info@nutva.uz" className="ml-4 underline">
                 info@nutva.uz
               </Link>
             </li>
 
-            <li className="mb-3">Адрес:  Узбекистан, Ташкент</li>
+            <li>
+              <span className="block font-medium text-white">Адрес:</span>
+              <span className="ml-4">Узбекистан, Ташкент</span>
+            </li>
 
             <li>
-              По вопросом сотрудничества:
-              <ul className="text-white text-sm md:text-base md:leading-relaxed ml-5">
-                <PhoneLink title="+998 95 185-10-01" url="tel:+998 95 185-10-01" />
+              <span className="block font-medium text-white">По вопросам сотрудничества:</span>
+              <ul className="ml-4 space-y-1">
+                <PhoneLink title="+998 95 185-10-01" url="tel:+998951851001" />
                 <PhoneLink title="info@nutva.uz" url="mailto:info@nutva.uz" />
               </ul>
             </li>
-
           </ul>
         </div>
 
         <div>
-          <h4 className="text-2xl font-bold text-white mb-10">Быстрые ссылки</h4>
-          <ul>
+          <h4 className="text-xl font-semibold mb-4">Быстрые ссылки</h4>
+          <ul className="space-y-3 text-sm text-white/80">
             {FooterLinks.map((link) => (
               <FooterLink key={link.title} title={link.title} url={link.url} />
             ))}
@@ -114,10 +117,10 @@ const Footer = () => {
         </div>
 
         <div>
-          <h4 className="text-2xl font-bold text-white mb-10">Социальные сети</h4>
-          <ul>
+          <h4 className="text-xl font-semibold mb-4">Социальные сети</h4>
+          <ul className="space-y-3 text-sm text-white/80">
             {SocialLinks.map((link) => (
-              <FooterLink key={link.title} title={link.title} url={link.url} className="" />
+              <FooterLink key={link.title} title={link.title} url={link.url} />
             ))}
           </ul>
         </div>

@@ -36,11 +36,8 @@ const NavLink = ({
 );
 
 const Header: React.FC = () => {
-  const [visible, setVisible] = useState(true);
-  const [mobileMenu, setMobileMenu] = useState(false);
-  const lastScrollY = useRef(0);
-  const firstNavRef = useRef<HTMLAnchorElement>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
+    const [visible, setVisible] = useState(true);
+    const lastScrollY = useRef(0);
 
   const { t } = useTranslation();
 

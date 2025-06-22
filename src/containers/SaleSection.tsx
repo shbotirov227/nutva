@@ -18,11 +18,15 @@ const SaleSection = () => {
   const [errors, setErrors] = useState<{ name?: string; phone?: string }>({});
 
   return (
-    <Container className="py-15">
-      <div className="bg-[#BAE2FD] py-20 text-center rounded-xl max-w-[80%] mx-auto shadow-[10px_10px_10px_rgba(0,0,0,0.1),_10px_10px_10px_rgba(0,0,0,0.1)]">
-        <h2 className="text-2xl font-bold text-center text-[#075385]">ПОЛУЧИТЕ СКИДКУ УЖЕ СЕЙЧАС!</h2>
-        <p className="w-[35%] mx-auto text-center text-[#0362A1] mt-4">
-          NUTVA — натуральные комплексы для поддержки суставов, костей, пищеварения и иммунитета. Оформите заявку и получите скидку на курс оздоровления уже сегодня.
+    <Container className="py-16 px-4 sm:px-6 lg:px-8">
+      <div className="bg-[#BAE2FD] py-12 sm:py-16 px-4 sm:px-10 text-center rounded-xl max-w-5xl mx-auto">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#075385]">
+          ПОЛУЧИТЕ СКИДКУ УЖЕ СЕЙЧАС!
+        </h2>
+
+        <p className="mt-4 text-sm sm:text-base md:text-lg text-[#0362A1] max-w-2xl mx-auto">
+          NUTVA — натуральные комплексы для поддержки суставов, костей, пищеварения и иммунитета.
+          Оформите заявку и получите скидку на курс оздоровления уже сегодня.
         </p>
         <Input
           type="text"
@@ -44,7 +48,10 @@ const SaleSection = () => {
           />
         </FormInputWrapper>
 
-        <Button className="bg-[#075385] hover:bg-[#074265] mx-auto mt-8 cursor-pointer">Отправить заявку</Button>
+          <Button className="bg-[#075385] hover:bg-[#074265] w-full sm:w-auto mt-2 sm:mt-0">
+            Отправить заявку
+          </Button>
+        </div>
       </div>
     </Container>
   )
