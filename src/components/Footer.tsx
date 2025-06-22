@@ -56,7 +56,7 @@ const PhoneLink = ({ title, url, className }: { title: string; url: string; clas
 
 const Footer = () => {
   return (
-    <footer className="bg-[#2B2B2B] text-white pt-16 pb-10 mt-8">
+    <footer className="bg-[#2B2B2B] text-white pt-16 pb-10">
       <Container className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
 
         <div>
