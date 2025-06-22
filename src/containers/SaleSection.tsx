@@ -48,10 +48,9 @@ const SaleSection = () => {
           />
         </FormInputWrapper>
 
-          <Button className="bg-[#075385] hover:bg-[#074265] w-full sm:w-auto mt-2 sm:mt-0">
+          <Button className="bg-[#075385] hover:bg-[#074265] w-full sm:w-auto mt-5">
             Отправить заявку
           </Button>
-        </div>
       </div>
     </Container>
   )

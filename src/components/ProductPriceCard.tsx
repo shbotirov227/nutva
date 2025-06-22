@@ -6,7 +6,14 @@ interface Props {
   color: string;
 }
 
-const ProductPriceCard = ({product, color}: Props) => {
+const ProductPriceCard = ({ product, color }: Props) => {
+  
+  if (!product) {
+    return <div className="text-center">Product not found</div>;
+  }
+
+  
+
   return (
     <div>
       <div className="bg-white p-4 rounded-lg shadow-md">

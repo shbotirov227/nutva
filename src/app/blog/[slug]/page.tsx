@@ -11,17 +11,6 @@ type Props = {
   };
 };
 
-type BlogPost = {
-  id: string;
-  title: string;
-  content: string;
-  imageUrls: string[];
-  metaTitle?: string;
-  metaDescription?: string;
-  metaKeywords?: string;
-  createdAt?: string;
-};
-
 export async function generateMetadata({
   params,
 }: {
@@ -74,7 +63,7 @@ export default async function BlogPostPage({ params }: Props) {
     return notFound();
   }
 
-  const post: BlogPost = await res.json();
+  const post: GetOneBlogType = await res.json();
   <pre>{JSON.stringify(post, null, 2)}</pre>;
 
   return (

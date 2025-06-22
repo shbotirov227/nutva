@@ -16,7 +16,7 @@ export default function App() {
   return (
     <main className="">
       <HeroSection />
-      <Products />
+      <Products isAviableBackground />
       <Blogs />
       <AboutBrandSection />
       <Reviews />
