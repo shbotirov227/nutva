@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { NavigationOptions, Swiper as SwiperType } from "swiper/types";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -33,6 +34,7 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
   const swiperRef = useRef<SwiperType | null>(null);
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
+  const { t } = useTranslation();
 
   const {
     data: products = [] as GetAllProductsType[],
@@ -100,7 +102,7 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
             className="text-3xl sm:text-4xl font-bold transition-colors duration-500"
             style={{ color: activeColor }}
           >
-            Наши Продукты
+            {t("common.ourProducts")}
           </h2>
           <div className="flex items-center gap-4">
             <Button

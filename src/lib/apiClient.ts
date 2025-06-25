@@ -56,8 +56,12 @@ const api = axios.create({
 // Exported API functions
 export const apiClient = {
 
-  getBanner: async () => {
-    const res = await api.get("/Banner");
+  getBanner: async (lang: string) => {
+    const res = await api.get("/Banner", {
+      params: {
+        lang: lang
+      }
+    });
     return res.data;
   },
 

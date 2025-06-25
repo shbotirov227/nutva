@@ -30,15 +30,15 @@ const nextConfig: NextConfig = {
 		return [
 			{
 				source: "/api/:path((?!auth).*)",
-				destination: "https://www.nutvahealth.uz/api/:path*",
+        destination: "https://demo.nutva.uz/api/:path*",
 			},
 		];
 	},
 	//   devIndicators: false,
 	env: {
-		NEXT_PUBLIC_BASE_URL: "https://www.nutvahealth.uz/api",
-		NEXT_PUBLIC_API_URL: "https://www.nutvahealth.uz/api",
-	},
+    NEXT_PUBLIC_BASE_URL: "https://demo.nutva.uz/api",
+    NEXT_PUBLIC_API_URL: "https://demo.nutva.uz/api",
+  },
 };
 
 export default nextConfig;

@@ -16,7 +16,8 @@
         "more": "Batafsil",
         "quantity": "dona",
         "sale": "chegirma",
-        "forYou": "Siz uchun"
+        "forYou": "Siz uchun",
+        "ourProducts": "Bizning mahsulotlarimiz"
     },
     "errors": {
         "notFound": "Sahifa topilmadi",
