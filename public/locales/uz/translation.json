@@ -11,7 +11,12 @@
         "yes": "Ha",
         "no": "Yo'q",
         "ok": "OK",
-        "loading": "Yuklanmoqda..."
+        "sum": "so'm",
+        "loading": "Yuklanmoqda...",
+        "more": "Batafsil",
+        "quantity": "dona",
+        "sale": "chegirma",
+        "forYou": "Siz uchun"
     },
     "errors": {
         "notFound": "Sahifa topilmadi",

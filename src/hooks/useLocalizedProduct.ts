@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMemo } from "react";
 
 type SupportedLangs = "uz" | "ru" | "en";

@@ -6,9 +6,11 @@ import Layout from "@/components/Layout";
 import { ToastContainer } from 'react-toastify';
 import { QueryProvider } from "@/providers/queryProvider";
 import { AuthProvider } from "@/providers/sessionProvider";
+import { LangProvider } from "@/context/LangContext";
+import InjectPixelScript from "@/components/InjectPixelScript";
+import TrackVisit from "@/components/TrackVisit";
 import 'react-toastify/dist/ReactToastify.css';
 import "./globals.css";
-import { LangProvider } from "@/context/LangContext";
 // import "../i18n";
 
 const geistSans = Geist({
@@ -41,6 +43,8 @@ export default function RootLayout({
           <QueryProvider>
             <LangProvider>
               <Layout>
+                <InjectPixelScript />
+                <TrackVisit />
                 {children}
                 <ToastContainer />
               </Layout>

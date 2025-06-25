@@ -55,6 +55,12 @@ const api = axios.create({
 
 // Exported API functions
 export const apiClient = {
+
+  getBanner: async () => {
+    const res = await api.get("/Banner");
+    return res.data;
+  },
+
   getAllProducts: async (lng: string) => {
     // const session = await getSession();
     // const token = session?.user?.token;
@@ -67,6 +73,7 @@ export const apiClient = {
     });
     return res.data;
   },
+
   getOneProduct: async (id: string) => {
     const res = await api.get<GetAllProductsType>(`/Product/${id}`);
     return res.data;
@@ -78,6 +85,16 @@ export const apiClient = {
         lang: lang
       }
     });
+    return res.data;
+  },
+
+  postProductView: async (id: string) => {
+    const res = await api.post(`/Product/view/${id}`);
+    return res.data;
+  },
+
+  postBuyProduct: async (id: string) => {
+    const res = await api.post(`/Product/buy-click/${id}`);
     return res.data;
   },
 
@@ -108,6 +125,16 @@ export const apiClient = {
 
   createBlog: async (data: CreateBlogType) => {
     const res = await api.post("/BlogPost", data);
+    return res.data;
+  },
+
+  postTrackVisit: async () => {
+    const res = await api.post("/statistics/track-visit");
+    return res.data;
+  },
+
+  getTrackingPixels: async () => {
+    const res = await api.get("/pixels");
     return res.data;
   },
 };

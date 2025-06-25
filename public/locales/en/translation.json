@@ -10,7 +10,13 @@
         "confirm": "Confirm",
         "yes": "Yes",
         "no": "No",
-        "ok": "OK"
+        "ok": "OK",
+        "sum": "sum",
+        "loading": "Loading...",
+        "more": "More",
+        "quantity": "pcs.",
+        "sale": "sale",
+        "forYou": "For You"
     },
 
     "errors": {

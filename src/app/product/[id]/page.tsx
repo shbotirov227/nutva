@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
@@ -36,6 +36,14 @@ export default function ProductDetailPage() {
     enabled: !!id,
   });
 
+  useEffect(() => {
+    if (id) {
+      apiClient.postProductView(id as string).catch((err) => {
+        console.error("View count post error:", err);
+      });
+    }
+  }, [id]);
+
   const localizedProduct = useMemo(() => {
     if (!product) return null;
 
@@ -52,6 +60,9 @@ export default function ProductDetailPage() {
     return <ProductDetailSkeleton />;
   }
 
+  const handleBuyClick = async () => apiClient.postBuyProduct(id as string)
+
+
   return (
     <div className="relative pt-32 overflow-hidden">
       <div
@@ -66,20 +77,23 @@ export default function ProductDetailPage() {
 
       <div className="relative z-10">
         <Container>
-          <div className="grid grid-cols-1 md:grid-cols-2 mb-8">
-            <Image
-              src={ product?.imageUrls[0] || ProductImage}
-              alt={localizedProduct?.name || "Product Image"}
-              width={500}
-              height={500}
-              priority
-              className="w-auto h-auto"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-8">
+            <div className="w-full">
+              <Image
+                src={product?.imageUrls[0] || ProductImage}
+                alt={localizedProduct?.name || "Product Image"}
+                width={500}
+                height={500}
+                priority
+                className="w-full h-auto max-w-full object-contain rounded-2xl"
+              />
+            </div>
 
-            <div className="">
-              <ProductPriceCard product={product} color={color} />
+            <div className="w-full">
+              <ProductPriceCard product={product} color={color} onClick={handleBuyClick} />
             </div>
           </div>
+
 
           <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="my-10">
             <TabsList className="flex gap-4 bg-transparent">
