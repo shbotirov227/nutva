@@ -266,17 +266,20 @@ export default function ProductDetailPage() {
             </TabsContent>
 
             <TabsContent key={`tab-4-${lang}`} value={"4"}>
-              <div className="grid grid-cols-3 md:grid-cols-4 gap-6 items-center my-12">
-                {[1, 2, 3, 4, 5, 6].map((item) => (
-                  <div key={item} className="">
-                    <Image
-                      src={CertificateImg}
-                      alt="product"
-                      width={250}
-                      height={350}
-                    />
-                  </div>
-                ))}
+              <div className="w-full px-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-12">
+                  {[1, 2, 3, 4, 5, 6].map((item) => (
+                    <div key={item} className="flex justify-center">
+                      <Image
+                        src={CertificateImg}
+                        alt={`Certificate ${item}`}
+                        width={250}
+                        height={350}
+                        className="w-full max-w-[250px] h-auto object-contain rounded-xl shadow-md"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             </TabsContent>
           </Tabs>
