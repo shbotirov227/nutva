@@ -90,7 +90,7 @@ export default function ProductDetailPage() {
             </div>
 
             <div className="w-full">
-              <ProductPriceCard product={product} color={color} onClick={handleBuyClick} />
+              <ProductPriceCard product={product} color={color} bgColor={bgColor} onClick={handleBuyClick} />
             </div>
           </div>
 

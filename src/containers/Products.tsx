@@ -19,6 +19,9 @@ import ProductCard from "@/components/ProductCard";
 import Container from "@/components/Container";
 import "swiper/css/navigation";
 import "swiper/css";
+// import dynamic from "next/dynamic";
+
+
 
 const SkeletonCard = () => (
   <div className="p-4 rounded-xl bg-gray-200 border border-gray-300 shadow-[10px_10px_10px_rgba(0,0,0,0.1),_10px_10px_10px_rgba(0,0,0,0.1)] min-h-[350px] flex flex-col">
@@ -29,12 +32,24 @@ const SkeletonCard = () => (
   </div>
 );
 
+// const Swiper = dynamic(() => import("swiper/react").then(mod => mod.Swiper), {
+//   ssr: false,
+// });
+// const SwiperSlide = dynamic(() => import("swiper/react").then(mod => mod.SwiperSlide), {
+//   ssr: false,
+// });
+
 const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) => {
+  const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const swiperRef = useRef<SwiperType | null>(null);
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
-  const { t } = useTranslation();
+  const [isMounted, setIsMounted] = useState(false);
+  
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const {
     data: products = [] as GetAllProductsType[],
@@ -84,11 +99,15 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
     activeProduct?.name as ProductName
   );
 
+  if (!isMounted) {
+    return <SkeletonCard />;
+  }
+
   return (
     <div className="relative w-full py-10">
       {isAviableBackground ? (
         <div
-          className="absolute h-full w-full inset-0 -z-10 mx-auto px-4 sm:px-6 lg:px-8 py-10 overflow-hidden duration-500 bg-cover bg-center bg-no-repeat"
+          className="absolute h-full w-full inset-0 -z-10 mx-auto px-4 sm:px-6 lg:px-8 py-10 overflow-hidden duration-500 !bg-cover !bg-center !bg-no-repeat !  object-fit-cover"
           style={{
             background: `url(${activeBgImage})`,
             transition: "background-image 0.5s ease-in-out",

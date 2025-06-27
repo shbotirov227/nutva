@@ -16,7 +16,9 @@
         "more": "More",
         "quantity": "pcs.",
         "sale": "sale",
-        "forYou": "For You"
+        "forYou": "For You",
+        "ourProducts": "Our Products",
+        "pending": "Pending..."
     },
 
     "errors": {
@@ -53,5 +55,37 @@
             "3": "Instructions",
             "4": "Certification"
         }
+    },
+
+    "form": {
+        "title": "Order already today for the health of your child",
+        "subtitle": "🚚 Free delivery to all Uzbekistan",
+
+        "input": {
+            "name": "Name",
+            "phone": "Phone number"
+        },
+
+        "errors": {
+            "nameRequired": "Name is required",
+            "phoneRequired": "Phone number must be fully specified"
+        },
+
+        "success": "Order accepted successfully",
+        "fillAllFields": "Fill in all fields",
+        "searchCountry": "Search...",
+        "searchCountryNotFound": "Country not found"
+    },
+
+    "formModal": {
+        "title": "Do you have any questions about your health? Leave your phone number.",
+        "subtitle": "Our experienced pharmacists will contact you as soon as possible."
+    },
+
+    "button": {
+        "heroButton": "Order",
+        "consultationButton": "Consultation",
+        "formButton": "Leave an application",
+        "cancelButton": "Cancel"
     }
 }

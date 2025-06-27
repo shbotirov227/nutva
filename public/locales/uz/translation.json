@@ -1,42 +1,44 @@
 {
-    "common": {
-        "buy": "Sotib olish",
-        "cancel": "Bekor qilish",
-        "save": "Saqlash",
-        "delete": "O'chirish",
-        "edit": "Tahrirlash",
-        "add": "Qo'shish",
-        "close": "Yopish",
-        "confirm": "Tasdiqlash",
-        "yes": "Ha",
-        "no": "Yo'q",
-        "ok": "OK",
-        "sum": "so'm",
-        "loading": "Yuklanmoqda...",
-        "more": "Batafsil",
-        "quantity": "dona",
-        "sale": "chegirma",
-        "forYou": "Siz uchun",
-        "ourProducts": "Bizning mahsulotlarimiz"
-    },
-    "errors": {
-        "notFound": "Sahifa topilmadi",
-        "serverError": "Ichki server xatosi",
-        "unauthorized": "Siz avtorizatsiyadan o'tmagansiz",
-        "forbidden": "Kirish taqiqlangan",
-        "badRequest": "Noto'g'ri so'rov",
-        "validationError": "Validatsiya xatosi",
-        "networkError": "Internet xatosi"
-    },
+	"common": {
+		"buy": "Sotib olish",
+		"cancel": "Bekor qilish",
+		"save": "Saqlash",
+		"delete": "O'chirish",
+		"edit": "Tahrirlash",
+		"add": "Qo'shish",
+		"close": "Yopish",
+		"confirm": "Tasdiqlash",
+		"yes": "Ha",
+		"no": "Yo'q",
+		"ok": "OK",
+		"sum": "so'm",
+		"loading": "Yuklanmoqda...",
+		"more": "Batafsil",
+		"quantity": "dona",
+		"sale": "chegirma",
+		"forYou": "Siz uchun",
+		"ourProducts": "Bizning mahsulotlarimiz",
+        "pending": "Yuklanmoqda..."
+	},
 
-    "nav": {
-        "home": "Bosh sahifa",
-        "about": "Biz haqimizda",
-        "products": "Mahsulotlar",
-        "blog": "Blog",
-        "contact": "Aloqa"
-    },
-    
+	"errors": {
+		"notFound": "Sahifa topilmadi",
+		"serverError": "Ichki server xatosi",
+		"unauthorized": "Siz avtorizatsiyadan o'tmagansiz",
+		"forbidden": "Kirish taqiqlangan",
+		"badRequest": "Noto'g'ri so'rov",
+		"validationError": "Validatsiya xatosi",
+		"networkError": "Internet xatosi"
+	},
+
+	"nav": {
+		"home": "Bosh sahifa",
+		"about": "Biz haqimizda",
+		"products": "Mahsulotlar",
+		"blog": "Blog",
+		"contact": "Aloqa"
+	},
+
 	"blog": {
 		"date": "Sana",
 		"search": "Qidirish...",
@@ -44,15 +46,47 @@
 		"clearFilter": "Filtrni tozalash",
 		"noResults": "Natija topilmadi",
 		"loadMore": "Ko'proq yuklash",
-        "noBlogs": "Bloglar mavjud emas"
+		"noBlogs": "Bloglar mavjud emas"
 	},
 
-    "product": {
-        "tab": {
-            "1": "Tavsif",
-            "2": "Tarkibi",
-            "3": "Ko'rsatmalar",
-            "4": "Sertifikatlar"
-        }
+	"product": {
+		"tab": {
+			"1": "Tavsif",
+			"2": "Tarkibi",
+			"3": "Ko'rsatmalar",
+			"4": "Sertifikatlar"
+		}
+	},
+
+	"form": {
+		"title": "Bolangiz salomatligi uchun bugunoq buyurtma bering",
+		"subtitle": "🚚 O'zbekiston bo'ylab bepul yetkazib berish",
+
+		"input": {
+			"name": "Ism",
+			"phone": "Telefon raqam"
+		},
+
+		"errors": {
+			"nameRequired": "Ism kiritilishi shart",
+			"phoneRequired": "Telefon raqami to'liq bo'lishi kerak"
+		},
+
+		"success": "Buyurtma muvaffaqiyatli qabul qilindi",
+		"fillAllFields": "Barcha maydonlarni to'ldiring",
+		"searchCountry": "Qidirish...",
+		"searchCountryNotFound": "Ushbu davlat topilmadi"
+	},
+
+	"formModal": {
+		"title": "Farzandingiz salomatligiga oid savollaringiz bormi? Raqamingizni qoldiring.",
+		"subtitle": "Bizning malakali shifokorlarimiz sizga bepul maslahat berish uchun tez orada bog'lanadi."
+	},
+
+    "button": {
+        "heroButton": "Buyurtma berish",
+        "consultationButton": "Konsultatsiya olish",
+        "formButton": "Ariza qoldirish",
+        "cancelButton": "Bekor qilish"
     }
 }

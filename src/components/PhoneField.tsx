@@ -27,17 +27,18 @@ const PhoneField = ({ placeholder, phone, setPhone, setErrors, errors, className
   }, []);
 
   return (
-    <div ref={containerRef} className="mx-auto w-[35%]  flex flex-col gap-1 transition-all">
+    <div ref={containerRef} className="mx-auto w-full flex flex-col gap-1 transition-all">
       <PhoneInput
         country={defaultCountry}
         searchPlaceholder={t("form.searchCountry")}
         searchNotFound={t("form.searchCountryNotFound")}
         searchStyle={{
-          width: "85%",
+          width: "100%",
           borderRadius: "10px",
           padding: "10px",
           color: "#6F6F6F",
           border: "1px solid #D9D9D9",
+          marginRight: "10px",
         }}
         searchClass="w-full"
         enableSearch
@@ -48,11 +49,11 @@ const PhoneField = ({ placeholder, phone, setPhone, setErrors, errors, className
         onChange={(value) => setPhone(value)}
         inputClass={clsx(
           className,
-          errors?.phone ? "border-red-500 !ring-red-500 focus:!ring" : "border-blue-400 !ring-blue-400 focus:!ring",
-          "!w-full !py-[17px] !rounded-[8px] !ring-[1px] ring-blue-400 focus:ring-[#33739D] focus:ring-[#33739D] focus:!shadow-[0_0_8px_rgba(0,0,0,0.1),_0_0_5px_rgba(0,0,0,0.5)] !transition-all",
+          errors?.phone ? "border-red-500 !w-full !ring-red-500 focus:!ring" : "border-blue-400",
+          "!w-full !py-[22px] !pl-[55px] !rounded-[13px] overflow-hidden !border-2 !focus:!shadow-[0_0_8px_rgba(0,0,0,0.1),_0_0_5px_rgba(10,10,10,0.8)] !transition-all",
         )}
         containerClass="!w-full !rounded-xl"
-        buttonClass="h-[80%] m-auto ml-[3px] !bg-white !border-none !hover:bg-gray-100 !hover:rounded-l-2xl"
+        buttonClass="h-[80%] m-auto !ml-[3px] !bg-white !border-none !hover:bg-gray-100 !hover:rounded-l-2xl"
         specialLabel=""
         onFocus={() => setErrors((prev) => ({ ...prev, phone: undefined }))}
         dropdownClass="custom-phone-dropdown"

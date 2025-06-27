@@ -13,10 +13,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "react-toastify";
+import { FormModal } from "./FormModal";
+import SuccessModal from "./SuccessModal";
 
 interface Props {
   product: GetOneProductType;
-  color: string;
+  bgColor: string | undefined;
+  color: string | undefined;
   onClick?: () => void;
 }
 
@@ -30,10 +33,17 @@ const DISCOUNT_TABLE: Record<string, { two: number; threePlus: number }> = {
   EXTRA: { two: 22.7, threePlus: 36.4 },
 };
 
-export default function ProductPriceCard({ product, color, onClick }: Props) {
+export default function ProductPriceCard({ product, bgColor, color, onClick }: Props) {
   const { t } = useTranslation();
   const { lang } = useLang();
   const [quantity, setQuantity] = useState(1);
+  const [showFormModal, setShowFormModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  const handleSuccess = () => {
+    setShowFormModal(false);
+    setShowSuccessModal(true);
+  };
 
   const localizedProduct = useLocalizedProduct(product, lang);
   // const productKey = product?.slug?.toUpperCase();
@@ -62,6 +72,7 @@ export default function ProductPriceCard({ product, color, onClick }: Props) {
   }, [quantity, product.price, product?.slug]);
 
   const handleClick = () => {
+    setShowFormModal(true);
     if (onClick) {
       onClick();
       toast.success("Product buyed!", {
@@ -71,11 +82,13 @@ export default function ProductPriceCard({ product, color, onClick }: Props) {
     }
   };
 
-
   if (!product) return null;
 
   return (
-    <Card className="bg-[#e6fbdc] rounded-2xl p-6 w-full text-black shadow-[0_10px_20px_rgba(0,0,0,0.1)] border-none">
+    <Card
+      // style={{ backgroundColor: color }}
+      className="bg-[#e6fbdc] rounded-2xl p-6 w-full text-black shadow-[0_10px_20px_rgba(0,0,0,0.1)] border-none"
+    >
       <CardContent className="p-0">
         <div className="mb-4">
           <h2 className="text-4xl font-bold">{localizedProduct?.name}</h2>
@@ -122,9 +135,36 @@ export default function ProductPriceCard({ product, color, onClick }: Props) {
           {formatPrice(totalPrice)} {t("common.sum", "so'm")}
         </div>
 
-        <Button onClick={handleClick} className="w-full bg-green-600 text-white text-lg font-semibold py-3 rounded-lg cursor-pointer hover:bg-green-700 transition-all">
-          {t("common.buy")}
-        </Button>
+        {/* <FormModal>
+          <Button
+            size="lg"
+            variant="destructive"
+            onClick={handleClick}
+            className="w-full bg-green-600 text-white text-lg font-semibold py-3 rounded-lg cursor-pointer hover:bg-green-700 transition-all"
+          >
+            {t("common.buy")}
+          </Button>
+        </FormModal> */}
+
+
+          <FormModal
+            onClose={() => setShowFormModal(false)}
+            onSuccess={handleSuccess}
+          >
+            <Button
+              size="lg"
+              variant="destructive"
+              onClick={handleClick}
+              className="w-full bg-green-600 text-white text-lg font-semibold py-3 rounded-lg cursor-pointer hover:bg-green-700 transition-all"
+            >
+              {t("common.buy")}
+            </Button>
+          </FormModal>
+
+        {/* {showSuccessModal && (
+          <SuccessModal onClose={() => setShowSuccessModal(false)} />
+        )} */}
+
       </CardContent>
     </Card>
   );
