@@ -12,8 +12,9 @@ import { GetOneProductType } from "@/types/products/getOneProduct";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatPrice } from "@/lib/formatPrice";
 import NoImage from "@/assets/images/noimage.webp";
+import { useTranslated } from "@/hooks/useTranslated";
 
-type LangKey = "uz" | "ru" | "en";
+// type LangKey = "uz" | "ru" | "en";
 
 export default function ProductsListPage() {
   const router = useRouter();
@@ -26,6 +27,8 @@ export default function ProductsListPage() {
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
   });
+
+  const localized = useTranslated(products);
 
   if (isLoading || !products) {
     return (
@@ -49,7 +52,7 @@ export default function ProductsListPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product: GetOneProductType) => {
-          const localized = product?.[lang as LangKey] || product?.uz;
+          // const localized = product?.[lang as LangKey] || product?.uz;
 
           return (
             <Card

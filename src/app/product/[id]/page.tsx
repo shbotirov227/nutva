@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
@@ -23,6 +23,7 @@ import GinsengImg from "@/assets/images/ginseng.png";
 import CertificateImg from "@/assets/images/certificate-img.png";
 import ProductDetailSkeleton from "@/components/ProductDetailSkleton";
 import { GetOneProductType } from "@/types/products/getOneProduct";
+import { useTranslated } from "@/hooks/useTranslated";
 
 export default function ProductDetailPage() {
   const [activeTab, setActiveTab] = useState("1");
@@ -44,14 +45,16 @@ export default function ProductDetailPage() {
     }
   }, [id]);
 
-  const localizedProduct = useMemo(() => {
-    if (!product) return null;
+  // const localizedProduct = useMemo(() => {
+  //   if (!product) return null;
 
-    const supportedLangs = ["uz", "ru", "en"];
-    const currentLang = supportedLangs.includes(lang) ? lang : "uz";
+  //   const supportedLangs = ["uz", "ru", "en"];
+  //   const currentLang = supportedLangs.includes(lang) ? lang : "uz";
 
-    return product[currentLang as "uz" | "ru" | "en"];
-  }, [product, lang]);
+  //   return product[currentLang as "uz" | "ru" | "en"];
+  // }, [product, lang]);
+
+  const localizedProduct = useTranslated(product);
 
 
   const { color, bgImage, bgColor } = useProductVisuals(localizedProduct?.name as ProductName, { includeBgColor: true });

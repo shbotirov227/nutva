@@ -37,12 +37,16 @@ const NavLink = ({
 
 const Header: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const lastScrollY = useRef(0);
   const firstNavRef = useRef<HTMLAnchorElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(true);
-
   const { t } = useTranslation();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const navLinks = useMemo(() => [
     { href: "/", label: t("nav.home") },
@@ -100,6 +104,8 @@ const Header: React.FC = () => {
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [mobileMenu]);
+
+  if (!mounted) return null;
 
   return (
     <>

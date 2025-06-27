@@ -12,18 +12,23 @@ import { GetOneBlogType } from "@/types/blogs/getOneBlog";
 import { useQuery } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function BlogClient() {
 
+  const [mounted, setMounted] = useState(false);
   const [, setVisibleCount] = useState(6);
   const [search, setSearch] = useState("");
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedCats, setSelectedCats] = useState<string[]>([]);
   const { t } = useTranslation();
-
   const { lang } = useLang();
+
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const { data: blogs = [] as GetAllBlogsType, isLoading } = useQuery({
     queryKey: ["blogs", lang],
@@ -53,6 +58,8 @@ export default function BlogClient() {
 
     return matchSearch && matchDate && matchCategory;
   });
+
+  if (!mounted) return null;
 
   return (
     <div className="pt-32">

@@ -12,7 +12,7 @@ import Container from "@/components/Container";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLang } from "@/context/LangContext";
-import { useTranslatedData } from "@/hooks/useTranslatedData";
+import { useTranslated } from "@/hooks/useTranslated";
 
 type ButtonType = "popular" | "latest";
 
@@ -74,7 +74,7 @@ const Blogs = () => {
 
 
 
-  const translatedBlogs = useTranslatedData(filteredBlogs);
+  const translatedBlogs = useTranslated(filteredBlogs);
 
   console.log("translated", translatedBlogs);
 
@@ -118,29 +118,29 @@ const Blogs = () => {
           ))
         ) : (
           <AnimatePresence mode="popLayout">
-              {translatedBlogs?.map((blog) => {
-                if (!blog || !blog?.id) return null;
+            {translatedBlogs?.map((blog) => {
+              if (!blog || !blog?.id) return null;
 
-                return (
-                  <motion.div
-                    key={blog?.id}
-                    layout
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-full rounded-xl flex flex-col gap-4 px-5"
-                  >
-                    <BlogCard
-                      id={blog?.id}
-                      // imgUrl={blog?.media?.[0] || ""}
-                      title={blog?.title}
-                      content={blog?.content}
-                      media={blog?.media || null}
-                    />
-                  </motion.div>
-                );
-              })}
+              return (
+                <motion.div
+                  key={blog?.id}
+                  layout
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="w-full rounded-xl flex flex-col gap-4 px-5"
+                >
+                  <BlogCard
+                    id={blog?.id}
+                    // imgUrl={blog?.media?.[0] || ""}
+                    title={blog?.title}
+                    content={blog?.content}
+                    media={blog?.media[0] || null}
+                  />
+                </motion.div>
+              );
+            })}
           </AnimatePresence>
         )}
       </div>

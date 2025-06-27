@@ -45,7 +45,7 @@ BlogCardProps) => {
   const { t } = useTranslation();
 
   return (
-    <Card className="bg-[#FFF7ED] w-full min-h-full shadow-[10px_10px_10px_rgba(0,0,0,0.1),_10px_10px_10px_rgba(0,0,0,0.1)] rounded-xl hover:shadow-[10px_10px_10px_rgba(0,0,0,0.2),_10px_10px_10px_rgba(0,0,0,0.2)] transition-shadow duration-300 border-1 box-border">
+    <Card className="bg-white w-full min-h-full shadow-[10px_10px_10px_rgba(0,0,0,0.1),_10px_10px_10px_rgba(0,0,0,0.1)] rounded-xl hover:shadow-[10px_10px_10px_rgba(0,0,0,0.2),_10px_10px_10px_rgba(0,0,0,0.2)] transition-shadow duration-300 border-1 box-border">
       <Link
         href={`/blog/${id}`}
         rel="noopener noreferrer"

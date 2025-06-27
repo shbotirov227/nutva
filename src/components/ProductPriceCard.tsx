@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useLang } from "@/context/LangContext";
 import { GetOneProductType } from "@/types/products/getOneProduct";
 import { useTranslation } from "react-i18next";
@@ -34,11 +34,16 @@ const DISCOUNT_TABLE: Record<string, { two: number; threePlus: number }> = {
 };
 
 export default function ProductPriceCard({ product, bgColor, color, onClick }: Props) {
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showFormModal, setShowFormModal] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [quantity, setQuantity] = useState(1);
   const { t } = useTranslation();
   const { lang } = useLang();
-  const [quantity, setQuantity] = useState(1);
-  const [showFormModal, setShowFormModal] = useState(false);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleSuccess = () => {
     setShowFormModal(false);
@@ -83,6 +88,7 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
   };
 
   if (!product) return null;
+  if (!mounted) return null;
 
   return (
     <Card
