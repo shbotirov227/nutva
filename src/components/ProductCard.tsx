@@ -37,13 +37,14 @@ const ProductCard = ({
   return (
     <div
       style={{ backgroundColor: bgColor ? bgColor : "white", ...style }}
-      className={`w-full md:w-[100%] sm:w-[100%] h-[350px] shadow-[10px_15px_15px_rgba(0,0,0,0.1),_10px_15px_15px_rgba(0,0,0,0.1)] rounded flex lg:flex-row items-center justify-between ${className}`}
+      className={`w-full h-auto shadow-[10px_15px_15px_rgba(0,0,0,0.1),_10px_15px_15px_rgba(0,0,0,0.1)] rounded flex flex-col lg:flex-row items-center justify-between ${className}`}
     >
-      <div className="w-[55%] p-6">
-        <h2 className="text-white text-4xl font-semibold mb-5">{title}</h2>
-        <span className="text-white text-xl mb-16">{slug}</span>
-        <p className="text-white text-md  mt-12 mb-5">{description}</p>
-        <div className="mt-4 flex justify-start items-center gap-5">
+      {/* LEFT CONTENT */}
+      <div className="w-full lg:w-[55%] p-6 text-center lg:text-left">
+        <h2 className="text-white text-2xl sm:text-3xl md:text-4xl font-semibold mb-5">{title}</h2>
+        <span className="text-white text-lg sm:text-xl mb-6 block">{slug}</span>
+        <p className="text-white text-sm sm:text-base md:text-md mt-6 mb-5">{description}</p>
+        <div className="mt-4 flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-4">
           <Link
             href={`/product/${id}`}
             style={{ color: activeColor }}
@@ -51,13 +52,17 @@ const ProductCard = ({
           >
             Купить
           </Link>
-          <Link href={`/product/${id}`} className="text-white font-semibold bg-transparent underline p-5">
+          <Link
+            href={`/product/${id}`}
+            className="text-white font-semibold bg-transparent underline px-4 py-2"
+          >
             Подробнее
           </Link>
         </div>
       </div>
 
-      <div className="w-[55%]">
+      {/* RIGHT IMAGE */}
+      <div className="w-full lg:w-[45%] mt-6 lg:mt-0 px-4">
         {image?.length > 0 ? (
           <Image
             src={image[0]}
@@ -84,7 +89,6 @@ const ProductCard = ({
           />
         )}
       </div>
-
     </div>
   )
 }
