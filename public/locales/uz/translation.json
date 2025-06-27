@@ -46,7 +46,9 @@
 		"clearFilter": "Filtrni tozalash",
 		"noResults": "Natija topilmadi",
 		"loadMore": "Ko'proq yuklash",
-		"noBlogs": "Bloglar mavjud emas"
+		"noBlogs": "Bloglar mavjud emas",
+        "popular": "Mashhur bloglar",
+        "latest": "So'nggi bloglar"
 	},
 
 	"product": {
@@ -57,6 +59,10 @@
 			"4": "Sertifikatlar"
 		}
 	},
+
+    "aboutBrand": {
+        "title": "Brend haqida"
+    },
 
 	"form": {
 		"title": "Bolangiz salomatligi uchun bugunoq buyurtma bering",

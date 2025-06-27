@@ -10,6 +10,7 @@ import {
 } from "./ui/card";
 import { BlogMediaType } from "@/types/blogs/getOneBlog";
 import DefaultImg from "@/assets/images/default-img.png";
+import { useTranslation } from "react-i18next";
 // import { ArrowUpRight } from "lucide-react";
 
 type BlogCardProps = {

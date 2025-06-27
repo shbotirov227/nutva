@@ -46,7 +46,9 @@
         "clearFilter": "Clear Filter",
         "noResults": "No results found",
         "loadMore": "Load More",
-        "noBlogs": "No blogs available"
+        "noBlogs": "No blogs available",
+        "popular": "Popular",
+        "latest": "Latest"
     },
     "product": {
         "tab": {
@@ -55,6 +57,10 @@
             "3": "Instructions",
             "4": "Certification"
         }
+    },
+
+    "aboutBrand": {
+        "title": "About the brand"
     },
 
     "form": {

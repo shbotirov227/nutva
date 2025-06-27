@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 import { GetAllBlogsType } from "@/types/blogs/getAllBlogs";
@@ -11,6 +12,7 @@ import Container from "@/components/Container";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLang } from "@/context/LangContext";
+import { useTranslatedData } from "@/hooks/useTranslatedData";
 
 type ButtonType = "popular" | "latest";
 
@@ -43,9 +45,15 @@ const ActiveButton = ({
 
 const Blogs = () => {
   const [active, setActive] = useState<ButtonType>("popular");
+  const [mounted, setMounted] = useState(false);
   const { lang } = useLang();
+  const { t } = useTranslation();
 
-  const { data: blogs = [] as GetAllBlogsType[], isLoading } = useQuery({
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const { data: blogs = [] as GetAllBlogsType, isLoading } = useQuery({
     queryKey: ["blogs", lang],
     queryFn: () => apiClient.getAllBlogs(lang),
     refetchOnWindowFocus: false,
@@ -64,6 +72,15 @@ const Blogs = () => {
     })
     .slice(0, 4);
 
+
+
+  const translatedBlogs = useTranslatedData(filteredBlogs);
+
+  console.log("translated", translatedBlogs);
+
+
+  if (!mounted) return null;
+
   return (
     <Container className="px-4 pb-10">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-8">
@@ -75,13 +92,13 @@ const Blogs = () => {
             isActive={active === "popular"}
             onClick={() => setActive("popular")}
           >
-            Популярные
+            {t("blog.popular")}
           </ActiveButton>
           <ActiveButton
             isActive={active === "latest"}
             onClick={() => setActive("latest")}
           >
-            Последние
+            {t("blog.latest")}
           </ActiveButton>
         </div>
       </div>
@@ -101,25 +118,29 @@ const Blogs = () => {
           ))
         ) : (
           <AnimatePresence mode="popLayout">
-            {filteredBlogs.map((blog) => (
-              <motion.div
-                key={blog.id}
-                layout
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
-                className="w-full rounded-xl flex flex-col gap-4 px-5"
-              >
-                <BlogCard
-                  id={blog.id}
-                  imgUrl={blog.imageUrls > 0 ? blog.imageUrls[0] : ""}
-                  title={blog.title}
-                  content={blog.content}
-                  media={null}
-                />
-              </motion.div>
-            ))}
+              {translatedBlogs?.map((blog) => {
+                if (!blog || !blog?.id) return null;
+
+                return (
+                  <motion.div
+                    key={blog?.id}
+                    layout
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full rounded-xl flex flex-col gap-4 px-5"
+                  >
+                    <BlogCard
+                      id={blog?.id}
+                      // imgUrl={blog?.media?.[0] || ""}
+                      title={blog?.title}
+                      content={blog?.content}
+                      media={blog?.media || null}
+                    />
+                  </motion.div>
+                );
+              })}
           </AnimatePresence>
         )}
       </div>
