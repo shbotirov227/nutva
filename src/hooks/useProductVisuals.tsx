@@ -6,13 +6,13 @@ import { bgColors } from "@/types/records";
 import CarouselBgImg1 from "@/assets/images/carousel-bg-green.webp";
 import CarouselBgImg2 from "@/assets/images/carousel-bg-orange.webp";
 import CarouselBgImg3 from "@/assets/images/carousel-bg-red.webp";
-import CarouselBgImg4 from "@/assets/images/carousel-bg-purple.webp";
+import CarouselBgImg4 from "@/assets/images/carousel-bg-pink.webp";
 import CarouselBgImg5 from "@/assets/images/carousel-bg-blue.webp";
-import ProductDetailBgImage1 from "@/assets/images/product-detail-img-green.jpg";
-import ProductDetailBgImage2 from "@/assets/images/product-detail-img-orange.jpg";
-import ProductDetailBgImage3 from "@/assets/images/product-detail-img-red.jpg";
-import ProductDetailBgImage4 from "@/assets/images/product-detail-img-purple.jpg";
-import ProductDetailBgImage5 from "@/assets/images/product-detail-img-blue.jpg";
+import ProductDetailBgImage1 from "@/assets/images/product-detail-img-green.png";
+import ProductDetailBgImage2 from "@/assets/images/product-detail-img-orange.png";
+import ProductDetailBgImage3 from "@/assets/images/product-detail-img-red.png";
+import ProductDetailBgImage4 from "@/assets/images/product-detail-img-pink.png";
+import ProductDetailBgImage5 from "@/assets/images/product-detail-img-blue.png";
 
 type Options = {
   includeBgColor?: boolean;

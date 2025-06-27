@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
         fields: {
           ENTITY_ID: dealId,
           ENTITY_TYPE: "deal",
-          COMMENT: `📝 Новая заявка от ${formData.name} (${phoneDigits})`,
+          COMMENT: `📝 Новая заявка от ${formData.name} (${phoneDigits}) Товар: ${formData.productName}\n🔢 Кол-во: ${formData.quantity}`,
         },
       }),
     });

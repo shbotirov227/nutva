@@ -13,9 +13,11 @@ type FormModalProps = {
   children: React.ReactElement<React.HTMLAttributes<HTMLButtonElement>>;
   onClose?: () => void;
   onSuccess?: () => void;
+  productName: string;
+  quantity: number;
 };
 
-export function FormModal({ children }: FormModalProps) {
+export function FormModal({ children, onClose, onSuccess, productName, quantity }: FormModalProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [name, setName] = React.useState("");
   const [phone, setPhone] = React.useState("");
@@ -53,7 +55,7 @@ export function FormModal({ children }: FormModalProps) {
     const cleanedCode = countryCode.replace(/\D/g, "");
     const phoneLength = digitsOnly.length - cleanedCode.length;
 
-    if (!trimmedName || phoneLength < 9) {
+    if (!trimmedName ) {
       toast.error(t("form.fillAllFields") || "Barcha maydonlarni to'ldiring");
       return;
     }
@@ -62,6 +64,8 @@ export function FormModal({ children }: FormModalProps) {
     const formData = {
       name: trimmedName,
       phone,
+      productName,
+      quantity,  
       utm_source: searchParams.get("utm_source") || undefined,
       utm_medium: searchParams.get("utm_medium") || undefined,
       utm_campaign: searchParams.get("utm_campaign") || undefined,

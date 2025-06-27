@@ -45,26 +45,15 @@ export default function ProductDetailPage() {
     }
   }, [id]);
 
-  // const localizedProduct = useMemo(() => {
-  //   if (!product) return null;
-
-  //   const supportedLangs = ["uz", "ru", "en"];
-  //   const currentLang = supportedLangs.includes(lang) ? lang : "uz";
-
-  //   return product[currentLang as "uz" | "ru" | "en"];
-  // }, [product, lang]);
-
   const localizedProduct = useTranslated(product);
 
-
-  const { color, bgImage, bgColor } = useProductVisuals(localizedProduct?.name as ProductName, { includeBgColor: true });
+  const { color, bgDetailImage, bgColor } = useProductVisuals(localizedProduct?.name as ProductName, { includeBgColor: true, includeBgImage: true });
 
   if (isLoading || !product) {
     return <ProductDetailSkeleton />;
   }
 
-  const handleBuyClick = async () => apiClient.postBuyProduct(id as string)
-
+  const handleBuyClick = async () => apiClient.postBuyProduct(id as string);
 
   return (
     <div className="relative pt-32 overflow-hidden">
@@ -75,7 +64,7 @@ export default function ProductDetailPage() {
 
       <div
         className="absolute inset-0 -z-10 object-cover bg-top bg-no-repeat"
-        style={{ backgroundImage: `url(${bgImage})` }}
+        style={{ backgroundImage: `url(${bgDetailImage})` }}
       />
 
       <div className="relative z-10">
@@ -93,10 +82,15 @@ export default function ProductDetailPage() {
             </div>
 
             <div className="w-full">
-              <ProductPriceCard product={product} color={color} bgColor={bgColor} onClick={handleBuyClick} />
+              <ProductPriceCard
+                product={product}
+                color={color}
+                bgColor={bgColor}
+                onClick={handleBuyClick}
+              />
             </div>
-          </div>
 
+          </div>
 
           <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="my-10">
             <TabsList className="flex flex-wrap justify-center gap-4 bg-transparent">

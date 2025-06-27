@@ -20,10 +20,11 @@ const PhoneField = ({ placeholder, phone, setPhone, setErrors, errors, className
   const { t } = useTranslation();
 
   useEffect(() => {
-    fetch("https://ipapi.co/json")
-      .then((res) => res.json())
-      .then((data) => setDefaultCountry(data.country_code.toLowerCase()))
-      .catch(() => setDefaultCountry("uz"));
+    // fetch("https://ipapi.co/json")
+    //   .then((res) => res.json())
+    //   .then((data) => setDefaultCountry(data.country_code.toLowerCase()))
+    //   .catch(() => setDefaultCountry("uz"));
+    setDefaultCountry("ru");
   }, []);
 
   return (
