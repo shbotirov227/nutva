@@ -273,9 +273,9 @@ export default function ProductDetailPage() {
             </TabsContent>
           </Tabs>
 
+        </Container>
           <ProductsComponent isAviableBackground={false} />
           <SaleSection />
-        </Container>
       </div>
     </div>
   );

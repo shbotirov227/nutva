@@ -46,7 +46,7 @@ const Blogs = () => {
   const { lang } = useLang();
 
   const { data: blogs = [] as GetAllBlogsType[], isLoading } = useQuery({
-    queryKey: ["blogs"],
+    queryKey: ["blogs", lang],
     queryFn: () => apiClient.getAllBlogs(lang),
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
@@ -86,7 +86,6 @@ const Blogs = () => {
         </div>
       </div>
 
-      {/* Bloglar grid */}
       <div className="grid grid-cols-1 xl:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 gap-6">
         {isLoading ? (
           Array.from({ length: 4 }).map((_, idx) => (

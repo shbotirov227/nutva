@@ -40,8 +40,8 @@ const BlogCard = ({
 }: // icon
 BlogCardProps) => {
   const isYouTube = media?.mediaType === "YoutubeUrl";
-  const isImage =
-    media?.mediaType === "Image" || media?.mediaType === "ImageUrl";
+  const isImage = media?.mediaType === "Image" || media?.mediaType === "ImageUrl";
+  const { t } = useTranslation();
 
   return (
     <Card className="bg-[#FFF7ED] w-full min-h-full shadow-[10px_10px_10px_rgba(0,0,0,0.1),_10px_10px_10px_rgba(0,0,0,0.1)] rounded-xl hover:shadow-[10px_10px_10px_rgba(0,0,0,0.2),_10px_10px_10px_rgba(0,0,0,0.2)] transition-shadow duration-300 border-1 box-border">
@@ -92,7 +92,7 @@ BlogCardProps) => {
           rel="noopener noreferrer"
           className="inline-block text-sm py-2 px-4 bg-[#218A4F] text-white hover:bg-[#365343] transition-all rounded-lg font-medium focus:outline-none focus-visible:ring-2 ring-[#218A4F] mt-auto"
         >
-          Read More
+          {t("common.more")}
         </Link>
       </CardFooter>
     </Card>
