@@ -96,13 +96,21 @@ export default function ProductDetailPage() {
 
 
           <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="my-10">
-            <TabsList className="flex gap-4 bg-transparent">
+            <TabsList className="flex flex-wrap justify-center gap-4 bg-transparent">
               {["1", "2", "3", "4"].map((tab) => (
-                <TabsTrigger key={tab} value={tab} asChild className={clsx("cursor-pointer shadow-md", activeTab === tab ? "!bg-black text-white" : "")}>
+                <TabsTrigger
+                  key={tab}
+                  value={tab}
+                  asChild
+                  className={clsx(
+                    "cursor-pointer shadow-md",
+                    activeTab === tab ? "!bg-black text-white" : ""
+                  )}
+                >
                   <Button
                     size="lg"
                     variant={activeTab === tab ? "default" : "outline"}
-                    className="w-full p-5 text-base font-semibold"
+                    className="w-full sm:w-auto p-3 text-sm sm:text-base font-semibold"
                   >
                     {t(`product.tab.${tab}`)}
                   </Button>
@@ -274,8 +282,8 @@ export default function ProductDetailPage() {
           </Tabs>
 
         </Container>
-          <ProductsComponent isAviableBackground={false} />
-          <SaleSection />
+        <ProductsComponent isAviableBackground={false} />
+        <SaleSection />
       </div>
     </div>
   );
