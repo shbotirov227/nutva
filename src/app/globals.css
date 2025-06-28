@@ -209,6 +209,11 @@ body {
   margin-top: 5px !important;
 }
 
+.custom-phone-dropdown {
+  position: relative !important;
+  z-index: 99 !important;
+}
+
 .custom-phone-dropdown .country {
   padding: 13px !important;
   font-size: 15px !important;

@@ -3,7 +3,7 @@
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
 // import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 import { useLang } from "@/context/LangContext";
 import clsx from "clsx";
 
@@ -21,8 +21,8 @@ export default function LanguageSwitcher() {
   const handleChange = (value: string) => {
     i18n.changeLanguage(value);
 
-    localStorage.setItem("lang", value);
-    Cookies.set("lang", value);
+    // localStorage.setItem("lang", value);
+    // Cookies.set("lang", value);
     setLang(value);
     queryClient.invalidateQueries();
   };

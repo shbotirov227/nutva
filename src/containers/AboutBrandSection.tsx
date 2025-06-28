@@ -20,7 +20,6 @@ export default function AboutBrandSection() {
       <Container className="flex flex-col md:flex-row-reverse items-center justify-center">
         <div className="w-full flex flex-col md:flex-row-reverse items-center justify-between bg-white rounded-xl shadow-[10px_10px_10px_rgba(0,0,0,0.1)] py-8 px-6 md:px-10 gap-8">
 
-          {/* Image On Top in Mobile, On Right in Desktop */}
           <div className="w-full md:w-[40%] relative h-[250px] md:h-[300px]">
             <Image
               src={DefaultImg}
@@ -31,7 +30,6 @@ export default function AboutBrandSection() {
             />
           </div>
 
-          {/* Text - Left in Desktop, Below in Mobile */}
           <div className="w-full md:w-[60%]">
             <h2 className="text-3xl font-bold text-[#3F3F46] mb-4">
               {t("aboutBrand.title")}
@@ -44,7 +42,7 @@ export default function AboutBrandSection() {
               variant="default"
               size="lg"
             >
-              Подробнее
+              {t("common.more")}
             </Button>
           </div>
         </div>

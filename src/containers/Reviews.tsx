@@ -1,21 +1,24 @@
 "use client";
 
-import Container from "@/components/Container";
-import ReviewCard from "@/components/ReviewCard";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import Container from "@/components/Container";
+import ReviewCard from "@/components/ReviewCard";
 import "swiper/css";
 
 const Reviews = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <Container className="text-center my-10 px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl sm:text-3xl font-bold text-[#3F3F46]">
-          Реальные отзывы наших клиентов
+          {t("reviewSection.title")}
         </h2>
         <p className="w-full sm:w-[80%] md:w-[70%] mx-auto mt-4 text-sm sm:text-base text-[#3F3F46]">
-          Узнайте, как NUTVA помогает улучшить качество жизни и достичь желаемых результатов. Видео-отзывы от тех, кто уже попробовал наш продукт, подтверждают эффективность и качество.
+          {t("reviewSection.subtitle")}
         </p>
       </Container>
 

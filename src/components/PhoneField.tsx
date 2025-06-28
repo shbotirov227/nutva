@@ -28,7 +28,7 @@ const PhoneField = ({ placeholder, phone, setPhone, setErrors, errors, className
   }, []);
 
   return (
-    <div ref={containerRef} className="mx-auto w-[35%] flex flex-col gap-1 transition-all">
+    <div ref={containerRef} className="mx-auto w-full gap-1 transition-all !z-30">
       <PhoneInput
         country={defaultCountry}
         searchPlaceholder={t("form.searchCountry")}
@@ -50,8 +50,9 @@ const PhoneField = ({ placeholder, phone, setPhone, setErrors, errors, className
         onChange={(value) => setPhone(value)}
         inputClass={clsx(
           className,
-          errors?.phone ? "relative border-red-500 !w-[35%] !ring-red-500 focus:!ring" : "border-blue-400",
-          "!w-full !py-[22px] !pl-[55px] !rounded-[13px] overflow-hidden !border-2 !focus:!shadow-[0_0_8px_rgba(0,0,0,0.1),_0_0_5px_rgba(10,10,10,0.8)] !transition-all",
+          errors?.phone ? "relative border-red-500 !ring-red-500 focus:!ring" : "border-blue-400",
+                    "!w-full !py-[22px] !pl-[55px] px-4 py-4 sm:px-5 sm:py-3 !rounded-xl text-[15px] font-bold bg-white outline-none border-2 border-gray-800 focus:shadow-[0_0_10px_rgba(10,10,10,0.8)] transition-all",
+          // "!w-full   !rounded-[13px] overflow-hidden !border-2 focus:!shadow-[0_0_8px_rgba(0,0,0,0.1),_0_0_5px_rgba(10,10,10,0.8)] !transition-all",
         )}
         containerClass="!w-full !rounded-xl"
         buttonClass="h-[80%] m-auto !ml-[3px] !bg-white !border-none !hover:bg-gray-100 !hover:rounded-l-2xl"
@@ -62,7 +63,7 @@ const PhoneField = ({ placeholder, phone, setPhone, setErrors, errors, className
           borderRadius: "13px",
           color: "#6F6F6F",
           boxSizing: "border-box",
-          zIndex: 50,
+          zIndex:"99 !important",
           overflowY: "scroll",
           scrollbarWidth: "none",
           maxHeight: "300px",

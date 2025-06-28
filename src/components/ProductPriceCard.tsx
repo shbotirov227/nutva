@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import { Checkbox } from "./ui/checkbox";
 import { Label } from "./ui/label";
 import { AnimatePresence, motion } from "framer-motion";
+import { useDiscount } from "@/hooks/useDiscount";
 // import SuccessModal from "./SuccessModal";
 
 interface Props {
@@ -58,28 +59,11 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
   const localizedProduct = useLocalizedProduct(product, lang);
   // const productKey = product?.slug?.toUpperCase();
 
-  const { totalPrice, discountPercent } = useMemo(() => {
-    const basePrice = product.price;
-    const productKey = product?.slug?.toUpperCase() || "";
+  const selectedQuantity = isChecked ? count! : quantity!;
 
-    const discounts = DISCOUNT_TABLE[productKey] || { two: 0, threePlus: 0 };
+  const { pricePerUnit, totalPrice, discountPercent } = useDiscount(product?.uz?.name, selectedQuantity);
+  console.log({ pricePerUnit })
 
-    let discount = 0;
-    if (quantity === 2) {
-      discount = discounts.two;
-    } else if (quantity >= 3) {
-      discount = discounts.threePlus;
-    }
-
-    const pricePerUnit = Math.round(basePrice * (1 - discount / 100));
-    const totalPrice = pricePerUnit * quantity;
-
-    return {
-      pricePerUnit,
-      totalPrice,
-      discountPercent: discount,
-    };
-  }, [quantity, product.price, product?.slug]);
 
   const handleClick = () => {
     // setShowFormModal(true);
@@ -103,10 +87,8 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
   //   }
   // };
 
-  const selectedQuantity = isChecked ? count! : quantity!;
 
-  if (!product) return null;
-  if (!mounted) return null;
+  if (!product || !localizedProduct || !mounted) return null;
 
   return (
     <AnimatePresence mode="popLayout">
@@ -143,7 +125,7 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
                       -{discountPercent}%
                     </Badge>
                     <Badge className="bg-yellow-400 text-black text-base font-semibold px-2 py-1 rounded-full">
-                      {t("sale", "Распродажа")}
+                      {t("common.saleUpperCase")}
                     </Badge>
                   </div>
                 )}
@@ -160,10 +142,12 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
                   transition={{ duration: 0.3 }}
                   className="w-full rounded-xl flex flex-col gap-4"
                 >
-                  <div className="flex items-center text-base font-semibold text-red-600 gap-1 mb-4 bg-white p-4 rounded-lg">
-                    <Flame className="w-4 h-4" />
-                    {t("common.forYou")} {discountPercent}% {t("common.sale")} • {quantity} {t("common.quantity")}
-                  </div>
+                  {discountPercent > 0 && (
+                    <div className="flex items-center text-base font-semibold text-red-600 gap-1 mb-4 bg-white p-4 rounded-lg">
+                      <Flame className="w-4 h-4" />
+                      {t("common.forYou")} {discountPercent}% {t("common.sale")} • {quantity} {t("common.quantity")}
+                    </div>
+                  )}
                 </motion.div>
               </AnimatePresence>
 

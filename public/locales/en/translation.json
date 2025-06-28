@@ -16,6 +16,7 @@
         "more": "More",
         "quantity": "pcs.",
         "sale": "sale",
+        "saleUpperCase": "Sale",
         "forYou": "For You",
         "ourProducts": "Our Products",
         "pending": "Pending..."
@@ -58,11 +59,23 @@
             "4": "Certification"
         },
 
-        "checkboxLabel": "Select more than 3 products"
+        "checkboxLabel": "Select more than 3 products",
+        "consultation": "Free consultation"
     },
 
     "aboutBrand": {
         "title": "About the brand"
+    },
+
+    "reviewSection": {
+        "title": "Real feedback from our customers",
+        "subtitle": "Find out how NUTVA helps to improve the quality of life and achieve the desired results. Video reviews from those who have already tried our product confirm the effectiveness and quality."
+    },
+
+    "saleSection": {
+        "title": "Get a discount right now",
+        "subtitle": "NUTVA — natural complexes to support joints, bones, digestion and immunity. Apply and get a discount on the wellness course today.",
+        "button": "Send a request"
     },
 
     "form": {

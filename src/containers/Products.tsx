@@ -46,7 +46,7 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
   const [isMounted, setIsMounted] = useState(false);
-  
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -166,6 +166,7 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
           }
         }}
         onSlideChange={(swiper) => {
+          // fix for loop + active index bug:
           const realIndex = swiper.realIndex ?? (swiper.activeIndex % products.length);
           setActiveIndex(realIndex);
         }}
@@ -179,18 +180,18 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
             spaceBetween: 20,
             centeredSlides: true,
           },
-          440: {
+          480: {
             slidesPerView: 1,
             spaceBetween: 25,
             centeredSlides: true,
           },
-          640: {
-            slidesPerView: 1.2,
+          768: {
+            slidesPerView: 2,
             spaceBetween: 30,
             centeredSlides: true,
           },
-          768: {
-            slidesPerView: 2,
+          900: {
+            slidesPerView: "auto",
             spaceBetween: 35,
             centeredSlides: true,
           },
@@ -205,13 +206,13 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
             centeredSlides: true,
           },
         }}
-        className="mySwiper cursor-grab active:cursor-grabbing"
+        className="mySwiper cursor-grab active:cursor-grabbing px-[10%]"
       >
-        {(isLoading || !products?.length
+        {isLoading || !products?.length
           ? Array.from({ length: 5 }).map((_, idx) => (
             <SwiperSlide
               key={idx}
-              className="!w-full sm:!w-[600px] md:!w-[700px] lg:!w-[800px] min-h-[400px] shrink-0 grow-0 px-4 sm:px-0"
+              className="!w-[90vw] sm:!w-[600px] md:!w-[700px] lg:!w-[800px] min-h-[400px] shrink-0 grow-0"
             >
               <SkeletonCard />
             </SwiperSlide>
@@ -221,7 +222,7 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
             return (
               <SwiperSlide
                 key={product.id}
-                className="!w-full sm:!w-[600px] md:!w-[700px] lg:!w-[800px] min-h-[400px] shrink-0 grow-0 transition-transform duration-500 px-6 max-sm:px-10 overflow-hidden"
+                className="!w-[90vw] sm:!w-[600px] md:!w-[700px] lg:!w-[800px] min-h-[400px] shrink-0 grow-0 transition-transform duration-500"
               >
                 <ProductCard
                   id={product?.id}
@@ -242,16 +243,15 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
                 />
               </SwiperSlide>
             );
-          }))}
+          })}
       </Swiper>
-
       <div className="flex items-center justify-center mt-10">
         <Link
           href="/contact"
           className="inline-flex items-center justify-center mx-auto text-white text-lg px-8 py-4 font-semibold rounded-lg shadow-[3px_5px_5px_rgba(0,0,0,0.1),_3px_5px_5px_rgba(0,0,0,0.1)] hover:shadow-[3px_5px_5px_rgba(0,0,0,0.3),_3px_5px_5px_rgba(0,0,0,0.3)] transition-all duration-500 cursor-pointer"
           style={{ backgroundColor: activeColor }}
         >
-          Бесплатная Консультация
+          {t("product.consultation")}
         </Link>
       </div>
 

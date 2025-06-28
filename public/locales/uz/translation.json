@@ -16,6 +16,7 @@
 		"more": "Batafsil",
 		"quantity": "dona",
 		"sale": "chegirma",
+        "saleUpperCase": "Chegirma",
 		"forYou": "Siz uchun",
 		"ourProducts": "Bizning mahsulotlarimiz",
         "pending": "Yuklanmoqda..."
@@ -58,11 +59,23 @@
 			"3": "Ko'rsatmalar",
 			"4": "Sertifikatlar"
 		},
-        "checkboxLabel": "3 tadan ko'p mahsulot tanlash"
+        "checkboxLabel": "3 tadan ko'p mahsulot tanlash",
+        "consultation": "Bepul konsultatsiya"
 	},
 
     "aboutBrand": {
         "title": "Brend haqida"
+    },
+
+    "reviewSection": {
+        "title": "Mijozlarimizning haqiqiy sharhlari",
+        "subtitle": "NUTVA hayot sifatini yaxshilashga va kerakli natijalarga erishishga qanday yordam berishini bilib oling. Mahsulotimizni allaqachon sinab ko'rganlarning video sharhlari samaradorlik va sifatni tasdiqlaydi."
+    },
+
+    "saleSection": {
+        "title": "Hoziroq chegirmaga ega bo'ling",
+        "subtitle": "NUTVA-bo'g'inlar, suyaklar, ovqat hazm qilish va immunitetni qo'llab-quvvatlash uchun tabiiy komplekslar. Arizani to'ldiring va bugun sog'lomlashtirish kursiga chegirma oling.",
+        "button": "Arizani yuboring"
     },
 
 	"form": {

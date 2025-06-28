@@ -79,7 +79,7 @@ export default function ProductDetailPage() {
               transition={{ duration: 0.3 }}
               className="w-full rounded-xl flex flex-col gap-4"
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-8 items-center mb-8">
                 <div className="w-full">
                   <Image
                     src={product?.imageUrls[0] || ProductImage}
@@ -136,168 +136,170 @@ export default function ProductDetailPage() {
                 transition={{ duration: 0.3 }}
                 className="w-full rounded-xl flex flex-col gap-4"
               >
-                <TabsContent key={`tab-1-${lang}`} value={"1"}>
-                  <ul className="space-y-4 my-12 list-disc grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3">
-                    <li className="text-base font-semibold">
-                      Nutva Complex состоит из 100% натуральных компонентов.
-                    </li>
-                    <li className="text-base font-semibold">
-                      Грыжа позвоночника - нарушение целостности внешней оболочки межпозвоночного диска!
-                    </li>
-                    <li className="text-base font-semibold">
-                      Гонартроз - хроническое дегенеративное заболевание коленного
-                      сустава.
-                    </li>
-                    <li className="text-base font-semibold">
-                      Запускает процесс регенерации и улучшает качества
-                      синовиальной жидкости, возобновляет ее нормальную
-                      циркуляцию.
-                    </li>
-                    <li className="text-base font-semibold">
-                      Остеопороз - хрупкость костей.
-                    </li>
-                    <li className="text-base font-semibold">
-                      Коксартроз - эрозия тазобедренного сустава.
-                    </li>
-                    <li className="text-base font-semibold">
-                      Полиартрит - воспаление суставов.
-                    </li>
-                    <li className="text-base font-semibold">
-                      Способствуют выведению токсинов и воздействуют на
-                      восстановление тканей, питает его необходимыми веществами.
-                    </li>
-                  </ul>
-
-                  <div className="mt-10 w-full flex justify-center">
-                    <Image src={DefaultVideoImg} alt="Product Image" width={500} className="w-[600px] rounded-xl h-auto" />
-                  </div>
-
-                  <div className="mt-10">
-                    <h4 className="text-lg font-semibold mb-6">
-                      Дополнительно:
-                    </h4>
-                    <ul className="space-y-3">
-                      <li className="text-base">
-                        Эффективно помогает при таких заболеваниях как:
+                <Container>
+                  <TabsContent key={`tab-1-${lang}`} value={"1"}>
+                    <ul className="space-y-4 my-12 list-disc grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3">
+                      <li className="text-base font-semibold">
+                        Nutva Complex состоит из 100% натуральных компонентов.
                       </li>
-                      <li className="text-base">
-                        Грыжа позвоночника - нарушение целостности внешней оболочки межпозвоночного диска;
+                      <li className="text-base font-semibold">
+                        Грыжа позвоночника - нарушение целостности внешней оболочки межпозвоночного диска!
                       </li>
-                      <li className="text-base">
-                        Коксартроз - эрозия тазобедренного сустава;
+                      <li className="text-base font-semibold">
+                        Гонартроз - хроническое дегенеративное заболевание коленного
+                        сустава.
                       </li>
-                      <li className="text-base">
-                        Гонартроз - хроническое дегенеративное заболевание коленного сустава;
+                      <li className="text-base font-semibold">
+                        Запускает процесс регенерации и улучшает качества
+                        синовиальной жидкости, возобновляет ее нормальную
+                        циркуляцию.
                       </li>
-                      <li className="text-base">
-                        Полиартрит - воспаление суставов;
+                      <li className="text-base font-semibold">
+                        Остеопороз - хрупкость костей.
                       </li>
-                      <li className="text-base">
-                        Остеопороз - хрупкость костей;
+                      <li className="text-base font-semibold">
+                        Коксартроз - эрозия тазобедренного сустава.
+                      </li>
+                      <li className="text-base font-semibold">
+                        Полиартрит - воспаление суставов.
+                      </li>
+                      <li className="text-base font-semibold">
+                        Способствуют выведению токсинов и воздействуют на
+                        восстановление тканей, питает его необходимыми веществами.
                       </li>
                     </ul>
-                  </div>
 
-                  <div className="flex justify-center mt-10">
-                    <Image src={ProductDetailImage} alt="Product Detail Image" width={500} className="w-[500px] rounded-xl h-auto" />
-                  </div>
-                </TabsContent>
-                <TabsContent key={`tab-2-${lang}`} value={"2"}>
-                  <div className="mb-10">
-                    {[1, 2, 3].map((item, index) => (
-                      <div
-                        key={item}
-                        className={clsx(
-                          "grid grid-cols-1 md:grid-cols-2 gap-6 items-center",
-                          index % 2 === 1 && "md:flex-row-reverse md:flex"
-                        )}
-                      >
-                        <div className="flex justify-center">
-                          <Image
-                            src={GinsengImg}
-                            alt="Ginseng Image"
-                            width={500}
-                            className="w-[500px] rounded-xl h-auto"
-                          />
-                        </div>
+                    <div className="mt-10 w-full flex justify-center">
+                      <Image src={DefaultVideoImg} alt="Product Image" width={500} className="w-[600px] rounded-xl h-auto" />
+                    </div>
 
-                        <div className="mt-10">
-                          <h4 className="text-lg font-semibold mb-6">
-                            Дополнительно:
-                          </h4>
-                          <ul className="space-y-3">
-                            <li className="text-base">
-                              Эффективно помогает при таких заболеваниях как:
-                            </li>
-                            <li className="text-base">
-                              Грыжа позвоночника - нарушение целостности внешней оболочки межпозвоночного диска;
-                            </li>
-                            <li className="text-base">
-                              Коксартроз - эрозия тазобедренного сустава;
-                            </li>
-                            <li className="text-base">
-                              Гонартроз - хроническое дегенеративное заболевание коленного сустава;
-                            </li>
-                            <li className="text-base">
-                              Полиартрит - воспаление суставов;
-                            </li>
-                            <li className="text-base">
-                              Остеопороз - хрупкость костей;
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </TabsContent>
+                    <div className="mt-10">
+                      <h4 className="text-lg font-semibold mb-6">
+                        Дополнительно:
+                      </h4>
+                      <ul className="space-y-3">
+                        <li className="text-base">
+                          Эффективно помогает при таких заболеваниях как:
+                        </li>
+                        <li className="text-base">
+                          Грыжа позвоночника - нарушение целостности внешней оболочки межпозвоночного диска;
+                        </li>
+                        <li className="text-base">
+                          Коксартроз - эрозия тазобедренного сустава;
+                        </li>
+                        <li className="text-base">
+                          Гонартроз - хроническое дегенеративное заболевание коленного сустава;
+                        </li>
+                        <li className="text-base">
+                          Полиартрит - воспаление суставов;
+                        </li>
+                        <li className="text-base">
+                          Остеопороз - хрупкость костей;
+                        </li>
+                      </ul>
+                    </div>
 
-                <TabsContent key={`tab-3-${lang}`} value={"3"}>
-                  <div className="my-12 max-w-[80%] mx-auto">
-                    <h4 className="text-base leading-10 font-semibold mb-2">
-                      Клиническая фармакология:
-                    </h4>
-                    <p className="text-base mb-4 leading-10">
-                      Комплексный продукт для поддержания здоровья суставов и костей: Оказывает питательную поддержку соединительной ткани, улучшает синтез коллагена и эластина, оказывает общеукрепляющее воздействие на организм. Способствует купированию воспалительных процессов в тканях, снижению болевого синдрома.
-                    </p>
+                    <div className="flex justify-center mt-10">
+                      <Image src={ProductDetailImage} alt="Product Detail Image" width={500} className="w-[500px] rounded-xl h-auto" />
+                    </div>
+                  </TabsContent>
+                  <TabsContent key={`tab-2-${lang}`} value={"2"}>
+                    <div className="mb-10">
+                      {[1, 2, 3].map((item, index) => (
+                        <div
+                          key={item}
+                          className={clsx(
+                            "grid grid-cols-1 md:grid-cols-2 gap-6 items-center",
+                            index % 2 === 1 && "md:flex-row-reverse md:flex"
+                          )}
+                        >
+                          <div className="flex justify-center">
+                            <Image
+                              src={GinsengImg}
+                              alt="Ginseng Image"
+                              width={500}
+                              className="w-[500px] rounded-xl h-auto"
+                            />
+                          </div>
 
-                    <h4 className="text- leading-10 font-semibold mb-2">
-                      Показания к применению:
-                    </h4>
-                    <p className="text-base mb-4 leading-10">
-                      В качестве биологически активной добавки рекомендуется при нарушениях функции опорно-двигательного аппарата (остеохондроз позвоночника, артриты и артрозы, тендовагиниты, миозиты, в восстановительном периоде после травм), как ежедневная поддержка костно-суставной системы для спортсменов и других лиц, имеющих повышенную нагрузку на опорно-двигательный аппарат; заболевания сосудов, в том числе тромбофлебиты, геморрой; патологии со стороны клапанов сердца; аномалии и другие заболевания со стороны соединительной ткани. Способствует укреплению волос, ногтей, повышению эластичности кожи и улучшению ее внешнего вида, помогает при воспалении и напряжении в суставах, мышцах, связках.
-                    </p>
-                    <h4 className="text-base leading-10 font-semibold mb-2">
-                      Способ применения и дозировка:
-                    </h4>
-                    <p className="text-base mb-4 leading-10">
-                      Взрослым по 2 капсулы в день, вечером за 30 минут до еды. Продукт рекомендуется принимать длительными курсами в течение 3-4 месяцев.
-                    </p>
-                    <h4 className="text-base leading-10 font-semibold mb-2">
-                      Противопоказания:
-                    </h4>
-                    <p className="text-base mb-4 leading-10">
-                      Индивидуальная непереносимость компонентов продукта, беременность, кормление грудью.
-                    </p>
-                  </div>
-                </TabsContent>
-
-                <TabsContent key={`tab-4-${lang}`} value={"4"}>
-                  <div className="w-full px-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-12">
-                      {[1, 2, 3, 4, 5, 6].map((item) => (
-                        <div key={item} className="flex justify-center">
-                          <Image
-                            src={CertificateImg}
-                            alt={`Certificate ${item}`}
-                            width={250}
-                            height={350}
-                            className="w-full max-w-[250px] h-auto object-contain rounded-xl"
-                          />
+                          <div className="mt-10">
+                            <h4 className="text-lg font-semibold mb-6">
+                              Дополнительно:
+                            </h4>
+                            <ul className="space-y-3">
+                              <li className="text-base">
+                                Эффективно помогает при таких заболеваниях как:
+                              </li>
+                              <li className="text-base">
+                                Грыжа позвоночника - нарушение целостности внешней оболочки межпозвоночного диска;
+                              </li>
+                              <li className="text-base">
+                                Коксартроз - эрозия тазобедренного сустава;
+                              </li>
+                              <li className="text-base">
+                                Гонартроз - хроническое дегенеративное заболевание коленного сустава;
+                              </li>
+                              <li className="text-base">
+                                Полиартрит - воспаление суставов;
+                              </li>
+                              <li className="text-base">
+                                Остеопороз - хрупкость костей;
+                              </li>
+                            </ul>
+                          </div>
                         </div>
                       ))}
                     </div>
-                  </div>
-                </TabsContent>
+                  </TabsContent>
+
+                  <TabsContent key={`tab-3-${lang}`} value={"3"}>
+                    <div className="my-12 max-w-[80%] mx-auto">
+                      <h4 className="text-base leading-10 font-semibold mb-2">
+                        Клиническая фармакология:
+                      </h4>
+                      <p className="text-base mb-4 leading-10">
+                        Комплексный продукт для поддержания здоровья суставов и костей: Оказывает питательную поддержку соединительной ткани, улучшает синтез коллагена и эластина, оказывает общеукрепляющее воздействие на организм. Способствует купированию воспалительных процессов в тканях, снижению болевого синдрома.
+                      </p>
+
+                      <h4 className="text- leading-10 font-semibold mb-2">
+                        Показания к применению:
+                      </h4>
+                      <p className="text-base mb-4 leading-10">
+                        В качестве биологически активной добавки рекомендуется при нарушениях функции опорно-двигательного аппарата (остеохондроз позвоночника, артриты и артрозы, тендовагиниты, миозиты, в восстановительном периоде после травм), как ежедневная поддержка костно-суставной системы для спортсменов и других лиц, имеющих повышенную нагрузку на опорно-двигательный аппарат; заболевания сосудов, в том числе тромбофлебиты, геморрой; патологии со стороны клапанов сердца; аномалии и другие заболевания со стороны соединительной ткани. Способствует укреплению волос, ногтей, повышению эластичности кожи и улучшению ее внешнего вида, помогает при воспалении и напряжении в суставах, мышцах, связках.
+                      </p>
+                      <h4 className="text-base leading-10 font-semibold mb-2">
+                        Способ применения и дозировка:
+                      </h4>
+                      <p className="text-base mb-4 leading-10">
+                        Взрослым по 2 капсулы в день, вечером за 30 минут до еды. Продукт рекомендуется принимать длительными курсами в течение 3-4 месяцев.
+                      </p>
+                      <h4 className="text-base leading-10 font-semibold mb-2">
+                        Противопоказания:
+                      </h4>
+                      <p className="text-base mb-4 leading-10">
+                        Индивидуальная непереносимость компонентов продукта, беременность, кормление грудью.
+                      </p>
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent key={`tab-4-${lang}`} value={"4"}>
+                    <div className="w-full px-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-12">
+                        {[1, 2, 3, 4, 5, 6].map((item) => (
+                          <div key={item} className="flex justify-center">
+                            <Image
+                              src={CertificateImg}
+                              alt={`Certificate ${item}`}
+                              width={250}
+                              height={350}
+                              className="w-full max-w-[250px] h-auto object-contain rounded-xl"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </TabsContent>
+                </Container>
               </motion.div>
             </AnimatePresence>
           </Tabs>

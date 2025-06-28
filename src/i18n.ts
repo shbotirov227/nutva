@@ -17,10 +17,10 @@ i18n
       escapeValue: false,
     },
     detection: {
-      order: ["cookie", "localStorage"],
+      order: ["cookie", "localStorage", "navigator"],
       lookupCookie: "lang",
-      lookupLocalStorage: "lang",
-      caches: ["cookie", "localStorage"],
+      // lookupLocalStorage: "lang",
+      caches: ["cookie"],
     },
     backend: {
       loadPath: "/locales/{{lng}}/{{ns}}.json",

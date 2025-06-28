@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -17,9 +18,14 @@ import { useTranslated } from "@/hooks/useTranslated";
 // type LangKey = "uz" | "ru" | "en";
 
 export default function ProductsListPage() {
+  const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const { lang } = useLang();
   const { t } = useTranslation();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const { data: products, isLoading } = useQuery({
     queryKey: ["products", lang],
@@ -43,6 +49,8 @@ export default function ProductsListPage() {
       </div>
     );
   }
+
+  if (!isMounted) return null;
 
   return (
     <div className="pt-32 pb-16 max-w-7xl mx-auto px-4">
