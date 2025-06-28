@@ -28,7 +28,7 @@ const PhoneField = ({ placeholder, phone, setPhone, setErrors, errors, className
   }, []);
 
   return (
-    <div ref={containerRef} className="mx-auto w-full flex flex-col gap-1 transition-all">
+    <div ref={containerRef} className="mx-auto w-[35%] flex flex-col gap-1 transition-all">
       <PhoneInput
         country={defaultCountry}
         searchPlaceholder={t("form.searchCountry")}
@@ -50,7 +50,7 @@ const PhoneField = ({ placeholder, phone, setPhone, setErrors, errors, className
         onChange={(value) => setPhone(value)}
         inputClass={clsx(
           className,
-          errors?.phone ? "border-red-500 !w-full !ring-red-500 focus:!ring" : "border-blue-400",
+          errors?.phone ? "relative border-red-500 !w-[35%] !ring-red-500 focus:!ring" : "border-blue-400",
           "!w-full !py-[22px] !pl-[55px] !rounded-[13px] overflow-hidden !border-2 !focus:!shadow-[0_0_8px_rgba(0,0,0,0.1),_0_0_5px_rgba(10,10,10,0.8)] !transition-all",
         )}
         containerClass="!w-full !rounded-xl"
