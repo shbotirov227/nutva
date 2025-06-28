@@ -24,7 +24,7 @@ const PhoneField = ({ placeholder, phone, setPhone, setErrors, errors, className
     //   .then((res) => res.json())
     //   .then((data) => setDefaultCountry(data.country_code.toLowerCase()))
     //   .catch(() => setDefaultCountry("uz"));
-    setDefaultCountry("ru");
+    setDefaultCountry("uz");
   }, []);
 
   return (

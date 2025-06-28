@@ -7,26 +7,34 @@ import { toast } from "react-toastify";
 import { FormInputWrapper } from "./FormInputWrapper";
 import PhoneField from "./PhoneField";
 import { useBitrixMutation } from "@/hooks/useBitrixMutation";
+import { useMutation } from "@tanstack/react-query";
+import { apiClient } from "@/lib/apiClient";
 // import { useLang } from "@/context/LangContext";
 
 type FormModalProps = {
+  productId?: string;
   children: React.ReactElement<React.HTMLAttributes<HTMLButtonElement>>;
   onClose?: () => void;
   onSuccess?: () => void;
-  productName: string;
   quantity: number;
+  btnColor?: string;
 };
 
-export function FormModal({ children, onClose, onSuccess, productName, quantity }: FormModalProps) {
+export function FormModal({ productId, children, quantity, btnColor }: FormModalProps) {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [isMounted, setIsMounted] = React.useState(false);
   const [name, setName] = React.useState("");
   const [phone, setPhone] = React.useState("");
-  const [countryCode] = React.useState("+998");
+  // const [countryCode] = React.useState("+998");
   const [errors, setErrors] = React.useState<{ name?: string; phone?: string }>({});
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [dropUp, setDropUp] = React.useState(false);
   // const { lang } = useLang();
   const { t } = useTranslation();
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -45,42 +53,66 @@ export function FormModal({ children, onClose, onSuccess, productName, quantity 
   }, []);
 
 
-  const { mutate: sendToBitrix, isPending } = useBitrixMutation();
+  // const { mutate: sendToBitrix, isPending } = useBitrixMutation();
+
+  const { mutate: purchaseProduct, isPending } = useMutation({
+    mutationFn: (data: {
+      productId: string;
+      buyerName: string;
+      phone: string;
+      comment: string;
+    }) => apiClient.postPurchaseRequest(data),
+    onSuccess: () => {
+      toast.success(t("form.success") || "So'rov yuborildi");
+      setIsOpen(false);
+      setName("");
+      setPhone("");
+    },
+    onError: (err: any) => {
+      toast.error(err.message || t("errors.badRequest") || "Xatolik yuz berdi");
+    },
+  });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const trimmedName = name.trim();
-    const digitsOnly = phone.replace(/\D/g, "");
-    const cleanedCode = countryCode.replace(/\D/g, "");
-    const phoneLength = digitsOnly.length - cleanedCode.length;
+    // const digitsOnly = phone.replace(/\D/g, "");
+    // const cleanedCode = countryCode.replace(/\D/g, "");
+    // const phoneLength = digitsOnly.length - cleanedCode.length;
 
     if (!trimmedName ) {
       toast.error(t("form.fillAllFields") || "Barcha maydonlarni to'ldiring");
       return;
     }
 
-    const searchParams = new URLSearchParams(window.location.search);
-    const formData = {
-      name: trimmedName,
-      phone,
-      productName,
-      quantity,  
-      utm_source: searchParams.get("utm_source") || undefined,
-      utm_medium: searchParams.get("utm_medium") || undefined,
-      utm_campaign: searchParams.get("utm_campaign") || undefined,
-      utm_term: searchParams.get("utm_term") || undefined,
-      utm_content: searchParams.get("utm_content") || undefined,
-    };
+    // const searchParams = new URLSearchParams(window.location.search);
+    // const formData = {
+    //   name: trimmedName,
+    //   phone,
+    //   productName,
+    //   quantity,  
+    //   utm_source: searchParams.get("utm_source") || undefined,
+    //   utm_medium: searchParams.get("utm_medium") || undefined,
+    //   utm_campaign: searchParams.get("utm_campaign") || undefined,
+    //   utm_term: searchParams.get("utm_term") || undefined,
+    //   utm_content: searchParams.get("utm_content") || undefined,
+    // };
 
-    sendToBitrix(formData, {
-      onSuccess: () => {
-        toast.success(t("form.success") || "So'rov yuborildi");
-        setIsOpen(false);
-      },
-      onError: (err: any) => {
-        toast.error(err.message || t("errors.badRequest") || "Xatolik yuz berdi");
-      },
+    // sendToBitrix(formData, {
+    //   onSuccess: () => {
+    //     toast.success(t("form.success") || "So'rov yuborildi");
+    //     setIsOpen(false);
+    //   },
+    //   onError: (err: any) => {
+    //     toast.error(err.message || t("errors.badRequest") || "Xatolik yuz berdi");
+    //   },
+    // });
+    purchaseProduct({
+      productId: productId || "",
+      buyerName: trimmedName,
+      phone: phone,
+      comment: `${quantity}`,
     });
   };
 
@@ -89,7 +121,10 @@ export function FormModal({ children, onClose, onSuccess, productName, quantity 
     onClick: () => setIsOpen(true),
   });
 
+  
   const inputSharedStyle = "!w-full !px-10 !py-6 !border-gray-800 sm:px-5 sm:py-3 rounded-xl text-gray-800 text-[15px] font-bold bg-white outline-none border- focus:!shadow-[0_0_10px_rgba(10,10,10,0.8)] transition-all";
+  
+  if (!isMounted) return null;
 
   return (
     <>
@@ -165,6 +200,7 @@ export function FormModal({ children, onClose, onSuccess, productName, quantity 
                   <Button
                     type="submit"
                     disabled={isPending}
+                    style={{ backgroundColor: btnColor ? btnColor : "#218A4F" }}
                     className="flex-1 py-4 sm:py-5 bg-green-600 hover:bg-green-700 transition-all text-white rounded-lg cursor-pointer"
                   >
                     {isPending ? t("common.loading") : t("button.formButton")}

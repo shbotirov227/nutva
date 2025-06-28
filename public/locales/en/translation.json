@@ -56,7 +56,9 @@
             "2": "Composition",
             "3": "Instructions",
             "4": "Certification"
-        }
+        },
+
+        "checkboxLabel": "Select more than 3 products"
     },
 
     "aboutBrand": {

@@ -57,7 +57,8 @@
 			"2": "Tarkibi",
 			"3": "Ko'rsatmalar",
 			"4": "Sertifikatlar"
-		}
+		},
+        "checkboxLabel": "3 tadan ko'p mahsulot tanlash"
 	},
 
     "aboutBrand": {

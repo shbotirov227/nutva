@@ -137,8 +137,20 @@ export const apiClient = {
     return res.data;
   },
 
+  postPurchaseRequest: async (data: {
+      productId: string;
+      buyerName: string;
+      phone: string;
+      comment: string;
+  }) => {
+    const res = await api.post(`/statistics/purchase-request`, data);
+    return res.data;
+  },
+
   getTrackingPixels: async () => {
     const res = await api.get("/pixels");
     return res.data;
   },
+
+
 };
