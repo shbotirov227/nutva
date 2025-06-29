@@ -25,7 +25,7 @@ const NavLink = ({
     href={href}
     ref={refProp}
     className={
-      "text-white px-4 text-xl transition-all delay-75 pb-2 border-b-transparent border-b-2 hover:border-b-white focus:outline-none focus-visible:ring-2 ring-white " +
+      "text-white px-4 min-lg:px-2 text-xl max-h-lg:text-lg transition-all delay-75 pb-2 border-b-transparent border-b-2 hover:border-b-white focus:outline-none focus-visible:ring-2 ring-white " +
       className
     }
     onClick={onClick}
@@ -144,7 +144,10 @@ const Header: React.FC = () => {
                 ))}
               </ul>
             </nav>
+            <div className="max-lg:hidden">
             <LanguageSwitcher />
+            </div>
+
             <button
               className="md:hidden flex items-center justify-center p-2"
               onClick={() => setMobileMenu(true)}

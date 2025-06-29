@@ -105,21 +105,21 @@ export default function ProductDetailPage() {
           </AnimatePresence>
 
           <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="my-10">
-            <TabsList className="flex flex-wrap justify-center gap-4 bg-transparent">
+            <TabsList className="grid grid-cols-4 sm:grid-cols-4 max-[450px]:grid-cols-3 max-[350px]:grid-cols-2 mb-5 justify-center gap-4 bg-transparent">
               {["1", "2", "3", "4"].map((tab) => (
                 <TabsTrigger
                   key={tab}
                   value={tab}
                   asChild
                   className={clsx(
-                    "cursor-pointer shadow-md",
+                    "cursor-pointer shadow-md px-4 py-2 max-[450px]:px-2 max-[450px]:py-1 rounded-lg",
                     activeTab === tab ? "!bg-black text-white" : ""
                   )}
                 >
                   <Button
                     size="lg"
                     variant={activeTab === tab ? "default" : "outline"}
-                    className="w-full sm:w-auto p-5 text-sm sm:text-base font-semibold"
+                    className="w-full sm:w-auto  text-sm sm:text-base font-semibold"
                   >
                     {t(`product.tab.${tab}`)}
                   </Button>

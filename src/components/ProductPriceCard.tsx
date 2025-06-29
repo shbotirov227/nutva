@@ -53,8 +53,7 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
 
   const selectedQuantity = isChecked ? count! : quantity!;
 
-  const { basePrice, pricePerUnit, totalPrice, discountPercent } = useDiscount(product?.uz?.name, selectedQuantity);
-  console.log({ pricePerUnit })
+  const { basePrice, totalPrice, discountPercent } = useDiscount(localizedProduct?.name, selectedQuantity);
 
 
   const handleClick = () => {

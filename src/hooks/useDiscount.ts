@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { DISCOUNT_TABLE } from "@/constants/discountTable";
+import { ProductName } from "@/types/enums";
 
 export function useDiscount(slug: string | undefined, quantity: number) {
   return useMemo(() => {
@@ -12,7 +13,11 @@ export function useDiscount(slug: string | undefined, quantity: number) {
       };
     }
 
-    const productKey = slug.toUpperCase();
+    // const productKey = slug.toUpperCase();
+    const productKey = (Object.entries(ProductName).find(
+      ([, value]) => value.toLowerCase() === slug.toLowerCase()
+    )?.[0] || "") as keyof typeof ProductName;
+    
     const table = DISCOUNT_TABLE[productKey];
 
     if (!table) {
@@ -23,6 +28,8 @@ export function useDiscount(slug: string | undefined, quantity: number) {
         basePrice: 0
       };
     }
+
+    console.log(productKey)
 
     const quantityKey = quantity >= 5 ? 5 : quantity >= 3 ? 3 : quantity >= 2 ? 2 : 1;
 

@@ -48,7 +48,7 @@ export default function LanguageSwitcher() {
             value={lang}
             onClick={() => handleChange(lng.value)}
             className={clsx(
-              "text-lg pb-2 px-4 h-auto font-medium transition-colors cursor-pointer",
+              "text-lg text-white pb-2 px-4 h-auto font-medium transition-colors cursor-pointer",
               languages[1] === lng ? "border-x-1" : "border-none"
             )}
           >
