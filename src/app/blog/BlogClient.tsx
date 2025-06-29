@@ -1,73 +1,71 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
+import { AnimatePresence, motion } from "framer-motion";
+
 import BlogCard from "@/components/BlogCard";
 import Container from "@/components/Container";
 import FilterBar from "@/components/FilterBar";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useLang } from "@/context/LangContext";
-import { useTranslated } from "@/hooks/useTranslated";
-import { apiClient } from "@/lib/apiClient";
-import { GetAllBlogsType } from "@/types/blogs/getAllBlogs";
-import { GetOneBlogType } from "@/types/blogs/getOneBlog";
-import { useQuery } from "@tanstack/react-query";
-import { AnimatePresence, motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { apiClient } from "@/lib/apiClient";
+// import EmptyCartImg from "@/assets/images/empty-cart-img.png";
+import { GetAllBlogsType } from "@/types/blogs/getAllBlogs";
+import { useTranslated } from "@/hooks/useTranslated";
+// import Image from "next/image";
+import { useLang } from "@/context/LangContext";
+import { GetOneBlogType } from "@/types/blogs/getOneBlog";
+import Image from "next/image";
+import EmptyCartImg from "@/assets/images/empty-cart-img.png";
 
 export default function BlogClient() {
-
   const [mounted, setMounted] = useState(false);
-  const [, setVisibleCount] = useState(6);
+  const [visibleCount, setVisibleCount] = useState(6);
   const [search, setSearch] = useState("");
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+  const [selectedDate, setSelectedDate] = useState<Date>();
   const [selectedCats, setSelectedCats] = useState<string[]>([]);
-  const { t } = useTranslation();
   const { lang } = useLang();
-
+  const { t } = useTranslation();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const { data: blogs = [] as GetAllBlogsType, isLoading } = useQuery({
+  const { data: blogs = [], isLoading } = useQuery<GetAllBlogsType>({
     queryKey: ["blogs", lang],
     queryFn: () => apiClient.getAllBlogs(lang),
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
   });
 
-  const handleLoadMore = () => setVisibleCount((prev) => prev + 6);
-  const translation = useTranslated(blogs);
+  const translatedBlogs = useTranslated(blogs);
 
-  const filteredBlogs = blogs.filter((blog: GetOneBlogType) => {
-    // const translation = useTranslated(blog);
-    const matchSearch =
-      translation.title.toLowerCase().includes(search.toLowerCase()) ||
-      translation.content.toLowerCase().includes(search.toLowerCase()) ||
-      translation.subtitle.toLowerCase().includes(search.toLowerCase());
+  const filteredBlogs = translatedBlogs
+    .filter((blog: GetOneBlogType & { title: string; subtitle: string; content: string; metaKeywords: string }) => {
+      const matchSearch =
+        blog.title.toLowerCase().includes(search.toLowerCase()) ||
+        blog.subtitle.toLowerCase().includes(search.toLowerCase()) ||
+        blog.content.toLowerCase().includes(search.toLowerCase());
 
-    const matchDate = selectedDate
-      ? new Date(blog.createdAt!).toDateString() === selectedDate.toDateString()
-      : true;
+      const matchDate = selectedDate
+        ? new Date(blog.createdAt!).toDateString() === selectedDate.toDateString()
+        : true;
 
-    const matchCategory = selectedCats.length
-      ? selectedCats.every((cat) =>
-        translation.metaKeywords.toLowerCase().includes(cat)
-      )
-      : true;
+      const matchCategory = selectedCats.length
+        ? selectedCats.every((cat) => blog.metaKeywords.toLowerCase().includes(cat))
+        : true;
 
-    return matchSearch && matchDate && matchCategory;
-  });
-
-
-  console.log("Localized Blog", blogs)
+      return matchSearch && matchDate && matchCategory;
+    })
+    .slice(0, visibleCount);
 
   if (!mounted) return null;
 
   return (
-    <div className="pt-32">
+    <div className="pt-32 pb-25">
       <Container>
         <FilterBar
           search={search}
@@ -79,11 +77,11 @@ export default function BlogClient() {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {isLoading
-            ? Array.from({ length: 6 }).map((_, idx) => (
+          {isLoading ? (
+            Array.from({ length: 6 }).map((_, idx) => (
               <div
                 key={idx}
-                className="w-full h-[300px] rounded-xl flex flex-col gap-4 p-4 bg-gray-200 border border-gray-300 shadow-[10px_10px_10px_rgba(0,0,0,0.1),_10px_10px_10px_rgba(0,0,0,0.1)]"
+                className="w-full h-[300px] rounded-xl flex flex-col gap-4 p-4 bg-gray-200"
               >
                 <Skeleton className="w-full h-[180px] rounded-md" />
                 <Skeleton className="w-3/4 h-6" />
@@ -91,49 +89,58 @@ export default function BlogClient() {
                 <Skeleton className="w-5/6 h-4" />
               </div>
             ))
-            : (
-              <AnimatePresence mode="popLayout">
-                {localized?.map((blog: GetOneBlogType) => {
-                  return (
-                    <motion.div
-                      key={blog.id}
-                      layout
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.3 }}
-                      className="w-full rounded-xl flex flex-col gap-4 px-5"
-                    >
-                      <BlogCard
-                        id={blog.id}
-                        title={blog.title}
-                        content={blog.subtitle}
-                        media={blog.media[0] || null}
-                        icon
-                      />
-                    </motion.div>
-                  )
-                })}
-              </AnimatePresence>
-            )}
+          ) : (
+            <AnimatePresence mode="popLayout">
+              {filteredBlogs.map((blog) => (
+                <motion.div
+                  key={blog.id}
+                  layout
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="w-full rounded-xl flex flex-col gap-4 px-5"
+                >
+                  <BlogCard
+                    id={blog.id}
+                    title={blog.title}
+                    content={blog.subtitle}
+                    media={blog.media[0] || null}
+                    icon
+                  />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          )}
         </div>
 
-        {filteredBlogs.length ? (
+        {/* <div className="text-center text-gray-500 my-10">
+            {t("blog.noBlogs")}
+          </div> */}
+        {!filteredBlogs.length && !isLoading && (
+
+          <div>
+            <Image
+              src={EmptyCartImg}
+              alt="No image"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full m-auto max-w-[350px] h-full object-contain rounded-xl border shadow-none border-none"
+            />
+            <p className="text-muted-foreground text-xl text-center mt-10">{t("blog.noBlogs")}</p>
+          </div>
+        )}
+
+        {filteredBlogs.length > 0 && filteredBlogs.length < blogs.length && (
           <Button
-            onClick={handleLoadMore}
+            onClick={() => setVisibleCount((prev) => prev + 6)}
             size="lg"
-            color="green"
-            variant="outline"
-            className="flex items-center justify-between my-10 cursor-pointer mx-auto bg-[#218A4F] text-white hover:bg-[#365343] hover:text-white transition-all"
+            className="my-10 mx-auto flex gap-2 bg-[#218A4F] text-white hover:bg-[#365343]"
           >
             <ArrowDown size={20} />
             {t("blog.loadMore")}
-
           </Button>
-        ) : (
-          <div className="text-center text-gray-500 my-10">
-            {t("blog.noBlogs")}
-          </div>
         )}
       </Container>
     </div>

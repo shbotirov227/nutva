@@ -69,7 +69,7 @@ export default function CartItem({ item }: { item: GetOneProductType & { quantit
 
           <Button
             variant="secondary"
-            onClick={() => removeFromCart(item.id)}
+            // onClick={() => removeFromCart(item.id)}
             className="text-sm text-red-500 border border-red-300 hover:bg-red-50 px-4 py-2 rounded-xl cursor-pointer"
           >
             {t("common.delete")}
