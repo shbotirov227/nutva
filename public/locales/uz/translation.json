@@ -19,7 +19,11 @@
         "saleUpperCase": "Chegirma",
 		"forYou": "Siz uchun",
 		"ourProducts": "Bizning mahsulotlarimiz",
-        "pending": "Yuklanmoqda..."
+        "pending": "Yuklanmoqda...",
+        "price": "Narxi",
+        "total": "Jami",
+        "yourCart": "Sizning savatingiz",
+        "emptyCart": "Sizning savatingiz bo'sh"
 	},
 
 	"errors": {

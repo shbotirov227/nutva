@@ -58,7 +58,10 @@ export default function BlogsPage() {
         }
 
         const data = await response.json();
-        toast.success("Blog muvaffaqiyatli yaratildi!");
+        toast.success("Blog muvaffaqiyatli yaratildi!", {
+            position: "top-right",
+            autoClose: 5000,
+        });
         console.log("Blog yaratildi:", data);
     }
 

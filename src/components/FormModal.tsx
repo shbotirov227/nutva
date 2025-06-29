@@ -63,13 +63,19 @@ export function FormModal({ productId, children, quantity, btnColor }: FormModal
       comment: string;
     }) => apiClient.postPurchaseRequest(data),
     onSuccess: () => {
-      toast.success(t("form.success") || "So'rov yuborildi");
+      toast.success(t("form.success") || "So'rov yuborildi", {
+        position: "top-center",
+        autoClose: 1200,
+      });
       setIsOpen(false);
       setName("");
       setPhone("");
     },
     onError: (err: any) => {
-      toast.error(err.message || t("errors.badRequest") || "Xatolik yuz berdi");
+      toast.error(err.message || t("errors.badRequest") || "Xatolik yuz berdi", {
+        position: "top-center",
+        autoClose: 1200,
+      });
     },
   });
 
@@ -82,7 +88,10 @@ export function FormModal({ productId, children, quantity, btnColor }: FormModal
     // const phoneLength = digitsOnly.length - cleanedCode.length;
 
     if (!trimmedName ) {
-      toast.error(t("form.fillAllFields") || "Barcha maydonlarni to'ldiring");
+      toast.error(t("form.fillAllFields") || "Barcha maydonlarni to'ldiring", {
+        position: "top-center",
+        autoClose: 1200,
+      });
       return;
     }
 
@@ -120,7 +129,6 @@ export function FormModal({ productId, children, quantity, btnColor }: FormModal
   const trigger = React.cloneElement(children, {
     onClick: () => setIsOpen(true),
   });
-
   
   const inputSharedStyle = "!w-full !px-10 !py-6 !border-gray-800 sm:px-5 sm:py-3 rounded-xl text-gray-800 text-[15px] font-bold bg-white outline-none border- focus:!shadow-[0_0_10px_rgba(10,10,10,0.8)] transition-all";
   

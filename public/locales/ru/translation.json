@@ -19,7 +19,11 @@
         "saleUpperCase": "Скидка",
 		"forYou": "Для вас",
         "ourProducts": "Наши продукты",
-        "pending": "Выполняется..."
+        "pending": "Выполняется...",
+        "price": "Цена",
+        "total": "Итого",
+        "yourCart": "Ваша корзина",
+        "emptyCart": "Ваша корзина пуста"
 	},
 
 	"errors": {

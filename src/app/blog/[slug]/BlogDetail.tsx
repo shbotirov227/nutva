@@ -9,13 +9,11 @@ import { apiClient } from "@/lib/apiClient";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { useParams } from "next/navigation";
-import { useLang } from "@/context/LangContext";
+import { useTranslated } from "@/hooks/useTranslated";
 
 export default function BlogPostPage() {
   const params = useParams();
   const { t } = useTranslation();
-
-  const lang = useLang();
 
   const { data: blog } = useQuery({
     queryKey: ["blog", params.slug],
@@ -24,12 +22,12 @@ export default function BlogPostPage() {
     staleTime: 1000 * 60 * 5,
   });
 
-  // console.log("Blog data:", params);
+  const localized = useTranslated(blog);
 
   return (
     <Container className="pt-32">
       <div className="space-y-6">
-        <h1 className="text-4xl font-bold">{blog?.title}</h1>
+        <h1 className="text-4xl font-bold">{localized?.title}</h1>
 
         {blog?.createdAt && (
           <p className="text-gray-500 text-sm">

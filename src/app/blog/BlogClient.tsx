@@ -6,6 +6,7 @@ import FilterBar from "@/components/FilterBar";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useLang } from "@/context/LangContext";
+import { useTranslated } from "@/hooks/useTranslated";
 import { apiClient } from "@/lib/apiClient";
 import { GetAllBlogsType } from "@/types/blogs/getAllBlogs";
 import { GetOneBlogType } from "@/types/blogs/getOneBlog";
@@ -38,9 +39,10 @@ export default function BlogClient() {
   });
 
   const handleLoadMore = () => setVisibleCount((prev) => prev + 6);
+  const translation = useTranslated(blogs);
 
   const filteredBlogs = blogs.filter((blog: GetOneBlogType) => {
-    const translation = blog[lang as "uz" | "ru" | "en"];
+    // const translation = useTranslated(blog);
     const matchSearch =
       translation.title.toLowerCase().includes(search.toLowerCase()) ||
       translation.content.toLowerCase().includes(search.toLowerCase()) ||
@@ -58,6 +60,9 @@ export default function BlogClient() {
 
     return matchSearch && matchDate && matchCategory;
   });
+
+
+  console.log("Localized Blog", blogs)
 
   if (!mounted) return null;
 
@@ -88,8 +93,7 @@ export default function BlogClient() {
             ))
             : (
               <AnimatePresence mode="popLayout">
-                {filteredBlogs?.map((blog: GetOneBlogType) => {
-                  const translation = blog[lang as "uz" | "ru" | "en"];
+                {localized?.map((blog: GetOneBlogType) => {
                   return (
                     <motion.div
                       key={blog.id}
@@ -102,8 +106,8 @@ export default function BlogClient() {
                     >
                       <BlogCard
                         id={blog.id}
-                        title={translation.title}
-                        content={translation.subtitle}
+                        title={blog.title}
+                        content={blog.subtitle}
                         media={blog.media[0] || null}
                         icon
                       />

@@ -19,7 +19,11 @@
         "saleUpperCase": "Sale",
         "forYou": "For You",
         "ourProducts": "Our Products",
-        "pending": "Pending..."
+        "pending": "Pending...",
+        "price": "Price",
+        "total": "Total",
+        "yourCart": "Your Cart",
+        "emptyCart": "Your cart is empty"
     },
 
     "errors": {

@@ -18,6 +18,7 @@ import { Checkbox } from "./ui/checkbox";
 import { Label } from "./ui/label";
 import { AnimatePresence, motion } from "framer-motion";
 import { useDiscount } from "@/hooks/useDiscount";
+import { useCart } from "@/context/CartContext";
 // import SuccessModal from "./SuccessModal";
 
 interface Props {
@@ -38,6 +39,7 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
   const [quantity, setQuantity] = useState(1);
   const { t } = useTranslation();
   const { lang } = useLang();
+  const { addToCart } = useCart();
 
   useEffect(() => {
     setMounted(true);
@@ -66,6 +68,19 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
       });
     }
   };
+
+  const handleAddToCart = () => {
+    if (!product || !product.id) return;
+
+    addToCart({
+      ...product,
+      quantity: 1,
+    });
+    toast.success(t("product.addedToCart"), {
+      position: "top-center",
+      autoClose: 1200,
+    });
+  }
 
   // const handleCheckboxChange = () => {
   //   const newChecked = !isChecked;
@@ -267,26 +282,37 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
               ) : null}
             </div>
 
-            <FormModal
-              // onClose={() => setShowFormModal(false)}
-              // onSuccess={handleSuccess}
-              // productName={localizedProduct?.name}
-              quantity={selectedQuantity}
-              btnColor={color}
-              productId={product?.id}
-            >
+            {/* <div className="flex items-center justify-start gap-5"> */}
+              <FormModal
+                // onClose={() => setShowFormModal(false)}
+                // onSuccess={handleSuccess}
+                // productName={localizedProduct?.name}
+                quantity={selectedQuantity}
+                btnColor={color}
+                productId={product?.id}
+              >
+                <Button
+                  size={"lg"}
+                  onClick={handleClick}
+                  style={{ backgroundColor: color, padding: "1.5rem" }}
+                  className={cn(
+                    bgColor ? `bg-${bgColor}` : null,
+                    "w-full mb-5 text-white text-lg font-semibold rounded-lg cursor-pointer transition-all"
+                  )}
+                >
+                  {t("common.buy")}
+                </Button>
+              </FormModal>
+
               <Button
                 size={"lg"}
-                onClick={handleClick}
-                style={{ backgroundColor: color, padding: "1.6rem" }}
-                className={cn(
-                  bgColor ? `bg-${bgColor}` : null,
-                  "w-full text-white text-lg font-semibold rounded-lg cursor-pointer transition-all"
-                )}
+                style={{ backgroundColor: color, padding: "1.5rem" }}
+                onClick={handleAddToCart}
+                className="w-full text-white text-lg font-semibold rounded-lg cursor-pointer transition-all"
               >
-                {t("common.buy")}
+                {t("product.addToCart")}
               </Button>
-            </FormModal>
+            {/* </div> */}
 
             {/* {showSuccessModal && (
           <SuccessModal onClose={() => setShowSuccessModal(false)} />

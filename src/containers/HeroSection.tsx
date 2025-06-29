@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React from "react";
@@ -9,7 +10,7 @@ import { apiClient } from "@/lib/apiClient";
 import { useLang } from "@/context/LangContext";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 // import { GetOneBannerType } from "@/types/banner/getOneBanner";
 import { useTranslated } from "@/hooks/useTranslated";
 import "swiper/css/pagination";
@@ -40,14 +41,13 @@ const HeroSection = () => {
       ></div>
 
       <Swiper
-        modules={[Autoplay,Pagination]}
+        modules={[Autoplay]}
         autoplay={{ delay: 2000, disableOnInteraction: false }}
-        pagination={{ clickable: true }}
         loop
         speed={1000}
         className="w-full h-full"
       >
-        {localized.map((item, idx: number) => {
+        {localized.map((item: any, idx: number) => {
           return (
             <SwiperSlide key={idx} className="cursor-grab active:cursor-grabbing">
               <Container className="flex flex-col md:flex-row items-center justify-around gap-6 sm:gap-10 w-full px-4 sm:px-6 min-h-screen">
