@@ -9,6 +9,7 @@ import { AuthProvider } from "@/providers/sessionProvider";
 import { LangProvider } from "@/context/LangContext";
 import InjectPixelScript from "@/components/InjectPixelScript";
 import TrackVisit from "@/components/TrackVisit";
+import { CartProvider } from "@/context/CartContext";
 import 'react-toastify/dist/ReactToastify.css';
 import "./globals.css";
 // import "../i18n";
@@ -42,12 +43,14 @@ export default function RootLayout({
         <AuthProvider>
           <QueryProvider>
             <LangProvider>
-              <Layout>
-                <InjectPixelScript />
-                <TrackVisit />
-                {children}
-                <ToastContainer />
-              </Layout>
+              <CartProvider>
+                <Layout>
+                  <InjectPixelScript />
+                  <TrackVisit />
+                  {children}
+                  <ToastContainer />
+                </Layout>
+              </CartProvider>
             </LangProvider>
           </QueryProvider>
         </AuthProvider>

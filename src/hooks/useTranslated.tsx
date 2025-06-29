@@ -15,8 +15,10 @@ type MultilangData =
     [key: string]: any;
   }>;
 
-export function useTranslated<T extends MultilangData>(data: T): T extends any[] ? Array<any> : any {
+export function useTranslated<T extends MultilangData | undefined>(data: T): T extends any[] ? Array<any> : any {
   const { lang } = useLang();
+
+  if (!data) return [] as any as T[];
 
   if (Array.isArray(data)) {
     return data.map((item) => ({

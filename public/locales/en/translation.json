@@ -60,7 +60,10 @@
         },
 
         "checkboxLabel": "Select more than 3 products",
-        "consultation": "Free consultation"
+        "consultation": "Free consultation",
+        "addToCart": "Add to cart",
+        "remoreFromCart": "Remove from cart",
+        "addedToCart": "Added to cart"
     },
 
     "aboutBrand": {

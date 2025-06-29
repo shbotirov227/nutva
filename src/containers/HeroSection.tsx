@@ -5,24 +5,30 @@ import Image from "next/image";
 import Container from "@/components/Container";
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/lib/apiClient";
-import { GetAllBannerType } from "@/types/banner/getAllBanner";
+// import { GetAllBannerType } from "@/types/banner/getAllBanner";
 import { useLang } from "@/context/LangContext";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
-import "swiper/css";
+// import { GetOneBannerType } from "@/types/banner/getOneBanner";
+import { useTranslated } from "@/hooks/useTranslated";
 import "swiper/css/pagination";
-import { GetOneBannerType } from "@/types/banner/getOneBanner";
+import "swiper/css";
+import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 const HeroSection = () => {
   const { lang } = useLang();
+  const { t } = useTranslation();
 
-  const { data: banner = [] as GetAllBannerType } = useQuery({
+  const { data: banner = [] } = useQuery({
     queryKey: ["banner", lang],
     queryFn: () => apiClient.getBanner(lang),
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
   });
+
+  const localized = useTranslated(banner);
 
   return (
     <div className="relative min-h-screen pt-[56px]">
@@ -34,38 +40,48 @@ const HeroSection = () => {
       ></div>
 
       <Swiper
-        modules={[Autoplay, Pagination]}
-        autoplay={{ delay: 4000, disableOnInteraction: false }}
+        modules={[Autoplay,Pagination]}
+        autoplay={{ delay: 2000, disableOnInteraction: false }}
         pagination={{ clickable: true }}
         loop
+        speed={1000}
         className="w-full h-full"
       >
-        {banner.map((item: GetOneBannerType, idx: number) => {
-          const localized = item[lang as "uz" | "ru" | "en"];
-
+        {localized.map((item, idx: number) => {
           return (
-            <SwiperSlide key={idx}>
+            <SwiperSlide key={idx} className="cursor-grab active:cursor-grabbing">
               <Container className="flex flex-col md:flex-row items-center justify-around gap-6 sm:gap-10 w-full px-4 sm:px-6 min-h-screen">
-                <div className="text-start text-white max-w-2xl">
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4">
-                    {localized?.title}
-                  </h1>
-                  <p className="text-base sm:text-lg md:text-xl md:leading-relaxed mb-4 md:mb-6">
-                    {localized?.subtitle}
-                  </p>
-                </div>
+                <div className="flex flex-col md:flex-row items-center justify-center gap-6 max-md:flex-col-reverse sm:gap-10 w-full px-4 sm:px-6 min-h-screen">
 
-                <div className="flex flex-wrap justify-center gap-4">
-                  {localized?.imageUrls?.map((image: string, i: number) => (
-                    <Image
-                      key={i}
-                      src={image}
-                      alt={`banner-image-${i}`}
-                      width={450}
-                      height={450}
-                      className="w-[220px] sm:w-[300px] md:w-[400px] lg:w-[450px] h-auto"
-                    />
-                  ))}
+                  <div className="text-start max-md:text-center text-white max-w-2xl">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4">
+                      {item?.title}
+                    </h1>
+                    <p className="text-base sm:text-lg md:text-xl md:leading-relaxed mb-4 md:mb-6">
+                      {item?.subtitle}
+                    </p>
+                    <Link
+                      href={item?.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white bg-[rgba(255,255,255,0.3)] hover:bg-[rgba(255,255,255,0.4)] px-4 py-2 rounded-md transition-all delay-75"
+                    >
+                      {t("common.more")}
+                    </Link>
+                  </div>
+
+                  <div className="flex flex-wrap justify-center gap-4">
+                    {item?.imageUrls?.map((image: string, i: number) => (
+                      <Image
+                        key={i}
+                        src={image}
+                        alt={`banner-image-${i}`}
+                        width={450}
+                        height={450}
+                        className="w-[220px] sm:w-[300px] md:w-[400px] lg:w-[450px] h-auto"
+                      />
+                    ))}
+                  </div>
                 </div>
               </Container>
             </SwiperSlide>

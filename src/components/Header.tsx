@@ -4,9 +4,12 @@ import Link from "next/link";
 import React, { useEffect, useState, useRef, useMemo } from "react";
 import Image from "next/image";
 import Container from "./Container";
-import { Menu, X } from "lucide-react";
+import { Menu, ShoppingCart, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { Button } from "./ui/button";
+import { AnimatePresence, motion } from "framer-motion";
+// import { AnimatePresence } from "framer-motion";
 
 const NavLink = ({
   href,
@@ -137,73 +140,95 @@ const Header: React.FC = () => {
             </Link>
             <nav className="hidden md:flex mt-2 items-center">
               <ul className="flex space-x-5">
-                {navLinks.map((item) => (
-                  <li key={item.href}>
+                {navLinks.map((item, idx) => (
+                  <li key={`navigationlink-${idx}`}>
                     <NavLink href={item.href}>{item.label}</NavLink>
                   </li>
                 ))}
               </ul>
             </nav>
-            <div className="max-lg:hidden">
-            <LanguageSwitcher />
+            <div className="flex items-center justify-between gap-5">
+              {/* <div className="flex items-center justify-between"> */}
+              <Link href="/cart">
+                <ShoppingCart className="cursor-pointer" size={25} />
+              </Link>
+              <LanguageSwitcher />
+              {/* </div> */}
+              <Button
+                size={"icon"}
+                className="md:hidden flex items-center justify-center border p-2"
+                onClick={() => setMobileMenu(true)}
+                aria-label="Open menu"
+              >
+                <Menu size={32} />
+              </Button>
             </div>
 
-            <button
-              className="md:hidden flex items-center justify-center p-2"
-              onClick={() => setMobileMenu(true)}
-              aria-label="Open menu"
-            >
-              <Menu size={32} />
-            </button>
+
           </div>
         </Container>
       </header>
       {mobileMenu && (
-        <div
-          ref={menuRef}
-          className={`
-            fixed inset-0 z-[9999] flex flex-col bg-[rgba(20,20,20,0.85)] backdrop-blur-lg transition-all duration-300 animate-fadein
-            overflow-y-auto
-          `}
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="flex items-center justify-between p-4">
-            <Link href="/" onClick={() => setMobileMenu(false)}>
-              <Image
-                src="/nutva-logo.png"
-                alt="Logo"
-                width={100}
-                height={34}
-                className="w-[100px] h-auto"
-                priority
-              />
-            </Link>
-            <button
-              onClick={() => setMobileMenu(false)}
-              className="text-white p-2"
-              aria-label="Close menu"
-            >
-              <X size={32} />
-            </button>
-          </div>
-          <nav className="flex flex-col items-center mt-10 gap-6 mb-8">
-            {navLinks.map((item, idx) => (
-              <NavLink
-                key={item.href}
-                href={item.href}
+        <AnimatePresence mode="wait">
+          {/* Fon qorayishi */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[9998] bg-black/50"
+            onClick={() => setMobileMenu(false)}
+          />
+
+          {/* Menyu o‘zi */}
+          <motion.div
+            ref={menuRef}
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "keyframes", stiffness: 500, damping: 80 }}
+            className="fixed right-0 top-0 bottom-0 z-[9999] w-full sm:w-80 flex flex-col bg-[rgba(20,20,20,0.95)] backdrop-blur-lg overflow-y-auto"
+            role="dialog"
+            aria-modal="true"
+          >
+            <div className="flex items-center justify-between p-4">
+              <Link href="/" onClick={() => setMobileMenu(false)}>
+                <Image
+                  src="/nutva-logo.png"
+                  alt="Logo"
+                  width={100}
+                  height={34}
+                  className="w-[100px] h-auto"
+                  priority
+                />
+              </Link>
+              <Button
+                size={"icon"}
                 onClick={() => setMobileMenu(false)}
-                className="text-2xl"
-                refProp={idx === 0 ? firstNavRef : undefined}
+                className="text-white p-2 text-2xl border"
+                aria-label="Close menu"
               >
-                {item.label}
-              </NavLink>
-            ))}
-            <LanguageSwitcher />
-          </nav>
-        </div>
+                <X size={32} />
+              </Button>
+            </div>
+            <nav className="flex flex-col items-center mt-10 gap-6 mb-8">
+              {navLinks.map((item, idx) => (
+                <NavLink
+                  key={`navlink-${idx}`}
+                  href={item.href}
+                  onClick={() => setMobileMenu(false)}
+                  className="text-2xl"
+                  refProp={idx === 0 ? firstNavRef : undefined}
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+
+            </nav>
+          </motion.div>
+        </AnimatePresence>
       )}
-      <style jsx global>{`
+      {/* <style jsx global>{`
         @keyframes fadein {
           from {
             opacity: 0;
@@ -217,7 +242,7 @@ const Header: React.FC = () => {
         .animate-fadein {
           animation: fadein 0.35s cubic-bezier(0.7, 0, 0.2, 1);
         }
-      `}</style>
+      `}</style> */}
     </>
   );
 };

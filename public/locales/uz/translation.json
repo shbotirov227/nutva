@@ -60,7 +60,10 @@
 			"4": "Sertifikatlar"
 		},
         "checkboxLabel": "3 tadan ko'p mahsulot tanlash",
-        "consultation": "Bepul konsultatsiya"
+        "consultation": "Bepul konsultatsiya",
+        "addToCart": "Savatga qo'shish",
+        "remoreFromCart": "Savatdan o'chirish",
+        "addedToCart": "Savatga qo'shildi"
 	},
 
     "aboutBrand": {

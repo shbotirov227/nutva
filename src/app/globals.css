@@ -65,6 +65,19 @@ body {
   display: none;
 }
 
+/* @media only screen and (max-width: 950px) and (min-width: 300px) {
+  .products {
+    .swiper {
+      .swiper-wrapper {
+        width: 130px !important;
+        .swiper-slide {
+          width: 100% !important;
+        }
+      }
+    }
+  }
+} */
+
 :root {
 	--radius: 0.625rem;
 	--background: oklch(1 0 0);

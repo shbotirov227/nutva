@@ -9,7 +9,6 @@ import type { NavigationOptions, Swiper as SwiperType } from "swiper/types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import { useProductVisuals } from "@/hooks/useProductVisuals";
-import { GetAllProductsType } from "@/types/products/getAllProducts";
 import { apiClient } from "@/lib/apiClient";
 import { ProductName } from "@/types/enums";
 import { productBgColors } from "@/types/records";
@@ -19,6 +18,10 @@ import ProductCard from "@/components/ProductCard";
 import Container from "@/components/Container";
 import "swiper/css/navigation";
 import "swiper/css";
+import clsx from "clsx";
+// import { useLang } from "@/context/LangContext";
+// import { GetAllProductsType } from "@/types/products/getAllProducts";
+import { useTranslated } from "@/hooks/useTranslated";
 // import dynamic from "next/dynamic";
 
 
@@ -52,7 +55,7 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
   }, []);
 
   const {
-    data: products = [] as GetAllProductsType[],
+    data: products = [],
     isLoading
   } = useQuery({
     queryKey: ["products"],
@@ -93,7 +96,9 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
     }
   }, [setupNavigation])
 
-  const activeProduct = useMemo(() => products?.[activeIndex], [products, activeIndex]);
+  const localized = useTranslated(products);
+
+  const activeProduct = useMemo(() => localized?.[activeIndex], [localized, activeIndex]);
 
   const { color: activeColor, bgImage: activeBgImage } = useProductVisuals(
     activeProduct?.name as ProductName
@@ -104,7 +109,7 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
   }
 
   return (
-    <div className="relative w-full py-10">
+    <div className="products relative w-full py-10">
       {isAviableBackground ? (
         <div
           className="absolute h-full w-full inset-0 -z-10 mx-auto px-4 sm:px-6 lg:px-8 py-10 overflow-hidden duration-500 !bg-cover !bg-center !bg-no-repeat !  object-fit-cover"
@@ -151,10 +156,10 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
         slidesPerGroup={1}
         loop={true}
         speed={600}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 5000,
+        //   disableOnInteraction: false,
+        // }}
         navigation={{
           prevEl: prevRef.current,
           nextEl: nextRef.current,
@@ -166,7 +171,6 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
           }
         }}
         onSlideChange={(swiper) => {
-          // fix for loop + active index bug:
           const realIndex = swiper.realIndex ?? (swiper.activeIndex % products.length);
           setActiveIndex(realIndex);
         }}
@@ -177,33 +181,39 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
         breakpoints={{
           320: {
             slidesPerView: 1,
-            spaceBetween: 20,
-            centeredSlides: true,
+            spaceBetween: 15,
           },
           480: {
             slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          640: {
+            slidesPerView: 1.1,
             spaceBetween: 25,
-            centeredSlides: true,
           },
           768: {
-            slidesPerView: 2,
+            slidesPerView: 1.2,
             spaceBetween: 30,
-            centeredSlides: true,
           },
           900: {
-            slidesPerView: "auto",
-            spaceBetween: 35,
-            centeredSlides: true,
+            slidesPerView: 1.3,
+            spaceBetween: 30,
           },
           1024: {
-            slidesPerView: "auto",
+            slidesPerView: 1.4,
+            spaceBetween: 35,
+          },
+          1150: {
+            slidesPerView: 1.6,
             spaceBetween: 40,
-            centeredSlides: true,
           },
           1280: {
             slidesPerView: "auto",
+            spaceBetween: 45,
+          },
+          1536: {
+            slidesPerView: "auto",
             spaceBetween: 55,
-            centeredSlides: true,
           },
         }}
         className="mySwiper cursor-grab active:cursor-grabbing px-[10%]"
@@ -217,14 +227,24 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
               <SkeletonCard />
             </SwiperSlide>
           ))
-          : products?.map((product: GetAllProductsType[number], index: number) => {
+          : localized?.map((product, index: number) => {
             const isActive = activeIndex === index;
             return (
               <SwiperSlide
-                key={product.id}
-                className="!w-[90vw] sm:!w-[600px] md:!w-[700px] lg:!w-[800px] min-h-[400px] shrink-0 grow-0 transition-transform duration-500"
+                key={index}
+                className={clsx(
+                  "!w-[92vw]",              // Default for small screens
+                  "sm:!w-[500px]",          // ≥ 640px
+                  "md:!w-[600px]",          // ≥ 768px
+                  "lg:!w-[700px]",          // ≥ 1024px
+                  "xl:!w-[800px]",          // ≥ 1280px
+                  "2xl:!w-[850px]",         // ≥ 1536px
+                  "min-h-[420px] shrink-0 grow-0 transition-transform duration-500"
+                )}
+                // className="!w-[90vw] sm:!w-[600px] md:!w-[700px] lg:!w-[800px] max-xl:!w-[400px] max-[1050px]:!w-[300px] min-[900px]:w-[400px] min-h-[400px] shrink-0 grow-0 transition-transform duration-500"
               >
                 <ProductCard
+                  product={product}
                   id={product?.id}
                   title={product?.name}
                   slug={product?.slug}

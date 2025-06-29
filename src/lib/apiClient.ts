@@ -69,7 +69,7 @@ export const apiClient = {
     // const session = await getSession();
     // const token = session?.user?.token;
 
-    const res = await api.get("/Product", {
+    const res = await api.get<GetAllProductsType>("/Product", {
       // headers: token ? { Authorization: `Bearer ${token}` } : {},
       params: {
         lang: lng,
