@@ -8,6 +8,7 @@ export function useDiscount(slug: string | undefined, quantity: number) {
         pricePerUnit: 0,
         totalPrice: 0,
         discountPercent: 0,
+        basePrice: 0
       };
     }
 
@@ -19,6 +20,7 @@ export function useDiscount(slug: string | undefined, quantity: number) {
         pricePerUnit: 0,
         totalPrice: 0,
         discountPercent: 0,
+        basePrice: 0
       };
     }
 
@@ -34,6 +36,7 @@ export function useDiscount(slug: string | undefined, quantity: number) {
     const totalPrice = discountedPrice * quantity;
 
     return {
+      basePrice,
       pricePerUnit: discountedPrice,
       totalPrice,
       discountPercent,

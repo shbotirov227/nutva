@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLang } from "@/context/LangContext";
 import { GetOneProductType } from "@/types/products/getOneProduct";
 import { useTranslation } from "react-i18next";
@@ -29,14 +29,6 @@ interface Props {
 
 const quantityOptions = [1, 2, 3];
 
-const DISCOUNT_TABLE: Record<string, { two: number; threePlus: number }> = {
-  VIRIS: { two: 16.7, threePlus: 27.8 },
-  FERTILIA: { two: 16.7, threePlus: 27.8 },
-  GELMIN: { two: 20, threePlus: 34 },
-  COMPLEX: { two: 22.7, threePlus: 36.4 },
-  EXTRA: { two: 22.7, threePlus: 36.4 },
-};
-
 export default function ProductPriceCard({ product, bgColor, color, onClick }: Props) {
   // const [showSuccessModal, setShowSuccessModal] = useState(false);
   // const [showFormModal, setShowFormModal] = useState(false);
@@ -61,7 +53,7 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
 
   const selectedQuantity = isChecked ? count! : quantity!;
 
-  const { pricePerUnit, totalPrice, discountPercent } = useDiscount(product?.uz?.name, selectedQuantity);
+  const { basePrice, pricePerUnit, totalPrice, discountPercent } = useDiscount(product?.uz?.name, selectedQuantity);
   console.log({ pricePerUnit })
 
 
@@ -145,7 +137,7 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
                   {discountPercent > 0 && (
                     <div className="flex items-center text-base font-semibold text-red-600 gap-1 mb-4 bg-white p-4 rounded-lg">
                       <Flame className="w-4 h-4" />
-                      {t("common.forYou")} {discountPercent}% {t("common.sale")} • {quantity} {t("common.quantity")}
+                      {t("common.forYou")} {discountPercent}% {t("common.sale")} • {isChecked ? count : quantity} {t("common.quantity")}
                     </div>
                   )}
                 </motion.div>
@@ -262,8 +254,18 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
 
             </div>
 
-            <div style={{ color: color }} className="text-3xl font-bold mb-4">
-              {formatPrice(totalPrice)} {t("common.sum", "so'm")}
+            <div className="flex items-center gap-5 mb-4">
+              <div
+                style={{ color: selectedQuantity === 1 ? color : "red" }}
+                className="text-3xl font-bold"
+              >
+                {formatPrice(totalPrice)} {t("common.sum", "so'm")}
+              </div>
+              {!(selectedQuantity === 1) ? (
+                <span className="text-gray-500 text-lg line-through">
+                  {formatPrice(basePrice * selectedQuantity)} {t("common.sum")}
+                </span>
+              ) : null}
             </div>
 
             <FormModal
