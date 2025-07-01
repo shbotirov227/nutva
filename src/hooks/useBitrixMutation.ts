@@ -1,8 +1,19 @@
 import { useMutation } from "@tanstack/react-query";
 
-type FormDataType = {
-  name: string;
+type BitrixProduct = {
+  productId: string;
+  quantity: number;
+};
+
+type BitrixFormData = {
+  buyerName: string;
   phone: string;
+  age: number;
+  forWhom: string;
+  problem: string;
+  region: string;
+  comment?: string;
+  products?: BitrixProduct[];
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;
@@ -12,7 +23,7 @@ type FormDataType = {
 
 export function useBitrixMutation() {
   return useMutation({
-    mutationFn: async (formData: FormDataType) => {
+    mutationFn: async (formData: BitrixFormData) => {
       const response = await fetch("/api/sendToBitrix", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -22,7 +33,7 @@ export function useBitrixMutation() {
       const res = await response.json();
 
       if (!response.ok || !res.success) {
-        throw new Error(res.message || "Server error");
+        throw new Error(res.message || "Bitrixga yuborishda xatolik");
       }
 
       return res;
