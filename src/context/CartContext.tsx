@@ -1,29 +1,32 @@
+// context/CartContext.ts
 "use client";
 
 import React, {
   createContext,
   useContext,
-  useState,
   useEffect,
-  ReactNode,
+  // useMemo,
+  useState,
 } from "react";
 import { GetOneProductType } from "@/types/products/getOneProduct";
+// import { useDiscount } from "@/hooks/useDiscount";
+// import { useTranslated } from "@/hooks/useTranslated";
 
 const STORAGE_KEY = "cart-data";
 
-type CartItemType = GetOneProductType & { quantity: number };
+type RawCartItem = GetOneProductType & { quantity: number };
 
 type CartContextType = {
-  cart: CartItemType[];
-  addToCart: (item: CartItemType) => void;
+  cart: RawCartItem[];
+  addToCart: (item: RawCartItem) => void;
   removeFromCart: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
 };
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+const RawCartContext = createContext<CartContextType | undefined>(undefined);
 
-export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [cart, setCart] = useState<CartItemType[]>([]);
+export const RawCartProvider = ({ children }: { children: React.ReactNode }) => {
+  const [cart, setCart] = useState<RawCartItem[]>([]);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -44,7 +47,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [cart, isMounted]);
 
-  const addToCart = (item: CartItemType) => {
+  const addToCart = (item: RawCartItem) => {
     setCart((prev) => {
       const existing = prev.find((i) => i.id === item.id);
       if (existing) {
@@ -67,17 +70,17 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <CartContext.Provider
+    <RawCartContext.Provider
       value={{ cart, addToCart, removeFromCart, updateQuantity }}
     >
       {isMounted ? children : null}
-    </CartContext.Provider>
+    </RawCartContext.Provider>
   );
 };
 
 export const useCart = () => {
-  const context = useContext(CartContext);
+  const context = useContext(RawCartContext);
   if (!context)
-    throw new Error("useCart must be used within a CartProvider");
+    throw new Error("useRawCart must be used within RawCartProvider");
   return context;
 };

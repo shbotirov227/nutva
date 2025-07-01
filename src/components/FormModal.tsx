@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -6,31 +5,48 @@ import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { FormInputWrapper } from "./FormInputWrapper";
 import PhoneField from "./PhoneField";
-// import { useBitrixMutation } from "@/hooks/useBitrixMutation";
 import { useMutation } from "@tanstack/react-query";
 import { apiClient } from "@/lib/apiClient";
-// import { useLang } from "@/context/LangContext";
+import { CreateProductPurchaseRequest } from "@/types/purchase/createProductPurchaseRequest";
+// import { getPurchaseProductsPayload } from "@/helper/getPurchaseProductsPayload";
+import { useCart } from "@/context/CartContext";
+import { getPurchaseProductsPayload } from "@/helper/getPurchaseProductsPayload";
+import { useBitrixMutation } from "@/hooks/useBitrixMutation";
 
 type FormModalProps = {
-  productId?: string;
+  products?: { productId: string; quantity: number }[];
   children: React.ReactElement<React.HTMLAttributes<HTMLButtonElement>>;
   onClose?: () => void;
   onSuccess?: () => void;
-  quantity: number;
   btnColor?: string;
 };
 
-export function FormModal({ productId, children, quantity, btnColor }: FormModalProps) {
+export function FormModal({ children, products, btnColor }: FormModalProps) {
+
+  const { t } = useTranslation();
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [dropUp, setDropUp] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
   const [isMounted, setIsMounted] = React.useState(false);
   const [name, setName] = React.useState("");
   const [phone, setPhone] = React.useState("");
-  // const [countryCode] = React.useState("+998");
-  const [errors, setErrors] = React.useState<{ name?: string; phone?: string }>({});
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const [dropUp, setDropUp] = React.useState(false);
-  // const { lang } = useLang();
-  const { t } = useTranslation();
+  const [age, setAge] = React.useState("");
+  const [forWhom, setForWhom] = React.useState("");
+  const [problem, setProblem] = React.useState("");
+  const [region, setRegion] = React.useState("");
+  const [comment, setComment] = React.useState("");
+  // const [productName, setProductName] = React.useState("");
+  const [errors, setErrors] = React.useState<{
+    name?: string;
+    phone?: string;
+    age?: string;
+    forWhom?: string;
+    problem?: string;
+    region?: string;
+    comment?: string;
+    // productName?: string;
+  }>({});
+  const { cart } = useCart();
 
   React.useEffect(() => {
     setIsMounted(true);
@@ -52,16 +68,10 @@ export function FormModal({ productId, children, quantity, btnColor }: FormModal
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const { mutate: sendToBitrix, isPending } = useBitrixMutation();
 
-  // const { mutate: sendToBitrix, isPending } = useBitrixMutation();
-
-  const { mutate: purchaseProduct, isPending } = useMutation({
-    mutationFn: (data: {
-      productId: string;
-      buyerName: string;
-      phone: string;
-      comment: string;
-    }) => apiClient.postPurchaseRequest(data),
+  const { mutate: purchaseProduct } = useMutation({
+    mutationFn: (data: CreateProductPurchaseRequest) => apiClient.postPurchaseRequest(data),
     onSuccess: () => {
       toast.success(t("form.success") || "So'rov yuborildi", {
         position: "top-center",
@@ -70,9 +80,14 @@ export function FormModal({ productId, children, quantity, btnColor }: FormModal
       setIsOpen(false);
       setName("");
       setPhone("");
+      setAge("");
+      setForWhom("");
+      setProblem("");
+      setRegion("");
+      setComment("");
     },
-    onError: (err: any) => {
-      toast.error(err.message || t("errors.badRequest") || "Xatolik yuz berdi", {
+    onError: () => {
+      toast.error("Xatolik yuz berdi", {
         position: "top-center",
         autoClose: 1200,
       });
@@ -87,7 +102,26 @@ export function FormModal({ productId, children, quantity, btnColor }: FormModal
     // const cleanedCode = countryCode.replace(/\D/g, "");
     // const phoneLength = digitsOnly.length - cleanedCode.length;
 
-    if (!trimmedName ) {
+    const numericAge = Number(age);
+
+    if (!numericAge || numericAge < 1 || numericAge > 120) {
+      toast.error(t("errors.ageError") || "Iltimos, haqiqiy yosh kiriting (1-120)", {
+        position: "top-center",
+        autoClose: 1200,
+      });
+      return;
+    }
+
+    if (
+      !trimmedName ||
+      !phone ||
+      !age ||
+      !forWhom ||
+      !problem ||
+      !region ||
+      numericAge < 1 ||
+      numericAge > 120
+    ) {
       toast.error(t("form.fillAllFields") || "Barcha maydonlarni to'ldiring", {
         position: "top-center",
         autoClose: 1200,
@@ -95,33 +129,43 @@ export function FormModal({ productId, children, quantity, btnColor }: FormModal
       return;
     }
 
-    // const searchParams = new URLSearchParams(window.location.search);
-    // const formData = {
-    //   name: trimmedName,
-    //   phone,
-    //   productName,
-    //   quantity,  
-    //   utm_source: searchParams.get("utm_source") || undefined,
-    //   utm_medium: searchParams.get("utm_medium") || undefined,
-    //   utm_campaign: searchParams.get("utm_campaign") || undefined,
-    //   utm_term: searchParams.get("utm_term") || undefined,
-    //   utm_content: searchParams.get("utm_content") || undefined,
-    // };
 
-    // sendToBitrix(formData, {
-    //   onSuccess: () => {
-    //     toast.success(t("form.success") || "So'rov yuborildi");
-    //     setIsOpen(false);
-    //   },
-    //   onError: (err: any) => {
-    //     toast.error(err.message || t("errors.badRequest") || "Xatolik yuz berdi");
-    //   },
-    // });
-    purchaseProduct({
-      productId: productId || "",
+    const searchParams = new URLSearchParams(window.location.search);
+    const formData = {
       buyerName: trimmedName,
+      age: numericAge,
+      forWhom: forWhom,
+      problem: problem,
+      region: region,
       phone: phone,
-      comment: `${quantity}`,
+      comment: comment,
+      products: products || getPurchaseProductsPayload(cart),
+      utm_source: searchParams.get("utm_source") || undefined,
+      utm_medium: searchParams.get("utm_medium") || undefined,
+      utm_campaign: searchParams.get("utm_campaign") || undefined,
+      utm_term: searchParams.get("utm_term") || undefined,
+      utm_content: searchParams.get("utm_content") || undefined,
+    };
+
+    sendToBitrix(formData, {
+      onSuccess: () => {
+        toast.success(t("form.success") || "So'rov yuborildi");
+        setIsOpen(false);
+      },
+      onError: (err: any) => {
+        toast.error(err.message || t("errors.badRequest") || "Xatolik yuz berdi");
+      },
+    });
+    purchaseProduct({
+      buyerName: trimmedName,
+      age: numericAge,
+      forWhom: forWhom,
+      problem: problem,
+      region: region,
+      phone: phone,
+      comment: comment,
+      products: products || getPurchaseProductsPayload(cart)
+      
     });
   };
 
@@ -129,9 +173,9 @@ export function FormModal({ productId, children, quantity, btnColor }: FormModal
   const trigger = React.cloneElement(children, {
     onClick: () => setIsOpen(true),
   });
-  
-  const inputSharedStyle = "!w-full !px-10 !py-6 !border-gray-800 sm:px-5 sm:py-3 rounded-xl text-gray-800 text-[15px] font-bold bg-white outline-none border- focus:!shadow-[0_0_10px_rgba(10,10,10,0.8)] transition-all";
-  
+
+  const inputSharedStyle = "!w-full !px-10 !py-6 !border-gray-800 sm:px-5 sm:py-3 rounded-xl text-gray-800 text-[15px] font-bold bg-white outline-none !border-2 focus:!shadow-[0_0_10px_rgba(10,10,10,0.8)] transition-all";
+
   if (!isMounted) return null;
 
   return (
@@ -163,19 +207,69 @@ export function FormModal({ productId, children, quantity, btnColor }: FormModal
               </div>
 
               <form onSubmit={handleSubmit} className="grid gap-4">
-                <FormInputWrapper
-                  error={errors.name}
-                  className="flex flex-col gap-1"
-                >
-                  <input
-                    id="name"
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder={t("form.input.name")}
-                    className="w-full px-4 py-4 sm:px-5 sm:py-3 rounded-xl text-[15px] font-bold bg-white outline-none border-2 border-gray-800 focus:shadow-[0_0_10px_rgba(10,10,10,0.8)] transition-all"
-                  />
-                </FormInputWrapper>
+                <div className="gap-5 grid grid-cols-2">
+                  <FormInputWrapper
+                    error={errors.name}
+                    className="flex flex-col gap-1"
+                  >
+                    <input
+                      id="name"
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder={t("form.input.name")}
+                      className="w-full px-4 py-4 sm:px-5 sm:py-3 rounded-xl text-[15px] font-bold bg-white outline-none border-2 border-gray-800 focus:shadow-[0_0_10px_rgba(10,10,10,0.8)] transition-all"
+                    />
+                  </FormInputWrapper>
+
+                  <FormInputWrapper
+                    error={errors.age}
+                    className="flex flex-col gap-1"
+                  >
+                    <input
+                      id="age"
+                      type="number"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      value={age}
+                      // onChange={(e) => setAge(e.target.value)}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        if (/^\d{0,3}$/.test(val)) setAge(val);
+                      }}
+                      placeholder={t("form.input.age")}
+                      className="w-full px-4 py-4 sm:px-5 sm:py-3 rounded-xl text-[15px] font-bold bg-white outline-none border-2 border-gray-800 focus:shadow-[0_0_10px_rgba(10,10,10,0.8)] transition-all"
+                    />
+                  </FormInputWrapper>
+
+                  <FormInputWrapper
+                    error={errors.forWhom}
+                    className="flex flex-col gap-1"
+                  >
+                    <input
+                      id="forWhom"
+                      type="text"
+                      value={forWhom}
+                      onChange={(e) => setForWhom(e.target.value)}
+                      placeholder={t("form.input.forWhom")}
+                      className="w-full px-4 py-4 sm:px-5 sm:py-3 rounded-xl text-[15px] font-bold bg-white outline-none border-2 border-gray-800 focus:shadow-[0_0_10px_rgba(10,10,10,0.8)] transition-all"
+                    />
+                  </FormInputWrapper>
+
+                  <FormInputWrapper
+                    error={errors.problem}
+                    className="flex flex-col gap-1"
+                  >
+                    <input
+                      id="problem"
+                      type="text"
+                      value={problem}
+                      onChange={(e) => setProblem(e.target.value)}
+                      placeholder={t("form.input.problem")}
+                      className="w-full px-4 py-4 sm:px-5 sm:py-3 rounded-xl text-[15px] font-bold bg-white outline-none border-2 border-gray-800 focus:shadow-[0_0_10px_rgba(10,10,10,0.8)] transition-all"
+                    />
+                  </FormInputWrapper>
+                </div>
 
                 <FormInputWrapper
                   error={errors.phone}
@@ -194,6 +288,34 @@ export function FormModal({ productId, children, quantity, btnColor }: FormModal
                       transform: dropUp ? "translateY(-5px)" : "translateY(0)",
                     }}
                   />
+                </FormInputWrapper>
+
+                <FormInputWrapper
+                  error={errors.region}
+                  className="flex flex-col gap-1"
+                >
+                  <input
+                    id="region"
+                    type="text"
+                    value={region}
+                    onChange={(e) => setRegion(e.target.value)}
+                    placeholder={t("form.input.region")}
+                    className="w-full px-4 py-4 sm:px-5 sm:py-3 rounded-xl text-[15px] font-bold bg-white outline-none border-2 border-gray-800 focus:shadow-[0_0_10px_rgba(10,10,10,0.8)] transition-all"
+                  />
+                </FormInputWrapper>
+
+                <FormInputWrapper
+                  error={errors.comment}
+                  className="flex flex-col gap-1"
+                >
+                  <textarea
+                    id="comment"
+                    rows={3}
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    placeholder={t("form.input.comment")}
+                    className="w-full px-4 py-4 sm:px-5 sm:py-3 rounded-xl text-[15px] font-bold bg-white outline-none ring-none border-2 border-gray-800 focus:shadow-[0_0_10px_rgba(10,10,10,0.8)] transition-all"
+                  ></textarea>
                 </FormInputWrapper>
 
                 <div className="flex flex-row items-center justify-between gap-3 mt-2">

@@ -33,7 +33,10 @@
 		"forbidden": "Kirish taqiqlangan",
 		"badRequest": "Noto'g'ri so'rov",
 		"validationError": "Validatsiya xatosi",
-		"networkError": "Internet xatosi"
+		"networkError": "Internet xatosi",
+        "fillAllFields": "Barcha maydonlarni to'ldiring",
+        "ageError": "Iltimos, haqiqiy yosh kiriting (1-120)",
+        "emptyProducts": "Mahsulotlar mavjud emas"
 	},
 
 	"nav": {
@@ -71,7 +74,13 @@
 	},
 
     "aboutBrand": {
-        "title": "Brend haqida"
+        "title": "Brend haqida",
+        "text": "Nutva Pharm — bu sog'lom hayot tarzi uchun yaratilgan, tabiiy va samarali biofaol qo'shimchalar ishlab chiqaruvchi zamonaviy brend. Bizning asosiy maqsadimiz — inson salomatligini qo'llab-quvvatlash, immunitetni mustahkamlash va organizmga zarar yetkazmasdan foyda beradigan yechimlarni taqdim etishdir.2020-yilda Nutva Pharm o'zining ilk mahsuloti — Nutva Complex orqali O'zbekiston, O'rta Osiyo va Rossiya bozorlarida e’tirof etila boshladi. Dastlab mahalliy bozorni o'rganib, mijozlar ehtiyojiga mos maxsus tarkiblar asosida mahsulotlar yaratildi. Bugungi kunga kelib, Nutva Pharm assortimentida bolalar, ayollar, erkaklar va keksa yoshdagilar uchun alohida liniyalar mavjud. Biz har bir mahsulotni puxta ilmiy yondashuv, ekologik toza xomashyo va xalq tabobatining eng yaxshi an'analari asosida ishlab chiqamiz. Nutva Pharm — bu shunchaki biofaol qo'shimcha emas, bu — tabiat va ilm uyg'unligidagi sog'lom yashash falsafasi."
+    },
+
+    "aboutUs": {
+        "title": "Sog'lig'ingizga g'amxo'rlik qiling",
+        "subtitle": "Sog'lomlashtirish majmuasi"
     },
 
     "reviewSection": {
@@ -91,12 +100,24 @@
 
 		"input": {
 			"name": "Ism",
-			"phone": "Telefon raqam"
+			"phone": "Telefon raqam",
+            "age": "Yosh",
+            "forWhom": "Kim uchun",
+            "problem": "Shikoyat",
+            "region": "Viloyat",
+            "comment": "Qo'shimcha ma'lumot",
+            "productName": "Mahsulot nomi",
+            "quantity": "Miqdori"
 		},
 
 		"errors": {
 			"nameRequired": "Ism kiritilishi shart",
-			"phoneRequired": "Telefon raqami to'liq bo'lishi kerak"
+			"phoneRequired": "Telefon raqami to'liq bo'lishi kerak",
+            "ageRequired": "Yosh kiritilishi shart",
+            "forWhomRequired": "Kim uchun kiritilishi shart",
+            "problemRequired": "Shikoyat kiritilishi shart",
+            "regionRequired": "Viloyat kiritilishi shart",
+            "productNameRequired": "Mahsulot nomi kiritilishi shart"
 		},
 
 		"success": "Buyurtma muvaffaqiyatli qabul qilindi",
@@ -113,6 +134,7 @@
     "button": {
         "heroButton": "Buyurtma berish",
         "consultationButton": "Konsultatsiya olish",
+        "freeConsultation": "Bepul konsultatsiya",
         "formButton": "Ariza qoldirish",
         "cancelButton": "Bekor qilish"
     }

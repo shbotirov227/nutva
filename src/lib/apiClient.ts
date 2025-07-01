@@ -33,6 +33,7 @@ import { GetOneBlogType } from "@/types/blogs/getOneBlog";
 import { CreateProductType } from "@/types/products/createProduct";
 import { GetAllProductsType } from "@/types/products/getAllProducts";
 import { GetOneProductType } from "@/types/products/getOneProduct";
+import { CreateProductPurchaseRequest } from "@/types/purchase/createProductPurchaseRequest";
 import axios from "axios";
 // import { getToken } from "next-auth/jwt";
 
@@ -137,12 +138,7 @@ export const apiClient = {
     return res.data;
   },
 
-  postPurchaseRequest: async (data: {
-      productId: string;
-      buyerName: string;
-      phone: string;
-      comment: string;
-  }) => {
+  postPurchaseRequest: async (data: CreateProductPurchaseRequest) => {
     const res = await api.post(`/statistics/purchase-request`, data);
     return res.data;
   },

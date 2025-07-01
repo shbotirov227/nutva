@@ -7,7 +7,7 @@ import "./globals.css";
 import { QueryProvider } from "@/providers/queryProvider";
 import { AuthProvider } from "@/providers/sessionProvider";
 import { LangProvider } from "@/context/LangContext";
-import { CartProvider } from "@/context/CartContext";
+import { RawCartProvider } from "@/context/CartContext";
 import { BuyProvider } from "@/context/BuyContext";
 
 // Components (UI)
@@ -43,7 +43,7 @@ export default function RootLayout({
         <AuthProvider>
           <QueryProvider>
             <LangProvider>
-              <CartProvider>
+              <RawCartProvider>
                 <BuyProvider>
                   <Layout>
                     {/* Server-side / Static components */}
@@ -58,7 +58,7 @@ export default function RootLayout({
 
                   </Layout>
                 </BuyProvider>
-              </CartProvider>
+              </RawCartProvider>
             </LangProvider>
           </QueryProvider>
         </AuthProvider>

@@ -51,10 +51,7 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
   // };
 
   const localizedProduct = useLocalizedProduct(product, lang);
-  // const productKey = product?.slug?.toUpperCase();
-
   const selectedQuantity = isChecked ? count! : quantity!;
-
   const { basePrice, totalPrice, discountPercent } = useDiscount(localizedProduct?.name, selectedQuantity);
 
 
@@ -74,25 +71,13 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
 
     addToCart({
       ...product,
-      quantity: 1,
+      quantity: selectedQuantity,
     });
     toast.success(t("product.addedToCart"), {
       position: "top-center",
       autoClose: 1200,
     });
   }
-
-  // const handleCheckboxChange = () => {
-  //   const newChecked = !isChecked;
-  //   setIsChecked(newChecked);
-
-  //   if (newChecked) {
-  //     setCount(quantity);
-  //   } else {
-  //     setQuantity(count);
-  //   }
-  // };
-
 
   if (!product || !localizedProduct || !mounted) return null;
 
@@ -283,35 +268,31 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
             </div>
 
             {/* <div className="flex items-center justify-start gap-5"> */}
-              <FormModal
-                // onClose={() => setShowFormModal(false)}
-                // onSuccess={handleSuccess}
-                // productName={localizedProduct?.name}
-                quantity={selectedQuantity}
-                btnColor={color}
-                productId={product?.id}
-              >
-                <Button
-                  size={"lg"}
-                  onClick={handleClick}
-                  style={{ backgroundColor: color, padding: "1.5rem" }}
-                  className={cn(
-                    bgColor ? `bg-${bgColor}` : null,
-                    "w-full mb-5 text-white text-lg font-semibold rounded-lg cursor-pointer transition-all"
-                  )}
-                >
-                  {t("common.buy")}
-                </Button>
-              </FormModal>
-
+            <FormModal
+              products={[{ productId: product.id, quantity: selectedQuantity }]}
+              btnColor={color}
+            >
               <Button
                 size={"lg"}
+                onClick={handleClick}
                 style={{ backgroundColor: color, padding: "1.5rem" }}
-                onClick={handleAddToCart}
-                className="w-full text-white text-lg font-semibold rounded-lg cursor-pointer transition-all"
+                className={cn(
+                  bgColor ? `bg-${bgColor}` : null,
+                  "w-full mb-5 text-white text-lg font-semibold rounded-lg cursor-pointer transition-all"
+                )}
               >
-                {t("product.addToCart")}
+                {t("common.buy")}
               </Button>
+            </FormModal>
+
+            <Button
+              size={"lg"}
+              style={{ backgroundColor: color, padding: "1.5rem" }}
+              onClick={handleAddToCart}
+              className="w-full text-white text-lg font-semibold rounded-lg cursor-pointer transition-all"
+            >
+              {t("product.addToCart")}
+            </Button>
             {/* </div> */}
 
             {/* {showSuccessModal && (
