@@ -8,12 +8,6 @@ const nextConfig: NextConfig = {
 		remotePatterns: [
 			{
 				protocol: "http",
-				hostname: "nutva-11a7ac0c0873.herokuapp.com",
-				port: "",
-				pathname: "/uploads/**",
-			},
-			{
-				protocol: "http",
 				hostname: "www.nutvahealth.uz",
 				port: "",
 				pathname: "/uploads/**",
@@ -30,14 +24,14 @@ const nextConfig: NextConfig = {
 		return [
 			{
 				source: "/api/:path((?!auth).*)",
-        destination: "https://demo.nutva.uz/api/:path*",
+        destination: "https://api.nutvahealth.uz/api/:path*",
 			},
 		];
 	},
 	//   devIndicators: false,
 	env: {
-    NEXT_PUBLIC_BASE_URL: "https://demo.nutva.uz/api",
-    NEXT_PUBLIC_API_URL: "https://demo.nutva.uz/api",
+    NEXT_PUBLIC_BASE_URL: "https://api.nutvahealth.uz/api",
+    NEXT_PUBLIC_API_URL: "https://api.nutvahealth.uz/api",
   },
 };
 
