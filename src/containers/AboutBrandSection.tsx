@@ -1,11 +1,11 @@
 import React from "react";
 import Image from "next/image";
-import { Button } from "../components/ui/button";
 import Container from "../components/Container";
 import BgImage from "@/assets/images/carousel-bg-orange.webp";
 import DefaultImg from "@/assets/images/default-img.png";
 import AboutBrandImg from "@/assets/images/about-brand-img.jpg";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 export default function AboutBrandSection() {
 
@@ -38,13 +38,12 @@ export default function AboutBrandSection() {
             <p className="text-base text-[#3F3F46] leading-relaxed mb-6">
               {t("aboutBrand.text")}
             </p>
-            <Button
-              className="bg-[#218A4F] hover:bg-[#365343] text-white text-md"
-              variant="default"
-              size="lg"
+            <Link
+              href="/about"
+              className="bg-[#218A4F] hover:bg-[#365343] text-white text-md px-6 py-2 rounded-md"
             >
               {t("common.more")}
-            </Button>
+            </Link>
           </div>
         </div>
       </Container>
