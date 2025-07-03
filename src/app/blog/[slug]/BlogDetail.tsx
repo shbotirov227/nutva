@@ -38,7 +38,7 @@ export default function BlogDetail({ blog }: { blog: GetOneBlogType }) {
               src={
                 media?.url.startsWith("http")
                   ? media?.url
-                  : `https://www.nutvahealth.uz/uploads/${media?.url}`
+                  : `https://www.api.nutvahealth.uz/uploads/${media?.url}`
               }
               alt={media?.altText || `Image ${index + 1}`}
               width={500}

@@ -24,7 +24,7 @@ const nextConfig: NextConfig = {
 		return [
 			{
 				source: "/api/:path((?!auth).*)",
-        destination: "https://api.nutvahealth.uz/api/:path*",
+        		destination: "https://api.nutvahealth.uz/api/:path*",
 			},
 		];
 	},

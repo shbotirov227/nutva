@@ -38,7 +38,7 @@ import axios from "axios";
 // import { getToken } from "next-auth/jwt";
 
 const api = axios.create({
-  baseURL: "/api",
+  baseURL: "https://api.nutvahealth.uz",
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
