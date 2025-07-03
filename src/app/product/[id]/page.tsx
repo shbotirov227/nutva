@@ -17,14 +17,31 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProductsComponent from "@/containers/Products";
 import SaleSection from "@/containers/SaleSection";
 import ProductImage from "@/assets/images/product-green.png";
-import ProductDetailImage from "@/assets/images/product-detail-img.png";
 import DefaultVideoImg from "@/assets/images/reviewcard-img.png";
 import GinsengImg from "@/assets/images/ginseng.png";
-import CertificateImg from "@/assets/images/certificate-img.png";
+import CertificateImg1 from "@/assets/images/certificate-img1.png";
+import CertificateImg2 from "@/assets/images/certificate_1748945174-1.png";
+import CertificateImg3 from "@/assets/images/certificate_1748945174-2.png";
+import CertificateImg4 from "@/assets/images/certificate_1748945174-3.png";
+import CertificateImg5 from "@/assets/images/certificate_1748945174-4.png";
+import CertificateImg6 from "@/assets/images/certificate_1748945174-5.png";
 import ProductDetailSkeleton from "@/components/ProductDetailSkleton";
 import { GetOneProductType } from "@/types/products/getOneProduct";
 import { useTranslated } from "@/hooks/useTranslated";
 import { AnimatePresence, motion } from "framer-motion";
+import { getProductKeyFromName } from "@/helper/getProductKeyFromName";
+import { getProductDetailMiddleImage } from "@/helper/getProductDetailMiddleImage";
+import YouTubeEmbed from "@/components/YouTubeEmbed";
+import { getProductMedia } from "@/helper/getProductMedia";
+
+const certificateImages = [
+  CertificateImg1,
+  CertificateImg2,
+  CertificateImg3,
+  CertificateImg4,
+  CertificateImg5,
+  CertificateImg6
+];
 
 export default function ProductDetailPage() {
   const [activeTab, setActiveTab] = useState("1");
@@ -49,6 +66,11 @@ export default function ProductDetailPage() {
   const localizedProduct = useTranslated(product);
 
   const { color, bgDetailImage, bgColor } = useProductVisuals(localizedProduct?.name as ProductName, { includeBgColor: true, includeBgImage: true });
+
+  const productKey = getProductKeyFromName(localizedProduct?.name || "");
+  const getImage = getProductDetailMiddleImage(localizedProduct);
+  const { youtubelink, image } = getProductMedia(localizedProduct?.name);
+
 
   if (isLoading || !product) {
     return <ProductDetailSkeleton />;
@@ -138,8 +160,8 @@ export default function ProductDetailPage() {
               >
                 <Container>
                   <TabsContent key={`tab-1-${lang}`} value={"1"}>
-                    <ul className="space-y-4 my-12 list-disc grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3">
-                      <li className="text-base font-semibold">
+                    <ul className="space-y-4 my-12 list-disc grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 gap-x-18">
+                      {/* <li className="text-base font-semibold">
                         Nutva Complex состоит из 100% натуральных компонентов.
                       </li>
                       <li className="text-base font-semibold">
@@ -166,41 +188,84 @@ export default function ProductDetailPage() {
                       <li className="text-base font-semibold">
                         Способствуют выведению токсинов и воздействуют на
                         восстановление тканей, питает его необходимыми веществами.
-                      </li>
+                      </li> */}
+
+                      {productKey &&
+                        Object.entries(t(`products.${productKey}.tab.1`, { returnObjects: true }) || {}).flatMap(
+                          ([key, value]) => {
+                            if (typeof value !== "string") return [];
+
+                            const parts = value
+                              .split("•")
+                              .map((item) => item.trim())
+                              .filter((item) => item.length > 0);
+
+                            return parts.map((part, index) => {
+                              if (index === 0) {
+                                return (
+                                  <li key={`${key}-${index}`} className="text-base font-semibold">
+                                    {part}
+                                  </li>
+                                );
+                              }
+
+                              const dashIndex = part.indexOf("–");
+                              if (dashIndex > -1) {
+                                const beforeDash = part.slice(0, dashIndex + 1).trim();
+                                const afterDash = part.slice(dashIndex + 1).trim();
+
+                                return (
+                                  <li key={`${key}-${index}`} className="text-base font-semibold">
+                                    {beforeDash}
+                                    <br />
+                                    {afterDash}
+                                  </li>
+                                );
+                              }
+
+                              return (
+                                <li key={`${key}-${index}`} className="text-base font-semibold">
+                                  {part}
+                                </li>
+                              );
+                            });
+                          }
+                        )}
+
                     </ul>
 
                     <div className="mt-10 w-full flex justify-center">
-                      <Image src={DefaultVideoImg} alt="Product Image" width={500} className="w-[600px] rounded-xl h-auto" />
+                      <Image src={getImage || DefaultVideoImg} alt="Product Image" width={500} height={500} className="w-[600px] rounded-xl h-auto" />
                     </div>
 
                     <div className="mt-10">
                       <h4 className="text-lg font-semibold mb-6">
-                        Дополнительно:
+                        {t("products.additional.title")}
                       </h4>
                       <ul className="space-y-3">
-                        <li className="text-base">
-                          Эффективно помогает при таких заболеваниях как:
+                        {Array.from({ length: 6 }).map((_, index) => (  
+                        <li key={index} className="text-base">
+                          {t(`products.additional.${index + 1}`)}
                         </li>
-                        <li className="text-base">
-                          Грыжа позвоночника - нарушение целостности внешней оболочки межпозвоночного диска;
-                        </li>
-                        <li className="text-base">
-                          Коксартроз - эрозия тазобедренного сустава;
-                        </li>
-                        <li className="text-base">
-                          Гонартроз - хроническое дегенеративное заболевание коленного сустава;
-                        </li>
-                        <li className="text-base">
-                          Полиартрит - воспаление суставов;
-                        </li>
-                        <li className="text-base">
-                          Остеопороз - хрупкость костей;
-                        </li>
+                        ))}
                       </ul>
                     </div>
 
                     <div className="flex justify-center mt-10">
-                      <Image src={ProductDetailImage} alt="Product Detail Image" width={500} className="w-[500px] rounded-xl h-auto" />
+                      {youtubelink ? (
+                        <YouTubeEmbed
+                          link={youtubelink}
+                          className="w-[650px] rounded-xl h-[500px] object-cover"
+                        />
+                      ) : (
+                        <Image
+                          className="w-[650px] rounded-xl h-[500px] object-cover"
+                          src={image}
+                          width={500}
+                          alt="Product Detail Image"
+                        />
+                      )}
+
                     </div>
                   </TabsContent>
                   <TabsContent key={`tab-2-${lang}`} value={"2"}>
@@ -285,10 +350,10 @@ export default function ProductDetailPage() {
                   <TabsContent key={`tab-4-${lang}`} value={"4"}>
                     <div className="w-full px-4">
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-12">
-                        {[1, 2, 3, 4, 5, 6].map((item) => (
-                          <div key={item} className="flex justify-center">
+                        {certificateImages.map((item) => (
+                          <div key={item.src} className="flex justify-center">
                             <Image
-                              src={CertificateImg}
+                              src={item.src}
                               alt={`Certificate ${item}`}
                               width={250}
                               height={350}

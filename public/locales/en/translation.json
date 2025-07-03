@@ -23,7 +23,8 @@
         "price": "Price",
         "total": "Total",
         "yourCart": "Your Cart",
-        "emptyCart": "Your cart is empty"
+        "emptyCart": "Your cart is empty",
+        "blogs": "Blogs"
     },
 
     "errors": {
@@ -80,7 +81,30 @@
 
     "reviewSection": {
         "title": "Real feedback from our customers",
-        "subtitle": "Find out how NUTVA helps to improve the quality of life and achieve the desired results. Video reviews from those who have already tried our product confirm the effectiveness and quality."
+        "subtitle": "Find out how NUTVA helps to improve the quality of life and achieve the desired results. Video reviews from those who have already tried our product confirm the effectiveness and quality.",
+        
+        "videoData": {
+            "1": {
+                "title": "Dancing at the age of 70!",
+                "description": "After polyarthritis, gonarthrosis, and a herniated disc, I'm moving freely again![[BR]]A face-to-face meeting with a 70-year-old female farmer from the Pastdargom district of Samarkand region. Her serious health issues — spinal hernias, accumulated polyarthritis, knee joint degradation, seizures, and stomach ulcers — were all overcome with the help of Nutva Complex.[[BR]]This video is a true source of inspiration for those fighting pain!"
+            },
+            "2": {
+                "title": "Recovered from spondyloarthrosis without surgery",
+                "description": "Our sister from Surkhandarya had injuries in 6 vertebrae.[[BR]]Doctors recommended surgery. But she didn't lose hope — and recovered without an operation![[BR]]🎥 This story proves that healing without surgery is possible.[[BR]]Watch the full video and draw your own conclusions![[BR]]A story that started with tears ended with a dance."
+            },
+            "3": {
+                "title": "Healing in Samarkand — Nutva Complex results",
+                "description": "Nutva founder Alijon G'aybullaev and his team of doctors welcomed over 100 people in Samarkand.[[BR]]They provided professional consultations and medical check-ups.[[BR]]Alijon G'aybullaev personally met with patients and listened to their heartfelt testimonials and real improvements after using Nutva Complex."
+            },
+            "4": {
+                "title": "Paralysis, Morphine, Aseptic Necrosis — all left behind",
+                "description": "Gulchehra apa from Furqat district of Fergana region became paralyzed due to a serious medical mistake. Her legs stopped moving, and she was bedridden, suffering not only from pain but also hopelessness.[[BR]]Today she is close to walking again and has regained faith in life. Healer Alijon G'aybullaev, Bahora Qodiralieva, and journalist Oybek Rixsibekov visited her at home to check on her condition."
+            },
+            "5": {
+                "title": "Otinoyi relieved of 3-year leg pain",
+                "description": "This herb is amazing, I feel lighter! I can't believe I got rid of the pain![[BR]]Our grandmother from Bekobod district, Tashkent region, had been waiting for us for months. She said she wanted to personally thank healer Alijon. For 3 years, she suffered from knee and leg pain that wouldn't even let her sleep. She couldn't climb stairs, but now she says she found healing and sincerely thanked the Nutva team and the healer."
+            }
+        }
     },
 
     "saleSection": {
@@ -131,5 +155,81 @@
         "consultationButton": "Consultation",
         "formButton": "Leave an application",
         "cancelButton": "Cancel"
+    },
+
+    "products": {
+        "complex": {
+            "tab": {
+                "1": {
+                    "1": "This dietary supplement is a natural product created from a unique combination of medicinal herbs using innovative technology that allows their natural power and value to be preserved to the utmost.",
+                    "2": "Bearberry - 51.7 mg, Corn silk - 51.2 mg, Marshmallow root - 41.4 mg, Corn tassel - 40.8 mg, Flaxseed - 39.6 mg, Elecampane root - 32.7 mg, Black comfrey - 29.3 mg, Boswellia - 28.7 mg, Gobbahtree bark - 26.4 mg, Yucca - 20.4 mg, Echinacea - 16.8 mg, Ginger - 16.4 mg, Anise - 16.2 mg, Rosehip - 15.9 mg, Glucosamine - 12.9 mg, Collagen - 12.8 mg, Hyaluronic acid - 11.8 mg, Chondroitin sulfate - 10.3 mg, Yarrow - 5.8 mg, Vitamin B6 - 2.1 mg, Melatonin - 1.5 mg.",
+                    "3": "Take 2 capsules in the evening, 30 minutes after a meal. The product is recommended to be taken in long-term courses for 3-6 months.",
+                    "4": {
+                        "image": "/img/products/nutva-complex/certificate.jpg"
+                    }
+                }
+            }
+        },
+        "complexExtra": {
+            "tab": {
+                "1": {
+                    "1": "This dietary supplement is a natural product made from a unique blend of medicinal herbs using innovative technology that preserves their natural strength and value.",
+                    "2": "Bearberry - 41.7 mg, Marshmallow root - 41.4 mg, Corn silk - 41.2 mg, Corn tassel - 40.8 mg, Flaxseed - 39.6 mg, Elecampane root - 32.7 mg, Black comfrey - 29.3 mg, Boswellia - 28.7 mg, Gobbahtree bark - 26.4 mg, Alpha-lipoic acid - 24.7 mg, Yucca - 20.4 mg, Echinacea - 16.8 mg, Ginger - 16.4 mg, Anise - 16.2 mg, Namatak - 15.9 mg, Vitamin B8 - 14.8 mg, Vitamin E - 14.6 mg, Yarrow - 5.8 mg, Vitamin B5 - 2.9 mg, Vitamin B2 - 1.5 mg, Vitamin B6 - 1.5 mg, Vitamin A - 0.5 mg, Vitamin B9 - 0.3 mg, Potassium iodide - 0.127 mg, Vitamin D3 - 15 µg, Biotin (B7) - 0.015 mg, Selenium - 0.01 mg, Vitamin B12 - 9 µg.",
+                    "3": "Take 2 capsules in the morning, 30 minutes before meals. It is recommended to take the product in long-term courses for 3-6 months.",
+                    "4": {
+                        "image": "/img/products/nutva-complex/certificate.jpg"
+                    }
+                }
+            }
+        },
+        "gelminKids": {
+            "tab": {
+                "1": {
+                    "1": "A natural anti-parasitic complex for children. Helps combat worms, toxins, and skin issues.",
+                    "2": "Indov - 136.7 mg, Black asafoetida - 46.7 mg, Black comfrey - 37.7 mg, Yarrow - 12.5 mg, Pumpkin seed - 12.4 mg, Corn silk - 12.2 mg, Cinquefoil - 11.7 mg.",
+                    "3": "2-5 years: 1 capsule. 5-16 years: 2 capsules. 16+ years: 3 capsules. To be taken before dinner. Recommended course: 3-6 months.\n\n🔍 Uses (parasites):\n• Ascaris - from cough to bronchitis, reproduces in intestines, risk of reinfection.\n• Tapeworms - can live up to 30 years in intestines, migrate through body, dangerous to brain and heart.\n• Giardia - transmitted via water, contaminated vegetables, contact; resides in the small intestine.\n• Pinworms - cause anal itching, insomnia, repeat infections due to egg cycle.\n• Dwarf tapeworm - very small, lives in intestines, causes auto-reinfection.\n\n🛡️ Prevention: hygiene, cleaning children's nails, washing fruits and vegetables.\n\n🧾 Diagnosis and treatment: doctor's examination, stool egg detection, antiparasitic therapy if needed.",
+                    "4": {
+                        "image": "/img/products/nutva-complex/certificate.jpg"
+                    }
+                }
+            }
+        },
+        "fertiliaWomen": {
+            "tab": {
+                "1": {
+                    "1": "A specially formulated complex for women's reproductive health. Restores hormonal balance and increases the chances of conception.",
+                    "2": "Inositol - 74.6 mg, L-arginine - 69.4 mg, Diindolylmethane - 48.4 mg, Coenzyme Q10 - 39.5 mg, Vitex extract - 37.5 mg, Vitamin E - 34.2 mg, Turmeric - 14.8 mg, Elecampane root - 14.8 mg, Corn silk - 14.7 mg, Echinacea extract - 14.5 mg, Ginger - 14.2 mg, Dolchin - 13.9 mg, Flaxseed - 13.5 mg, Zinc - 7.5 mg, Vitamin A - 0.5 mg, Vitamin B9 - 0.2 mg, Vitamin D3 - 15 µg, Potassium iodide - 0.0655 mg, Selenium - 0.0075 mg.",
+                    "3": "Take 2 capsules in the morning, 30 minutes before meals. Recommended course duration: 3-6 months.",
+                    "4": {
+                        "image": "/img/products/nutva-complex/certificate.jpg"
+                    }
+                }
+            }
+        },
+        "virisMen": {
+            "tab": {
+                "1": {
+                    "1": "A men's health complex. Boosts immunity, improves sperm quality and sexual performance.",
+                    "2": "L-arginine - 125 mg, L-carnitine - 74.6 mg, Glutathione - 48.4 mg, Magnesium - 28.7 mg, Coenzyme Q10 - 24.4 mg, Eurycoma extract - 19.2 mg, Vitamin E - 18.75 mg, Zinc - 14.6 mg, Calcium - 12.5 mg, Tribulus extract - 12.5 mg, Leuzea extract - 12.5 mg, Elecampane root - 7.5 mg, Echinacea - 7.5 mg, Vitex extract - 7.5 mg, Manganese - 2.5 mg, Vitamin A - 0.225 mg, Vitamin B9 - 0.2 mg, Vitamin D3 - 15 µg, Potassium iodide - 0.0655 mg, Selenium - 0.0075 mg.",
+                    "3": "Take 2 capsules in the morning, 30 minutes before meals. The product is recommended for long-term courses of 3-6 months.\n\n⚕️ For men's health:\n• Prostatitis, urethritis, prostate adenoma - urinary difficulties, decreased potency.\n• Varicocele, erectile dysfunction - reduced sperm quality, risk of infertility.\n• Balanitis, epididymitis, orchitis - infections and inflammation of the reproductive system.\n\n👨‍⚕️ Solution: The complex can be used for addressing complex inflammatory conditions and hormonal imbalances.\n\n🧠 Nervous system and stress: regular intake supports overall energy, testosterone levels, sperm motility, and mental stability.",
+                    "4": {
+                        "image": "/img/products/nutva-complex/certificate.jpg"
+                    }
+                }
+            }
+        },
+        "additional": {
+            "title": "Additional:",
+            "1": "Effectively helps with the following diseases:",
+            "2": "Spinal hernia - disruption of the integrity of the outer shell of the intervertebral disc;",
+            "3": "Coxarthrosis - erosion of the hip joint;",
+            "4": "Gonarthrosis - chronic degenerative disease of the knee joint;",
+            "5": "Polyarthritis - inflammation of the joints;",
+            "6": "Osteoporosis - fragility of the bones;"
+        }
+    },
+
+    "about": {
+
     }
 }

@@ -66,7 +66,7 @@ const Blogs = () => {
         return (b.views ?? 0) - (a.views ?? 0);
       } else {
         return (
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          new Date(b.createdAt ?? 0).getTime() - new Date(a.createdAt ?? 0).getTime()
         );
       }
     })
@@ -82,69 +82,71 @@ const Blogs = () => {
   if (!mounted) return null;
 
   return (
-    <Container className="px-4 pb-10">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-8">
-        <h1 className="text-4xl font-bold mb-4 text-[#218A4F] text-center md:text-left">
-          Блоги
-        </h1>
-        <div className="flex flex-wrap justify-center md:justify-end gap-4">
-          <ActiveButton
-            isActive={active === "popular"}
-            onClick={() => setActive("popular")}
-          >
-            {t("blog.popular")}
-          </ActiveButton>
-          <ActiveButton
-            isActive={active === "latest"}
-            onClick={() => setActive("latest")}
-          >
-            {t("blog.latest")}
-          </ActiveButton>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 xl:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 gap-6">
-        {isLoading ? (
-          Array.from({ length: 4 }).map((_, idx) => (
-            <div
-              key={idx}
-              className="w-full h-[300px] rounded-xl flex flex-col gap-4 p-4 bg-gray-200 border border-gray-300 shadow-[10px_10px_10px_rgba(0,0,0,0.1),_10px_10px_10px_rgba(0,0,0,0.1)]"
+    blogs.length > 0 ? (
+      <Container className="px-4 pb-10">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-8">
+          <h1 className="text-4xl font-bold mb-4 text-[#218A4F] text-center md:text-left">
+            {t("common.blogs")}
+          </h1>
+          <div className="flex flex-wrap justify-center md:justify-end gap-4">
+            <ActiveButton
+              isActive={active === "popular"}
+              onClick={() => setActive("popular")}
             >
-              <Skeleton className="w-full h-[180px] rounded-md" />
-              <Skeleton className="w-3/4 h-6" />
-              <Skeleton className="w-full h-4" />
-              <Skeleton className="w-5/6 h-4" />
-            </div>
-          ))
-        ) : (
-          <AnimatePresence mode="popLayout">
-            {translatedBlogs?.map((blog) => {
-              if (!blog || !blog?.id) return null;
+              {t("blog.popular")}
+            </ActiveButton>
+            <ActiveButton
+              isActive={active === "latest"}
+              onClick={() => setActive("latest")}
+            >
+              {t("blog.latest")}
+            </ActiveButton>
+          </div>
+        </div>
 
-              return (
-                <motion.div
-                  key={blog?.id}
-                  layout
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="w-full rounded-xl flex flex-col gap-4 px-5"
-                >
-                  <BlogCard
-                    id={blog?.id}
-                    // imgUrl={blog?.media?.[0] || ""}
-                    title={blog?.title}
-                    content={blog?.content}
-                    media={blog?.media[0] || null}
-                  />
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        )}
-      </div>
-    </Container>
+        <div className="grid grid-cols-1 xl:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 gap-6">
+          {isLoading ? (
+            Array.from({ length: 4 }).map((_, idx) => (
+              <div
+                key={idx}
+                className="w-full h-[300px] rounded-xl flex flex-col gap-4 p-4 bg-gray-200 border border-gray-300 shadow-[10px_10px_10px_rgba(0,0,0,0.1),_10px_10px_10px_rgba(0,0,0,0.1)]"
+              >
+                <Skeleton className="w-full h-[180px] rounded-md" />
+                <Skeleton className="w-3/4 h-6" />
+                <Skeleton className="w-full h-4" />
+                <Skeleton className="w-5/6 h-4" />
+              </div>
+            ))
+          ) : (
+            <AnimatePresence mode="popLayout">
+              {translatedBlogs?.map((blog) => {
+                if (!blog || !blog?.id) return null;
+
+                return (
+                  <motion.div
+                    key={blog?.id}
+                    layout
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full rounded-xl flex flex-col gap-4 px-5"
+                  >
+                    <BlogCard
+                      id={blog?.id}
+                      // imgUrl={blog?.media?.[0] || ""}
+                      title={blog?.title}
+                      content={blog?.content}
+                      media={blog?.media[0] || null}
+                    />
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          )}
+        </div>
+      </Container>
+    ) : null
   );
 };
 

@@ -4,6 +4,7 @@ import { Button } from "../components/ui/button";
 import Container from "../components/Container";
 import BgImage from "@/assets/images/carousel-bg-orange.webp";
 import DefaultImg from "@/assets/images/default-img.png";
+import AboutBrandImg from "@/assets/images/about-brand-img.jpg";
 import { useTranslation } from "react-i18next";
 
 export default function AboutBrandSection() {
@@ -17,12 +18,12 @@ export default function AboutBrandSection() {
         backgroundImage: `url(${BgImage.src})`,
       }}
     >
-      <Container className="flex flex-col md:flex-row-reverse items-center justify-center">
-        <div className="w-full flex flex-col md:flex-row-reverse items-center justify-between bg-white rounded-xl shadow-[10px_10px_10px_rgba(0,0,0,0.1)] py-8 px-6 md:px-10 gap-8">
+      <Container className="flex flex-col lg:flex-row-reverse items-center justify-center">
+        <div className="w-full flex flex-col lg:flex-row-reverse items-center justify-between bg-white rounded-xl shadow-[10px_10px_10px_rgba(0,0,0,0.1)] py-8 px-6 md:px-10 gap-8">
 
-          <div className="w-full md:w-[40%] relative h-[250px] md:h-[300px]">
+          <div className="w-full lg:w-[40%] relative h-[250px] lg:h-[300px]">
             <Image
-              src={DefaultImg}
+              src={AboutBrandImg || DefaultImg}
               alt="About Brand"
               fill
               className="object-cover rounded-xl"
@@ -30,12 +31,12 @@ export default function AboutBrandSection() {
             />
           </div>
 
-          <div className="w-full md:w-[60%]">
+          <div className="w-full lg:w-[60%]">
             <h2 className="text-3xl font-bold text-[#3F3F46] mb-4">
               {t("aboutBrand.title")}
             </h2>
             <p className="text-base text-[#3F3F46] leading-relaxed mb-6">
-              Corem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. Corem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Corem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. Corem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+              {t("aboutBrand.text")}
             </p>
             <Button
               className="bg-[#218A4F] hover:bg-[#365343] text-white text-md"

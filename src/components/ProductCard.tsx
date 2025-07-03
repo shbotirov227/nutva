@@ -56,7 +56,7 @@ const ProductCard = ({
   return (
     <div
       style={{ backgroundColor: bgColor || "white", ...style }}
-      className={`w-full relative rounded-xl max-[1024px]:w-[500px] min-h-[400px] max-[950px]:mt-30 max-[950px]:w-[450px] max-[800]:w-[350px] flex flex-col-reverse lg:flex-row items-center justify-between shadow-lg ${className}`}
+      className={`w-full relative rounded-xl max-[1024px]:w-[500px] min-h-[400px] max-[950px]:mt-30 max-[950px]:w-[450px] max-[800px]:w-[350px] flex flex-col-reverse lg:flex-row items-center justify-between shadow-lg ${className}`}
     >
       <div className="w-full px-6 pt-6 pb-10 lg:text-left flex flex-col gap-6">
         <div>
@@ -114,7 +114,7 @@ const ProductCard = ({
             width={0}
             height={0}
             sizes="100vw"
-            className="w-full min-w-[300px] max-[950px]:absolute -top-25 h-56 object-contain"
+            className="w-full min-w-[300px] max-[950px]:absolute -top-30 h-56 object-contain"
             loading={index === 0 ? "eager" : "lazy"}
             priority={imagePriority}
             decoding="async"

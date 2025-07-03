@@ -3,6 +3,7 @@
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import clsx from "clsx";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -17,10 +18,9 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import ProductCard from "@/components/ProductCard";
 import Container from "@/components/Container";
+import { useTranslated } from "@/hooks/useTranslated";
 import "swiper/css/navigation";
 import "swiper/css";
-import clsx from "clsx";
-import { useTranslated } from "@/hooks/useTranslated";
 
 const SkeletonCard = () => (
   <div className="p-4 rounded-xl bg-gray-200 border border-gray-300 shadow-md min-h-[350px] flex flex-col">
@@ -123,7 +123,7 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
         modules={[Autoplay, Navigation]}
         slidesPerView={"auto"}
         centeredSlides={true}
-        spaceBetween={55}
+        spaceBetween={0}
         slidesPerGroup={1}
         loop={true}
         speed={600}
@@ -157,12 +157,12 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
             <SwiperSlide
               key={index}
               className={clsx(
-                "w-[84vw]",
+                "w-[90vw]",
                 "sm:!w-[500px]",
                 "md:!w-[330px] md:mx-auto",
                 "lg:!w-[700px]",
                 "xl:!w-[800px]",
-                "2xl:!w-[850px]",
+                "2xl:!w-[67vw]",
                 "h-[800px] shrink-0 grow-0 transition-transform duration-500"
               )}
             >

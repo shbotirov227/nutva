@@ -9,15 +9,15 @@ import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/lib/apiClient";
 import { useLang } from "@/context/LangContext";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatPrice } from "@/lib/formatPrice";
 import NoImage from "@/assets/images/noimage.webp";
 import { useTranslated } from "@/hooks/useTranslated";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { toast } from "react-toastify";
-import Container from "@/components/Container";
 import EmptyCartImg from "@/assets/images/empty-cart-img.png";
+import Container from "@/components/Container";
 
 // type LangKey = "uz" | "ru" | "en";
 
@@ -58,10 +58,10 @@ export default function ProductsListPage() {
   if (!isMounted) return null;
 
   return (
-    <Container className="pt-32 pb-16 max-w-7xl mx-auto px-4">
+    <Container className="pt-32 pb-16  px-4">
       {products?.length > 0 ? (
         <>
-          <h1 className="text-3xl font-bold mb-10 text-center">
+          <h1 className="text-3xl font-bold mb-10 text-center text-green-900">
             {t("nav.products", "Mahsulotlar")}
           </h1>
 
@@ -81,7 +81,7 @@ export default function ProductsListPage() {
               return (
                 <Card
                   key={product.id}
-                  className="transition-all hover:shadow-xl p-0"
+                  className="transition-all hover:shadow-xl"
                 >
                   <CardHeader className="p-0">
                     <div className="relative w-full h-[200px] overflow-hidden">
@@ -94,7 +94,7 @@ export default function ProductsListPage() {
                       />
                     </div>
                   </CardHeader>
-                  <CardContent className="p-4 space-y-2">
+                  <CardContent className="flex-grow space-t-2">
                     <CardTitle className="text-lg font-semibold line-clamp-1">
                       {localized?.name}
                     </CardTitle>
@@ -104,26 +104,27 @@ export default function ProductsListPage() {
                     <p className="text-base mb-3 text-gray-500">
                       {product?.slug}
                     </p>
-                    <p className="text-base font-bold text-[#218A4F] mb-5">
+                    <p className="text-base font-bold text-[#218A4F]">
                       {formatPrice(product.price)} {t("common.sum")}
                     </p>
 
-                    <div className="flex flex-col gap-2 mt-auto">
-                      <Link
-                        href={`/product/${product.id}`}
-                        className="w-full text-center px-4 py-2 border border-[#218A4F] text-[#218A4F] rounded-lg hover:bg-[#218A4F] hover:text-white transition-all text-sm"
-                      >
-                        {t("common.more")}
-                      </Link>
-                      <Button
-                        onClick={handleAdd}
-                        className="w-full whitespace-nowrap bg-black cursor-pointer hover:bg-neutral-800 text-sm"
-                      >
-                        {t("product.addToCart")}
-                      </Button>
-                    </div>
 
                   </CardContent>
+                  <CardFooter className="flex flex-col gap-2">
+                    <Link
+                      href={`/product/${product.id}`}
+                      className="w-full text-center px-4 py-2 border border-[#218A4F] text-[#218A4F] rounded-lg hover:bg-green-900 hover:text-white transition-all text-sm"
+                    >
+                      {t("common.more")}
+                    </Link>
+                    <Button
+                      size={"lg"}
+                      onClick={handleAdd}
+                      className="w-full whitespace-nowrap cursor-pointer bg-green-700 hover:bg-green-900 text-sm py-4"
+                    >
+                      {t("product.addToCart")}
+                    </Button>
+                  </CardFooter>
                 </Card>
               );
             })}

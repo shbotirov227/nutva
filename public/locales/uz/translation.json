@@ -16,14 +16,15 @@
 		"more": "Batafsil",
 		"quantity": "dona",
 		"sale": "chegirma",
-        "saleUpperCase": "Chegirma",
+		"saleUpperCase": "Chegirma",
 		"forYou": "Siz uchun",
 		"ourProducts": "Bizning mahsulotlarimiz",
-        "pending": "Yuklanmoqda...",
-        "price": "Narxi",
-        "total": "Jami",
-        "yourCart": "Sizning savatingiz",
-        "emptyCart": "Sizning savatingiz bo'sh"
+		"pending": "Yuklanmoqda...",
+		"price": "Narxi",
+		"total": "Jami",
+		"yourCart": "Sizning savatingiz",
+		"emptyCart": "Sizning savatingiz bo'sh",
+        "blogs": "Bloglar"
 	},
 
 	"errors": {
@@ -34,9 +35,9 @@
 		"badRequest": "Noto'g'ri so'rov",
 		"validationError": "Validatsiya xatosi",
 		"networkError": "Internet xatosi",
-        "fillAllFields": "Barcha maydonlarni to'ldiring",
-        "ageError": "Iltimos, haqiqiy yosh kiriting (1-120)",
-        "emptyProducts": "Mahsulotlar mavjud emas"
+		"fillAllFields": "Barcha maydonlarni to'ldiring",
+		"ageError": "Iltimos, haqiqiy yosh kiriting (1-120)",
+		"emptyProducts": "Mahsulotlar mavjud emas"
 	},
 
 	"nav": {
@@ -55,8 +56,8 @@
 		"noResults": "Natija topilmadi",
 		"loadMore": "Ko'proq yuklash",
 		"noBlogs": "Bloglar mavjud emas",
-        "popular": "Mashhur bloglar",
-        "latest": "So'nggi bloglar"
+		"popular": "Mashhur bloglar",
+		"latest": "So'nggi bloglar"
 	},
 
 	"product": {
@@ -66,58 +67,81 @@
 			"3": "Ko'rsatmalar",
 			"4": "Sertifikatlar"
 		},
-        "checkboxLabel": "3 tadan ko'p mahsulot tanlash",
-        "consultation": "Bepul konsultatsiya",
-        "addToCart": "Savatga qo'shish",
-        "remoreFromCart": "Savatdan o'chirish",
-        "addedToCart": "Savatga qo'shildi"
+
+		"checkboxLabel": "3 tadan ko'p mahsulot tanlash",
+		"consultation": "Bepul konsultatsiya",
+		"addToCart": "Savatga qo'shish",
+		"remoreFromCart": "Savatdan o'chirish",
+		"addedToCart": "Savatga qo'shildi"
 	},
 
-    "aboutBrand": {
-        "title": "Brend haqida",
-        "text": "Nutva Pharm — bu sog'lom hayot tarzi uchun yaratilgan, tabiiy va samarali biofaol qo'shimchalar ishlab chiqaruvchi zamonaviy brend. Bizning asosiy maqsadimiz — inson salomatligini qo'llab-quvvatlash, immunitetni mustahkamlash va organizmga zarar yetkazmasdan foyda beradigan yechimlarni taqdim etishdir.2020-yilda Nutva Pharm o'zining ilk mahsuloti — Nutva Complex orqali O'zbekiston, O'rta Osiyo va Rossiya bozorlarida e’tirof etila boshladi. Dastlab mahalliy bozorni o'rganib, mijozlar ehtiyojiga mos maxsus tarkiblar asosida mahsulotlar yaratildi. Bugungi kunga kelib, Nutva Pharm assortimentida bolalar, ayollar, erkaklar va keksa yoshdagilar uchun alohida liniyalar mavjud. Biz har bir mahsulotni puxta ilmiy yondashuv, ekologik toza xomashyo va xalq tabobatining eng yaxshi an'analari asosida ishlab chiqamiz. Nutva Pharm — bu shunchaki biofaol qo'shimcha emas, bu — tabiat va ilm uyg'unligidagi sog'lom yashash falsafasi."
+	"aboutBrand": {
+		"title": "Brend haqida",
+		"text": "Nutva Pharm — bu sog'lom hayot tarzi uchun yaratilgan, tabiiy va samarali biofaol qo'shimchalar ishlab chiqaruvchi zamonaviy brend. Bizning asosiy maqsadimiz — inson salomatligini qo'llab-quvvatlash, immunitetni mustahkamlash va organizmga zarar yetkazmasdan foyda beradigan yechimlarni taqdim etishdir.2020-yilda Nutva Pharm o'zining ilk mahsuloti — Nutva Complex orqali O'zbekiston, O'rta Osiyo va Rossiya bozorlarida e'tirof etila boshladi. Dastlab mahalliy bozorni o'rganib, mijozlar ehtiyojiga mos maxsus tarkiblar asosida mahsulotlar yaratildi. Bugungi kunga kelib, Nutva Pharm assortimentida bolalar, ayollar, erkaklar va keksa yoshdagilar uchun alohida liniyalar mavjud. Biz har bir mahsulotni puxta ilmiy yondashuv, ekologik toza xomashyo va xalq tabobatining eng yaxshi an'analari asosida ishlab chiqamiz. Nutva Pharm — bu shunchaki biofaol qo'shimcha emas, bu — tabiat va ilm uyg'unligidagi sog'lom yashash falsafasi."
+	},
+
+	"aboutUs": {
+		"title": "Sog'lig'ingizga g'amxo'rlik qiling",
+		"subtitle": "Sog'lomlashtirish majmuasi"
+	},
+
+	"reviewSection": {
+		"title": "Mijozlarimizning haqiqiy sharhlari",
+		"subtitle": "NUTVA hayot sifatini yaxshilashga va kerakli natijalarga erishishga qanday yordam berishini bilib oling. Mahsulotimizni allaqachon sinab ko'rganlarning video sharhlari samaradorlik va sifatni tasdiqlaydi.",
+        
+        "videoData": {
+            "1": {
+                "title": "70 yoshda raqsga tushyapman!",
+                "description": "Polliartrit, gonartroz va grijadan so'ng o'ynab yuribman![[BR]]Samarqand viloyati, Pastdarg'om tumanida 70 yoshli dehqon ayol bilan yuzma-yuz uchrashuv. Uning hayotidagi og'ir muammolar — beldagi grijalar, to'plangan poliartrit, tiza suyaklarining emirilishi, tutqanoq xurujlari va oshqozon yarasini engishda Nutva Complex qanday yordam berdi?[[BR]]Bu video —  dard bilan kurashayotganlar uchun haqiqiy ilhom manbai!"
+            },
+            "2": {
+                "title": "Spondiloartrozdan operasiyasiz tuzaldi",
+                "description": "Surxondaryolik opamizda 6 ta umurtqa suyagida jarohat aniqlangan edi.[[BR]]Shifokorlar operasiyani maslahat bergan. Ammo u umidini yo'qotmadi. U operasiyasiz shifo topdi![[BR]]🎥 Bu hikoya — operasiyasiz shifo topish mumkinligiga ishonch beradi.[[BR]]To'liq videoni ko'ring va o'zingiz xulosa chiqaring![[BR]]Ko'z yosh bilan boshlangan hikoya — raqs bilan tugadi."
+            },
+            "3": {
+                "title": "Самарқандда шифо — Nutva Complex натижалари",
+                "description": "Nutva asoschisi Alijon G'aybullaev va shifokorlar jamoasi Samarqandda 100 dan ortiq yurtdoshimizni qabul qildi.[[BR]]Ularga professional maslahatlar va tibbiy tekshiruvlar o'tkazildi.[[BR]]Alijon G'aybullaev shaxsan bemorlar bilan suhbatlashdi va Nutva Complexni qabul qilgandan keyingi real o'zgarishlari, yurakdan chiqqan so'zlari va umid bilan to'lgan taassurotlarini tingladi."
+            },
+            "4": {
+                "title": "Falajlik, Morfin, Aseptik Nekroz - barchasi ortda qoldi",
+                "description": "Farg'ona viloyati, Furqat tumanidan bo'lgan Gulchehra opa og'ir xatolik tufayli falaj holatiga tushib qolgan edi. Oyoqlari harakatdan to'xtagan, yotoqqa mixlanib qolgan bu ayolni nafaqat og'riq, balki umidsizlik ham qiynagan.[[BR]]Bugun esa u yurishga yaqin, hayotga bo'lgan ishonchi tiklangan. Tabib Alijon G'aybullaev, Bahora Qodiralieva va jurnalist Oybek Rixsibekov Gulchehra opaning holidan xabardor bo'lib, xonadonlariga tashrif buyurdi."
+            },
+            "5": {
+                "title": "Otinoyi 3 yillik oyoq og'rig'idan halos bo'ldi",
+                "description": "Bu giyoh zo'r ekan , engil bo'ldim! Naxotki,  og'riqlardan qutuldim[[BR]]Toshkent viloyati Bekobod tumanidan bo'lgan Xoji Onamiz bizni nechi oydan beri kutgan ekan. Tabib Alijon bilan gaplashib , rahmatimni , minnatdorchligimni o'zim aytaman deb niyat qilgan ekan. 3 yildan beri tizza va  oyoq og'rig'i uxlashga ham qo'ymagan. Zinalarda yurolmasdim hatto endi mana davo topdim deb  Nutva jamoasi va Tabibga samimiy tashakkurlar bildirdi."
+            }
+        }
     },
 
-    "aboutUs": {
-        "title": "Sog'lig'ingizga g'amxo'rlik qiling",
-        "subtitle": "Sog'lomlashtirish majmuasi"
-    },
-
-    "reviewSection": {
-        "title": "Mijozlarimizning haqiqiy sharhlari",
-        "subtitle": "NUTVA hayot sifatini yaxshilashga va kerakli natijalarga erishishga qanday yordam berishini bilib oling. Mahsulotimizni allaqachon sinab ko'rganlarning video sharhlari samaradorlik va sifatni tasdiqlaydi."
-    },
-
-    "saleSection": {
-        "title": "Hoziroq chegirmaga ega bo'ling",
-        "subtitle": "NUTVA-bo'g'inlar, suyaklar, ovqat hazm qilish va immunitetni qo'llab-quvvatlash uchun tabiiy komplekslar. Arizani to'ldiring va bugun sog'lomlashtirish kursiga chegirma oling.",
-        "button": "Arizani yuboring"
-    },
+	"saleSection": {
+		"title": "Hoziroq chegirmaga ega bo'ling",
+		"subtitle": "NUTVA-bo'g'inlar, suyaklar, ovqat hazm qilish va immunitetni qo'llab-quvvatlash uchun tabiiy komplekslar. Arizani to'ldiring va bugun sog'lomlashtirish kursiga chegirma oling.",
+		"button": "Arizani yuboring"
+	},
 
 	"form": {
 		"title": "Bolangiz salomatligi uchun bugunoq buyurtma bering",
 		"subtitle": "🚚 O'zbekiston bo'ylab bepul yetkazib berish",
-
 		"input": {
 			"name": "Ism",
 			"phone": "Telefon raqam",
-            "age": "Yosh",
-            "forWhom": "Kim uchun",
-            "problem": "Shikoyat",
-            "region": "Viloyat",
-            "comment": "Qo'shimcha ma'lumot",
-            "productName": "Mahsulot nomi",
-            "quantity": "Miqdori"
+			"age": "Yosh",
+			"forWhom": "Kim uchun",
+			"problem": "Shikoyat",
+			"region": "Viloyat",
+			"comment": "Qo'shimcha ma'lumot",
+			"productName": "Mahsulot nomi",
+			"quantity": "Miqdori"
 		},
 
 		"errors": {
 			"nameRequired": "Ism kiritilishi shart",
 			"phoneRequired": "Telefon raqami to'liq bo'lishi kerak",
-            "ageRequired": "Yosh kiritilishi shart",
-            "forWhomRequired": "Kim uchun kiritilishi shart",
-            "problemRequired": "Shikoyat kiritilishi shart",
-            "regionRequired": "Viloyat kiritilishi shart",
-            "productNameRequired": "Mahsulot nomi kiritilishi shart"
+			"ageRequired": "Yosh kiritilishi shart",
+			"forWhomRequired": "Kim uchun kiritilishi shart",
+			"problemRequired": "Shikoyat kiritilishi shart",
+			"regionRequired": "Viloyat kiritilishi shart",
+			"productNameRequired": "Mahsulot nomi kiritilishi shart"
 		},
 
 		"success": "Buyurtma muvaffaqiyatli qabul qilindi",
@@ -131,11 +155,93 @@
 		"subtitle": "Bizning malakali shifokorlarimiz sizga bepul maslahat berish uchun tez orada bog'lanadi."
 	},
 
-    "button": {
-        "heroButton": "Buyurtma berish",
-        "consultationButton": "Konsultatsiya olish",
-        "freeConsultation": "Bepul konsultatsiya",
-        "formButton": "Ariza qoldirish",
-        "cancelButton": "Bekor qilish"
+	"button": {
+		"heroButton": "Buyurtma berish",
+		"consultationButton": "Konsultatsiya olish",
+		"freeConsultation": "Bepul konsultatsiya",
+		"formButton": "Ariza qoldirish",
+		"cancelButton": "Bekor qilish"
+	},
+
+	"products": {
+		"complex":{
+			"tab": {
+				"1": {
+					"1": "Bu biologik faol qo'shimcha — dorivor o'tlarning noyob jamlanmasi asosida yaratilgan va ularning tabiiy kuchi va qiymatini yuqori darajada saqlash imkonini beruvchi innovatsion texnologiyadan foydalangan holda ishlab chiqarilgan tabiiy mahsulot.",
+					"2": "Ayiq quloq - 51,7 mg, Makkai sano - 51,2 mg, Gulxayri ildizi - 41,4 mg, Jo'xori popugi - 40,8 mg, Zig'ir urug'i - 39,6 mg, Qariqiz ildizi - 32,7 mg, Qora andiz - 29,3 mg, Bosvellia - 28,7 mg, Gubbaxt daraxt po'stlog'i - 26,4 mg, Juka - 20,4 mg, Ekinezya - 16,8 mg, Zanjabil - 16,4 mg, Anis - 16,2 mg, Na'matak - 15,9 mg, Glyukozamin - 12,9 mg, Kollagen - 12,8 mg, Gialuron kislotasi - 11,8 mg, Xondroitin sulfat - 10,3 mg, Bo'yimodaron - 5,8 mg, Vitamin B6 - 2,1 mg, Melatonin - 1,5 mg.",
+					"3": "Kechqurun 2 dona kapsuladan, ovqatdan 30 daqiqa keyin qabul qilinadi. Mahsulotni 3-6 oy davomida uzoq kurslarda qabul qilish tavsiya etiladi.",
+					"4": {
+						"image": "/img/products/nutva-complex/certificate.jpg"
+					}
+				}
+			}
+		},
+
+		"complexExtra": {
+			"tab": {
+				"1": {
+					"1": "Bu biologik faol qo'shimcha — dorivor o'tlarning noyob jamlanmasi asosida yaratilgan va ularning tabiiy kuchi va qiymatini yuqori darajada saqlash imkonini beruvchi innovatsion texnologiyadan foydalangan holda ishlab chiqarilgan tabiiy mahsulot.",
+					"2": "Ayiq quloq - 41,7 mg, Gulxayri ildizi - 41,4 mg, Makkai sano - 41,2 mg, Jo'xori popugi - 40,8 mg, Zig'ir urug'i - 39,6 mg, Qariqiz ildizi - 32,7 mg, Qora andiz - 29,3 mg, Bosvellia - 28,7 mg, Gubbaxt daraxt po'stlog'i - 26,4 mg, Alfa lipoik kislotasi - 24,7 mg, Juka - 20,4 mg, Ekinezya - 16,8 mg, Zanjabil - 16,4 mg, Anis - 16,2 mg, Namatak - 15,9 mg, Vitamin B8 - 14,8 mg, Vitamin E - 14,6 mg, Bo'yimodaron - 5,8 mg, Vitamin B5 - 2,9 mg, Vitamin B2 - 1,5 mg, Vitamin B6 - 1,5 mg, Vitamin A - 0,5 mg, Vitamin B9 - 0,3 mg, Kaliy yodid - 0,127 mg, Vitamin D3 - 15 mkg, Vitamin B7 - 0,015 mg, Selen - 0,01 mg, Vitamin B12 - 9 mkg.",
+					"3": "Ertalab 2 dona kapsuladan, ovqatdan 30 daqiqa oldin ichiladi. Mahsulotni 3-6 oy davomida uzoq kurslarda qabul qilish tavsiya etiladi.",
+					"4": {
+						"image": "/img/products/nutva-complex-extra/certificate.jpg"
+					}
+				}
+			}
+		},
+
+		"gelminKids": {
+			"tab": {
+				"1": {
+					"1": "Bolalar uchun mo'ljallangan tabiiy parazitlarga qarshi kompleks. Gijjalar, toksinlar va teri muammolarini bartaraf etishda yordam beradi.",
+					"2": "Indov - 136,7 mg, Qora sedana - 46,7 mg, Qora andiz - 37,7 mg, Bo'ymadaron - 12,5 mg, Qovoq urug'i - 12,4 mg, Makkai sano - 12,2 mg, Dastarbosh - 11,7 mg.",
+					"3": "2-5 yosh: 1 kapsula. 5-16 yosh: 2 kapsula. 16+ yosh: 3 kapsula. Kechki ovqatdan avval qabul qilinadi. Mahsulotni 3-6 oy davomida uzoq kurslarda qabul qilish tavsiya etiladi.\n\n🔍 Qo'llanilishi (parazitlar):\n• Askarida - yo'taldan bronxitgacha, ichakda ko'payadi, to'liq hayotiy tsikl bilan qayta infektsiya xavfi mavjud.\n• Lentamison gijja - ichakda 30 yilgacha yashashi mumkin, tana orqali ko'chib yuradi, miya va yurakka xavfli.\n• Lyamblya - ichimlik suvi, iflos sabzavot va kontakt orqali yuqadi. Ingichka ichakda yashaydi.\n• Ostritsa - anal sohada qichish, uyqusizlik, qayta-qayta infeksiya beruvchi tuxum aylanishi bilan kechadi.\n• Pakana gijja - o'ta kichik, ichakda yashab, avtosupеринвазия xavfini keltirib chiqaradi.\n\n🛡️ Profilaktika: gigiena, bolalarda tirnoqni tozalash, yuvilgan meva va sabzavot iste'moli.\n\n🧾 Diagnoz va muolaja: shifokor ko'rigi, najasda tuxum aniqlash, zarur hollarda antiparazitar terapiya.",
+					"4": {
+						"image": "/img/products/nutva-gelmin-kids/certificate.jpg"
+					}
+				}
+			}
+		},
+
+		"fertiliaWomen": {
+			"tab": {
+				"1": {
+					"1": "Ayollar reproduktiv salomatligi uchun maxsus yaratilgan kompleks. Gormonal balansni tiklaydi, homiladorlik ehtimolini oshiradi.",
+					"2": "Inositol - 74,6 mg, L-arginin - 69,4 mg, Diindolilmetan - 48,4 mg, Koenzim Q10 - 39,5 mg, Vitex ekstrakti - 37,5 mg, Vitamin E - 34,2 mg, Kurkuma - 14,8 mg, Qariqiz ildizi - 14,8 mg, Jo'xori popugi - 14,7 mg, Ekinezya ekstrakti - 14,5 mg, Zanjabil - 14,2 mg, Dolchin - 13,9 mg, Zig'ir urug'i - 13,5 mg, Rux - 7,5 mg, Vitamin A - 0,5 mg, Vitamin B9 - 0,2 mg, Vitamin D3 - 15 mkg, Kaliy yodid - 0,0655 mg, Selen - 0,0075 mg.",
+					"3": "Ertalab 2 kapsuladan, ovqatdan 30 daqiqa oldin. Mahsulotni 3-6 oy davomida kursda ichish tavsiya etiladi.",
+					"4": {
+						"image": "/img/products/nutva-fertilia-women/certificate.jpg"
+					}
+				}
+			}
+		},
+
+		"virisMen": {
+			"tab": {
+				"1": {
+					"1": "Erkaklar salomatligi uchun kompleks. Immunitetni oshiradi, spermatozoid sifatini va jinsiy faollikni tiklaydi.",
+					"2": "L-arginin - 125 mg, L-karnitin - 74,6 mg, Glutation - 48,4 mg, Magniy - 28,7 mg, Koenzim Q10 - 24,4 mg, Evrikoma ekstrakti - 19,2 mg, Vitamin E - 18,75 mg, Rux - 14,6 mg, Kaltsiy - 12,5 mg, Tribulus ekstrakti - 12,5 mg, Levzeya ekstrakti - 12,5 mg, Qariqiz ildizi - 7,5 mg, Ekinezya - 7,5 mg, Viteks ekstrakti - 7,5 mg, Marganets - 2,5 mg, Vitamin A - 0,225 mg, Vitamin B9 - 0,2 mg, Vitamin D3 - 15 mkg, Kaliy yodid - 0,0655 mg, Selen - 0,0075 mg.",
+					"3": "Ertalab 2 kapsuladan, ovqatdan 30 daqiqa oldin. Mahsulotni 3-6 oy davomida uzoq kurslarda qabul qilish tavsiya etiladi.\n\n⚕️ Erkaklar jinsiy salomatligi:\n• Простатит, уретрит, аденома простата - siydikda qiyinchilik, jinsiy zaiflik.\n• Варикоцеле, эриктиль дисфункция - urug' sifati pasayishi, bepushtlik xavfi.\n• Баланит, эпидидимит, орхит - infeksiyalar va yallig'lanishlar bilan bog'liq muammolar.\n\n👨‍⚕️ Yechim: murakkab yallig'lanish holatlari va gormonal buzilishlarni tiklash uchun kompleks qo'llanilishi mumkin.\n\n🧠 Asab tizimi va stress: muntazam qabul qilish orqali umumiy quvvat, testosteron, sperma harakatchanligi va ruhiy barqarorlikka ijobiy ta'sir ko'rsatadi.",
+					"4": {
+						"image": "/img/products/nutva-viris/certificate.jpg"
+					}
+				}
+			}
+		},
+        "additional": {
+            "title": "Qo'shimcha:",
+            "1": "Quyidagi kasalliklarda samarali yordam beradi:",
+            "2": "Orqa umurtqa hernisi - orqa umurtqa diskining tashqi qobig'ining buzilishi;",
+            "3": "Koksartroz - son bo'g'imining eroziyasi;",
+            "4": "Gonartroz - tizza bo'g'imining surunkali degenerativ kasalligi;",
+            "5": "Poliartrit - bo'g'imlarning yallig'lanishi;",
+            "6": "Osteoporoz - suyaklarning sinishi osonligi;"
+        }
+	},
+
+    "about": {
+        
     }
+
+
 }
