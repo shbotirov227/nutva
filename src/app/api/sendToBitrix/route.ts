@@ -14,11 +14,7 @@ export async function POST(req: NextRequest) {
     region,
     comment,
     products,
-    utm_source,
-    utm_medium,
-    utm_campaign,
-    utm_term,
-    utm_content,
+
   } = body;
 
   if (!buyerName || !phone || !age || !forWhom || !problem || !region) {
@@ -28,46 +24,46 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const baseUrl = "https://crm.nutva.uz/rest/4/7irbhunnsb0rj0x9";
+  const baseUrl = "https://crm.nutva.uz/rest/4/0rmhzl4g9pnvvw0c";
 
   const getProductName = (id: string): string => {
     const map: Record<string, string> = {
-      "b992bcdb-c472-4c22-8a79-daf18b9d3ea0": "Complex",
-      "1bb3b587-7441-4990-9832-a7d0716c0acb": "Complex Extra",
-      "8bed60a5-463c-4f4a-bfb3-ea5fc0498fc2": "Gelmin Kids",
-      "45a51307-e017-49f0-a250-357ea36d66b7": "Virus (M)",
-      "a646aaef-9633-4b42-bfde-01d1eb802038": "Fertilia (J)"
+      "78a05bcd-d0d8-4f5e-8271-b6b879f06621": "Complex",
+      "995cf09c-25fb-475c-baff-2ece1dcb0156": "Complex Extra",
+      "913d886c-940e-46c4-8fe4-17db725dbbee": "Gelmin Kids",
+      "4dcfe3bc-0c43-4cef-bcf1-3bba8ac0c682": "Virus Men",
+      "f9440b15-e98c-4a7f-a8a7-311a431c8fd0": "Fertilia Women"
     };
     return map[id] || `ID: ${id}`;
   };
 
   const getUnitPrice = (id: string, quantity: number): number => {
     const pricing: Record<string, { qty: number, price: number }[]> = {
-      "b992bcdb-c472-4c22-8a79-daf18b9d3ea0": [
+      "78a05bcd-d0d8-4f5e-8271-b6b879f06621": [
         { qty: 5, price: 560000 },
         { qty: 3, price: 640000 },
         { qty: 2, price: 990000 },
         { qty: 1, price: 1170000 }
       ],
-      "1bb3b587-7441-4990-9832-a7d0716c0acb": [
+      "995cf09c-25fb-475c-baff-2ece1dcb0156": [
         { qty: 5, price: 560000 },
         { qty: 3, price: 640000 },
         { qty: 2, price: 990000 },
         { qty: 1, price: 1170000 }
       ],
-      "8bed60a5-463c-4f4a-bfb3-ea5fc0498fc2": [
+      "913d886c-940e-46c4-8fe4-17db725dbbee": [
         { qty: 5, price: 220000 },
         { qty: 3, price: 290000 },
         { qty: 2, price: 390000 },
         { qty: 1, price: 490000 }
       ],
-      "45a51307-e017-49f0-a250-357ea36d66b7": [
+      "4dcfe3bc-0c43-4cef-bcf1-3bba8ac0c682": [
         { qty: 5, price: 390000 },
         { qty: 3, price: 490000 },
         { qty: 2, price: 690000 },
         { qty: 1, price: 860000 }
       ],
-      "a646aaef-9633-4b42-bfde-01d1eb802038": [
+      "f9440b15-e98c-4a7f-a8a7-311a431c8fd0": [
         { qty: 5, price: 390000 },
         { qty: 3, price: 490000 },
         { qty: 2, price: 690000 },
@@ -184,7 +180,7 @@ export async function POST(req: NextRequest) {
       fields: {
         ENTITY_ID: dealId,
         ENTITY_TYPE: "deal",
-        COMMENT: `${repeatPrefix}📝 Yangi so‘rov saytdan\n👤 Ism: ${buyerName}\n📞 Telefon: +${phone}\n🎂 Yosh: ${age}\n🌍 Hudud: ${region}\n👥 Kim uchun: ${forWhom}\n🧠 Muammo: ${problem}\n💬 Izoh: ${comment || "Yo‘q"}\n\n🛍 Mahsulotlar:\n${productList}\n\n💰 Umumiy narx: ${totalAmount.toLocaleString()} so'm\n\n🔗 UTM:\n- Source: ${utm_source || "-"}\n- Medium: ${utm_medium || "-"}\n- Campaign: ${utm_campaign || "-"}\n- Term: ${utm_term || "-"}\n- Content: ${utm_content || "-"}`
+        COMMENT: `${repeatPrefix}📝 Yangi so‘rov saytdan\n👤 Ism: ${buyerName}\n📞 Telefon: +${phone}\n🎂 Yosh: ${age}\n🌍 Hudud: ${region}\n👥 Kim uchun: ${forWhom}\n🧠 Muammo: ${problem}\n💬 Izoh: ${comment || "Yo‘q"}\n\n🛍 Mahsulotlar:\n${productList}\n\n💰 Umumiy narx: ${totalAmount.toLocaleString()} so'm`
       }
     })
   });

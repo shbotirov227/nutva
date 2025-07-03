@@ -128,7 +128,7 @@ export default function ProductDetailPage() {
 
           <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="my-10">
             <TabsList className="grid grid-cols-4 sm:grid-cols-4 max-[450px]:grid-cols-3 max-[350px]:grid-cols-2 mb-5 justify-center gap-4 bg-transparent">
-              {["1", "2", "3", "4"].map((tab) => (
+              {["1", /*"2", "3",*/ "4"].map((tab) => (
                 <TabsTrigger
                   key={tab}
                   value={tab}
