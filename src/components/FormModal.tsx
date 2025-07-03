@@ -152,8 +152,12 @@ export function FormModal({ children, products, btnColor }: FormModalProps) {
         toast.success(t("form.success") || "So'rov yuborildi");
         setIsOpen(false);
       },
-      onError: (err: any) => {
-        toast.error(err.message || t("errors.badRequest") || "Xatolik yuz berdi");
+      onError: (err: unknown) => {
+        const message =
+          typeof err === "object" && err !== null && "message" in err
+            ? (err as { message?: string }).message
+            : undefined;
+        toast.error(message || t("errors.badRequest") || "Xatolik yuz berdi");
       },
     });
     purchaseProduct({
