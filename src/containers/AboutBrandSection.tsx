@@ -39,7 +39,7 @@ export default function AboutBrandSection() {
               {t("aboutBrand.text")}
             </p>
             <Link
-              href="/about"
+              href="/about-us"
               className="bg-[#218A4F] hover:bg-[#365343] text-white text-md px-6 py-2 rounded-md"
             >
               {t("common.more")}
