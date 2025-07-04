@@ -1,0 +1,31 @@
+name: Deploy Nutva Frontend
+
+on:
+  push:
+    branches:
+      - azim
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup SSH key
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+
+      - name: Deploy via SSH
+        run: |
+          ssh -p 2245 -o StrictHostKeyChecking=no ntva@demo.nutva.uz "
+            cd ~/NutvaFrontend &&
+            git fetch origin azim &&
+            git checkout azim &&
+            git pull origin azim &&
+            npm install &&
+            npm run build &&
+            pm2 reload nutva-frontend --update-env
+          "
