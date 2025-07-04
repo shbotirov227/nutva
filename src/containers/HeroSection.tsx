@@ -36,7 +36,7 @@ const HeroSection = () => {
       <div
         className="absolute inset-0 -z-10 bg-cover bg-center brightness-50"
         style={{
-          backgroundImage: `url(/hero-bg.webp)`,
+          backgroundImage: `url(/hero-bg2.webp)`,
         }}
       ></div>
 
