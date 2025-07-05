@@ -18,9 +18,10 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import ProductCard from "@/components/ProductCard";
 import Container from "@/components/Container";
-import { useTranslated } from "@/hooks/useTranslated";
+// import { useTranslated } from "@/hooks/useTranslated";
 import "swiper/css/navigation";
 import "swiper/css";
+import { useLang } from "@/context/LangContext";
 
 const SkeletonCard = () => (
   <div className="p-4 rounded-xl bg-gray-200 border border-gray-300 shadow-md min-h-[350px] flex flex-col">
@@ -38,6 +39,7 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
   const [isMounted, setIsMounted] = useState(false);
+    const { lang } = useLang();
 
   useEffect(() => {
     setIsMounted(true);
@@ -47,8 +49,8 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
     data: products = [],
     isLoading
   } = useQuery({
-    queryKey: ["products"],
-    queryFn: () => apiClient.getAllProducts("en"),
+    queryKey: ["products", lang],
+    queryFn: () => apiClient.getAllProducts(lang),
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
   });
@@ -84,11 +86,13 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
     }
   }, [setupNavigation]);
 
-  const localized = useTranslated(products);
-  const activeProduct = useMemo(() => localized?.[activeIndex], [localized, activeIndex]);
+  // const localized = useTranslated(products);
+  const activeProduct = useMemo(() => products?.[activeIndex], [products, activeIndex]);
   const { color: activeColor, bgImage: activeBgImage } = useProductVisuals(activeProduct?.name as ProductName);
 
-  if (!isMounted) return <SkeletonCard />;
+  console.log({ products })
+
+  if (!isMounted || isLoading) return <SkeletonCard />;
 
   return (
     <div className="products relative w-full py-10">
@@ -149,7 +153,7 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
 
 
       >
-        {(isLoading || !products.length ? Array.from({ length: 5 }) : localized)?.map((product, index) => {
+        {products?.map((product, index) => {
           if (!product || !product.name) return null;
 
           const isActive = activeIndex === index;

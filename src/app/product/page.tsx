@@ -12,7 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatPrice } from "@/lib/formatPrice";
 import NoImage from "@/assets/images/noimage.webp";
-import { useTranslated } from "@/hooks/useTranslated";
+// import { useTranslated } from "@/hooks/useTranslated";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { toast } from "react-toastify";
@@ -39,7 +39,7 @@ export default function ProductsListPage() {
     staleTime: 1000 * 60 * 5,
   });
 
-  const localized = useTranslated(products);
+  // const localized = useTranslated(products);
 
   if (isLoading || !products) {
     return (
@@ -87,7 +87,7 @@ export default function ProductsListPage() {
                     <div className="relative w-full h-[200px] overflow-hidden">
                       <Image
                         src={product.imageUrls?.[0] || NoImage}
-                        alt={localized?.name || "Product Image"}
+                        alt={product?.name || "Product Image"}
                         fill
                         className="object-contain cursor-pointer rounded-t-xl p-3"
                         onClick={() => router.push(`/product/${product.id}`)}
@@ -96,13 +96,13 @@ export default function ProductsListPage() {
                   </CardHeader>
                   <CardContent className="flex-grow space-t-2">
                     <CardTitle className="text-lg font-semibold line-clamp-1">
-                      {localized?.name}
+                      {product?.name}
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground line-clamp-2">
-                      {localized?.description}
-                    </p>
                     <p className="text-base mb-3 text-gray-500">
                       {product?.slug}
+                    </p>
+                    <p className="text-sm text-muted-foreground line-clamp-2 my-4">
+                      {product?.description}
                     </p>
                     <p className="text-base font-bold text-[#218A4F]">
                       {formatPrice(product.price)} {t("common.sum")}

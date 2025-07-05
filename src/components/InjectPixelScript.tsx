@@ -21,7 +21,9 @@ export default function InjectPixelScript() {
     };
 
     fetchPixelScript();
-  }, []);
 
+  }, []);
+  
+  console.log(document.querySelectorAll('script'));
   return null;
 }

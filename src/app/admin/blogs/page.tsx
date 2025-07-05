@@ -7,7 +7,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 // import { apiClient } from "@/api/requests";
-// import { toast } from "react-toastify";
 // import { useCreateBlog } from "@/lib/api-hooks";
 import { toast } from "react-toastify";
 // import { CreateBlogType } from "@/types/blogs/createBlog";
@@ -53,14 +52,17 @@ export default function BlogsPage() {
         });
         if (!response.ok) {
             const errorData = await response.json();
-            toast.error(`Xatolik: ${errorData.message || "Blog yaratishda xatolik"}`);
+          toast.error(`Xatolik: ${errorData.message || "Blog yaratishda xatolik"}`, {
+            position: "top-center",
+            autoClose: 1200,
+            });
             return;
         }
 
         const data = await response.json();
         toast.success("Blog muvaffaqiyatli yaratildi!", {
-            position: "top-right",
-            autoClose: 5000,
+            position: "top-center",
+            autoClose: 1200,
         });
         console.log("Blog yaratildi:", data);
     }

@@ -27,7 +27,7 @@ import CertificateImg5 from "@/assets/images/certificate_1748945174-4.png";
 import CertificateImg6 from "@/assets/images/certificate_1748945174-5.png";
 import ProductDetailSkeleton from "@/components/ProductDetailSkleton";
 import { GetOneProductType } from "@/types/products/getOneProduct";
-import { useTranslated } from "@/hooks/useTranslated";
+// import { useTranslated } from "@/hooks/useTranslated";
 import { AnimatePresence, motion } from "framer-motion";
 import { getProductKeyFromName } from "@/helper/getProductKeyFromName";
 import { getProductDetailMiddleImage } from "@/helper/getProductDetailMiddleImage";
@@ -63,13 +63,13 @@ export default function ProductDetailPage() {
     }
   }, [id]);
 
-  const localizedProduct = useTranslated(product);
+  // const localizedProduct = useTranslated(product);
 
-  const { color, bgDetailImage, bgColor } = useProductVisuals(localizedProduct?.name as ProductName, { includeBgColor: true, includeBgImage: true });
+  const { color, bgDetailImage, bgColor } = useProductVisuals(product?.name as ProductName, { includeBgColor: true, includeBgImage: true });
 
-  const productKey = getProductKeyFromName(localizedProduct?.name || "");
-  const getImage = getProductDetailMiddleImage(localizedProduct);
-  const { youtubelink, image } = getProductMedia(localizedProduct?.name);
+  const productKey = getProductKeyFromName(product?.name || "");
+  const getImage = getProductDetailMiddleImage(product);
+  const { youtubelink, image } = getProductMedia(product?.name as ProductName);
 
 
   if (isLoading || !product) {
@@ -105,7 +105,7 @@ export default function ProductDetailPage() {
                 <div className="w-full">
                   <Image
                     src={product?.imageUrls[0] || ProductImage}
-                    alt={localizedProduct?.name || "Product Image"}
+                    alt={product?.name || "Product Image"}
                     width={500}
                     height={500}
                     priority

@@ -1,17 +1,3 @@
-// export type GetOneBlogType = {
-//   id: string,
-//   title: string,
-//   content: string,
-//   slug: string,
-//   metaTitle: string,
-//   metaDescription: string,
-//   metaKeywords: string,
-//   createdAt: Date,
-//   viewCount: number,
-//   imageUrls: string[]
-// }
-
-// types/blogs/getAllBlogs.ts
 export type BlogMediaType = {
   url: string;
   file: File | null;
@@ -25,34 +11,13 @@ export type GetOneBlogType = {
   createdAt: Date | null;
   updatedAt: Date | null;
   published: boolean;
-
-  en: {
-    title: string;
-    subtitle: string;
-    content: string;
-    metaTitle: string;
-    metaDescription: string;
-    metaKeywords: string;
-  };
-
-  uz: {
-    title: string;
-    subtitle: string;
-    content: string;
-    metaTitle: string;
-    metaDescription: string;
-    metaKeywords: string;
-  };
-
-  ru: {
-    title: string;
-    subtitle: string;
-    content: string;
-    metaTitle: string;
-    metaDescription: string;
-    metaKeywords: string;
-  };
+  title: string;
+  subtitle: string;
+  content: string;
+  metaTitle: string;
+  metaDescription: string;
+  metaKeywords: string;
   media: BlogMediaType[];
-  
+
   views?: number;
 };

@@ -49,16 +49,16 @@ export default function ProductsPage() {
     },
     onSuccess: (data) => {
       toast.success(`Product created: ${data.title} ${isSuccess}`, {
-        position: "top-right",
-        autoClose: 5000,
+        position: "top-center",
+        autoClose: 1200,
       });
       // Istasangiz product listni invalidatsiya qilsangiz ham bo'ladi:
       queryClient.invalidateQueries({ queryKey: ["products"] });
     },
     onError: (error) => {
       toast.error(`Error creating product: ${error} ${isError}`, {
-        position: "top-right",
-        autoClose: 5000,
+        position: "top-center",
+        autoClose: 1200,
       });
     },
     // onSettled: () => {

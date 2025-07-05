@@ -46,7 +46,7 @@ export function FormModal({ children, products, btnColor }: FormModalProps) {
     comment?: string;
     // productName?: string;
   }>({});
-  const { cart } = useCart();
+  const { cart, removeAll } = useCart();
 
   React.useEffect(() => {
     setIsMounted(true);
@@ -85,6 +85,7 @@ export function FormModal({ children, products, btnColor }: FormModalProps) {
       setProblem("");
       setRegion("");
       setComment("");
+      removeAll();
     },
     onError: () => {
       toast.error("Xatolik yuz berdi", {
@@ -149,7 +150,10 @@ export function FormModal({ children, products, btnColor }: FormModalProps) {
 
     sendToBitrix(formData, {
       onSuccess: () => {
-        toast.success(t("form.success") || "So'rov yuborildi");
+        toast.success(t("form.success") || "So'rov yuborildi", {
+          position: "top-center",
+          autoClose: 1200,
+        });
         setIsOpen(false);
       },
       onError: (err: unknown) => {
@@ -157,7 +161,10 @@ export function FormModal({ children, products, btnColor }: FormModalProps) {
           typeof err === "object" && err !== null && "message" in err
             ? (err as { message?: string }).message
             : undefined;
-        toast.error(message || t("errors.badRequest") || "Xatolik yuz berdi");
+        toast.error(message || t("errors.badRequest") || "Xatolik yuz berdi", {
+          position: "top-center",
+          autoClose: 1200,
+        });
       },
     });
     purchaseProduct({

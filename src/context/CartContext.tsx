@@ -21,6 +21,8 @@ type CartContextType = {
   addToCart: (item: RawCartItem) => void;
   removeFromCart: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
+  removeAll: () => void;
+  totalElements: number;
 };
 
 const RawCartContext = createContext<CartContextType | undefined>(undefined);
@@ -63,6 +65,13 @@ export const RawCartProvider = ({ children }: { children: React.ReactNode }) => 
     setCart((prev) => prev.filter((i) => i.id !== id));
   };
 
+  const removeAll = () => setCart([]);
+
+  const totalElements = cart.reduce(
+    (acc, item) => acc + item.quantity,
+    0
+  );
+
   const updateQuantity = (id: string, quantity: number) => {
     setCart((prev) =>
       prev.map((i) => (i.id === id ? { ...i, quantity } : i))
@@ -71,7 +80,7 @@ export const RawCartProvider = ({ children }: { children: React.ReactNode }) => 
 
   return (
     <RawCartContext.Provider
-      value={{ cart, addToCart, removeFromCart, updateQuantity }}
+      value={{ cart, addToCart, removeFromCart, updateQuantity, removeAll, totalElements }}
     >
       {isMounted ? children : null}
     </RawCartContext.Provider>

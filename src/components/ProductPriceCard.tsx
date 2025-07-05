@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useLang } from "@/context/LangContext";
+// import { useLang } from "@/context/LangContext";
 import { GetOneProductType } from "@/types/products/getOneProduct";
 import { useTranslation } from "react-i18next";
-import { useLocalizedProduct } from "@/hooks/useLocalizedProduct";
+// import { useLocalizedProduct } from "@/hooks/useLocalizedProduct";
 import { formatPrice } from "@/lib/formatPrice";
 import { Flame, Minus, Plus } from "lucide-react";
 
@@ -38,7 +38,7 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
   const [count, setCount] = useState(4);
   const [quantity, setQuantity] = useState(1);
   const { t } = useTranslation();
-  const { lang } = useLang();
+  // const { lang } = useLang();
   const { addToCart } = useCart();
 
   useEffect(() => {
@@ -50,9 +50,9 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
   //   setShowSuccessModal(true);
   // };
 
-  const localizedProduct = useLocalizedProduct(product, lang);
+  // const localizedProduct = useLocalizedProduct(product, lang);
   const selectedQuantity = isChecked ? count! : quantity!;
-  const { basePrice, totalPrice, discountPercent } = useDiscount(localizedProduct?.name, selectedQuantity);
+  const { basePrice, totalPrice, discountPercent } = useDiscount(product?.name, selectedQuantity);
 
 
   const handleClick = () => {
@@ -60,8 +60,8 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
     if (onClick) {
       onClick();
       toast.success("Product buyed!", {
-        position: "top-right",
-        autoClose: 5000,
+        position: "top-center",
+        autoClose: 1200,
       });
     }
   };
@@ -79,7 +79,7 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
     });
   }
 
-  if (!product || !localizedProduct || !mounted) return null;
+  if (!product || !product || !mounted) return null;
 
   return (
     <AnimatePresence mode="popLayout">
@@ -106,7 +106,7 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
                 className="w-full rounded-xl flex flex-col gap-4"
               >
                 <div className="mb-4">
-                  <h2 className="text-4xl font-bold">{localizedProduct?.name}</h2>
+                  <h2 className="text-4xl font-bold">{product?.name}</h2>
                   <p className="text-xl mt-1 text-gray-800">{product?.slug}</p>
                 </div>
 

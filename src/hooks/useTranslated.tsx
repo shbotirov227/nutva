@@ -1,36 +1,41 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useLang } from "@/context/LangContext";
 
-type MultilangData =
-  | {
-    uz: Record<string, any>;
-    ru: Record<string, any>;
-    en: Record<string, any>;
-    [key: string]: any;
-  }
-  | Array<{
-    uz: Record<string, any>;
-    ru: Record<string, any>;
-    en: Record<string, any>;
-    [key: string]: any;
-  }>;
+type LangKey = "uz" | "ru" | "en";
 
-export function useTranslated<T extends MultilangData | undefined>(data: T): T extends any[] ? Array<any> : any {
+type MultilangItem = {
+  uz: Record<string, any>;
+  ru: Record<string, any>;
+  en: Record<string, any>;
+  [key: string]: any;
+};
+
+type MultilangData = MultilangItem | MultilangItem[];
+
+/**
+ * Translates data based on current language.
+ * Supports both object and array of objects with `uz`, `ru`, `en` keys.
+ */
+export function useTranslated<T extends MultilangData | undefined>(
+  data: T
+): T extends MultilangItem[] ? Array<Record<string, any>> : Record<string, any> {
   const { lang } = useLang();
 
-  if (!data) return [] as any as T[];
+  if (!data) return ([] as unknown) as any;
 
   if (Array.isArray(data)) {
     return data.map((item) => ({
       ...item,
-      ...(item?.[lang] || item?.uz),
+      ...(item?.[lang as LangKey] || item?.uz),
     })) as any;
-  } else if (typeof data === "object" && data !== null) {
+  }
+
+  if (typeof data === "object" && data !== null) {
     return {
       ...data,
-      ...(data?.[lang] || data?.uz),
+      ...(data?.[lang as LangKey] || data?.uz),
     } as any;
   }
 
-  return data;
+  return data as any;
 }

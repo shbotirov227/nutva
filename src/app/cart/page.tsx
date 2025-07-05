@@ -14,8 +14,6 @@ export default function CartPage() {
 
   const { t } = useTranslation();
   const { cart, total } = useCartWithDiscounts();
-  console.log("cart", cart);
-  console.log("total", total);
 
   return (
     <Container className="pt-32 pb-25">

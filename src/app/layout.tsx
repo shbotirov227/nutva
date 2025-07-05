@@ -5,14 +5,14 @@ import "./globals.css";
 
 // Providers
 import { QueryProvider } from "@/providers/queryProvider";
-import { AuthProvider } from "@/providers/sessionProvider";
+// import { AuthProvider } from "@/providers/sessionProvider";
 import { LangProvider } from "@/context/LangContext";
 import { RawCartProvider } from "@/context/CartContext";
 import { BuyProvider } from "@/context/BuyContext";
 
 // Components (UI)
 import Layout from "@/components/Layout";
-import InjectPixelScript from "@/components/InjectPixelScript";
+// import InjectPixelScript from "@/components/InjectPixelScript";
 import TrackVisit from "@/components/TrackVisit";
 
 // Modal container (must be client-only)
@@ -40,14 +40,14 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <AuthProvider>
+        {/* <AuthProvider> */}
           <QueryProvider>
             <LangProvider>
               <RawCartProvider>
                 <BuyProvider>
                   <Layout>
                     {/* Server-side / Static components */}
-                    <InjectPixelScript />
+                    {/* <InjectPixelScript /> */}
                     <TrackVisit />
 
                     {children}
@@ -61,7 +61,7 @@ export default function RootLayout({
               </RawCartProvider>
             </LangProvider>
           </QueryProvider>
-        </AuthProvider>
+        {/* </AuthProvider> */}
       </body>
     </html>
   );

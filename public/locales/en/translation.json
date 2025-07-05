@@ -59,6 +59,7 @@
         "popular": "Popular",
         "latest": "Latest"
     },
+
     "product": {
         "tab": {
             "1": "Description",
@@ -77,6 +78,11 @@
     "aboutBrand": {
         "title": "About the brand",
         "text": "Nutva Pharm is a modern brand created for a healthy lifestyle, producing natural and effective biofuel supplements. Our main goal is to support human health, strengthen immunity and provide solutions that can benefit the body without harm. In 2020, Nutva Pharm began to be recognized in the markets of Uzbekistan, Central Asia and Russia through its first product, Nutva Complex. Initially, having studied the local market, products were created on the basis of special compositions suitable for the needs of customers. To date, the Nutva Pharm range has separate lines for children, women, men and seniors. We develop each product based on a thorough scientific approach, environmentally friendly raw materials and the best traditions of folk medicine. Nutva Pharm is not just a biofaol supplement, it is a philosophy of healthy living in the harmony of nature and science."
+    },
+
+    "aboutUs": {
+        "title": "Take care of your health.",
+        "subtitle": "Wellness complex"
     },
 
     "reviewSection": {
@@ -126,23 +132,30 @@
             "region": "Region",
             "comment": "Additional information",
             "productName": "Product name",
-            "quantity": "Quantity"
+            "quantity": "Quantity",
+            "message": "Message"
         },
 
         "errors": {
             "nameRequired": "Name is required",
             "phoneRequired": "Phone number must be fully specified",
+            "phoneNotValid": "Please enter your phone number!",
             "ageRequired": "Age is required",
             "forWhomRequired": "For whom is required",
             "problemRequired": "Problem is required",
             "regionRequired": "Region is required",
-            "productNameRequired": "Product name is required"
+            "productNameRequired": "Product name is required",
+            "requestFailed": "Request failed"
         },
 
         "success": "Order accepted successfully",
+        "applicationSuccess": "Application sent successfully",
         "fillAllFields": "Fill in all fields",
         "searchCountry": "Search...",
-        "searchCountryNotFound": "Country not found"
+        "searchCountryNotFound": "Country not found",
+
+        "email": "Email",
+        "shortNumber": "Short number"
     },
 
     "formModal": {
@@ -150,11 +163,18 @@
         "subtitle": "Our experienced pharmacists will contact you as soon as possible."
     },
 
+    "contactModal": {
+        "title": "Do you have any questions about your health?",
+        "subtitle": "Leave your phone number and our operators will contact you as soon as possible."
+    },
+
     "button": {
         "heroButton": "Order",
         "consultationButton": "Consultation",
+        "freeConsultation": "Free consultation",
         "formButton": "Leave an application",
-        "cancelButton": "Cancel"
+        "cancelButton": "Cancel",
+        "sendMessage": "Send message"
     },
 
     "products": {
@@ -170,6 +190,7 @@
                 }
             }
         },
+        
         "complexExtra": {
             "tab": {
                 "1": {
@@ -182,6 +203,7 @@
                 }
             }
         },
+
         "gelminKids": {
             "tab": {
                 "1": {
@@ -194,6 +216,7 @@
                 }
             }
         },
+
         "fertiliaWomen": {
             "tab": {
                 "1": {
@@ -206,6 +229,7 @@
                 }
             }
         },
+
         "virisMen": {
             "tab": {
                 "1": {
@@ -218,6 +242,7 @@
                 }
             }
         },
+
         "additional": {
             "title": "Additional:",
             "1": "Effectively helps with the following diseases:",
@@ -231,5 +256,10 @@
 
     "about": {
 
+    },
+
+    "contact": {
+        "title": "Contact us",
+        "subtitle": "We are happy to answer your questions about our products and services."
     }
 }

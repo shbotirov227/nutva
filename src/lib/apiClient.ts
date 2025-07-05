@@ -28,7 +28,7 @@ export const apiClient = {
   },
 
   getOneProduct: async (id: string) => {
-    const res = await api.get<GetAllProductsType>(`/Product/${id}`);
+    const res = await api.get<GetOneProductType>(`/Product/${id}`);
     return res.data;
   },
 
@@ -66,8 +66,10 @@ export const apiClient = {
     return res.data;
   },
 
-  getOneBlog: async (id: string) => {
-    const res = await api.get<GetOneBlogType>(`/BlogPost/${id}`);
+  getOneBlog: async (id: string, lang: string) => {
+    const res = await api.get<GetOneBlogType>(`/BlogPost/${id}`, {
+      params: { lang }
+    });
     return res.data;
   },
 
@@ -88,6 +90,11 @@ export const apiClient = {
 
   getTrackingPixels: async () => {
     const res = await api.get("/pixels");
+    return res.data;
+  },
+
+  postContactForm: async (data: { name: string; phone: string; comment: string }) => {
+    const res = await api.post("/contact-forms", data);
     return res.data;
   },
 };

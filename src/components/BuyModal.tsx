@@ -1,11 +1,13 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useBuy } from "@/context/BuyContext";
 import { Button } from "@/components/ui/button";
 import { FormModal } from "@/components/FormModal";
-import { useEffect, useState } from "react";
 
 export default function BuyModalContainer() {
+  const { t } = useTranslation();
   const { buyModalOpen, productId, quantity, color, closeBuyModal } = useBuy();
   const [mounted, setMounted] = useState(false);
 
@@ -27,7 +29,7 @@ export default function BuyModalContainer() {
         style={{ backgroundColor: color }}
         className="w-full text-white text-lg font-semibold rounded-lg"
       >
-        Tasdiqlash
+        {t("common.confirm")}
       </Button>
     </FormModal>
   );

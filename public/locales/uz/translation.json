@@ -77,7 +77,7 @@
 
 	"aboutBrand": {
 		"title": "Brend haqida",
-		"text": "Nutva Pharm — bu sog'lom hayot tarzi uchun yaratilgan, tabiiy va samarali biofaol qo'shimchalar ishlab chiqaruvchi zamonaviy brend. Bizning asosiy maqsadimiz — inson salomatligini qo'llab-quvvatlash, immunitetni mustahkamlash va organizmga zarar yetkazmasdan foyda beradigan yechimlarni taqdim etishdir.2020-yilda Nutva Pharm o'zining ilk mahsuloti — Nutva Complex orqali O'zbekiston, O'rta Osiyo va Rossiya bozorlarida e'tirof etila boshladi. Dastlab mahalliy bozorni o'rganib, mijozlar ehtiyojiga mos maxsus tarkiblar asosida mahsulotlar yaratildi. Bugungi kunga kelib, Nutva Pharm assortimentida bolalar, ayollar, erkaklar va keksa yoshdagilar uchun alohida liniyalar mavjud. Biz har bir mahsulotni puxta ilmiy yondashuv, ekologik toza xomashyo va xalq tabobatining eng yaxshi an'analari asosida ishlab chiqamiz. Nutva Pharm — bu shunchaki biofaol qo'shimcha emas, bu — tabiat va ilm uyg'unligidagi sog'lom yashash falsafasi."
+		"text": "Nutva Pharm — bu sog'lom hayot tarzi uchun yaratilgan, tabiiy va samarali biofaol qo'shimchalar ishlab chiqaruvchi zamonaviy brend. Bizning asosiy maqsadimiz — inson salomatligini qo'llab-quvvatlash, immunitetni mustahkamlash va organizmga zarar yetkazmasdan foyda beradigan yechimlarni taqdim etishdir. 2020-yilda Nutva Pharm o'zining ilk mahsuloti — Nutva Complex orqali O'zbekiston, O'rta Osiyo va Rossiya bozorlarida e'tirof etila boshladi. Dastlab mahalliy bozorni o'rganib, mijozlar ehtiyojiga mos maxsus tarkiblar asosida mahsulotlar yaratildi. Bugungi kunga kelib, Nutva Pharm assortimentida bolalar, ayollar, erkaklar va keksa yoshdagilar uchun alohida liniyalar mavjud. Biz har bir mahsulotni puxta ilmiy yondashuv, ekologik toza xomashyo va xalq tabobatining eng yaxshi an'analari asosida ishlab chiqamiz. Nutva Pharm — bu shunchaki biofaol qo'shimcha emas, bu — tabiat va ilm uyg'unligidagi sog'lom yashash falsafasi."
 	},
 
 	"aboutUs": {
@@ -122,6 +122,7 @@
 	"form": {
 		"title": "Bolangiz salomatligi uchun bugunoq buyurtma bering",
 		"subtitle": "🚚 O'zbekiston bo'ylab bepul yetkazib berish",
+        
 		"input": {
 			"name": "Ism",
 			"phone": "Telefon raqam",
@@ -131,36 +132,49 @@
 			"region": "Viloyat",
 			"comment": "Qo'shimcha ma'lumot",
 			"productName": "Mahsulot nomi",
-			"quantity": "Miqdori"
+			"quantity": "Miqdori",
+            "message": "Xabar"
 		},
 
 		"errors": {
 			"nameRequired": "Ism kiritilishi shart",
 			"phoneRequired": "Telefon raqami to'liq bo'lishi kerak",
+            "phoneNotValid": "Iltimos telefon raqamingizni kiriting!",
 			"ageRequired": "Yosh kiritilishi shart",
 			"forWhomRequired": "Kim uchun kiritilishi shart",
 			"problemRequired": "Shikoyat kiritilishi shart",
 			"regionRequired": "Viloyat kiritilishi shart",
-			"productNameRequired": "Mahsulot nomi kiritilishi shart"
+			"productNameRequired": "Mahsulot nomi kiritilishi shart",
+            "requestFailed": "Xatolik yuz berdi"
 		},
 
 		"success": "Buyurtma muvaffaqiyatli qabul qilindi",
+        "applicationSuccess": "Ariza muvaffaqiyatli yuborildi",
 		"fillAllFields": "Barcha maydonlarni to'ldiring",
 		"searchCountry": "Qidirish...",
-		"searchCountryNotFound": "Ushbu davlat topilmadi"
-	},
+		"searchCountryNotFound": "Ushbu davlat topilmadi",
+        
+        "email": "Email",
+        "shortNumber": "Qisqa raqami"
+    },
 
 	"formModal": {
-		"title": "Farzandingiz salomatligiga oid savollaringiz bormi? Raqamingizni qoldiring.",
-		"subtitle": "Bizning malakali shifokorlarimiz sizga bepul maslahat berish uchun tez orada bog'lanadi."
+		"title": "To'liq ma'lumot va buyurtma uchun:",
+		"subtitle": "Ismingiz va telefon raqamingiz hamda quyidagi ma'lumotlarni qoldiring - mutaxassislarimiz siz bilan bog'lanadi!"
 	},
+
+    "contactModal": {
+        "title": "Salomatligingiz bo'yicha savolingiz bormi?",
+        "subtitle": "Raqamingizni qoldiring — shifokorlarimiz bepul maslahat uchun tez orada bog'lanadi."
+    },
 
 	"button": {
 		"heroButton": "Buyurtma berish",
 		"consultationButton": "Konsultatsiya olish",
 		"freeConsultation": "Bepul konsultatsiya",
 		"formButton": "Ariza qoldirish",
-		"cancelButton": "Bekor qilish"
+		"cancelButton": "Bekor qilish",
+        "sendMessage": "Xabarni yuborish"
 	},
 
 	"products": {
@@ -228,6 +242,7 @@
 				}
 			}
 		},
+
         "additional": {
             "title": "Qo'shimcha:",
             "1": "Quyidagi kasalliklarda samarali yordam beradi:",
@@ -241,7 +256,10 @@
 
     "about": {
         
+    },
+
+    "contact": {
+        "title": "Biz bilan bog'laning",
+        "subtitle": "Mahsulot va xizmatlarimiz bo'yicha savollaringizga javob berishdan mamnunmiz."
     }
-
-
 }

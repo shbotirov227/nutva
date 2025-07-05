@@ -10,7 +10,7 @@ export const FormInputWrapper = ({ children, error, className }: Props) => {
   return (
     <div className={clsx(className ? className : "w-full mx-auto flex flex-col gap-1 transition-all")}>
       {children}
-      {error && <p className="text-red-600 text-sm font-bold">{error}</p>}
+      {error && <p className="text-red-600 text-sm font-bold mb-2">{error}</p>}
     </div>
   );
 };

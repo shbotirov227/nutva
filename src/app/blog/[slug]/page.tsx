@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Container from "@/components/Container";
 import { GetOneBlogType } from "@/types/blogs/getOneBlog";
 import BlogDetail from "./BlogDetail";
+import { headers } from "next/headers";
 
 type Props = {
   params: {
@@ -10,7 +11,14 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/BlogPost/${params.slug}`);
+  const lang = headers().get("accept-language")?.split(",")[0].split("-")[0] || "uz";
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/BlogPost/${params.slug}`, {
+    cache: "no-store",
+    headers: {
+      "Accept-Language": lang,
+    },
+  });
 
   if (!res.ok) {
     return {
@@ -20,15 +28,14 @@ export async function generateMetadata({ params }: Props) {
   }
 
   const post: GetOneBlogType = await res.json();
-  const localized = post["uz"]; // Fallback uchun. SEO static qismda tilni aniq bilolmaymiz
 
   return {
-    title: localized.metaTitle || localized.title,
-    description: localized.metaDescription || localized.content?.slice(0, 150),
-    keywords: localized.metaKeywords?.split(",") || [],
+    title: post.metaTitle || post.title,
+    description: post.metaDescription || post.content?.slice(0, 150),
+    keywords: post.metaKeywords?.split(",") || [],
     openGraph: {
-      title: localized.metaTitle || localized.title,
-      description: localized.metaDescription || localized.content?.slice(0, 150),
+      title: post.metaTitle || post.title,
+      description: post.metaDescription || post.content?.slice(0, 150),
       images: post?.media?.length ? [post?.media[0]] : [],
     },
   };

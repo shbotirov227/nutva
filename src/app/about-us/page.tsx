@@ -9,6 +9,7 @@ import SaleSection from "@/containers/SaleSection";
 import Container from "@/components/Container";
 import BannerImg from "@/assets/images/bannerImg1.jpg";
 import ProductImg from "@/assets/images/product-green.webp";
+import ContactFormModal from "@/components/ContactForm";
 
 const features = [
   {
@@ -90,9 +91,11 @@ export default function AboutPage() {
           </div>
 
           <div className="text-center mb-14">
-            <Button className="w-full md:w-[634px] h-[58px] bg-[#267A41] hover:bg-[#1F6335] text-white px-6 py-3 rounded-full text-lg md:text-2xl">
-              {t("button.freeConsultation")}
-            </Button>
+            <ContactFormModal>
+              <Button className="w-full md:w-[634px] h-[58px] bg-[#267A41] hover:bg-[#1F6335] text-white px-6 py-3 rounded-full text-lg md:text-2xl cursor-pointer">
+                {t("button.freeConsultation")}
+              </Button>
+            </ContactFormModal>
           </div>
 
           <div className="grid gap-10 items-center flex-col">

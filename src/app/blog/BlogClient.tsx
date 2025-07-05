@@ -14,7 +14,7 @@ import { ArrowDown } from "lucide-react";
 import { apiClient } from "@/lib/apiClient";
 // import EmptyCartImg from "@/assets/images/empty-cart-img.png";
 import { GetAllBlogsType } from "@/types/blogs/getAllBlogs";
-import { useTranslated } from "@/hooks/useTranslated";
+// import { useTranslated } from "@/hooks/useTranslated";
 // import Image from "next/image";
 import { useLang } from "@/context/LangContext";
 import { GetOneBlogType } from "@/types/blogs/getOneBlog";
@@ -41,9 +41,9 @@ export default function BlogClient() {
     staleTime: 1000 * 60 * 5,
   });
 
-  const translatedBlogs = useTranslated(blogs);
+  // const translatedBlogs = useTranslated(blogs);
 
-  const filteredBlogs = translatedBlogs
+  const filteredBlogs = blogs
     .filter((blog: GetOneBlogType & { title: string; subtitle: string; content: string; metaKeywords: string }) => {
       const matchSearch =
         blog.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -76,7 +76,7 @@ export default function BlogClient() {
           setSelectedCats={setSelectedCats}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-y-6">
           {isLoading ? (
             Array.from({ length: 6 }).map((_, idx) => (
               <div

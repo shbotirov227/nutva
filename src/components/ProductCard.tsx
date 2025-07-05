@@ -45,7 +45,7 @@ const ProductCard = ({
   const { t } = useTranslation();
 
   const handleAddToCart = () => {
-    if (!product || !product.id) return;
+    if (!product) return;
     addToCart({ ...product, quantity: 1 });
     toast.success(t("product.addedToCart"), {
       position: "top-center",

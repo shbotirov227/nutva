@@ -34,15 +34,15 @@ const Reviews = () => {
         centeredSlides={false}
         speed={700}
         autoplay={{
-          delay: 3000,
+          delay: 5000,
           disableOnInteraction: false,
         }}
         breakpoints={{
-          480: { slidesPerView: 1, spaceBetween: 20 },
-          640: { slidesPerView: 1, spaceBetween: 25 },
-          768: { slidesPerView: 2, spaceBetween: 30 },
-          1024: { slidesPerView: 3, spaceBetween: 40 },
-          1280: { slidesPerView: 3, spaceBetween: 55 },
+          480: { slidesPerView: 1.7, centeredSlides: true, spaceBetween: 20 },
+          640: { slidesPerView: 1.7, centeredSlides: true, spaceBetween: 25 },
+          768: { slidesPerView: 2.4, centeredSlides: true, spaceBetween: 30 },
+          1024: { slidesPerView: 4, spaceBetween: 20 },
+          1280: { slidesPerView: 4, spaceBetween: 20 },
         }}
         aria-label="Отзывы клиентов"
         className="mySwiper cursor-grab active:cursor-grabbing px-4 sm:px-6 lg:px-8 py-5"
@@ -53,7 +53,7 @@ const Reviews = () => {
               <ReviewCard
                 url={item.url}
                 title={item.title}
-                description={item.description}
+                // description={item.description}
                 onPlay={() => swiperRef.current?.autoplay.stop()}
               />
             </div>
