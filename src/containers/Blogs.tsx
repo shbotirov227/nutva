@@ -12,7 +12,7 @@ import Container from "@/components/Container";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLang } from "@/context/LangContext";
-import { useTranslated } from "@/hooks/useTranslated";
+// import { useTranslated } from "@/hooks/useTranslated";
 
 type ButtonType = "popular" | "latest";
 
@@ -74,16 +74,16 @@ const Blogs = () => {
 
 
 
-  const translatedBlogs = useTranslated(filteredBlogs);
+  // const translatedBlogs = useTranslated(filteredBlogs);
 
-  console.log("translated", translatedBlogs);
+  // console.log("translated", translatedBlogs);
 
 
   if (!mounted) return null;
 
   return (
     blogs.length > 0 ? (
-      <Container className="px-4 pb-10">
+      <Container className="pb-10">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-8">
           <h1 className="text-4xl font-bold mb-4 text-[#218A4F] text-center md:text-left">
             {t("common.blogs")}
@@ -119,7 +119,7 @@ const Blogs = () => {
             ))
           ) : (
             <AnimatePresence mode="popLayout">
-              {translatedBlogs?.map((blog) => {
+              {filteredBlogs?.map((blog) => {
                 if (!blog || !blog?.id) return null;
 
                 return (

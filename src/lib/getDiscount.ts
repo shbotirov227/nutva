@@ -2,6 +2,8 @@ import { DISCOUNT_TABLE } from "@/constants/discountTable";
 import { ProductName } from "@/types/enums";
 
 export function getDiscount(slug: string | undefined, quantity: number) {
+  console.log("Discount check:", { slug, quantity });
+  
   if (!slug) {
     return {
       pricePerUnit: 0,

@@ -2,10 +2,10 @@
 
 import { useMemo } from "react";
 import { useCart } from "@/context/CartContext";
-import { useTranslated } from "@/hooks/useTranslated";
+// import { useTranslated } from "@/hooks/useTranslated";
 // import { useDiscount } from "@/hooks/useDiscount";
 import { GetOneProductType } from "@/types/products/getOneProduct";
-import { getDiscount } from "@/lib/getDiscount"; // eski useDiscount emas
+import { getDiscount } from "@/lib/getDiscount";
 
 type EnrichedCartItem = GetOneProductType & {
   quantity: number;
@@ -24,13 +24,13 @@ export function useCartWithDiscounts(): {
 } {
   const { cart } = useCart();
 
-  const translatedCart = useTranslated(cart);
+  // const translatedCart = useTranslated(cart);
 
 
   const enrichedCart = useMemo(() => {
     return cart.map((item, index) => {
-      const translatedName = translatedCart[index]?.name || item.en.name;
-      const discount = getDiscount(item.slug, item.quantity);
+      const translatedName = cart[index]?.name || item.name;
+      const discount = getDiscount(item.name, item.quantity);
 
       return {
         ...item,
@@ -38,7 +38,7 @@ export function useCartWithDiscounts(): {
         discount,
       };
     });
-  }, [cart, translatedCart]);
+  }, [cart]);
   
 
   const total = useMemo(

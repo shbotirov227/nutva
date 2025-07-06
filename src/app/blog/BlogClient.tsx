@@ -136,7 +136,7 @@ export default function BlogClient() {
           <Button
             onClick={() => setVisibleCount((prev) => prev + 6)}
             size="lg"
-            className="my-10 mx-auto flex gap-2 bg-[#218A4F] text-white hover:bg-[#365343]"
+            className="my-10 mx-auto  flex gap-2 bg-[#218A4F] text-white hover:bg-[#365343]"
           >
             <ArrowDown size={20} />
             {t("blog.loadMore")}

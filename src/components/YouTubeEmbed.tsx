@@ -13,8 +13,10 @@ export default function YouTubeEmbed({ link, className, onPlay }: Props) {
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      if (typeof event.data === "object" && event.data?.event === "playing") {
-        onPlay?.();
+      if (event.origin.includes("youtube.com") && typeof event.data === "object") {
+        if (event.data.event === "onStateChange" && event.data.info === 1) {
+          onPlay?.();
+        }
       }
     };
 
@@ -44,7 +46,7 @@ function convertToEmbedUrl(link: string): string {
 
     if (url.hostname.includes("youtu.be")) {
       videoId = url.pathname.slice(1);
-    } else if (url.hostname.includes("youtube.com")) {
+    } else if (url.hostname.includes("youtube.com") || url.hostname.includes("www.youtube.com")) {
       if (url.pathname.startsWith("/watch")) {
         videoId = url.searchParams.get("v") || "";
       } else if (url.pathname.startsWith("/shorts/")) {

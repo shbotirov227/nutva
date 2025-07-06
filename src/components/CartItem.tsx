@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import NoImage from "@/assets/images/noimage.webp";
-import { useTranslated } from "@/hooks/useTranslated";
+// import { useTranslated } from "@/hooks/useTranslated";
 import { GetOneProductType } from "@/types/products/getOneProduct";
 import { useTranslation } from "react-i18next";
 import { X, Equal, MinusIcon, PlusIcon } from "lucide-react";
@@ -14,8 +14,8 @@ import { useDiscount } from "@/hooks/useDiscount";
 export default function CartItem({ item }: { item: GetOneProductType & { quantity: number } }) {
   const { removeFromCart, updateQuantity } = useCart();
   const { t } = useTranslation();
-  const localized = useTranslated(item);
-  const { totalPrice, discountPercent, basePrice } = useDiscount(localized?.name, item.quantity);
+  // const localized = useTranslated(item);
+  const { totalPrice, discountPercent, basePrice } = useDiscount(item?.name, item.quantity);
 
   const handleIncrement = () => updateQuantity(item.id, item.quantity + 1);
   const handleDecrement = () => {
@@ -28,7 +28,7 @@ export default function CartItem({ item }: { item: GetOneProductType & { quantit
       <div className="w-full sm:w-[180px] flex justify-center sm:justify-start">
         <Image
           src={item.imageUrls?.[0] || NoImage}
-          alt={`Image of ${localized.name}`}
+          alt={`Image of ${item.name}`}
           width={0}
           height={0}
           sizes="100vw"
@@ -41,7 +41,7 @@ export default function CartItem({ item }: { item: GetOneProductType & { quantit
         {/* Product Description */}
         <div className="flex flex-col text-center sm:text-left flex-1 w-full">
           <h3 className="text-lg sm:text-xl md:text-2xl mb-2 sm:mb-4 font-semibold text-gray-800 break-words">
-            {localized.name}
+            {item.name}
           </h3>
 
           {/* Price Breakdown */}
