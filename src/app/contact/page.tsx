@@ -5,19 +5,20 @@ import { useTranslation } from "react-i18next";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { apiClient } from "@/lib/apiClient";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import PhoneField from "@/components/PhoneField";
+import { cn } from "@/lib/utils";
+import { useContactBitrixMutation } from "@/hooks/useContactBitrixMutation";
 
 export default function ContactPage() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [comment, setComment] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const { t } = useTranslation();
 
+  const { mutate: sendToContactBitrix } = useContactBitrixMutation();
   const { mutate: submitContact, isPending } = useMutation({
     mutationFn: async () => {
       return apiClient.postContactForm({ name, phone, comment });
@@ -41,10 +42,64 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
 
-    submitContact();
+    const searchParams = new URLSearchParams(window.location.search);
+    const formData = {
+      name: name,
+      phone,
+      comment: comment || "",
+      utm_source: searchParams.get("utm_source") || undefined,
+      utm_medium: searchParams.get("utm_medium") || undefined,
+      utm_campaign: searchParams.get("utm_campaign") || undefined,
+      utm_term: searchParams.get("utm_term") || undefined,
+      utm_content: searchParams.get("utm_content") || undefined,
+    };
+    sendToContactBitrix(formData, {
+      onSuccess: () => {
+        toast.success(t("form.success") || "So'rov yuborildi", {
+          position: "top-center",
+          autoClose: 1200,
+        });
+      },
+      onError: (err: unknown) => {
+        const message =
+          typeof err === "object" && err !== null && "message" in err
+            ? (err as { message?: string }).message
+            : undefined;
+        console.log(message || t("errors.badRequest") || "Xatolik yuz berdi");
+      },
+    });
+
+    try {
+      submitContact();
+      sendToContactBitrix(formData, {
+        // 2. Bitrix form submission
+        onSuccess: () => {
+          toast.success(t("form.success") || "So'rov yuborildi", {
+            position: "top-center",
+            autoClose: 1200,
+          });
+          setName("");
+          setPhone("");
+          setComment("");
+        },
+        onError: (err: unknown) => {
+          const message =
+            typeof err === "object" && err !== null && "message" in err
+              ? (err as { message?: string }).message
+              : undefined;
+          console.log(message || t("errors.badRequest") || "Xatolik yuz berdi");
+        },
+      });
+    } catch (err) {
+      console.log(t("errors.badRequest") || "Xatolik yuz berdi" || err);
+    }
+
+    // submitContact();
   };
+
+  const inputStyle =
+    "!w-full !border-gray-800 sm:px-5 sm:py-3 rounded-xl text-gray-800 text-[15px] font-bold bg-white outline-none !border-2 focus:!shadow-[0_0_10px_rgba(10,10,10,0.8)] transition-all";
 
   return (
     <section className="bg-[#BEE1B5] py-32 px-4">
@@ -55,41 +110,48 @@ export default function ContactPage() {
         </p>
       </div>
 
-      <Card className="max-w-2xl mx-auto p-6 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-6 bg-[#FDF6F2] rounded-xl">
+      <Card className="max-w-5xl mx-auto p-6 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-6 bg-[#FDF6F2] rounded-xl">
         <form onSubmit={handleSubmit} className="md:col-span-2 space-y-4">
           <div className="flex flex-col md:flex-row gap-4">
-            <Input
+            <input
               name="name"
               placeholder={t("form.input.name")}
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="bg-white w-full"
+              className={inputStyle}
             />
-            <Input
+            {/* <Input
               name="phone"
               placeholder={t("form.input.phone")}
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               required
               className="bg-white w-full"
+            /> */}
+
+            <PhoneField
+              placeholder={t("form.input.phone")}
+              phone={phone}
+              setPhone={setPhone}
+              className={inputStyle}
             />
           </div>
 
-          <Textarea
+          <textarea
             name="message"
             placeholder={t("form.input.message")}
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            className="bg-white resize-none w-full"
+            className={cn("bg-white resize-none w-full", inputStyle)}
           />
 
           <Button
             type="submit"
             disabled={isPending}
-            className="bg-[#267A41] hover:bg-[#1F6335] text-white w-full md:w-auto"
+            className="bg-[#267A41] hover:bg-[#1F6335] text-white w-full md:w-auto cursor-pointer"
           >
-            {loading ? t("common.loading") : t("button.sendMessage")}
+            {isPending ? t("common.loading") : t("button.sendMessage")}
           </Button>
         </form>
 

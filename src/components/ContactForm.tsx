@@ -6,15 +6,17 @@ import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { FormInputWrapper } from "./FormInputWrapper";
-import PhoneField from "./PhoneField";
 import { useMutation } from "@tanstack/react-query";
 import { apiClient } from "@/lib/apiClient";
+import { useContactBitrixMutation } from "@/hooks/useContactBitrixMutation";
+import PhoneField from "./PhoneField";
 
 type ContactFormModalProps = {
   children: React.ReactElement<React.HTMLAttributes<HTMLButtonElement>>;
   onSuccess?: () => void;
   btnColor?: string;
 };
+
 
 export default function ContactFormModal({ children, onSuccess, btnColor }: ContactFormModalProps) {
   const { t } = useTranslation();
@@ -24,10 +26,11 @@ export default function ContactFormModal({ children, onSuccess, btnColor }: Cont
   const [isMounted, setIsMounted] = React.useState(false);
   const [name, setName] = React.useState("");
   const [phone, setPhone] = React.useState("");
+  const [comment, setComment] = React.useState("");
   const [errors, setErrors] = React.useState<{ name?: string; phone?: string }>({});
-
+  
   React.useEffect(() => setIsMounted(true), []);
-
+  
   React.useEffect(() => {
     const handleResize = () => {
       if (!containerRef.current) return;
@@ -36,12 +39,13 @@ export default function ContactFormModal({ children, onSuccess, btnColor }: Cont
       const spaceAbove = rect.top;
       setDropUp(spaceBelow < 200 && spaceAbove > 200);
     };
-
+    
     window.addEventListener("resize", handleResize);
     handleResize();
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
+  
+  const { mutate: sendToContactBitrix } = useContactBitrixMutation();
   const { mutate: submitContact, isPending } = useMutation({
     mutationFn: async () => {
       return apiClient.postContactForm({ name, phone, comment: "" });
@@ -54,6 +58,7 @@ export default function ContactFormModal({ children, onSuccess, btnColor }: Cont
       setIsOpen(false);
       setName("");
       setPhone("");
+      setComment("");
       onSuccess?.();
     },
     onError: () => {
@@ -77,7 +82,73 @@ export default function ContactFormModal({ children, onSuccess, btnColor }: Cont
       return;
     }
 
-    submitContact();
+    const searchParams = new URLSearchParams(window.location.search);
+    const formData = {
+      name: trimmedName,
+      phone,
+      comment: comment || "",
+      utm_source: searchParams.get("utm_source") || undefined,
+      utm_medium: searchParams.get("utm_medium") || undefined,
+      utm_campaign: searchParams.get("utm_campaign") || undefined,
+      utm_term: searchParams.get("utm_term") || undefined,
+      utm_content: searchParams.get("utm_content") || undefined,
+    };
+    sendToContactBitrix(formData, {
+      onSuccess: () => {
+        toast.success(t("form.success") || "So'rov yuborildi", {
+          position: "top-center",
+          autoClose: 1200,
+        });
+        setIsOpen(false);
+      },
+      onError: (err: unknown) => {
+        const message =
+          typeof err === "object" && err !== null && "message" in err
+            ? (err as { message?: string }).message
+            : undefined;
+        toast.error(message || t("errors.badRequest") || "Xatolik yuz berdi", {
+          position: "top-center",
+          autoClose: 1200,
+        });
+      },
+    });
+
+    try {
+      submitContact();
+      sendToContactBitrix(formData, {
+        // 2. Bitrix form submission
+        onSuccess: () => {
+          toast.success(t("form.success") || "So'rov yuborildi", {
+            position: "top-center",
+            autoClose: 1200,
+          });
+          setIsOpen(false);
+          setName("");
+          setPhone("");
+          setComment("");
+          onSuccess?.();
+        },
+        onError: (err: unknown) => {
+          const message =
+            typeof err === "object" && err !== null && "message" in err
+              ? (err as { message?: string }).message
+              : undefined;
+          toast.error(message || t("errors.badRequest") || "Xatolik yuz berdi", {
+            position: "top-center",
+            autoClose: 1200,
+          });
+        },
+      });
+    } catch (err) {
+      toast.error(t("errors.badRequest") || "Xatolik yuz berdi", {
+        position: "top-center",
+        autoClose: 1200,
+      });
+
+      console.log(err)
+    }
+
+    // submitContact();
   };
 
   const trigger = React.cloneElement(children, {

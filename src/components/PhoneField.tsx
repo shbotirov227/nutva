@@ -8,7 +8,7 @@ interface PhoneFieldProps {
   placeholder: string;
   phone: string;
   setPhone: React.Dispatch<React.SetStateAction<string>>;
-  setErrors: React.Dispatch<React.SetStateAction<{ name?: string; phone?: string }>>;
+  setErrors?: React.Dispatch<React.SetStateAction<{ name?: string; phone?: string }>>;
   errors?: { name?: string; phone?: string };
   className?: string;
   containerRef?: React.RefObject<HTMLDivElement | null>;
@@ -57,7 +57,7 @@ const PhoneField = ({ placeholder, phone, setPhone, setErrors, errors, className
         containerClass="!w-full !rounded-xl"
         buttonClass="h-[80%] m-auto !ml-[3px] !bg-white !border-none !hover:bg-gray-100 !hover:rounded-l-2xl"
         specialLabel=""
-        onFocus={() => setErrors((prev) => ({ ...prev, phone: undefined }))}
+        onFocus={() => setErrors && setErrors((prev) => ({ ...prev, phone: undefined }))}
         dropdownClass="custom-phone-dropdown"
         dropdownStyle={{
           borderRadius: "13px",

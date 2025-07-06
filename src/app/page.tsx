@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Blogs from "@/containers/Blogs";
 import HeroSection from "@/containers/HeroSection";
 import Products from "@/containers/Products";
@@ -14,14 +13,6 @@ import SaleSection from "@/containers/SaleSection";
 // };
 
 export default function App() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
   return (
     <main className="">
       <HeroSection />

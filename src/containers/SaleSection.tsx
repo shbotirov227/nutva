@@ -59,7 +59,7 @@ const SaleSection = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Container className="py-16 px-4 sm:px-6 lg:px-8 mb-36">
+      <Container className="py-16  px-4 sm:px-6 lg:px-8">
         <div className="bg-[#BAE2FD] py-12 sm:py-16 px-4 sm:px-10 text-center rounded-xl max-w-5xl mx-auto border-2 border-[rgb(7,83,133,0.2)] shadow-[10px_10px_10px_rgba(0,0,0,0.1),_10px_10px_10px_rgba(0,0,0,0.1)]">
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#075385]">
             {t("saleSection.title")}

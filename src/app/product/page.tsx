@@ -18,6 +18,7 @@ import { useCart } from "@/context/CartContext";
 import { toast } from "react-toastify";
 import EmptyCartImg from "@/assets/images/empty-cart-img.png";
 import Container from "@/components/Container";
+import { ProductName } from "@/types/enums";
 
 // type LangKey = "uz" | "ru" | "en";
 
@@ -55,6 +56,12 @@ export default function ProductsListPage() {
     );
   }
 
+  const excludedNames = [ProductName.VIRIS_MEN, ProductName.FERTILIA_WOMEN];
+
+  const visibleProducts = products.filter(
+    (product) => !excludedNames.includes(product.name as ProductName)
+  );
+
   if (!isMounted) return null;
 
   return (
@@ -66,7 +73,7 @@ export default function ProductsListPage() {
           </h1>
 
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {products.map((product) => {
+            {visibleProducts.map((product) => {
               const handleAdd = () => {
                 addToCart({
                   ...product,

@@ -9,16 +9,27 @@ import { FormModal } from "@/components/FormModal";
 import { useCartWithDiscounts } from "@/hooks/useCartWithDiscounts";
 import { formatPrice } from "@/lib/formatPrice";
 import EmptyCartImg from "@/assets/images/empty-cart-img.png";
+import { useCart } from "@/context/CartContext";
 
 export default function CartPage() {
 
   const { t } = useTranslation();
   const { cart, total } = useCartWithDiscounts();
+  const { removeAll } = useCart();
 
   return (
     <Container className="pt-32 pb-25">
       {cart.length > 0 ? (
-        <h1 className="text-3xl font-bold mb-6">{t("common.yourCart")}</h1>
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-3xl font-bold">{t("common.yourCart")}</h1>
+          <Button
+            size="lg"
+            onClick={() => removeAll()}
+            className="cursor-pointer"
+          >
+            {t("common.clearCart")}
+          </Button>
+        </div>
       ) : null}
 
       {cart.length === 0 ? (

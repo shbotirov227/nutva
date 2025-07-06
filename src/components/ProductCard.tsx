@@ -9,6 +9,8 @@ import { Button } from "./ui/button";
 import { useCart } from "@/context/CartContext";
 import { toast } from "react-toastify";
 import { GetOneProductType } from "@/types/products/getOneProduct";
+import { ProductName } from "@/types/enums";
+import { FormModal } from "./FormModal";
 
 type ProductCardProps = {
   id: string;
@@ -53,6 +55,8 @@ const ProductCard = ({
     });
   };
 
+  const excludedProduct = product?.name === ProductName.VIRIS_MEN || product?.name === ProductName.FERTILIA_WOMEN;
+
   return (
     <div
       style={{ backgroundColor: bgColor || "white", ...style }}
@@ -65,24 +69,34 @@ const ProductCard = ({
           <p className="text-white text-sm sm:text-base md:text-md">{description}</p>
         </div>
 
-        {/* Buy / Add to cart */}
-        <div className="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-4">
-          <Link
-            href={`/product/${id}`}
-            style={{ color: activeColor }}
-            className="bg-white font-bold px-6 py-2 rounded-lg transition-all w-full sm:w-auto text-center"
-          >
-            {t("common.buy")}
-          </Link>
+        {!excludedProduct ? (
+          <div className="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-4">
+            {product && (
+              <FormModal products={[{ productId: product.id, quantity: 1 }]}>
+                <Button
+                  size="lg"
+                  style={{ color: activeColor }}
+                  className="bg-white font-bold hover:!bg-white px-6 py-2 rounded-lg transition-all w-full sm:w-auto text-center cursor-pointer"
+                >
+                  {t("common.buy")}
+                </Button>
+              </FormModal>
+            )}
 
-          <Button
-            size="lg"
-            onClick={handleAddToCart}
-            className="w-full sm:w-auto text-center"
-          >
-            {t("product.addToCart")}
-          </Button>
-        </div>
+            <Button
+              size="lg"
+              onClick={handleAddToCart}
+              className="w-full sm:w-auto text-center cursor-pointer"
+            >
+              {t("product.addToCart")}
+            </Button>
+          </div>
+        ) : (
+          <div>
+            <h2 className="text-white text-lg md:text:xl font-semibold">{t("common.soon")}</h2>
+          </div>
+        )}
+
 
         {/* More link at bottom on mobile */}
         <div className="block sm:hidden text-center mt-2">

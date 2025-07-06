@@ -17,6 +17,7 @@
         "more": "More",
         "quantity": "pcs.",
         "sale": "sale",
+        "clearCart": "Clear Cart",
         "saleUpperCase": "Sale",
         "forYou": "For You",
         "ourProducts": "Our Products",
@@ -25,7 +26,8 @@
         "total": "Total",
         "yourCart": "Your Cart",
         "emptyCart": "Your cart is empty",
-        "blogs": "Blogs"
+        "blogs": "Blogs",
+        "soon": "It will soon go on sale..."
     },
 
     "errors": {
@@ -256,7 +258,52 @@
     },
 
     "about": {
+        "features": "Features",
+        "whyChoose": "Why choose Nutva?",
 
+        "accordionQuestions": {
+            "1": "Natural composition",
+            "2": "The result is proven",
+            "3": "Collaboration with doctors",
+            "4": "Reliable and convenient"
+        },
+
+        "accordionContent": {
+            "1": "All our products are based on plant extracts, minerals and beneficial vitamins. No dyes, antibiotics or preservatives.",
+            "2": "Thousands of people throughout our country have recovered their health with Nutva. Their stories are our pride and we're going to post them on our YouTube channel.",
+            "3": "Nutva products are developed by experienced professionals and recommended by doctors. Our clients are under constant medical supervision and free inter-regional examinations are organized.",
+            "4": "Our products meet international quality standards. The packaging is clear and easy to use."
+        },
+
+        "faqTitle": "Frequently asked questions",
+
+        "faq": {
+            "title": {
+                "1": "Why is Nutva used?",
+                "2": "Does it contain chemicals or hormones?",
+                "3": "Where is Nutva manufactured?",
+                "4": "How is it taken? What’s the dosage?",
+                "5": "How many months should it be taken?",
+                "6": "When will the results be noticeable?",
+                "7": "Can elderly people take it?",
+                "8": "Is additional treatment or medication needed?",
+                "9": "Can pregnant or breastfeeding women take it?",
+                "10": "Where can I buy it?"
+            },
+            
+            "content": {
+                "1": "This product is used for joint and bone-related conditions.",
+                "2": "No. It contains only natural herbal extracts, with no hormones or chemical substances.",
+                "3": "It is produced in Uzbekistan in accordance with international GMP standards.",
+                "4": "Take 1 capsule once a day for 10 days. Then continue with 2 capsules daily after meals with water. One box contains 60 capsules – enough for 1 month.",
+                "5": "Depends on the condition. Usually, a 12-month course is recommended. For chronic illnesses, a longer duration may be needed.",
+                "6": "Results vary by individual. However, noticeable relief is often experienced within 6 months.",
+                "7": "Absolutely. It is especially beneficial for elderly people and is widely used by those of retirement age.",
+                "8": "In most cases, Nutva is sufficient. For severe cases, additional treatment may be recommended after consulting a doctor.",
+                "9": "Not suitable during pregnancy. It can be taken while breastfeeding.",
+                "10": "Available on Telegram: https://t.me/nutvauz, via short number 📞 1294 (free), or online via Uzum Market."
+            }
+        }
     },
 
     "contact": {
