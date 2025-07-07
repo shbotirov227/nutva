@@ -154,14 +154,14 @@ export default function BlogDetail({ blog: initalBlog, id }: { blog: GetOneBlogT
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold">{blog.title}</h1>
 
-            {blog.views && (
+            {blog.viewCount ? (
               <div className="flex items-center justify-center gap-3">
                 <Eye size={20} />
                 <p className="text-gray-500 text-base">
-                  <span className="font-semibold">{blog.views}</span> views
+                  <span className="font-semibold">{blog.viewCount}</span> views
                 </p>
               </div>
-            )}
+            ) : null}
 
             {blog?.createdAt && (
               <div className="flex items-center justify-center gap-3">

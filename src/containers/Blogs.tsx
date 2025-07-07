@@ -63,7 +63,7 @@ const Blogs = () => {
   const filteredBlogs = [...blogs]
     .sort((a, b) => {
       if (active === "popular") {
-        return (b.views ?? 0) - (a.views ?? 0);
+        return (b.viewCount ?? 0) - (a.viewCount ?? 0);
       } else {
         return (
           new Date(b.createdAt ?? 0).getTime() - new Date(a.createdAt ?? 0).getTime()

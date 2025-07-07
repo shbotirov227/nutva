@@ -2,14 +2,11 @@ import { notFound } from "next/navigation";
 import Container from "@/components/Container";
 import { GetOneBlogType } from "@/types/blogs/getOneBlog";
 import BlogDetail from "./BlogDetail";
+import RedirectIfNoLang from "@/components/RedirectIfNoLang";
 
 type Props = {
-  params: Promise<{
-    id: string;
-  }>;
-  searchParams: Promise<{
-    lang?: string;
-  }>;
+  params: { id: string; };
+  searchParams: { lang?: string; };
 };
 
 export async function generateMetadata({ params, searchParams }: Props) {
@@ -17,7 +14,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
     const resolvedParams = await params;
     const resolvedSearchParams = await searchParams;
 
-    const lang = resolvedSearchParams.lang || "uz";
+    const lang = resolvedSearchParams?.lang || "uz";
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/BlogPost/${resolvedParams.id}?lang=${lang}`,
@@ -33,6 +30,8 @@ export async function generateMetadata({ params, searchParams }: Props) {
       };
     }
 
+
+    console.log({ resolvedParams, resolvedSearchParams });
     const post: GetOneBlogType = await res.json();
 
     const imageUrls =
@@ -68,7 +67,7 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
     const resolvedParams = await params;
     const resolvedSearchParams = await searchParams;
 
-    const lang = resolvedSearchParams.lang || "uz";
+    const lang = resolvedSearchParams?.lang || "uz";
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/BlogPost/${resolvedParams.id}?lang=${lang}`,
@@ -76,6 +75,9 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
         cache: "no-store",
       }
     );
+
+    console.log("PARAMS", resolvedParams);
+    console.log("SEARCH PARAMS", resolvedSearchParams);
 
     if (!res.ok) {
       console.error("API Error:", res.status, res.statusText);
@@ -86,7 +88,8 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
 
     return (
       <Container className="pt-32 pb-25">
-        <BlogDetail blog={blog} id={resolvedParams.id} />
+        <RedirectIfNoLang langFromUrl={resolvedSearchParams?.lang} id={resolvedParams.id} />
+        <BlogDetail blog={blog} id={resolvedParams?.id} />
       </Container>
     );
   } catch (error) {
