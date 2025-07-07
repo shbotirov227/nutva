@@ -157,7 +157,7 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
           const isActive = activeIndex === index;
           return (
             <SwiperSlide
-              key={index}
+              key={product.id || product.slug || index}
               className={clsx(
                 "w-[90vw]",
                 "sm:!w-[500px]",

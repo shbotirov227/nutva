@@ -49,7 +49,7 @@ const HeroSection = () => {
       >
         {localized.map((item: any, idx: number) => {
           return (
-            <SwiperSlide key={idx} className="cursor-grab active:cursor-grabbing">
+            <SwiperSlide key={item.id || item.title || idx} className="cursor-grab active:cursor-grabbing">
               <Container className="flex flex-col md:flex-row items-center justify-around gap-6 sm:gap-10 w-full px-4 sm:px-6 min-h-screen">
                 <div className="flex flex-col md:flex-row items-center justify-center gap-6 max-md:flex-col-reverse sm:gap-10 w-full px-4 sm:px-6 min-h-screen">
 
@@ -73,7 +73,7 @@ const HeroSection = () => {
                   <div className="flex flex-wrap justify-center gap-4">
                     {item?.imageUrls?.map((image: string, i: number) => (
                       <Image
-                        key={i}
+                        key={image}
                         src={image}
                         alt={`banner-image-${i}`}
                         width={450}

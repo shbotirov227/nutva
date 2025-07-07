@@ -61,7 +61,7 @@ const Header: React.FC = () => {
     { href: "/blog", label: t("nav.blog") },
     { href: "/contact", label: t("nav.contact") },
     // { href: "/admin", label: "Admin" },
-  ], [t]);
+  ].filter(link => !!link.href && !!link.label), [t]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -143,8 +143,8 @@ const Header: React.FC = () => {
             </Link>
             <nav className="hidden md:flex mt-2 items-center">
               <ul className="flex space-x-5">
-                {navLinks.map((item, idx) => (
-                  <li key={`navigationlink-${idx}`}>
+                {navLinks.map((item) => (
+                  <li key={`${item.href}-${item.label}`}>
                     <NavLink href={item.href}>{item.label}</NavLink>
                   </li>
                 ))}
@@ -164,7 +164,7 @@ const Header: React.FC = () => {
               {/* </div> */}
               <Button
                 size={"icon"}
-                className="md:hidden flex items-center justify-center border p-2"
+                className="md:hidden flex items-center justify-center border p-2 cursor-pointer"
                 onClick={() => setMobileMenu(true)}
                 aria-label="Open menu"
               >
@@ -213,7 +213,7 @@ const Header: React.FC = () => {
               <Button
                 size={"icon"}
                 onClick={() => setMobileMenu(false)}
-                className="text-white p-2 text-2xl border"
+                className="text-white p-2 text-2xl border cursor-pointer"
                 aria-label="Close menu"
               >
                 <X size={32} />
@@ -222,7 +222,7 @@ const Header: React.FC = () => {
             <nav className="flex flex-col items-center mt-10 gap-6 mb-8">
               {navLinks.map((item, idx) => (
                 <NavLink
-                  key={`navlink-${idx}`}
+                  key={item.href}
                   href={item.href}
                   onClick={() => setMobileMenu(false)}
                   className="text-2xl"

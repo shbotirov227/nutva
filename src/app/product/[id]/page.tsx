@@ -137,7 +137,7 @@ export default function ProductDetailPage() {
               <TabsList className="grid grid-cols-4 sm:grid-cols-4 max-[450px]:grid-cols-3 max-[350px]:grid-cols-2 mb-5 justify-center gap-4 bg-transparent">
                 {["1", /*"2", "3",*/ "4"].map((tab) => (
                   <TabsTrigger
-                    key={tab}
+                    key={`tab-${tab}-${lang}`}
                     value={tab}
                     asChild
                     className={clsx(
@@ -166,7 +166,7 @@ export default function ProductDetailPage() {
                   className="w-full rounded-xl flex flex-col gap-4"
                 >
                   <Container>
-                    <TabsContent key={`tab-1-${lang}`} value={"1"}>
+                    <TabsContent key={`tab-1`} value={"1"}>
                       <ul className="space-y-4 my-12 list-disc grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 gap-x-18">
                         {/* <li className="text-base font-semibold">
                         Nutva Complex состоит из 100% натуральных компонентов.
@@ -280,7 +280,7 @@ export default function ProductDetailPage() {
 
                       </div>
                     </TabsContent>
-                    <TabsContent key={`tab-2-${lang}`} value={"2"}>
+                    <TabsContent key={`tab-2`} value={"2"}>
                       <div className="mb-10">
                         {[1, 2, 3].map((item, index) => (
                           <div
@@ -329,7 +329,7 @@ export default function ProductDetailPage() {
                       </div>
                     </TabsContent>
 
-                    <TabsContent key={`tab-3-${lang}`} value={"3"}>
+                    <TabsContent key={`tab-3`} value={"3"}>
                       <div className="my-12 max-w-[80%] mx-auto">
                         <h4 className="text-base leading-10 font-semibold mb-2">
                           Клиническая фармакология:
@@ -359,11 +359,11 @@ export default function ProductDetailPage() {
                       </div>
                     </TabsContent>
 
-                    <TabsContent key={`tab-4-${lang}`} value={"4"}>
+                    <TabsContent key={`tab-4`} value={"4"}>
                       <div className="w-full px-4">
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-12">
-                          {certificateImages.map((item) => (
-                            <div key={item.src} className="flex justify-center">
+                          {certificateImages.map((item, idx) => (
+                            <div key={`certificate-${idx}`} className="flex justify-center">
                               <Image
                                 src={item.src}
                                 alt={`Certificate ${item}`}

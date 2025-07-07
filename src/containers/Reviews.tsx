@@ -13,7 +13,15 @@ const Reviews = () => {
   const { t } = useTranslation();
   const reviewVideos = useReviewVideos();
   const swiperRef = useRef<SwiperClass | null>(null);
-
+  const seen = new Set();
+  reviewVideos.forEach((item) => {
+    const key = `${item.title}-${item.url}`;
+    if (seen.has(key)) {
+      console.warn("Duplicate key detected:", key);
+    } else {
+      seen.add(key);
+    }
+  });
   return (
     <div className="max-[920px]:px-4 max-sm:px-0">
       <Container className="text-center my-10 px-4 sm:px-6 lg:px-8">
@@ -48,7 +56,7 @@ const Reviews = () => {
         className="mySwiper cursor-grab active:cursor-grabbing px-4 sm:px-6 lg:px-8 py-5"
       >
         {reviewVideos.map((item, index) => (
-          <SwiperSlide key={index} className="pb-7">
+          <SwiperSlide key={`${item.title}-${item.url || index}`} className="pb-7">
             <div className="w-full max-w-sm mx-auto">
               <ReviewCard
                 url={item.url}
