@@ -4,19 +4,22 @@ import { GetOneBlogType } from "@/types/blogs/getOneBlog";
 import BlogDetail from "./BlogDetail";
 
 type Props = {
-  params: {
-    slug: string;
-  };
-  searchParams: {
+  params: Promise<{
+    id: string;
+  }>;
+  searchParams: Promise<{
     lang?: string;
-  };
+  }>;
 };
 
 export async function generateMetadata({ params, searchParams }: Props) {
-  const lang = searchParams.lang || "uz";
+  const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
+  
+  const lang = resolvedSearchParams.lang || "uz";
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/BlogPost/${params.slug}?lang=${lang}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/BlogPost/${resolvedParams.id}?lang=${lang}`,
     {
       cache: "no-store",
     }
@@ -52,12 +55,14 @@ export async function generateMetadata({ params, searchParams }: Props) {
   };
 }
 
-
 export default async function BlogPostPage({ params, searchParams }: Props) {
-  const lang = searchParams.lang || "uz";
+  const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
+  
+  const lang = resolvedSearchParams.lang || "uz";
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/BlogPost/${params.slug}?lang=${lang}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/BlogPost/${resolvedParams.id}?lang=${lang}`,
     {
       cache: "no-store",
     }
@@ -71,7 +76,7 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
 
   return (
     <Container className="pt-32 pb-25">
-      <BlogDetail blog={blog} slug={params.slug} />
+      <BlogDetail blog={blog} slug={resolvedParams.id} />
     </Container>
   );
 }
