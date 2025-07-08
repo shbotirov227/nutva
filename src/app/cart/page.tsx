@@ -14,9 +14,9 @@ import { useCart } from "@/context/CartContext";
 export default function CartPage() {
 
   const { t } = useTranslation();
-  const { cart, total } = useCartWithDiscounts();
+  const { cart, total, originalTotal } = useCartWithDiscounts();
   const { removeAll } = useCart();
-
+  
   return (
     <Container className="pt-32 pb-25">
       {cart.length > 0 ? (
@@ -52,7 +52,16 @@ export default function CartPage() {
             ))}
           </div>
           <div className="mt-6 flex justify-between items-center">
-            <p className="text-2xl font-semibold">{t("common.total")}: {formatPrice(total)}</p>
+            <div>
+              {originalTotal > total && (
+                <p className="text-gray-500 text-lg line-through mt-1">
+                  {formatPrice(originalTotal)} {t("common.sum")}
+                </p>
+              )}
+              <p className="text-2xl font-bold text-red-600">
+                {t("common.total")}: {formatPrice(total)} {t("common.sum")}
+              </p>
+            </div>
             <FormModal>
               <Button size="lg" className="cursor-pointer">{t("common.confirm")}</Button>
             </FormModal>

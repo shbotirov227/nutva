@@ -1,14 +1,11 @@
-"use client";
+type RawCartItem = GetOneProductType & { quantity: number };
 
 import { useMemo } from "react";
 import { useCart } from "@/context/CartContext";
-// import { useTranslated } from "@/hooks/useTranslated";
-// import { useDiscount } from "@/hooks/useDiscount";
 import { GetOneProductType } from "@/types/products/getOneProduct";
 import { getDiscount } from "@/lib/getDiscount";
 
-type EnrichedCartItem = GetOneProductType & {
-  quantity: number;
+type EnrichedCartItem = RawCartItem & {
   translatedName: string;
   discount: {
     basePrice: number;
@@ -21,30 +18,39 @@ type EnrichedCartItem = GetOneProductType & {
 export function useCartWithDiscounts(): {
   cart: EnrichedCartItem[];
   total: number;
+  originalTotal: number;
 } {
   const { cart } = useCart();
 
-  // const translatedCart = useTranslated(cart);
-
+  const globalCartQuantity = useMemo(
+    () => cart.reduce((sum, item) => sum + item.quantity, 0),
+    [cart]
+  );
 
   const enrichedCart = useMemo(() => {
-    return cart.map((item, index) => {
-      const translatedName = cart[index]?.name || item.name;
-      const discount = getDiscount(item.name, item.quantity);
-
+    return cart.map((item) => {
+      const discount = getDiscount(item.name, item.quantity, globalCartQuantity);
       return {
         ...item,
-        translatedName,
+        translatedName: item.name,
         discount,
       };
     });
-  }, [cart]);
-  
+  }, [cart, globalCartQuantity]);
 
   const total = useMemo(
     () => enrichedCart.reduce((sum, item) => sum + item.discount.totalPrice, 0),
     [enrichedCart]
   );
 
-  return { cart: enrichedCart, total };
+  const originalTotal = useMemo(
+    () =>
+      enrichedCart.reduce(
+        (sum, item) => sum + item.discount.basePrice * item.quantity,
+        0
+      ),
+    [enrichedCart]
+  );
+
+  return { cart: enrichedCart, total, originalTotal };
 }

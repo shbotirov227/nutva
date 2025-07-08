@@ -35,6 +35,7 @@ import { getProductKeyFromName } from "@/helper/getProductKeyFromName";
 import { getProductDetailMiddleImage } from "@/helper/getProductDetailMiddleImage";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { getProductMedia } from "@/helper/getProductMedia";
+import { useCart } from "@/context/CartContext";
 
 const certificateImages = [
   CertificateImg1,
@@ -50,6 +51,7 @@ export default function ProductDetailPage() {
   const { id } = useParams();
   const { lang } = useLang();
   const { t } = useTranslation();
+  const { cart } = useCart();
 
   const { data: product = {} as GetOneProductType, isLoading } = useQuery({
     queryKey: ["product", id, lang],
@@ -85,6 +87,8 @@ export default function ProductDetailPage() {
   // const dynamicTabKeys = Object.keys(tabContent).filter((key) => key !== "1");
   // const allTabKeys = [...dynamicTabKeys, ...staticTabs];
 
+
+    console.log("CART:", cart);
 
   return (
     <div className="relative pt-32 overflow-hidden">

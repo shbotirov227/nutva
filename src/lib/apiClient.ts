@@ -8,7 +8,7 @@ import { GetOneProductType } from "@/types/products/getOneProduct";
 import { CreateProductPurchaseRequest } from "@/types/purchase/createProductPurchaseRequest";
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL, // ✅ dynamic base URL
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
@@ -95,6 +95,26 @@ export const apiClient = {
 
   postContactForm: async (data: { name: string; phone: string; comment: string }) => {
     const res = await api.post("/contact-forms", data);
+    return res.data;
+  },
+
+  getProductBoxPrice: async (id: string) => {
+    const res = await api.get(`/ProductBoxPrice/by-product/${id}`);
+    return res.data;
+  },
+
+  getProductPrice: async (id: string) => {
+    const res = await api.get(`/ProductBoxPrice/${id}`);
+    return res.data;
+  },
+
+  getProductAndBox: async (id: string, boxCount: number) => {
+    const res = await api.get(`/ProductBoxPrice/by-product-and-box`, {
+      params: {
+        productId: id,
+        boxCount: boxCount
+      }
+    });
     return res.data;
   },
 };

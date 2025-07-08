@@ -1,9 +1,13 @@
 import { DISCOUNT_TABLE } from "@/constants/discountTable";
 import { ProductName } from "@/types/enums";
 
-export function getDiscount(slug: string | undefined, quantity: number) {
-  console.log("Discount check:", { slug, quantity });
-  
+export function getDiscount(
+  slug: string | undefined,
+  quantity: number,
+  globalQuantity?: number
+) {
+  console.log("Discount check:", { slug, quantity, globalQuantity });
+
   if (!slug) {
     return {
       pricePerUnit: 0,
@@ -28,7 +32,8 @@ export function getDiscount(slug: string | undefined, quantity: number) {
     };
   }
 
-  const quantityKey = quantity >= 5 ? 5 : quantity >= 3 ? 3 : quantity >= 2 ? 2 : 1;
+  const qty = globalQuantity ?? quantity;
+  const quantityKey = qty >= 5 ? 5 : qty >= 3 ? 3 : qty >= 2 ? 2 : 1;
 
   const basePrice = table[1];
   const discountedPrice = table[quantityKey];
