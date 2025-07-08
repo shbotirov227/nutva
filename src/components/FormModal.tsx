@@ -219,7 +219,7 @@ export function FormModal({ children, products, btnColor }: FormModalProps) {
                 </div>
 
                 <form onSubmit={handleSubmit} className="grid gap-4">
-                  <div className="gap-5 grid grid-cols-2">
+                  <div className="gap-5 grid grid-cols-1">
                     <FormInputWrapper
                       error={errors.name}
                       className="flex flex-col gap-1"
@@ -234,7 +234,7 @@ export function FormModal({ children, products, btnColor }: FormModalProps) {
                       />
                     </FormInputWrapper>
 
-                    <FormInputWrapper
+                    {/* <FormInputWrapper
                       error={errors.age}
                       className="flex flex-col gap-1"
                     >
@@ -252,9 +252,9 @@ export function FormModal({ children, products, btnColor }: FormModalProps) {
                         placeholder={t("form.input.age")}
                         className="w-full px-4 py-4 sm:px-5 sm:py-3 rounded-xl text-[15px] font-bold bg-white outline-none border-2 border-gray-800 focus:shadow-[0_0_10px_rgba(10,10,10,0.8)] transition-all"
                       />
-                    </FormInputWrapper>
+                    </FormInputWrapper> */}
 
-                    <FormInputWrapper
+                    {/* <FormInputWrapper
                       error={errors.forWhom}
                       className="flex flex-col gap-1"
                     >
@@ -266,9 +266,9 @@ export function FormModal({ children, products, btnColor }: FormModalProps) {
                         placeholder={t("form.input.forWhom")}
                         className="w-full px-4 py-4 sm:px-5 sm:py-3 rounded-xl text-[15px] font-bold bg-white outline-none border-2 border-gray-800 focus:shadow-[0_0_10px_rgba(10,10,10,0.8)] transition-all"
                       />
-                    </FormInputWrapper>
+                    </FormInputWrapper> */}
 
-                    <FormInputWrapper
+                    {/* <FormInputWrapper
                       error={errors.problem}
                       className="flex flex-col gap-1"
                     >
@@ -280,7 +280,7 @@ export function FormModal({ children, products, btnColor }: FormModalProps) {
                         placeholder={t("form.input.problem")}
                         className="w-full px-4 py-4 sm:px-5 sm:py-3 rounded-xl text-[15px] font-bold bg-white outline-none border-2 border-gray-800 focus:shadow-[0_0_10px_rgba(10,10,10,0.8)] transition-all"
                       />
-                    </FormInputWrapper>
+                    </FormInputWrapper> */}
                   </div>
 
                   <FormInputWrapper

@@ -68,7 +68,8 @@
             "1": "Description",
             "2": "Composition",
             "3": "Instructions",
-            "4": "Certification"
+            "4": "Certification",
+            "5": "Helminths"
         },
 
         "checkboxLabel": "Select more than 3 products",
@@ -185,7 +186,7 @@
             "tab": {
                 "1": {
                     "1": "This dietary supplement is a natural product created from a unique combination of medicinal herbs using innovative technology that allows their natural power and value to be preserved to the utmost.",
-                    "2": "Bearberry - 51.7 mg, Corn silk - 51.2 mg, Marshmallow root - 41.4 mg, Corn tassel - 40.8 mg, Flaxseed - 39.6 mg, Elecampane root - 32.7 mg, Black comfrey - 29.3 mg, Boswellia - 28.7 mg, Gobbahtree bark - 26.4 mg, Yucca - 20.4 mg, Echinacea - 16.8 mg, Ginger - 16.4 mg, Anise - 16.2 mg, Rosehip - 15.9 mg, Glucosamine - 12.9 mg, Collagen - 12.8 mg, Hyaluronic acid - 11.8 mg, Chondroitin sulfate - 10.3 mg, Yarrow - 5.8 mg, Vitamin B6 - 2.1 mg, Melatonin - 1.5 mg.",
+                    "2": "Bearberry - 51.7 mg, Senna leaves - 51.2 mg, Marshmallow root - 41.4 mg, Corn stigmas - 40.8 mg, Flax seeds - 39.6 mg, Burdock root - 32.7 mg, Elderberry - 29.3 mg, Boswellia - 28.7 mg, Buckthorn extract - 26.4 mg, Linden extract - 20.4 mg, Echinacea - 16.8 mg, Ginger - 16.4 mg, Anise - 16.2 mg, Rosehip - 15.9 mg, Glucosamine - 12.9 mg, Collagen - 12.8 mg, Hyaluronic acid - 11.8 mg, Chondroitin sulfate - 10.3 mg, Herb yarrow - 5.8 mg, Vitamin B6 - 2.1 mg, Melatonin - 1.5 mg.",
                     "3": "Take 2 capsules in the evening, 30 minutes after a meal. The product is recommended to be taken in long-term courses for 3-6 months.",
                     "4": {
                         "image": "/img/products/nutva-complex/certificate.jpg"
@@ -198,7 +199,7 @@
             "tab": {
                 "1": {
                     "1": "This dietary supplement is a natural product made from a unique blend of medicinal herbs using innovative technology that preserves their natural strength and value.",
-                    "2": "Bearberry - 41.7 mg, Marshmallow root - 41.4 mg, Corn silk - 41.2 mg, Corn tassel - 40.8 mg, Flaxseed - 39.6 mg, Elecampane root - 32.7 mg, Black comfrey - 29.3 mg, Boswellia - 28.7 mg, Gobbahtree bark - 26.4 mg, Alpha-lipoic acid - 24.7 mg, Yucca - 20.4 mg, Echinacea - 16.8 mg, Ginger - 16.4 mg, Anise - 16.2 mg, Namatak - 15.9 mg, Vitamin B8 - 14.8 mg, Vitamin E - 14.6 mg, Yarrow - 5.8 mg, Vitamin B5 - 2.9 mg, Vitamin B2 - 1.5 mg, Vitamin B6 - 1.5 mg, Vitamin A - 0.5 mg, Vitamin B9 - 0.3 mg, Potassium iodide - 0.127 mg, Vitamin D3 - 15 µg, Biotin (B7) - 0.015 mg, Selenium - 0.01 mg, Vitamin B12 - 9 µg.",
+                    "2": "Bearberry - 41.7 mg, Marshmallow root - 41.4 mg, Senna leaves - 41.2 mg, Corn stigmas - 40.8 mg, Flax seeds - 39.6 mg, Burdock root - 32.7 mg, Elderberry - 29.3 mg, Boswellia - 28.7 mg, Buckthorn - 26.4 mg, Alpha lipoic acid - 24.7 mg, Linden - 20.4 mg, Echinacea - 16.8 mg, Ginger - 16.4 mg, Anise - 16.2 mg, Rosehip - 15.9 mg, Vitamin B8 - 14.8 mg, Vitamin E - 14.6 mg, Yarrow - 5.8 mg, Vitamin B5 - 2.9 mg, Vitamin B2 - 1.5 mg, Vitamin B6 - 1.5 mg, Vitamin A - 0.5 mg, Vitamin B9 - 0.3 mg, Potassium iodide - 0.127 mg, Vitamin D3 - 15 mcg, Vitamin B7 (Biotin) - 0.015 mg, Selenium - 0.01 mg, Vitamin B12 - 9 mcg.",
                     "3": "Take 2 capsules in the morning, 30 minutes before meals. It is recommended to take the product in long-term courses for 3-6 months.",
                     "4": {
                         "image": "/img/products/nutva-complex/certificate.jpg"
@@ -212,9 +213,26 @@
                 "1": {
                     "1": "A natural anti-parasitic complex for children. Helps combat worms, toxins, and skin issues.",
                     "2": "Indov - 136.7 mg, Black asafoetida - 46.7 mg, Black comfrey - 37.7 mg, Yarrow - 12.5 mg, Pumpkin seed - 12.4 mg, Corn silk - 12.2 mg, Cinquefoil - 11.7 mg.",
-                    "3": "2-5 years: 1 capsule. 5-16 years: 2 capsules. 16+ years: 3 capsules. To be taken before dinner. Recommended course: 3-6 months.\n\n🔍 Uses (parasites):\n• Ascaris - from cough to bronchitis, reproduces in intestines, risk of reinfection.\n• Tapeworms - can live up to 30 years in intestines, migrate through body, dangerous to brain and heart.\n• Giardia - transmitted via water, contaminated vegetables, contact; resides in the small intestine.\n• Pinworms - cause anal itching, insomnia, repeat infections due to egg cycle.\n• Dwarf tapeworm - very small, lives in intestines, causes auto-reinfection.\n\n🛡️ Prevention: hygiene, cleaning children's nails, washing fruits and vegetables.\n\n🧾 Diagnosis and treatment: doctor's examination, stool egg detection, antiparasitic therapy if needed.",
+                    "3": "2-5 years: 1 capsule. 5-16 years: 2 capsules. 16+ years: 3 capsules. To be taken before dinner. Recommended course: 3-6 months.",
                     "4": {
                         "image": "/img/products/nutva-complex/certificate.jpg"
+                    }
+                },
+
+                "gijjalar": {
+                    "1": {
+                        "title": "Helminths (Worms):",
+                        "1": "Ascaris — multiplies in the intestines, causes cough and bronchitis, high risk of reinfection due to a full life cycle.",
+                        "2": "Tapeworm — can live in the intestines for up to 30 years, migrates through the body, dangerous to the brain and heart.",
+                        "3": "Giardia — transmitted via drinking water, unwashed vegetables, and contact. Resides in the small intestine.",
+                        "4": "Pinworms — cause itching in the anal area, insomnia, and reinfection due to cyclical egg-laying.",
+                        "5": "Dwarf tapeworm — very small, lives in the intestines, increases the risk of autoinvasion."
+                    },
+
+                    "2": {
+                        "title": "Prevention and Diagnosis:",
+                        "1": "Prevention: hygiene, trimming children's nails, consuming washed fruits and vegetables.",
+                        "2": "Diagnosis and treatment: doctor examination, egg detection in stool, antiparasitic therapy if necessary."
                     }
                 }
             }

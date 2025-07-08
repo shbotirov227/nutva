@@ -8,9 +8,9 @@ type BitrixProduct = {
 type BitrixFormData = {
   buyerName: string;
   phone: string;
-  age: number;
-  forWhom: string;
-  problem: string;
+  // age: number;
+  // forWhom: string;
+  // problem: string;
   region: string;
   comment?: string;
   products?: BitrixProduct[];

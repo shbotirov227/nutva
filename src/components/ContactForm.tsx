@@ -183,8 +183,7 @@ export default function ContactFormModal({ children, onSuccess, btnColor }: Cont
                 {t("contactModal.title") || "Aloqa uchun"}
               </h2>
               <p className="text-center mb-6 text-base text-gray-600">
-                {t("contactModal.subtitle") ||
-                  "Ismingiz va telefon raqamingiz hamda quyidagi ma'lumotlarni qoldiring - mutaxassislarimiz siz bilan bog'lanadi!"}
+                {t("contactModal.subtitle")}
               </p>
 
               <form onSubmit={handleSubmit} className="grid gap-4">
