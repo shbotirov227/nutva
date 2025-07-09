@@ -3,7 +3,7 @@ name: Deploy Nutva Frontend
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
@@ -22,9 +22,9 @@ jobs:
         run: |
           ssh -p 2245 -o StrictHostKeyChecking=no ntva@demo.nutva.uz << 'EOF'
             cd ~/NutvaFrontend &&
-            git fetch origin main &&
-            git checkout main &&
-            git pull origin main &&
+            git fetch origin master &&
+            git checkout master &&
+            git pull origin master &&
             npm install &&
             npm run build &&
             pm2 reload nutva-frontend --update-env || pm2 start npm --name nutva-frontend -- run start
