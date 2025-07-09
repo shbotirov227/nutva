@@ -8,16 +8,23 @@ export async function POST(req: NextRequest) {
   const {
     buyerName,
     phone,
-    age,
-    forWhom,
-    problem,
+    // age,
+    // forWhom,
+    // problem,
     region,
     comment,
     products,
 
   } = body;
 
-  if (!buyerName || !phone || !age || !forWhom || !problem || !region) {
+  if (
+    !buyerName ||
+    !phone ||
+    // !age ||
+    // !forWhom ||
+    // !problem ||
+    !region
+  ) {
     return NextResponse.json(
       { message: "Required fields are missing" },
       { status: 400 }
@@ -129,13 +136,13 @@ export async function POST(req: NextRequest) {
     const timelineData = await timelineRes.json();
     if (timelineData.result) {
       const previousSubmissions = timelineData.result.filter((item: { COMMENT?: string }) =>
-        item?.COMMENT?.includes("Yangi so‘rov saytdan")
+        item?.COMMENT?.includes("Yangi so'rov saytdan")
       );
       submissionCount = previousSubmissions.length + 1;
     }
   }
 
-  const repeatPrefix = isRepeat ? `⚠️ Takroriy so‘rov (${submissionCount})\n` : "";
+  const repeatPrefix = isRepeat ? `⚠️ Takroriy so'rov (${submissionCount})\n` : "";
 
   let totalAmount = 0;
   const productList = products?.length
@@ -148,7 +155,7 @@ export async function POST(req: NextRequest) {
         return `  ${i + 1}. ${name} - ${p.quantity} dona — ${amount.toLocaleString()} so'm`;
       })
       .join("\n")
-    : "  - Mahsulotlar yo‘q";
+    : "  - Mahsulotlar yo'q";
 
   const firstProductName = products?.length
     ? getProductName(products[0].productId)
@@ -180,10 +187,25 @@ export async function POST(req: NextRequest) {
       fields: {
         ENTITY_ID: dealId,
         ENTITY_TYPE: "deal",
-        COMMENT: `${repeatPrefix}📝 Yangi so‘rov saytdan\n👤 Ism: ${buyerName}\n📞 Telefon: +${phone}\n🎂 Yosh: ${age}\n🌍 Hudud: ${region}\n👥 Kim uchun: ${forWhom}\n🧠 Muammo: ${problem}\n💬 Izoh: ${comment || "Yo‘q"}\n\n🛍 Mahsulotlar:\n${productList}\n\n💰 Umumiy narx: ${totalAmount.toLocaleString()} so'm`
+        COMMENT: `
+        ${repeatPrefix}📝 Yangi so'rov saytdan
+        \n👤 Ism: ${buyerName}
+        \n📞 Telefon: +${phone}
+        \n🌍 Hudud: ${region}
+        \n💬 Izoh: ${comment || "Yo'q"}
+        
+        \n\n🛒 Mahsulotlar:
+        \n${productList}
+        
+        \n\n💰 Umumiy narx: ${totalAmount.toLocaleString()} so'm
+        `
       }
     })
   });
+
+  // \n🎂 Yosh: ${ age }
+  // \n👥 Kim uchun: ${ forWhom }
+  // \n🧠 Muammo: ${ problem }
 
   return NextResponse.json({ success: true, dealId });
 }

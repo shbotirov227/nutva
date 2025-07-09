@@ -76,7 +76,7 @@ const ProductCard = ({
                 <Button
                   size="lg"
                   style={{ color: activeColor }}
-                  className="bg-white font-bold hover:!bg-white px-6 py-2 rounded-lg transition-all w-full sm:w-auto text-center cursor-pointer"
+                  className="bg-white text-black font-bold hover:!bg-white px-6 py-2 rounded-lg transition-all w-full sm:w-auto text-center cursor-pointer"
                 >
                   {t("common.buy")}
                 </Button>
@@ -119,7 +119,6 @@ const ProductCard = ({
         </div>
       </div>
 
-      {/* IMAGE SECTION */}
       <div className="w-full lg:w-[45%] flex justify-center items-center p-6 pt-10 lg:pt-6">
         {image?.length > 0 ? (
           <Image

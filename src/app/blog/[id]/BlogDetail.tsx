@@ -12,6 +12,7 @@ import { ArrowBigLeftDash, Calendar, Eye } from "lucide-react";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { useLang } from "@/context/LangContext";
 import { Button } from "@/components/ui/button";
+import { apiClient } from "@/lib/apiClient";
 
 export default function BlogDetail({ blog: initalBlog, id }: { blog: GetOneBlogType, id: string }) {
   const [mounted, setMounted] = useState(false);
@@ -25,6 +26,34 @@ export default function BlogDetail({ blog: initalBlog, id }: { blog: GetOneBlogT
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (!id) return;
+
+    const key = `viewed-blog-${id}`;
+    if (typeof window === "undefined") return;
+
+    const alreadyViewed = sessionStorage.getItem(key);
+    if (alreadyViewed === "true") return;
+
+    const trackView = async () => {
+      try {
+        await apiClient.postBlogView(id);
+        sessionStorage.setItem(key, "true");
+
+        setBlog((prev) =>
+          prev ? { ...prev, viewCount: (prev.viewCount || 0) + 1 } : prev
+        );
+
+        console.log("✅ View counted and updated immediately");
+      } catch (err) {
+        console.error("❌ Failed to track view:", err);
+      }
+    };
+
+    trackView();
+  }, [id]);
+
 
   useEffect(() => {
     if (!mounted) return;
@@ -151,30 +180,32 @@ export default function BlogDetail({ blog: initalBlog, id }: { blog: GetOneBlogT
 
 
         <CardContent>
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex max-md:flex-col justify-between items-center mb-6">
             <h1 className="text-2xl font-bold">{blog.title}</h1>
 
-            {blog.viewCount ? (
-              <div className="flex items-center justify-center gap-3">
-                <Eye size={20} />
-                <p className="text-gray-500 text-base">
-                  <span className="font-semibold">{blog.viewCount}</span> views
-                </p>
-              </div>
-            ) : null}
+            <div className="flex max-md:flex-col items-center gap-6">
+              {blog.viewCount ? (
+                <div className="flex items-center max-md:justify-end justify-center gap-3">
+                  <Eye size={22} />
+                  <p className="text-gray-500 text-base">
+                    <span className="font-semibold">{blog.viewCount}</span> views
+                  </p>
+                </div>
+              ) : null}
 
-            {blog?.createdAt && (
-              <div className="flex items-center justify-center gap-3">
-                <Calendar size={20} />
-                <p className="text-gray-500 text-base">
-                  {new Date(blog?.createdAt).toLocaleDateString("uz-UZ", {
-                    day: "numeric",
-                    month: "numeric",
-                    year: "numeric",
-                  })}
-                </p>
-              </div>
-            )}
+              {blog?.createdAt && (
+                <div className="flex items-center justify-center gap-3">
+                  <Calendar size={18} />
+                  <p className="text-gray-500 text-base">
+                    {new Date(blog?.createdAt).toLocaleDateString("uz-UZ", {
+                      day: "numeric",
+                      month: "numeric",
+                      year: "numeric",
+                    })}
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
 
           {blog?.content ? (

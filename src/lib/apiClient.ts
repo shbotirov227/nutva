@@ -78,6 +78,11 @@ export const apiClient = {
     return res.data;
   },
 
+  postBlogView: async (id: string) => {
+    const res = await api.post(`/BlogPost/view/${id}`);
+    return res.data;
+  },
+
   postTrackVisit: async () => {
     const res = await api.post("/statistics/track-visit");
     return res.data;

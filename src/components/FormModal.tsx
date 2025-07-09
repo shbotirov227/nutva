@@ -31,17 +31,17 @@ export function FormModal({ children, products, btnColor }: FormModalProps) {
   const [isMounted, setIsMounted] = React.useState(false);
   const [name, setName] = React.useState("");
   const [phone, setPhone] = React.useState("");
-  const [age, setAge] = React.useState("");
-  const [forWhom, setForWhom] = React.useState("");
-  const [problem, setProblem] = React.useState("");
+  // const [age, setAge] = React.useState("");
+  // const [forWhom, setForWhom] = React.useState("");
+  // const [problem, setProblem] = React.useState("");
   const [region, setRegion] = React.useState("");
   const [comment, setComment] = React.useState("");
   const [errors, setErrors] = React.useState<{
     name?: string;
     phone?: string;
-    age?: string;
-    forWhom?: string;
-    problem?: string;
+    // age?: string;
+    // forWhom?: string;
+    // problem?: string;
     region?: string;
     comment?: string;
     // productName?: string;
@@ -80,9 +80,9 @@ export function FormModal({ children, products, btnColor }: FormModalProps) {
       setIsOpen(false);
       setName("");
       setPhone("");
-      setAge("");
-      setForWhom("");
-      setProblem("");
+      // setAge("");
+      // setForWhom("");
+      // setProblem("");
       setRegion("");
       setComment("");
       removeAll();
@@ -103,25 +103,25 @@ export function FormModal({ children, products, btnColor }: FormModalProps) {
     // const cleanedCode = countryCode.replace(/\D/g, "");
     // const phoneLength = digitsOnly.length - cleanedCode.length;
 
-    const numericAge = Number(age);
+    // const numericAge = Number(age);
 
-    if (!numericAge || numericAge < 1 || numericAge > 120) {
-      toast.error(t("errors.ageError") || "Iltimos, haqiqiy yosh kiriting (1-120)", {
-        position: "top-center",
-        autoClose: 1200,
-      });
-      return;
-    }
+    // if (!numericAge || numericAge < 1 || numericAge > 120) {
+    //   toast.error(t("errors.ageError") || "Iltimos, haqiqiy yosh kiriting (1-120)", {
+    //     position: "top-center",
+    //     autoClose: 1200,
+    //   });
+    //   return;
+    // }
 
     if (
       !trimmedName ||
       !phone ||
-      !age ||
-      !forWhom ||
-      !problem ||
-      !region ||
-      numericAge < 1 ||
-      numericAge > 120
+      // !age ||
+      // !forWhom ||
+      // !problem ||
+      !region
+      // numericAge < 1 ||
+      // numericAge > 120
     ) {
       toast.error(t("form.fillAllFields") || "Barcha maydonlarni to'ldiring", {
         position: "top-center",
@@ -134,9 +134,9 @@ export function FormModal({ children, products, btnColor }: FormModalProps) {
     const searchParams = new URLSearchParams(window.location.search);
     const formData = {
       buyerName: trimmedName,
-      age: numericAge,
-      forWhom: forWhom,
-      problem: problem,
+      // age: numericAge,
+      // forWhom: forWhom,
+      // problem: problem,
       region: region,
       phone: phone,
       comment: comment,
@@ -169,9 +169,9 @@ export function FormModal({ children, products, btnColor }: FormModalProps) {
     });
     purchaseProduct({
       buyerName: trimmedName,
-      age: numericAge,
-      forWhom: forWhom,
-      problem: problem,
+      // age: numericAge,
+      // forWhom: forWhom,
+      // problem: problem,
       region: region,
       phone: phone,
       comment: comment,

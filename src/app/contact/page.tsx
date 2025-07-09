@@ -10,6 +10,7 @@ import { Card } from "@/components/ui/card";
 import PhoneField from "@/components/PhoneField";
 import { cn } from "@/lib/utils";
 import { useContactBitrixMutation } from "@/hooks/useContactBitrixMutation";
+import Link from "next/link";
 
 export default function ContactPage() {
   const [name, setName] = useState("");
@@ -99,7 +100,7 @@ export default function ContactPage() {
   };
 
   const inputStyle =
-    "!w-full !border-gray-800 sm:px-5 sm:py-3 rounded-xl text-gray-800 text-[15px] font-bold bg-white outline-none !border-2 focus:!shadow-[0_0_10px_rgba(10,10,10,0.8)] transition-all";
+    "!w-full !border-gray-800 px-3 py-2 sm:px-5 sm:py-3 rounded-xl text-gray-800 text-[15px] font-bold bg-white outline-none !border-2 focus:!shadow-[0_0_10px_rgba(10,10,10,0.8)] transition-all";
 
   return (
     <section className="bg-[#BEE1B5] py-32 px-4">
@@ -158,8 +159,15 @@ export default function ContactPage() {
         <div className="text-left space-y-4 text-[#1A3929]">
           <div>
             <p className="font-semibold mb-1 text-[#164A24]">📞 {t("form.input.phone")}:</p>
-            <p className="text-sm font-light text-[#164A24]">+998 71 211-11-12</p>
-            <p className="mt-2 text-sm text-[#164A24]">1294 ({t("form.shortNumber")})</p>
+            <Link href="tel:+998712111112" className="text-sm text-[#164A24]">
+              +998 71 211-11-12
+            </Link>
+            <p className="mt-2 text-sm text-[#164A24]">
+              <Link href="tel:1294">
+                1294 {" "}
+              </Link>
+              ({t("form.shortNumber")})
+            </p>
           </div>
           <div>
             <p className="font-semibold mb-1 text-[#164A24]">📧 {t("form.email")}:</p>
