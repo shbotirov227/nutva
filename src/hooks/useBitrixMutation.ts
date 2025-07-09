@@ -3,6 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 type BitrixProduct = {
   productId: string;
   quantity: number;
+  total?: number;
 };
 
 type BitrixFormData = {

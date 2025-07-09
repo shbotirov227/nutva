@@ -270,9 +270,13 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
             {/* <div className="flex items-center justify-start gap-5"> */}
             <FormModal
               products={
-                product?.id ?
-                [{ productId: product.id, quantity: selectedQuantity }]
-                : []
+                product?.id
+                  ? [{
+                    productId: product.id,
+                    quantity: selectedQuantity,
+                    total: totalPrice
+                  }]
+                  : []
               }
               btnColor={color}
             >

@@ -15,7 +15,7 @@ import { getPurchaseProductsPayload } from "@/helper/getPurchaseProductsPayload"
 import { useBitrixMutation } from "@/hooks/useBitrixMutation";
 
 type FormModalProps = {
-  products?: { productId: string; quantity: number }[];
+  products?: { productId: string; quantity: number; total?: number }[];
   children: React.ReactElement<React.HTMLAttributes<HTMLButtonElement>>;
   onClose?: () => void;
   onSuccess?: () => void;

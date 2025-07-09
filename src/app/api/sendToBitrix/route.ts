@@ -1,30 +1,13 @@
-// ✅ Final version: Bitrix deal creation with proper TITLE, mapped product names, dynamic pricing, and total amount
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { apiClient } from "@/lib/apiClient";
+import { getDiscount } from "@/lib/getDiscount";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
+  const { buyerName, phone, region, comment, products } = body;
 
-  const {
-    buyerName,
-    phone,
-    // age,
-    // forWhom,
-    // problem,
-    region,
-    comment,
-    products,
-
-  } = body;
-
-  if (
-    !buyerName ||
-    !phone ||
-    // !age ||
-    // !forWhom ||
-    // !problem ||
-    !region
-  ) {
+  if (!buyerName || !phone || !region) {
     return NextResponse.json(
       { message: "Required fields are missing" },
       { status: 400 }
@@ -33,72 +16,25 @@ export async function POST(req: NextRequest) {
 
   const baseUrl = "https://crm.nutva.uz/rest/4/0rmhzl4g9pnvvw0c";
 
-  const getProductName = (id: string): string => {
-    const map: Record<string, string> = {
-      "78a05bcd-d0d8-4f5e-8271-b6b879f06621": "Complex",
-      "995cf09c-25fb-475c-baff-2ece1dcb0156": "Complex Extra",
-      "913d886c-940e-46c4-8fe4-17db725dbbee": "Gelmin Kids",
-      "4dcfe3bc-0c43-4cef-bcf1-3bba8ac0c682": "Virus Men",
-      "f9440b15-e98c-4a7f-a8a7-311a431c8fd0": "Fertilia Women"
-    };
-    return map[id] || `ID: ${id}`;
-  };
+  // ✅ 1. Mahsulot nomlarini olish
+  const allProducts = await apiClient.getAllProducts("uz");
+  const productNameMap = allProducts.reduce((acc, p) => {
+    acc[p.id] = p.name || "Noma'lum mahsulot";
+    return acc;
+  }, {} as Record<string, string>);
 
-  const getUnitPrice = (id: string, quantity: number): number => {
-    const pricing: Record<string, { qty: number, price: number }[]> = {
-      "78a05bcd-d0d8-4f5e-8271-b6b879f06621": [
-        { qty: 5, price: 560000 },
-        { qty: 3, price: 640000 },
-        { qty: 2, price: 990000 },
-        { qty: 1, price: 1170000 }
-      ],
-      "995cf09c-25fb-475c-baff-2ece1dcb0156": [
-        { qty: 5, price: 560000 },
-        { qty: 3, price: 640000 },
-        { qty: 2, price: 990000 },
-        { qty: 1, price: 1170000 }
-      ],
-      "913d886c-940e-46c4-8fe4-17db725dbbee": [
-        { qty: 5, price: 220000 },
-        { qty: 3, price: 290000 },
-        { qty: 2, price: 390000 },
-        { qty: 1, price: 490000 }
-      ],
-      "4dcfe3bc-0c43-4cef-bcf1-3bba8ac0c682": [
-        { qty: 5, price: 390000 },
-        { qty: 3, price: 490000 },
-        { qty: 2, price: 690000 },
-        { qty: 1, price: 860000 }
-      ],
-      "f9440b15-e98c-4a7f-a8a7-311a431c8fd0": [
-        { qty: 5, price: 390000 },
-        { qty: 3, price: 490000 },
-        { qty: 2, price: 690000 },
-        { qty: 1, price: 860000 }
-      ]
-    };
+  const getProductName = (id: string): string =>
+    productNameMap[id] || `ID: ${id}`;
 
-    const rules = pricing[id];
-    if (!rules) return 0;
-
-    for (const rule of rules) {
-      if (quantity >= rule.qty) return rule.price;
-    }
-    return rules[rules.length - 1].price;
-  };
-
+  // Mijozni tekshirish yoki yaratish
   let contactId: number;
   const duplicateRes = await fetch(`${baseUrl}/crm.duplicate.findbycomm.json`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      type: "PHONE",
-      values: [phone]
-    })
+    body: JSON.stringify({ type: "PHONE", values: [phone] })
   });
-
   const duplicateData = await duplicateRes.json();
-  const isRepeat = duplicateData.result.CONTACT && duplicateData.result.CONTACT.length > 0;
+  const isRepeat = duplicateData.result.CONTACT?.length > 0;
 
   if (isRepeat) {
     contactId = duplicateData.result.CONTACT[0];
@@ -113,7 +49,6 @@ export async function POST(req: NextRequest) {
         }
       })
     });
-
     const contactData = await contactRes.json();
     if (!contactData.result) {
       return NextResponse.json({ message: "Contact creation failed" }, { status: 500 });
@@ -121,6 +56,7 @@ export async function POST(req: NextRequest) {
     contactId = contactData.result;
   }
 
+  // Takroriy so'rovlar soni
   let submissionCount = 1;
   if (isRepeat) {
     const timelineRes = await fetch(`${baseUrl}/crm.timeline.comment.list.json`, {
@@ -135,7 +71,7 @@ export async function POST(req: NextRequest) {
     });
     const timelineData = await timelineRes.json();
     if (timelineData.result) {
-      const previousSubmissions = timelineData.result.filter((item: { COMMENT?: string }) =>
+      const previousSubmissions = timelineData.result.filter((item: any) =>
         item?.COMMENT?.includes("Yangi so'rov saytdan")
       );
       submissionCount = previousSubmissions.length + 1;
@@ -144,19 +80,25 @@ export async function POST(req: NextRequest) {
 
   const repeatPrefix = isRepeat ? `⚠️ Takroriy so'rov (${submissionCount})\n` : "";
 
+  //  Mahsulotlar va narxlarni hisoblash (umumiy quantity asosida)
   let totalAmount = 0;
-  const productList = products?.length
-    ? products
-      .map((p: { productId: string; quantity: number }, i: number) => {
-        const name = getProductName(p.productId);
-        const unitPrice = getUnitPrice(p.productId, p.quantity);
-        const amount = unitPrice * p.quantity;
-        totalAmount += amount;
-        return `  ${i + 1}. ${name} - ${p.quantity} dona — ${amount.toLocaleString()} so'm`;
-      })
-      .join("\n")
+  const globalQuantity = products.reduce((sum: number, p: any) => sum + p.quantity, 0);
+
+  const formattedProductList = products?.length
+    ? products.map((p: { productId: string; quantity: number }, i: number) => {
+      const name = getProductName(p.productId);
+
+      // getDiscount: individual quantity + global quantity
+      const discount = getDiscount(name, p.quantity, globalQuantity);
+      const amount = discount.totalPrice;
+
+      totalAmount += amount;
+
+      return `${i + 1}. ${name} — ${p.quantity} dona — ${amount.toLocaleString()} so'm`;
+    }).join("\n")
     : "  - Mahsulotlar yo'q";
 
+  // Deal yaratish
   const firstProductName = products?.length
     ? getProductName(products[0].productId)
     : "Buyurtma";
@@ -172,7 +114,7 @@ export async function POST(req: NextRequest) {
         CONTACT_ID: contactId,
         SOURCE_ID: "WEB",
         CATEGORY_ID: 2,
-        STAGE_ID: "C2:EXECUTING",
+        STAGE_ID: "C2:EXECUTING"
       }
     })
   });
@@ -180,6 +122,7 @@ export async function POST(req: NextRequest) {
   const dealData = await dealRes.json();
   const dealId = dealData.result;
 
+  // Komment qo‘shish (formatlangan holda)
   await fetch(`${baseUrl}/crm.timeline.comment.add.json`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -188,24 +131,20 @@ export async function POST(req: NextRequest) {
         ENTITY_ID: dealId,
         ENTITY_TYPE: "deal",
         COMMENT: `
-        ${repeatPrefix}📝 Yangi so'rov saytdan
-        \n👤 Ism: ${buyerName}
-        \n📞 Telefon: +${phone}
-        \n🌍 Hudud: ${region}
-        \n💬 Izoh: ${comment || "Yo'q"}
-        
-        \n\n🛒 Mahsulotlar:
-        \n${productList}
-        
-        \n\n💰 Umumiy narx: ${totalAmount.toLocaleString()} so'm
-        `
+${repeatPrefix}📝 Yangi so'rov saytdan
+🧍 Ism: ${buyerName}
+📞 Telefon: +${phone}
+🌍 Hudud: ${region}
+💬 Izoh: ${comment || "Yo'q"}
+
+🛍️ Mahsulotlar:
+${formattedProductList}
+
+💰 Umumiy narx: ${totalAmount.toLocaleString()} so'm
+        `.trim()
       }
     })
   });
-
-  // \n🎂 Yosh: ${ age }
-  // \n👥 Kim uchun: ${ forWhom }
-  // \n🧠 Muammo: ${ problem }
 
   return NextResponse.json({ success: true, dealId });
 }
