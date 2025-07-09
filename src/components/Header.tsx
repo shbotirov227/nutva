@@ -29,7 +29,7 @@ const NavLink = ({
     href={href}
     ref={refProp}
     className={
-      "text-white px-4 min-lg:px-2 text-xl max-h-lg:text-lg transition-all delay-75 pb-2 border-b-transparent border-b-2 hover:border-b-white focus:outline-none focus-visible:ring-2 ring-white " +
+      " text-white px-4 min-lg:px-2 text-xl max-h-lg:text-lg transition-all delay-75 pb-2 border-b-transparent border-b-2 hover:border-b-white focus:outline-none focus-visible:ring-2 ring-white " +
       className
     }
     onClick={onClick}
