@@ -27,5 +27,5 @@ jobs:
             git pull origin master &&
             npm install &&
             npm run build &&
-            pm2 reload nutva-frontend --update-env || pm2 start npm --name nutva-frontend -- run start
+            pm2 reload nutva --update-env || pm2 start npm --name nutva -- run start
           EOF
