@@ -81,7 +81,7 @@
 
 	"aboutBrand": {
 		"title": "Brend haqida",
-		"text": "Nutva Pharm — bu sog'lom hayot tarzi uchun yaratilgan, tabiiy va samarali biofaol qo'shimchalar ishlab chiqaruvchi zamonaviy brend. Bizning asosiy maqsadimiz — inson salomatligini qo'llab-quvvatlash, immunitetni mustahkamlash va organizmga zarar yetkazmasdan foyda beradigan yechimlarni taqdim etishdir. 2020-yilda Nutva Pharm o'zining ilk mahsuloti — Nutva Complex orqali O'zbekiston, O'rta Osiyo va Rossiya bozorlarida e'tirof etila boshladi. Dastlab mahalliy bozorni o'rganib, mijozlar ehtiyojiga mos maxsus tarkiblar asosida mahsulotlar yaratildi. Bugungi kunga kelib, Nutva Pharm assortimentida bolalar, ayollar, erkaklar va keksa yoshdagilar uchun alohida liniyalar mavjud. Biz har bir mahsulotni puxta ilmiy yondashuv, ekologik toza xomashyo va xalq tabobatining eng yaxshi an'analari asosida ishlab chiqamiz. Nutva Pharm — bu shunchaki biofaol qo'shimcha emas, bu — tabiat va ilm uyg'unligidagi sog'lom yashash falsafasi."
+		"text": "Nutva Pharm - bu sog'lom hayot tarzi uchun yaratilgan, tabiiy va samarali biofaol qo'shimchalar ishlab chiqaruvchi zamonaviy brend. Bizning asosiy maqsadimiz - inson salomatligini qo'llab-quvvatlash, immunitetni mustahkamlash va organizmga zarar yetkazmasdan foyda beradigan yechimlarni taqdim etishdir. 2020-yilda Nutva Pharm o'zining ilk mahsuloti - Nutva Complex orqali O'zbekiston, O'rta Osiyo va Rossiya bozorlarida e'tirof etila boshladi. Dastlab mahalliy bozorni o'rganib, mijozlar ehtiyojiga mos maxsus tarkiblar asosida mahsulotlar yaratildi. Bugungi kunga kelib, Nutva Pharm assortimentida bolalar, ayollar, erkaklar va keksa yoshdagilar uchun alohida liniyalar mavjud. Biz har bir mahsulotni puxta ilmiy yondashuv, ekologik toza xomashyo va xalq tabobatining eng yaxshi an'analari asosida ishlab chiqamiz. Nutva Pharm - bu shunchaki biofaol qo'shimcha emas, bu - tabiat va ilm uyg'unligidagi sog'lom yashash falsafasi."
 	},
 
 	"aboutUs": {
@@ -96,14 +96,14 @@
         "videoData": {
             "1": {
                 "title": "70 yoshda raqsga tushyapman!",
-                "description": "Polliartrit, gonartroz va grijadan so'ng o'ynab yuribman![[BR]]Samarqand viloyati, Pastdarg'om tumanida 70 yoshli dehqon ayol bilan yuzma-yuz uchrashuv. Uning hayotidagi og'ir muammolar — beldagi grijalar, to'plangan poliartrit, tiza suyaklarining emirilishi, tutqanoq xurujlari va oshqozon yarasini engishda Nutva Complex qanday yordam berdi?[[BR]]Bu video —  dard bilan kurashayotganlar uchun haqiqiy ilhom manbai!"
+                "description": "Polliartrit, gonartroz va grijadan so'ng o'ynab yuribman![[BR]]Samarqand viloyati, Pastdarg'om tumanida 70 yoshli dehqon ayol bilan yuzma-yuz uchrashuv. Uning hayotidagi og'ir muammolar - beldagi grijalar, to'plangan poliartrit, tiza suyaklarining emirilishi, tutqanoq xurujlari va oshqozon yarasini engishda Nutva Complex qanday yordam berdi?[[BR]]Bu video -  dard bilan kurashayotganlar uchun haqiqiy ilhom manbai!"
             },
             "2": {
                 "title": "Spondiloartrozdan operasiyasiz tuzaldi",
-                "description": "Surxondaryolik opamizda 6 ta umurtqa suyagida jarohat aniqlangan edi.[[BR]]Shifokorlar operasiyani maslahat bergan. Ammo u umidini yo'qotmadi. U operasiyasiz shifo topdi![[BR]]🎥 Bu hikoya — operasiyasiz shifo topish mumkinligiga ishonch beradi.[[BR]]To'liq videoni ko'ring va o'zingiz xulosa chiqaring![[BR]]Ko'z yosh bilan boshlangan hikoya — raqs bilan tugadi."
+                "description": "Surxondaryolik opamizda 6 ta umurtqa suyagida jarohat aniqlangan edi.[[BR]]Shifokorlar operasiyani maslahat bergan. Ammo u umidini yo'qotmadi. U operasiyasiz shifo topdi![[BR]]🎥 Bu hikoya - operasiyasiz shifo topish mumkinligiga ishonch beradi.[[BR]]To'liq videoni ko'ring va o'zingiz xulosa chiqaring![[BR]]Ko'z yosh bilan boshlangan hikoya - raqs bilan tugadi."
             },
             "3": {
-                "title": "Самарқандда шифо — Nutva Complex натижалари",
+                "title": "Самарқандда шифо - Nutva Complex натижалари",
                 "description": "Nutva asoschisi Alijon G'aybullaev va shifokorlar jamoasi Samarqandda 100 dan ortiq yurtdoshimizni qabul qildi.[[BR]]Ularga professional maslahatlar va tibbiy tekshiruvlar o'tkazildi.[[BR]]Alijon G'aybullaev shaxsan bemorlar bilan suhbatlashdi va Nutva Complexni qabul qilgandan keyingi real o'zgarishlari, yurakdan chiqqan so'zlari va umid bilan to'lgan taassurotlarini tingladi."
             },
             "4": {
@@ -169,7 +169,7 @@
 
     "contactModal": {
         "title": "Salomatligingiz bo'yicha savolingiz bormi?",
-        "subtitle": "Raqamingizni qoldiring — shifokorlarimiz bepul maslahat uchun tez orada bog'lanadi."
+        "subtitle": "Raqamingizni qoldiring - shifokorlarimiz bepul maslahat uchun tez orada bog'lanadi."
     },
 
 	"button": {
@@ -185,7 +185,7 @@
 		"complex":{
 			"tab": {
 				"1": {
-					"1": "Bu biologik faol qo'shimcha — dorivor o'tlarning noyob jamlanmasi asosida yaratilgan va ularning tabiiy kuchi va qiymatini yuqori darajada saqlash imkonini beruvchi innovatsion texnologiyadan foydalangan holda ishlab chiqarilgan tabiiy mahsulot.",
+					"1": "Bu biologik faol qo'shimcha - dorivor o'tlarning noyob jamlanmasi asosida yaratilgan va ularning tabiiy kuchi va qiymatini yuqori darajada saqlash imkonini beruvchi innovatsion texnologiyadan foydalangan holda ishlab chiqarilgan tabiiy mahsulot.",
 					"2": "Bearberry - 51,7 mg, Senna barglari - 51,2 mg, zefir ildizi - 41,4 mg, makkajo'xori stigmalari - 40,8 mg, zig'ir urug'lari - 39,6 mg, dulavratotu ildizi - 32,7 mg, Elderberry - 29,3 mg, Bosveliya - 28,7 mg, itshumurt ekstrakti - 26,4 mg, jo'ka ekstrakti - 20,4 mg, ekinezya-16,8 mg, zanjabil - 16,4 mg, qizilmiya - 16,2 mg, Atirgul - 15,9 mg, glyukozamin - 12,9 mg, kollagen - 12,8 mg, gialuron kislotasi - 11,8 mg, xondroitin sulfat - 10,3 mg, o't o'ti - 5,8 mg, B6 vitamini - 2,1 mg, Melatonin-1,5 mg.",
 					"3": "Kechqurun 2 dona kapsuladan, ovqatdan 30 daqiqa keyin qabul qilinadi. Mahsulotni 3-6 oy davomida uzoq kurslarda qabul qilish tavsiya etiladi.",
 					"4": {
@@ -198,7 +198,7 @@
 		"complexExtra": {
 			"tab": {
 				"1": {
-					"1": "Bu biologik faol qo'shimcha — dorivor o'tlarning noyob jamlanmasi asosida yaratilgan va ularning tabiiy kuchi va qiymatini yuqori darajada saqlash imkonini beruvchi innovatsion texnologiyadan foydalangan holda ishlab chiqarilgan tabiiy mahsulot.",
+					"1": "Bu biologik faol qo'shimcha - dorivor o'tlarning noyob jamlanmasi asosida yaratilgan va ularning tabiiy kuchi va qiymatini yuqori darajada saqlash imkonini beruvchi innovatsion texnologiyadan foydalangan holda ishlab chiqarilgan tabiiy mahsulot.",
 					"2": "Bearberry-41,7 mg, Marshmallow ildizi-41,4 mg, Senna barglari-41,2 mg, makkajo'xori stigmalari-40,8 mg, zig'ir urug'lari-39,6 mg, dulavratotu ildizi-32,7 mg, Elecampane yuqori-29,3 mg, Boswellia-28,7 mg, itshumurt-26,4 mg, Alfa-lipoik kislota - 24,7 mg, jo'ka - 20,4 mg, Echinacea - 16,8 mg, zanjabil-16,4 mg, qizilmiya-16,2 mg, Atirgul kestirib-15,9 mg, vitamin B8-14,8 mg, vitamin E-14,6 mg, Yarrow - 5,8 mg, vitamin B5-2,9 mg, vitamin B2-1,5 mg, vitamin B6-1,5 mg, vitamin A-0,5 mg, vitamin B9-0,3 mg, kaliy yodid - 0,127 mg, vitamin D3-15 mkg, vitamin B7 (biotin) - 0,015 mg, selen - 0,01 mg, B12 vitamini - 9 mkg.",
 					"3": "Ertalab 2 dona kapsuladan, ovqatdan 30 daqiqa oldin ichiladi. Mahsulotni 3-6 oy davomida uzoq kurslarda qabul qilish tavsiya etiladi.",
 					"4": {
@@ -271,7 +271,36 @@
             "3": "Koksartroz - son bo'g'imining eroziyasi;",
             "4": "Gonartroz - tizza bo'g'imining surunkali degenerativ kasalligi;",
             "5": "Poliartrit - bo'g'imlarning yallig'lanishi;",
-            "6": "Osteoporoz - suyaklarning sinishi osonligi;"
+            "6": "Osteoporoz - suyaklarning sinishi osonligi;",
+
+            "complex": {
+                "title": "Quyidagi kasalliklarda samarali yordam beradi:",
+                "1": "Koksartroz - son bo'g'imining yemirilishi, yurishda og'riq va harakat cheklanishi bilan kechadi;",
+                "2": "Gonartroz - tizza bo'g'imining yemirilishi, og'riq, shish va bukilishda qiyinchilik bilan namoyon bo'ladi;",
+                "3": "Osteoxondroz - umurtqa disklari yemirilishi, bel, bo'yin yoki orqa sohada og'riq va qattiqlik bilan kechadi;",
+                "4": "Grija - umurtqa oraliq diskining chiqib ketishi, asabni siqib, qo'l-oyoqda og'riq va uvishishga sabab bo'ladi;",
+                "5": "Poliartrit - bir nechta bo'g'imlarning yallig'lanishi, shish, qattiqlik va harakatda og'riq bilan kechadi."
+            },
+
+            "gelminKids": {
+                "title": "Quyidagi kasalliklarda samarali yordam beradi:",
+                "1": "Ostritsa (Enterobioz) - Eng ko'p uchraydigan gijja turi, ayniqsa bolalarda. Tunda orqa chiqaruv yo'li atrofida qichishish, bezovtalik, ishtahasizlik bilan namoyon bo'ladi. Juda yuqumli.",
+                "2": "Askarida (Askaridoz) - O'rta kattalikdagi oq rangli dumaloq gijja. Belgilari: qorin og'rig'i, ishtahaning buzilishi, ko'ngil aynishi, ba'zida yo'tal, allergik toshmalar.",
+                "3": "Lyamblioz (Lyamblia) - Ichakda yashovchi mikroskopik parazit. Sababi - iflos suv yoki yuvilmagan meva-sabzavot. Belgilari: ich ketishi, ko'ngil aynishi, ichakda gaz to'planishi, charchoq.",
+                "4": "Toksokara (Toksokaroz) - Ichakda yashovchi mikroskopik parazit. Asosan it va mushuklardan yuqadi. Inson tanasida ko'chib yuradi. Belgilari: qattiq allergik reaksiya, isitma, ko'z va ichki a'zolarga zarar yetkazishi mumkin.",
+                "5": "Lentasimon gijja - uzun, tasmaga o'xshash gijja turi bo'lib, pishmagan go'sht orqali yuqadi; belgilari: qorin og'rig'i, ozib ketish, bosh aylanish, najasda gijja bo'laklari; xavfi - organizmda ozuqa moddalar yetishmovchiligi, kamqonlik va kuchsizlanish."
+            },
+
+            "complexExtra": {
+                "title": "Quyidagi kasalliklarda samarali yordam beradi:",
+                "1": "Gepatoz - Jigar hujayralariga yog' to'planishi (yog'li gepatoz). Ko'pincha noqulay ovqatlanish, kamharakat hayot tarzi va semizlikdan kelib chiqadi. Jigar funksiyasi pasayadi.",
+                "2": "Gepatit - Jigar yallig'lanishi. Virusli (A, B, C...) yoki toksik (dorilar, spirtli ichimliklar) sababli bo'ladi. Alomatlari: charchoq, terining sarg'ayishi, ozib ketish.",
+                "3": "Xolesistit - O't qopining yallig'lanishi. Ko'pincha o't qopidagi toshlar yoki infeksiya tufayli yuzaga keladi. Og'irlik, og'riq, ko'ngil aynishi bilan kechadi.",
+                "4": "Gastrit - Oshqozon shilliq qavatining yallig'lanishi. Sabablari: stress, haddan tashqari ovqatlanish. Alomatlar: og'riq yoki og'irlik hissi.",
+                "5": "Pankreatit - Oshqozon osti bezining yallig'lanishi. Sabablari: yog'li ovqat, spirtli ichimlilklar, o't qopdagi toshlar. Qorinda kuchli og'riq va hazm muammolari kuzatiladi.",
+                "6": "Ich qotishi (qabziyat) - Hajmi kam va qattiq axlat chiqishi. Sababi: kam suv ichish, kamharakat, ovqatda vitaminlar yetishmasligi. Noqulaylik, shish va uyqusizlikka olib keladi.",
+                "7": "Ichak faoliyati buzilishi - Diareya, shishish, og'riq, qabziyat - ichakning noto'g'ri ishlash belgilaridir. Sababi: stress, infeksiya yoki noto'g'ri ovqatlanish."
+            }
         }
 	},
 
@@ -288,7 +317,7 @@
 
         "accordionContent": {
             "1": "Barcha mahsulotlarimiz o'simlik ekstraktlari, minerallar va foydali vitaminlar asosida yaratilgan. Bo'yoqlar, antibiotiklar va konservantlar yo'q.",
-            "2": "Yurtimiz bo'ylab minglab odamlar Nutva bilan sog'lig'ini tikladi. Ularning hikoyalari — bizning faxrimiz va biz ularni YouTube kanalimizga joylab boramiz.",
+            "2": "Yurtimiz bo'ylab minglab odamlar Nutva bilan sog'lig'ini tikladi. Ularning hikoyalari - bizning faxrimiz va biz ularni YouTube kanalimizga joylab boramiz.",
             "3": "Nutva mahsulotlari tajribali mutaxassislar bilan ishlab chiqiladi va shifokorlar tomonidan tavsiya etilmoqda. Mijozlarimiz doimiy tibbiy nazorat ostida va viloyatlararo bepul ko'riklar tashkil qilinib kelinmoqda",
             "4": "Mahsulotlarimiz xalqaro sifat standartlariga javob beradi. Qadoqlari esa tushunarli va foydalanishga qulay."
         },

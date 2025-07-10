@@ -1,4 +1,4 @@
- 
+
 
 "use client";
 
@@ -88,7 +88,7 @@ export default function ProductDetailPage() {
   // const allTabKeys = [...dynamicTabKeys, ...staticTabs];
 
 
-    console.log("CART:", cart);
+  console.log("CART:", cart);
 
   return (
     <div className="relative pt-32 overflow-hidden">
@@ -259,19 +259,38 @@ export default function ProductDetailPage() {
 
                       <div className="mt-10">
                         <h4 className="text-lg font-semibold mb-6">
-                          {t("products.additional.title")}
-                        </h4>
-                        <ul className="space-y-3">
-                          {Array.from({ length: 6 }).map((_, index) => (
-                            <li key={index} className="text-base">
-                              {t(`products.additional.${index + 1}`)}
-                            </li>
-                          ))}
-                          {product?.name === ProductName.COMPLEX && (
-                            <li className="text-base">
-
-                            </li>
+                          {t(
+                            getProductKeyFromName(product?.name)
+                              ? `products.additional.${getProductKeyFromName(product.name)}.title`
+                              : "products.additional.title"
                           )}
+                        </h4>
+
+                        <ul className="space-y-3">
+                          {(() => {
+                            const keyRoot = getProductKeyFromName(product?.name);
+                            const baseKey = keyRoot
+                              ? `products.additional.${keyRoot}`
+                              : "products.additional";
+
+                            const items: string[] = [];
+                            for (let i = 1; i <= 10; i++) {
+                              const key = `${baseKey}.${i}`;
+                              const translated = t(key);
+                              if (translated === key) break;
+                              items.push(translated);
+                            }
+
+                            return items.map((text, index) => {
+                              const [bold, ...rest] = text.split(" - ");
+                              return (
+                                <li key={index} className="text-base">
+                                  <span className="font-semibold">{bold}</span>
+                                  {rest.length > 0 && ` - ${rest.join(" - ")}`}
+                                </li>
+                              );
+                            });
+                          })()}
                         </ul>
                       </div>
 
@@ -389,27 +408,27 @@ export default function ProductDetailPage() {
                       </div>
                     </TabsContent>
 
-                      <TabsContent value="5">
-                        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 my-12">
-                          <ul className="space-y-6 list-disc list-inside">
+                    <TabsContent value="5">
+                      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 my-12">
+                        <ul className="space-y-6 list-disc list-inside">
                           <h3 className="text-lg font-bold mb-6">{t("products.gelminKids.tab.gijjalar.1.title")}</h3>
-                            {Array.from({ length: 5 }).map((item, idx) => (
-                              <li key={`${item}-${idx}`} className="text-base font-medium">
-                                {t(`products.gelminKids.tab.gijjalar.1.${idx + 1}`)}
-                              </li>
-                            ))}
-                          </ul>
+                          {Array.from({ length: 5 }).map((item, idx) => (
+                            <li key={`${item}-${idx}`} className="text-base font-medium">
+                              {t(`products.gelminKids.tab.gijjalar.1.${idx + 1}`)}
+                            </li>
+                          ))}
+                        </ul>
 
-                          <ul className="space-y-6 list-disc list-inside">
+                        <ul className="space-y-6 list-disc list-inside">
                           <h3 className="text-lg font-bold mb-6">{t("products.gelminKids.tab.gijjalar.2.title")}</h3>
-                            {Array.from({ length: 2 }).map((item, idx) => (
-                              <li key={`${item}-${idx}`} className="text-base font-medium">
-                                {t(`products.gelminKids.tab.gijjalar.2.${idx + 1}`)}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </TabsContent>
+                          {Array.from({ length: 2 }).map((item, idx) => (
+                            <li key={`${item}-${idx}`} className="text-base font-medium">
+                              {t(`products.gelminKids.tab.gijjalar.2.${idx + 1}`)}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </TabsContent>
                   </Container>
                 </motion.div>
               </AnimatePresence>

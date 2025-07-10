@@ -271,7 +271,36 @@
             "3": "Coxarthrosis - erosion of the hip joint;",
             "4": "Gonarthrosis - chronic degenerative disease of the knee joint;",
             "5": "Polyarthritis - inflammation of the joints;",
-            "6": "Osteoporosis - fragility of the bones;"
+            "6": "Osteoporosis - fragility of the bones;",
+
+            "complex": {
+                "title": "Effectively helps with the following conditions:",
+                "1": "Coxarthrosis - degeneration of the hip joint, causing pain while walking and limited mobility;",
+                "2": "Gonarthrosis - degeneration of the knee joint, characterized by pain, swelling, and difficulty bending;",
+                "3": "Osteochondrosis - degeneration of spinal discs, accompanied by pain and stiffness in the lower back, neck, or back;",
+                "4": "Herniated disc - protrusion of an intervertebral disc, compressing nerves and causing pain and numbness in limbs;",
+                "5": "Polyarthritis - inflammation of multiple joints, with swelling, stiffness, and pain during movement."
+            },
+
+            "gelminKids": {
+                "title": "Effectively helps with the following conditions:",
+                "1": "Pinworms (Enterobiasis) - the most common type of worm, especially in children. Symptoms include nighttime itching around the anus, restlessness, and loss of appetite. Highly contagious.",
+                "2": "Roundworms (Ascariasis) - medium-sized white roundworms. Symptoms: abdominal pain, appetite loss, nausea, occasional cough, allergic rashes.",
+                "3": "Giardiasis (Giardia) - microscopic parasites living in the intestines. Caused by dirty water or unwashed fruits/vegetables. Symptoms: diarrhea, nausea, bloating, fatigue.",
+                "4": "Toxocariasis (Toxocara) - microscopic parasites transmitted from dogs or cats. They migrate through the human body. Symptoms: severe allergic reactions, fever, damage to eyes and internal organs.",
+                "5": "Tapeworms - long, ribbon-like worms transmitted through undercooked meat. Symptoms: abdominal pain, weight loss, dizziness, worm segments in stool. Risks include nutrient deficiency, anemia, and weakness."
+            },
+
+            "complexExtra": {
+                "title": "Effectively helps with the following conditions:",
+                "1": "Hepatosis - fat accumulation in liver cells (fatty liver). Often caused by poor diet, sedentary lifestyle, and obesity. Liver function declines.",
+                "2": "Hepatitis - liver inflammation. May be viral (A, B, C...) or toxic (due to medications or alcohol). Symptoms: fatigue, yellowing of the skin, weight loss.",
+                "3": "Cholecystitis - inflammation of the gallbladder. Often due to gallstones or infection. Symptoms include heaviness, pain, and nausea.",
+                "4": "Gastritis - inflammation of the stomach lining. Causes: stress, overeating. Symptoms: pain or a feeling of heaviness.",
+                "5": "Pancreatitis - inflammation of the pancreas. Causes: fatty foods, alcohol, gallstones. Symptoms: severe abdominal pain, digestive problems.",
+                "6": "Constipation - infrequent, hard stool. Causes: low water intake, sedentary lifestyle, lack of vitamins. Leads to discomfort, bloating, and insomnia.",
+                "7": "Bowel dysfunction - diarrhea, bloating, pain, constipation. Causes: stress, infection, or poor diet."
+            }
         }
     },
 
@@ -313,7 +342,7 @@
                 "1": "This product is used for joint and bone-related conditions.",
                 "2": "No. It contains only natural herbal extracts, with no hormones or chemical substances.",
                 "3": "It is produced in Uzbekistan in accordance with international GMP standards.",
-                "4": "Take 1 capsule once a day for 10 days. Then continue with 2 capsules daily after meals with water. One box contains 60 capsules – enough for 1 month.",
+                "4": "Take 1 capsule once a day for 10 days. Then continue with 2 capsules daily after meals with water. One box contains 60 capsules - enough for 1 month.",
                 "5": "Depends on the condition. Usually, a 12-month course is recommended. For chronic illnesses, a longer duration may be needed.",
                 "6": "Results vary by individual. However, noticeable relief is often experienced within 6 months.",
                 "7": "Absolutely. It is especially beneficial for elderly people and is widely used by those of retirement age.",
