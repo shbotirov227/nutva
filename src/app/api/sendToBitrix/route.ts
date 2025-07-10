@@ -114,10 +114,14 @@ export async function POST(req: NextRequest) {
         CONTACT_ID: contactId,
         SOURCE_ID: "WEB",
         CATEGORY_ID: 2,
-        STAGE_ID: "C2:EXECUTING"
+        STAGE_ID: "C2:EXECUTING",
+        OPPORTUNITY: totalAmount,
+        CURRENCY_ID: "UZS",
+        IS_MANUAL_OPPORTUNITY: "Y"
       }
     })
   });
+  
 
   const dealData = await dealRes.json();
   const dealId = dealData.result;
