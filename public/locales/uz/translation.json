@@ -76,7 +76,9 @@
 		"consultation": "Bepul konsultatsiya",
 		"addToCart": "Savatga qo'shish",
 		"remoreFromCart": "Savatdan o'chirish",
-		"addedToCart": "Savatga qo'shildi"
+		"addedToCart": "Savatga qo'shildi",
+        "noProducts": "Mahsulotlar mavjud emas",
+        "saleTitle": "MAXSUS TAKLIF! Qancha ko'p olsangiz — shuncha ko'p tejaysiz!"
 	},
 
 	"aboutBrand": {

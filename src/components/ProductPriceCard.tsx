@@ -109,6 +109,7 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
                   <h2 className="text-4xl font-bold">{product?.name}</h2>
                   <p className="text-xl mt-1 text-gray-800">{product?.slug}</p>
                 </div>
+                  <p className="text-xl mt-1 text-red-600 font-semibold">{t("product.saleTitle")}</p>
 
                 {discountPercent > 0 && (
                   <div className="flex gap-2 items-center mb-4">

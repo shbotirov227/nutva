@@ -76,7 +76,9 @@
         "consultation": "Free consultation",
         "addToCart": "Add to cart",
         "remoreFromCart": "Remove from cart",
-        "addedToCart": "Added to cart"
+        "addedToCart": "Added to cart",
+        "noProducts": "No products available",
+        "saleTitle": "SPECIAL OFFER! The more you buy — the more you save!"
     },
 
     "aboutBrand": {
