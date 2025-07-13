@@ -105,11 +105,20 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
 
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => {
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+
       if (draggingRef.current) {
-        setPosition({
-          x: e.clientX - offsetRef.current.x,
-          y: e.clientY - offsetRef.current.y,
-        });
+        const boxWidth = size.width;
+        const boxHeight = size.height;
+
+        let newX = e.clientX - offsetRef.current.x;
+        let newY = e.clientY - offsetRef.current.y;
+
+        newX = Math.max(0, Math.min(windowWidth - boxWidth, newX));
+        newY = Math.max(0, Math.min(windowHeight - boxHeight, newY));
+
+        setPosition({ x: newX, y: newY });
       }
 
       if (resizingRef.current && startRef.current) {
@@ -133,14 +142,11 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
           newY += deltaY;
         }
 
-        setSize({
-          width: Math.max(280, newWidth),
-          height: Math.max(300, newHeight),
-        });
-        setPosition({
-          x: newX,
-          y: newY,
-        });
+        newWidth = Math.max(280, Math.min(newWidth, windowWidth - newX));
+        newHeight = Math.max(300, Math.min(newHeight, windowHeight - newY));
+
+        setSize({ width: newWidth, height: newHeight });
+        setPosition({ x: newX, y: newY });
       }
     };
 
@@ -157,16 +163,35 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseup", onMouseUp);
     };
+  }, [size]);
+
+  useEffect(() => {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    const isMobile = screenWidth <= 600;
+
+    setSize({
+      width: isMobile ? screenWidth - 20 : 340,
+      height: isMobile ? screenHeight - 100 : 460,
+    });
+
+    setPosition({
+      x: isMobile ? 10 : screenWidth - 400,
+      y: isMobile ? 50 : screenHeight - 540,
+    });
   }, []);
 
-  const onKeyUp = (e: KeyboardEvent) => {
-    if (e.key === "Escape") {
-      draggingRef.current = false;
-      resizingRef.current = null;
-    }
-  };
-
-  document.addEventListener("keyup", onKeyUp);
+  useEffect(() => {
+    const onKeyUp = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        draggingRef.current = false;
+        resizingRef.current = null;
+      }
+    };
+    document.addEventListener("keyup", onKeyUp);
+    return () => document.removeEventListener("keyup", onKeyUp);
+  }, []);
 
 
   const resizeHandles: { dir: ResizeDirection; className: string; rotate?: string }[] = [
@@ -185,7 +210,12 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     <div
       ref={boxRef}
       className="fixed z-50 rounded-md border shadow-lg flex flex-col bg-white overflow-hidden"
-      style={{ left: position.x, top: position.y, width: size.width, height: size.height }}
+      style={{
+        left: position.x,
+        top: position.y,
+        width: size.width,
+        height: size.height,
+      }}
     >
       <div
         className="bg-primary text-primary-foreground px-4 py-2 flex justify-between items-center cursor-move"
