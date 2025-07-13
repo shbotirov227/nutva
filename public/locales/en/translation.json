@@ -27,7 +27,12 @@
         "yourCart": "Your Cart",
         "emptyCart": "Your cart is empty",
         "blogs": "Blogs",
-        "soon": "It will soon go on sale..."
+        "soon": "It will soon go on sale...",
+        "send": "Send",
+        "typing": "Typing...",
+        "typeMsg": "Type a message",
+        "contactOperator": "Contact operator",
+        "contactAI": "Contact AI"
     },
 
     "errors": {

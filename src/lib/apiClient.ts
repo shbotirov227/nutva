@@ -122,4 +122,9 @@ export const apiClient = {
     });
     return res.data;
   },
+
+  postChatAI: async (question: string) => {
+    const res = await api.post(`/Chat/ask`, { question });
+    return res.data;
+  }
 };

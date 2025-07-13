@@ -27,7 +27,12 @@
 		"yourCart": "Sizning savatingiz",
 		"emptyCart": "Sizning savatingiz bo'sh",
         "blogs": "Bloglar",
-        "soon": "Tez orada sotuvga chiqadi..."
+        "soon": "Tez orada sotuvga chiqadi...",
+        "send": "Yuborish",
+        "typing": "Yozmoqda...",
+        "typeMsg": "Xabarni yozing...",
+        "contactOperator": "Operator bilan aloqa",
+        "contactAI": "AI bilan aloqa"
 	},
 
 	"errors": {
