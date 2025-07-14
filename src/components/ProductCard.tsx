@@ -9,7 +9,7 @@ import { Button } from "./ui/button";
 import { useCart } from "@/context/CartContext";
 import { toast } from "react-toastify";
 import { GetOneProductType } from "@/types/products/getOneProduct";
-import { ProductName } from "@/types/enums";
+// import { ProductName } from "@/types/enums";
 import { FormModal } from "./FormModal";
 
 type ProductCardProps = {
@@ -55,7 +55,7 @@ const ProductCard = ({
     });
   };
 
-  const excludedProduct = product?.name === ProductName.VIRIS_MEN || product?.name === ProductName.FERTILIA_WOMEN;
+  // const excludedProduct = product?.name === ProductName.VIRIS_MEN || product?.name === ProductName.FERTILIA_WOMEN;
 
   return (
     <div
@@ -69,7 +69,7 @@ const ProductCard = ({
           <p className="text-white text-sm sm:text-base md:text-md">{description}</p>
         </div>
 
-        {!excludedProduct ? (
+        {product ? (
           <div className="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-4">
             {product && (
               <FormModal products={[{ productId: product.id, quantity: 1 }]}>

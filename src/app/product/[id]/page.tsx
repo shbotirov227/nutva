@@ -102,13 +102,13 @@ export default function ProductDetailPage() {
         style={{ backgroundImage: `url(${bgDetailImage})` }}
       />
 
-      {product?.name === ProductName.VIRIS_MEN || product?.name === ProductName.FERTILIA_WOMEN ? (
+      {/* {product?.name === ProductName.VIRIS_MEN || product?.name === ProductName.FERTILIA_WOMEN ? (
         <div className="w-full h-[calc(100vh-100px)] flex items-center justify-center">
           <h2 className="text-5xl max-md:text-3xl font-semibold text-[#1A3929] text-center">
             {t("common.soon")}
           </h2>
         </div>
-      ) : (
+      ) : ( */}
         <div className="relative z-10">
           <Container>
             <AnimatePresence mode="popLayout">
@@ -438,7 +438,7 @@ export default function ProductDetailPage() {
           <ProductsComponent isAviableBackground={false} />
           <SaleSection />
         </div>
-      )}
+      {/* )} */}
     </div >
   );
 }
