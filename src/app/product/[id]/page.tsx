@@ -109,9 +109,66 @@ export default function ProductDetailPage() {
           </h2>
         </div>
       ) : ( */}
-        <div className="relative z-10">
-          <Container>
-            <AnimatePresence mode="popLayout">
+      <div className="relative z-10">
+        <Container>
+          <AnimatePresence mode="popLayout">
+            <motion.div
+              layout
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="w-full rounded-xl flex flex-col gap-4"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-8 items-center mb-8">
+                <div className="w-full">
+                  <Image
+                    src={product?.imageUrls[0] || ProductImage}
+                    alt={product?.name || "Product Image"}
+                    width={500}
+                    height={500}
+                    priority
+                    className="w-full h-auto max-w-full object-contain rounded-2xl"
+                  />
+                </div>
+
+                <div className="w-full">
+                  <ProductPriceCard
+                    product={product}
+                    color={color}
+                    bgColor={bgColor}
+                    onClick={handleBuyClick}
+                  />
+                </div>
+
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="my-10">
+            <TabsList className="grid grid-cols-4 sm:grid-cols-4 max-[450px]:grid-cols-3 max-[350px]:grid-cols-2 mb-5 justify-center gap-4 bg-transparent">
+              {(product?.name === ProductName.GELMIN_KIDS ? ["1", /* "2", "3", */ "5", "4"] : ["1", /* "2", "3", */ "4"]).map((tab) => (
+                <TabsTrigger
+                  key={`tab-${tab}-${lang}`}
+                  value={tab}
+                  asChild
+                  className={clsx(
+                    "cursor-pointer shadow-md px-4 py-2 max-[450px]:px-2 max-[450px]:py-1 rounded-lg",
+                    activeTab === tab ? "!bg-black text-white" : ""
+                  )}
+                >
+                  <Button
+                    size="lg"
+                    variant={activeTab === tab ? "default" : "outline"}
+                    className="w-full sm:w-auto  text-sm sm:text-base font-semibold"
+                  >
+                    {t(`product.tab.${tab}`)}
+                  </Button>
+                </TabsTrigger>
+              ))}
+            </TabsList>
+
+            <AnimatePresence mode="wait">
               <motion.div
                 layout
                 initial={{ opacity: 0, y: 10 }}
@@ -120,67 +177,10 @@ export default function ProductDetailPage() {
                 transition={{ duration: 0.3 }}
                 className="w-full rounded-xl flex flex-col gap-4"
               >
-                <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-8 items-center mb-8">
-                  <div className="w-full">
-                    <Image
-                      src={product?.imageUrls[0] || ProductImage}
-                      alt={product?.name || "Product Image"}
-                      width={500}
-                      height={500}
-                      priority
-                      className="w-full h-auto max-w-full object-contain rounded-2xl"
-                    />
-                  </div>
-
-                  <div className="w-full">
-                    <ProductPriceCard
-                      product={product}
-                      color={color}
-                      bgColor={bgColor}
-                      onClick={handleBuyClick}
-                    />
-                  </div>
-
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="my-10">
-              <TabsList className="grid grid-cols-4 sm:grid-cols-4 max-[450px]:grid-cols-3 max-[350px]:grid-cols-2 mb-5 justify-center gap-4 bg-transparent">
-                {(product?.name === ProductName.GELMIN_KIDS ? ["1", /* "2", "3", */ "5", "4"] : ["1", /* "2", "3", */ "4"]).map((tab) => (
-                  <TabsTrigger
-                    key={`tab-${tab}-${lang}`}
-                    value={tab}
-                    asChild
-                    className={clsx(
-                      "cursor-pointer shadow-md px-4 py-2 max-[450px]:px-2 max-[450px]:py-1 rounded-lg",
-                      activeTab === tab ? "!bg-black text-white" : ""
-                    )}
-                  >
-                    <Button
-                      size="lg"
-                      variant={activeTab === tab ? "default" : "outline"}
-                      className="w-full sm:w-auto  text-sm sm:text-base font-semibold"
-                    >
-                      {t(`product.tab.${tab}`)}
-                    </Button>
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-
-              <AnimatePresence mode="wait">
-                <motion.div
-                  layout
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="w-full rounded-xl flex flex-col gap-4"
-                >
-                  <Container>
-                    <TabsContent key={`tab-1`} value={"1"}>
-                      <ul className="space-y-4 my-12 list-disc grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 gap-x-18">
-                        {/* <li className="text-base font-semibold">
+                <Container>
+                  <TabsContent key={`tab-1`} value={"1"}>
+                    <ul className="space-y-4 my-12 list-disc grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 gap-x-18">
+                      {/* <li className="text-base font-semibold">
                         Nutva Complex состоит из 100% натуральных компонентов.
                       </li>
                       <li className="text-base font-semibold">
@@ -209,235 +209,239 @@ export default function ProductDetailPage() {
                         восстановление тканей, питает его необходимыми веществами.
                       </li> */}
 
-                        {productKey &&
-                          Object.entries(t(`products.${productKey}.tab.1`, { returnObjects: true }) || {}).flatMap(
-                            ([key, value]) => {
-                              if (typeof value !== "string") return [];
+                      {productKey &&
+                        Object.entries(t(`products.${productKey}.tab.1`, { returnObjects: true }) || {}).flatMap(
+                          ([key, value]) => {
+                            if (typeof value !== "string") return [];
 
-                              const parts = value
-                                .split("•")
-                                .map((item) => item.trim())
-                                .filter((item) => item.length > 0);
+                            const parts = value
+                              .split("•")
+                              .map((item) => item.trim())
+                              .filter((item) => item.length > 0);
 
-                              return parts.map((part, index) => {
-                                if (index === 0) {
-                                  return (
-                                    <li key={`${key}-${index}`} className="text-base font-semibold">
-                                      {part}
-                                    </li>
-                                  );
-                                }
-
-                                const dashIndex = part.indexOf("–");
-                                if (dashIndex > -1) {
-                                  const beforeDash = part.slice(0, dashIndex + 1).trim();
-                                  const afterDash = part.slice(dashIndex + 1).trim();
-
-                                  return (
-                                    <li key={`${key}-${index}`} className="text-base font-semibold">
-                                      {beforeDash}
-                                      <br />
-                                      {afterDash}
-                                    </li>
-                                  );
-                                }
-
+                            return parts.map((part, index) => {
+                              if (index === 0) {
                                 return (
                                   <li key={`${key}-${index}`} className="text-base font-semibold">
                                     {part}
                                   </li>
                                 );
-                              });
-                            }
-                          )}
+                              }
 
-                      </ul>
+                              const dashIndex = part.indexOf("–");
+                              if (dashIndex > -1) {
+                                const beforeDash = part.slice(0, dashIndex + 1).trim();
+                                const afterDash = part.slice(dashIndex + 1).trim();
 
-                      <div className="mt-10 w-full flex justify-center">
-                        <Image src={getImage || DefaultVideoImg} alt="Product Image" width={500} height={500} className="w-[600px] rounded-xl h-auto" />
-                      </div>
+                                return (
+                                  <li key={`${key}-${index}`} className="text-base font-semibold">
+                                    {beforeDash}
+                                    <br />
+                                    {afterDash}
+                                  </li>
+                                );
+                              }
 
-                      <div className="mt-10">
-                        <h4 className="text-lg font-semibold mb-6">
-                          {t(
-                            getProductKeyFromName(product?.name)
-                              ? `products.additional.${getProductKeyFromName(product.name)}.title`
-                              : "products.additional.title"
-                          )}
-                        </h4>
-
-                        <ul className="space-y-3">
-                          {(() => {
-                            const keyRoot = getProductKeyFromName(product?.name);
-                            const baseKey = keyRoot
-                              ? `products.additional.${keyRoot}`
-                              : "products.additional";
-
-                            const items: string[] = [];
-                            for (let i = 1; i <= 10; i++) {
-                              const key = `${baseKey}.${i}`;
-                              const translated = t(key);
-                              if (translated === key) break;
-                              items.push(translated);
-                            }
-
-                            return items.map((text, index) => {
-                              const [bold, ...rest] = text.split(" - ");
                               return (
-                                <li key={index} className="text-base">
-                                  <span className="font-semibold">{bold}</span>
-                                  {rest.length > 0 && ` - ${rest.join(" - ")}`}
+                                <li key={`${key}-${index}`} className="text-base font-semibold">
+                                  {part}
                                 </li>
                               );
                             });
-                          })()}
-                        </ul>
-                      </div>
-
-                      <div className="flex justify-center mt-10">
-                        {youtubelink ? (
-                          <YouTubeEmbed
-                            link={youtubelink}
-                            className="w-[650px] rounded-xl h-[500px] object-cover"
-                          />
-                        ) : (
-                          <Image
-                            className="w-[650px] rounded-xl h-[500px] object-cover"
-                            src={image}
-                            width={500}
-                            alt="Product Detail Image"
-                          />
+                          }
                         )}
 
-                      </div>
-                    </TabsContent>
-                    <TabsContent key={`tab-2`} value={"2"}>
-                      <div className="mb-10">
-                        {[1, 2, 3].map((item, index) => (
-                          <div
-                            key={item}
-                            className={clsx(
-                              "grid grid-cols-1 md:grid-cols-2 gap-6 items-center",
-                              index % 2 === 1 && "md:flex-row-reverse md:flex"
-                            )}
-                          >
-                            <div className="flex justify-center">
-                              <Image
-                                src={GinsengImg}
-                                alt="Ginseng Image"
-                                width={500}
-                                className="w-[500px] rounded-xl h-auto"
-                              />
-                            </div>
+                    </ul>
 
-                            <div className="mt-10">
-                              <h4 className="text-lg font-semibold mb-6">
-                                Дополнительно:
-                              </h4>
-                              <ul className="space-y-3">
-                                <li className="text-base">
-                                  Эффективно помогает при таких заболеваниях как:
-                                </li>
-                                <li className="text-base">
-                                  Грыжа позвоночника - нарушение целостности внешней оболочки межпозвоночного диска;
-                                </li>
-                                <li className="text-base">
-                                  Коксартроз - эрозия тазобедренного сустава;
-                                </li>
-                                <li className="text-base">
-                                  Гонартроз - хроническое дегенеративное заболевание коленного сустава;
-                                </li>
-                                <li className="text-base">
-                                  Полиартрит - воспаление суставов;
-                                </li>
-                                <li className="text-base">
-                                  Остеопороз - хрупкость костей;
-                                </li>
-                              </ul>
-                            </div>
+                    <div className="mt-10 w-full flex justify-center">
+                      <Image src={getImage || DefaultVideoImg} alt="Product Image" width={500} height={500} className="w-[600px] rounded-xl h-auto" />
+                    </div>
+
+                    <div className="mt-10">
+                      {(() => {
+                        const keyRoot = getProductKeyFromName(product?.name);
+                        const allowedKeys = [
+                          ProductName.GELMIN_KIDS,
+                          ProductName.COMPLEX,
+                          ProductName.COMPLEX_EXTRA,
+                        ];
+
+                        const isCustomAdditional = allowedKeys.includes(product?.name as ProductName);
+                        const baseKey = isCustomAdditional && keyRoot
+                          ? `products.additional.${keyRoot}`
+                          : "products.additional";
+
+                        return (
+                          <>
+                            <h4 className="text-lg font-semibold mb-6">
+                              {t(`${baseKey}.title`)}
+                            </h4>
+
+                            <ul className="space-y-3">
+                              {Array.from({ length: 10 }).map((_, i) => {
+                                const key = `${baseKey}.${i + 1}`;
+                                const translated = t(key);
+                                if (translated === key) return null;
+
+                                const [bold, ...rest] = translated.split(" - ");
+                                return (
+                                  <li key={i} className="text-base">
+                                    <span className="font-semibold">{bold}</span>
+                                    {rest.length > 0 && ` - ${rest.join(" - ")}`}
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </>
+                        );
+                      })()}
+                    </div>
+
+
+                    <div className="flex justify-center mt-10">
+                      {youtubelink ? (
+                        <YouTubeEmbed
+                          link={youtubelink}
+                          className="w-[650px] rounded-xl h-[500px] object-cover"
+                        />
+                      ) : (
+                        <Image
+                          className="w-[650px] rounded-xl h-[500px] object-cover"
+                          src={image}
+                          width={500}
+                          alt="Product Detail Image"
+                        />
+                      )}
+
+                    </div>
+                  </TabsContent>
+                  <TabsContent key={`tab-2`} value={"2"}>
+                    <div className="mb-10">
+                      {[1, 2, 3].map((item, index) => (
+                        <div
+                          key={item}
+                          className={clsx(
+                            "grid grid-cols-1 md:grid-cols-2 gap-6 items-center",
+                            index % 2 === 1 && "md:flex-row-reverse md:flex"
+                          )}
+                        >
+                          <div className="flex justify-center">
+                            <Image
+                              src={GinsengImg}
+                              alt="Ginseng Image"
+                              width={500}
+                              className="w-[500px] rounded-xl h-auto"
+                            />
+                          </div>
+
+                          <div className="mt-10">
+                            <h4 className="text-lg font-semibold mb-6">
+                              Дополнительно:
+                            </h4>
+                            <ul className="space-y-3">
+                              <li className="text-base">
+                                Эффективно помогает при таких заболеваниях как:
+                              </li>
+                              <li className="text-base">
+                                Грыжа позвоночника - нарушение целостности внешней оболочки межпозвоночного диска;
+                              </li>
+                              <li className="text-base">
+                                Коксартроз - эрозия тазобедренного сустава;
+                              </li>
+                              <li className="text-base">
+                                Гонартроз - хроническое дегенеративное заболевание коленного сустава;
+                              </li>
+                              <li className="text-base">
+                                Полиартрит - воспаление суставов;
+                              </li>
+                              <li className="text-base">
+                                Остеопороз - хрупкость костей;
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent key={`tab-3`} value={"3"}>
+                    <div className="my-12 max-w-[80%] mx-auto">
+                      <h4 className="text-base leading-10 font-semibold mb-2">
+                        Клиническая фармакология:
+                      </h4>
+                      <p className="text-base mb-4 leading-10">
+                        Комплексный продукт для поддержания здоровья суставов и костей: Оказывает питательную поддержку соединительной ткани, улучшает синтез коллагена и эластина, оказывает общеукрепляющее воздействие на организм. Способствует купированию воспалительных процессов в тканях, снижению болевого синдрома.
+                      </p>
+
+                      <h4 className="text- leading-10 font-semibold mb-2">
+                        Показания к применению:
+                      </h4>
+                      <p className="text-base mb-4 leading-10">
+                        В качестве биологически активной добавки рекомендуется при нарушениях функции опорно-двигательного аппарата (остеохондроз позвоночника, артриты и артрозы, тендовагиниты, миозиты, в восстановительном периоде после травм), как ежедневная поддержка костно-суставной системы для спортсменов и других лиц, имеющих повышенную нагрузку на опорно-двигательный аппарат; заболевания сосудов, в том числе тромбофлебиты, геморрой; патологии со стороны клапанов сердца; аномалии и другие заболевания со стороны соединительной ткани. Способствует укреплению волос, ногтей, повышению эластичности кожи и улучшению ее внешнего вида, помогает при воспалении и напряжении в суставах, мышцах, связках.
+                      </p>
+                      <h4 className="text-base leading-10 font-semibold mb-2">
+                        Способ применения и дозировка:
+                      </h4>
+                      <p className="text-base mb-4 leading-10">
+                        Взрослым по 2 капсулы в день, вечером за 30 минут до еды. Продукт рекомендуется принимать длительными курсами в течение 3-4 месяцев.
+                      </p>
+                      <h4 className="text-base leading-10 font-semibold mb-2">
+                        Противопоказания:
+                      </h4>
+                      <p className="text-base mb-4 leading-10">
+                        Индивидуальная непереносимость компонентов продукта, беременность, кормление грудью.
+                      </p>
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent key={`tab-4`} value={"4"}>
+                    <div className="w-full px-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-12">
+                        {certificateImages.map((item, idx) => (
+                          <div key={`certificate-${idx}`} className="flex justify-center">
+                            <Image
+                              src={item.src}
+                              alt={`Certificate ${item}`}
+                              width={250}
+                              height={350}
+                              className="w-full max-w-[250px] h-auto object-contain rounded-xl"
+                            />
                           </div>
                         ))}
                       </div>
-                    </TabsContent>
+                    </div>
+                  </TabsContent>
 
-                    <TabsContent key={`tab-3`} value={"3"}>
-                      <div className="my-12 max-w-[80%] mx-auto">
-                        <h4 className="text-base leading-10 font-semibold mb-2">
-                          Клиническая фармакология:
-                        </h4>
-                        <p className="text-base mb-4 leading-10">
-                          Комплексный продукт для поддержания здоровья суставов и костей: Оказывает питательную поддержку соединительной ткани, улучшает синтез коллагена и эластина, оказывает общеукрепляющее воздействие на организм. Способствует купированию воспалительных процессов в тканях, снижению болевого синдрома.
-                        </p>
+                  <TabsContent value="5">
+                    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 my-12">
+                      <ul className="space-y-6 list-disc list-inside">
+                        <h3 className="text-lg font-bold mb-6">{t("products.gelminKids.tab.gijjalar.1.title")}</h3>
+                        {Array.from({ length: 5 }).map((item, idx) => (
+                          <li key={`${item}-${idx}`} className="text-base font-medium">
+                            {t(`products.gelminKids.tab.gijjalar.1.${idx + 1}`)}
+                          </li>
+                        ))}
+                      </ul>
 
-                        <h4 className="text- leading-10 font-semibold mb-2">
-                          Показания к применению:
-                        </h4>
-                        <p className="text-base mb-4 leading-10">
-                          В качестве биологически активной добавки рекомендуется при нарушениях функции опорно-двигательного аппарата (остеохондроз позвоночника, артриты и артрозы, тендовагиниты, миозиты, в восстановительном периоде после травм), как ежедневная поддержка костно-суставной системы для спортсменов и других лиц, имеющих повышенную нагрузку на опорно-двигательный аппарат; заболевания сосудов, в том числе тромбофлебиты, геморрой; патологии со стороны клапанов сердца; аномалии и другие заболевания со стороны соединительной ткани. Способствует укреплению волос, ногтей, повышению эластичности кожи и улучшению ее внешнего вида, помогает при воспалении и напряжении в суставах, мышцах, связках.
-                        </p>
-                        <h4 className="text-base leading-10 font-semibold mb-2">
-                          Способ применения и дозировка:
-                        </h4>
-                        <p className="text-base mb-4 leading-10">
-                          Взрослым по 2 капсулы в день, вечером за 30 минут до еды. Продукт рекомендуется принимать длительными курсами в течение 3-4 месяцев.
-                        </p>
-                        <h4 className="text-base leading-10 font-semibold mb-2">
-                          Противопоказания:
-                        </h4>
-                        <p className="text-base mb-4 leading-10">
-                          Индивидуальная непереносимость компонентов продукта, беременность, кормление грудью.
-                        </p>
-                      </div>
-                    </TabsContent>
+                      <ul className="space-y-6 list-disc list-inside">
+                        <h3 className="text-lg font-bold mb-6">{t("products.gelminKids.tab.gijjalar.2.title")}</h3>
+                        {Array.from({ length: 2 }).map((item, idx) => (
+                          <li key={`${item}-${idx}`} className="text-base font-medium">
+                            {t(`products.gelminKids.tab.gijjalar.2.${idx + 1}`)}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </TabsContent>
+                </Container>
+              </motion.div>
+            </AnimatePresence>
+          </Tabs>
 
-                    <TabsContent key={`tab-4`} value={"4"}>
-                      <div className="w-full px-4">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-12">
-                          {certificateImages.map((item, idx) => (
-                            <div key={`certificate-${idx}`} className="flex justify-center">
-                              <Image
-                                src={item.src}
-                                alt={`Certificate ${item}`}
-                                width={250}
-                                height={350}
-                                className="w-full max-w-[250px] h-auto object-contain rounded-xl"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </TabsContent>
-
-                    <TabsContent value="5">
-                      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 my-12">
-                        <ul className="space-y-6 list-disc list-inside">
-                          <h3 className="text-lg font-bold mb-6">{t("products.gelminKids.tab.gijjalar.1.title")}</h3>
-                          {Array.from({ length: 5 }).map((item, idx) => (
-                            <li key={`${item}-${idx}`} className="text-base font-medium">
-                              {t(`products.gelminKids.tab.gijjalar.1.${idx + 1}`)}
-                            </li>
-                          ))}
-                        </ul>
-
-                        <ul className="space-y-6 list-disc list-inside">
-                          <h3 className="text-lg font-bold mb-6">{t("products.gelminKids.tab.gijjalar.2.title")}</h3>
-                          {Array.from({ length: 2 }).map((item, idx) => (
-                            <li key={`${item}-${idx}`} className="text-base font-medium">
-                              {t(`products.gelminKids.tab.gijjalar.2.${idx + 1}`)}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </TabsContent>
-                  </Container>
-                </motion.div>
-              </AnimatePresence>
-            </Tabs>
-
-          </Container>
-          <ProductsComponent isAviableBackground={false} />
-          <SaleSection />
-        </div>
+        </Container>
+        <ProductsComponent isAviableBackground={false} />
+        <SaleSection />
+      </div>
       {/* )} */}
     </div >
   );
