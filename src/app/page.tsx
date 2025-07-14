@@ -6,7 +6,7 @@ import Products from "@/containers/Products";
 import AboutBrandSection from "@/containers/AboutBrandSection";
 import Reviews from "@/containers/Reviews";
 import SaleSection from "@/containers/SaleSection";
-import FloatingButtons from "@/components/FloatingButtons";
+// import FloatingButtons from "@/components/FloatingButtons";
 
 // export const metadata = {
 //     title: "Nutva Complex",
@@ -22,8 +22,6 @@ export default function App() {
       <AboutBrandSection />
       <Reviews />
       <SaleSection />
-
-      <FloatingButtons />
     </main>
   );
 }

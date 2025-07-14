@@ -16,6 +16,7 @@ import InjectPixelScript from "@/components/InjectPixelScript";
 import TrackVisit from "@/components/TrackVisit";
 
 import BuyModalContainerDynamic from "@/components/BuyModalContainerDynamic";
+import FloatingButtons from "@/components/FloatingButtons";
 
 // Fonts
 const geistSans = Geist({
@@ -131,25 +132,27 @@ export default function RootLayout({
           </div>
         </noscript>
         {/* <AuthProvider> */}
-          <QueryProvider>
-            <LangProvider>
-              <RawCartProvider>
-                <BuyProvider>
-                  <Layout>
-                    {/* Server-side / Static components */}
-                    <TrackVisit />
-                    <InjectPixelScript />
-                    {children}
+        <QueryProvider>
+          <LangProvider>
+            <RawCartProvider>
+              <BuyProvider>
+                <Layout>
+                  {/* Server-side / Static components */}
+                  <TrackVisit />
+                  <InjectPixelScript />
+                  {children}
 
-                    {/* Client-only components */}
-                    <BuyModalContainerDynamic />
-                    <ToastContainer />
+                  <FloatingButtons />
 
-                  </Layout>
-                </BuyProvider>
-              </RawCartProvider>
-            </LangProvider>
-          </QueryProvider>
+                  {/* Client-only components */}
+                  <BuyModalContainerDynamic />
+                  <ToastContainer />
+
+                </Layout>
+              </BuyProvider>
+            </RawCartProvider>
+          </LangProvider>
+        </QueryProvider>
         {/* </AuthProvider> */}
       </body>
     </html>
