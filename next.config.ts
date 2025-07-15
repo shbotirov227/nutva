@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "demo.nutva.uz",
+        hostname: "nutva.uz",
         port: "",
         pathname: "/uploads/**",
       },
@@ -18,14 +18,14 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "https://demo.nutva.uz/api/:path*",
+        destination: "https://nutva.uz/api/:path*",
       },
     ];
   },
 
   env: {
-    NEXT_PUBLIC_BASE_URL: "https://demo.nutva.uz/api",
-    NEXT_PUBLIC_API_URL: "https://demo.nutva.uz/api",
+    NEXT_PUBLIC_BASE_URL: "https://nutva.uz/api",
+    NEXT_PUBLIC_API_URL: "https://nutva.uz/api",
   },
 };
 
