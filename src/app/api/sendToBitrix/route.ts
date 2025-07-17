@@ -111,7 +111,7 @@ export async function POST(req: NextRequest) {
       fields: {
         TITLE: dealTitle,
         CONTACT_ID: contactId,
-        SOURCE_ID: sourceId, // ✅ O'zgartirilgan qism shu yerda
+        SOURCE_ID: sourceId,
         CATEGORY_ID: 2,
         STAGE_ID: "C2:EXECUTING",
         OPPORTUNITY: totalAmount,
