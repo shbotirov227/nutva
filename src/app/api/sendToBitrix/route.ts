@@ -16,6 +16,9 @@ export async function POST(req: NextRequest) {
 
   const baseUrl = "https://crm.nutva.uz/rest/4/0rmhzl4g9pnvvw0c";
 
+  // ✅ SOURCE_ID ni alohida ajratamiz
+  const sourceId = "WEB"; // istasangiz bu yerga "INSTAGRAM", "TELEGRAM" kabi IDlarni qo'yishingiz mumkin
+
   // ✅ 1. Mahsulot nomlarini olish
   const allProducts = await apiClient.getAllProducts("uz");
   const productNameMap = allProducts.reduce((acc, p) => {
@@ -87,13 +90,9 @@ export async function POST(req: NextRequest) {
   const formattedProductList = products?.length
     ? products.map((p: { productId: string; quantity: number }, i: number) => {
       const name = getProductName(p.productId);
-
-      // getDiscount: individual quantity + global quantity
       const discount = getDiscount(name, p.quantity, globalQuantity);
       const amount = discount.totalPrice;
-
       totalAmount += amount;
-
       return `${i + 1}. ${name} — ${p.quantity} dona — ${amount.toLocaleString()} so'm`;
     }).join("\n")
     : "  - Mahsulotlar yo'q";
@@ -112,9 +111,12 @@ export async function POST(req: NextRequest) {
       fields: {
         TITLE: dealTitle,
         CONTACT_ID: contactId,
-        SOURCE_ID: "WEB",
+        SOURCE_ID: sourceId, // ✅ O'zgartirilgan qism shu yerda
         CATEGORY_ID: 2,
-        STAGE_ID: "C2:EXECUTING"
+        STAGE_ID: "C2:EXECUTING",
+        OPPORTUNITY: totalAmount,
+        CURRENCY_ID: "UZS",
+        IS_MANUAL_OPPORTUNITY: "Y"
       }
     })
   });
