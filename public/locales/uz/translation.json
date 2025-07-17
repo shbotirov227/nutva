@@ -306,6 +306,39 @@
                 "5": "Pankreatit - Oshqozon osti bezining yallig'lanishi. Sabablari: yog'li ovqat, spirtli ichimlilklar, o't qopdagi toshlar. Qorinda kuchli og'riq va hazm muammolari kuzatiladi.",
                 "6": "Ich qotishi (qabziyat) - Hajmi kam va qattiq axlat chiqishi. Sababi: kam suv ichish, kamharakat, ovqatda vitaminlar yetishmasligi. Noqulaylik, shish va uyqusizlikka olib keladi.",
                 "7": "Ichak faoliyati buzilishi - Diareya, shishish, og'riq, qabziyat - ichakning noto'g'ri ishlash belgilaridir. Sababi: stress, infeksiya yoki noto'g'ri ovqatlanish."
+            },
+
+            "fertiliaWoman": {
+                "title": "Quyidagi kasalliklarda samarali yordam beradi:",
+                "1": "Vaginit - Qin devorining yallig'lanishi. Odatda infeksiya yoki gormonal o'zgarishlar sababli yuzaga keladi. Belgilari: ajralma, qichishish, achishish.",
+                "2": "Vulvit - Tashqi jinsiy a'zolar (labia) yallig'lanishi. Bolalar va menopauzadagi ayollarda ko'p uchraydi. Belgilari: qichishish, qizarish, og'riq.",
+                "3": "Servisit - Bachadon bo'yni (serviks) yallig'lanishi. Ko'pincha jinsiy yo'l bilan yuqadigan infeksiyalar sabab bo'ladi.",
+                "4": "Endometrit - Bachadon ichki qavati (endometriy) yallig'lanishi. Tug'ruq, abort yoki infeksiya tufayli paydo bo'ladi.",
+                "5": "Adneksit - Bachadon qo'shimchalari (tuxumdon va naylar) yallig'lanishi. Keskin og'riq va isitma bilan kechadi.",
+                "6": "Bartolinit - Bartolin bezlari yallig'lanishi. Qin kirishida og'riqli shish hosil qiladi.",
+                "7": "Salpingit - Bachadon naylari yallig'lanishi. Odatda jinsiy infeksiyalardan kelib chiqadi. Bezorlik, og'riq, bepushtlikka olib kelishi mumkin.",
+                "8": "Tuxumdonning yallig'lanishi - Odatda adneksit tarkibida ko'riladi. Tuxumdonlar shishib, og'riq va hayz buzilishiga olib keladi.",
+                "9": "Bachadon miomasi - Bachadon devorida hosil bo'ladigan begona, lekin yaxshi sifatli o'smalar. Ba'zida og'riq va qon ketishga olib keladi.",
+                "10": "Kista - Suyuqlik to'la shish. Odatda tuxumdonlarda paydo bo'ladi va gormonal o'zgarishlar bilan bog'liq.",
+                "11": "Polikistoz tuxumdon sindromi - Gormon disbalansi natijasida tuxumdonlarda ko'p sonli kistalar paydo bo'ladi. Hayz buzilishi, husnbuzar, ortiqcha tuklanish bilan kechadi.",
+                "12": "Folikulyar kista - Tuxum yetilishi jarayonida hosil bo'ladigan, ko'pincha o'z-o'zidan yo'qoladigan tuxumdon kistasi.",
+                "13": "Funksional kista - Tuxumdon funksiyasi bilan bog'liq bo'lgan oddiy kistalar. Gormonal nomutanosiblik sababli yuzaga keladi.",
+                "14": "Infeksion kasalliklar - Jinsiy yo'l bilan yuqadigan yoki ichki jinsiy a'zolarga zarar yetkazuvchi bakterial, virusli yoki zamburug'li infeksiyalar."
+            },
+
+            "virisMen": {
+                "title": "Quyidagi kasalliklarda samarali yordam beradi:",
+                "1": "Sistit - Siydik pufagi yallig'lanishi. Ayollarda ko'p uchrasa-da, erkaklarda ham og'riqli siyish va tez-tez siyishga olib keladi.",
+                "2": "Prostatit - Prostata bezining yallig'lanishi. Og'riq, siyishdagi qiyinchilik va jinsiy zaiflik bilan kechadi.",
+                "3": "Uretrit - Siydik chiqarish kanalining yallig'lanishi. Odatda infeksiyalardan kelib chiqadi. Qichishish va achishish bilan namoyon bo'ladi.",
+                "4": "Balanopostit - Jinsiy olat uchi va old terisi (qopqog'i) yallig'lanishi. Gigiyena yetishmovchiligi yoki infeksiya sababli yuzaga keladi.",
+                "5": "Balanit - Faqatgina jinsiy olat uchining yallig'lanishi. Og'riq, qizarish, suyuqlik ajralishi bilan kechadi.",
+                "6": "Epididimit - Urug' yo'llari (epididimis) yallig'lanishi. Odatda og'riqli shish, isitma va bepushtlik xavfi bilan kechadi.",
+                "7": "Orxit - Tuxumdon yallig'lanishi. Tez-tez virusli infeksiyalar, ayniqsa epidemik parotit (svinka) bilan bog'liq bo'ladi.",
+                "8": "Prostata adenomasi - Prostata bezining yaxshi sifatli o'smasi. Keksa yoshdagi erkaklarda siyishdagi qiyinchilik, zaif oqim va to'liq bo'shamaslik hissi paydo bo'ladi.",
+                "9": "Varikosele - Tuxumdon venalarining kengayishi. Erkaklarda bepushtlikning asosiy sababi bo'lishi mumkin.",
+                "10": "Erkaklarda bepushtlik - Turli sabablar, jumladan gormon yetishmovchiligi, sperma sifati pastligi yoki infektsiyalar bilan bog'liq bo'lishi mumkin.",
+                "11": "Ereksiya muammolari - Jinsiy aloqani boshlash yoki ushlab turishda qiyinchilik. Ko'pincha qon aylanishi, stress yoki gormon disbalansi bilan bog'liq."
             }
         }
 	},

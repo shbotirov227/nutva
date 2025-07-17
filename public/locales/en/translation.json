@@ -306,6 +306,39 @@
                 "5": "Pancreatitis - inflammation of the pancreas. Causes: fatty foods, alcohol, gallstones. Symptoms: severe abdominal pain, digestive problems.",
                 "6": "Constipation - infrequent, hard stool. Causes: low water intake, sedentary lifestyle, lack of vitamins. Leads to discomfort, bloating, and insomnia.",
                 "7": "Bowel dysfunction - diarrhea, bloating, pain, constipation. Causes: stress, infection, or poor diet."
+            },
+
+            "fertiliaWoman": {
+                "title": "Effective for the following conditions:",
+                "1": "Vaginitis - Inflammation of the vaginal wall. Usually caused by infection or hormonal changes. Symptoms: discharge, itching, burning.",
+                "2": "Vulvitis - Inflammation of the external genitalia (labia). Common in children and menopausal women. Symptoms: itching, redness, pain.",
+                "3": "Cervicitis - Inflammation of the cervix. Often caused by sexually transmitted infections.",
+                "4": "Endometritis - Inflammation of the inner lining of the uterus (endometrium). Can occur due to childbirth, abortion, or infection.",
+                "5": "Adnexitis - Inflammation of the uterus appendages (ovaries and fallopian tubes). Comes with severe pain and fever.",
+                "6": "Bartholinitis - Inflammation of the Bartholin glands. Causes a painful lump near the vaginal opening.",
+                "7": "Salpingitis - Inflammation of the fallopian tubes. Usually results from STIs. Can cause discomfort, pain, and infertility.",
+                "8": "Ovarian inflammation - Often part of adnexitis. Ovaries become swollen, causing pain and menstrual disorders.",
+                "9": "Uterine fibroids - Benign tumors forming in the uterine wall. Sometimes cause pain and bleeding.",
+                "10": "Cyst - Fluid-filled sac. Common in ovaries and related to hormonal changes.",
+                "11": "Polycystic ovary syndrome - Hormonal imbalance leads to many ovarian cysts. Irregular periods, acne, and excessive hair growth are common.",
+                "12": "Follicular cyst - Forms during egg maturation. Often resolves on its own.",
+                "13": "Functional cyst - Simple ovarian cysts related to ovarian function. Caused by hormonal imbalance.",
+                "14": "Infectious diseases - Bacterial, viral, or fungal infections affecting internal reproductive organs."
+            },
+
+            "virisMen": {
+                "title": "Effective for the following conditions:",
+                "1": "Cystitis - Inflammation of the bladder. Although more common in women, men may also experience painful and frequent urination.",
+                "2": "Prostatitis - Inflammation of the prostate gland. Causes pain, urination difficulties, and sexual weakness.",
+                "3": "Urethritis - Inflammation of the urethra. Usually caused by infections. Symptoms include itching and burning.",
+                "4": "Balanoposthitis - Inflammation of the glans and foreskin. Often due to poor hygiene or infection.",
+                "5": "Balanitis - Inflammation of the glans penis only. Symptoms: pain, redness, and discharge.",
+                "6": "Epididymitis - Inflammation of the epididymis. Comes with painful swelling, fever, and risk of infertility.",
+                "7": "Orchitis - Inflammation of the testicles. Often linked to viral infections, especially mumps.",
+                "8": "Prostate adenoma - Benign tumor of the prostate gland. In older men, causes urination problems and incomplete bladder emptying.",
+                "9": "Varicocele - Enlargement of the veins in the scrotum. A leading cause of male infertility.",
+                "10": "Male infertility - Can be due to hormone deficiencies, low sperm quality, or infections.",
+                "11": "Erectile dysfunction - Difficulty initiating or maintaining an erection. Commonly due to poor blood flow, stress, or hormonal imbalance."
             }
         }
     },
