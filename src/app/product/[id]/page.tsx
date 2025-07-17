@@ -264,6 +264,8 @@ export default function ProductDetailPage() {
                           ProductName.GELMIN_KIDS,
                           ProductName.COMPLEX,
                           ProductName.COMPLEX_EXTRA,
+                          ProductName.FERTILIA_WOMEN,
+                          ProductName.VIRIS_MEN,
                         ];
 
                         const isCustomAdditional = allowedKeys.includes(product?.name as ProductName);
