@@ -37,6 +37,10 @@ export default function RootLayout({
   return (
     <html lang="uz" suppressHydrationWarning>
       <head>
+        {/* Verification Meta Tags */}
+        <meta name="yandex-verification" content="aef60ba7c050b521" />
+        <meta name="google-site-verification" content="UvbmZYZaowizMbMapriLrVKCoiGywdpBr50iEVlajJ4" />
+        
         {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
@@ -99,6 +103,7 @@ export default function RootLayout({
           }}
         />
       </head>
+
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
         {/* Google Tag Manager (noscript) */}
         <noscript>
