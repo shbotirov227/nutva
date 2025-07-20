@@ -32,7 +32,10 @@
         "typing": "Typing...",
         "typeMsg": "Type a message",
         "contactOperator": "Contact operator",
-        "contactAI": "Contact AI"
+        "contactAI": "Contact AI",
+        "product": "product",
+        "products": "products",
+        "box": "box"
     },
     "errors": {
         "notFound": "Page not found",

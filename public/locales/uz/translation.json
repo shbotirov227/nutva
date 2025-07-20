@@ -32,7 +32,10 @@
         "typing": "Yozmoqda...",
         "typeMsg": "Xabarni yozing...",
         "contactOperator": "Operator bilan aloqa",
-        "contactAI": "AI bilan aloqa"
+        "contactAI": "AI bilan aloqa",
+        "product": "mahsulot",
+        "products": "mahsulotlar",
+        "box": "quti"
     },
     "errors": {
         "notFound": "Sahifa topilmadi",
@@ -357,5 +360,17 @@
     "contact": {
         "title": "Biz bilan bog'laning",
         "subtitle": "Mahsulot va xizmatlarimiz bo'yicha savollaringizga javob berishdan mamnunmiz."
+    },
+
+    "sale": {
+        "title": "MAXSUS TAKLIF!",
+        "subtitle": "Qancha ko'p olsangiz — shuncha ko'p tejaysiz!",
+        "saveFor": "tejab qoling",
+        "button": "Ushbu chegirma asosida xarid qilish",
+        "notSalePrice": "chegirmasiz narx",
+
+        "table": {
+            "title": "Qancha ko'p xarid — shuncha katta chegirma!"
+        }
     }
 }

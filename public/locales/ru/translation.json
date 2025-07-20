@@ -32,7 +32,10 @@
         "typing": "Печатает...",
         "typeMsg": "Напишите сообщение...",
         "contactOperator": "Написать оператору",
-        "contactAI": "Написать AI"
+        "contactAI": "Написать AI",
+        "product": "продукт",
+        "products": "продукты",
+        "box": "коробка"
     },
     "errors": {
         "notFound": "Страница не найдена",

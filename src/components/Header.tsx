@@ -57,6 +57,7 @@ const Header: React.FC = () => {
   const navLinks = useMemo(() => [
     { href: "/", label: t("nav.home") },
     { href: "/product", label: t("nav.products") },
+    { href: "/sale", label: t("common.saleUpperCase") },
     { href: "/about-us", label: t("nav.about") },
     { href: "/blog", label: t("nav.blog") },
     { href: "/contact", label: t("nav.contact") },
