@@ -6,7 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
 import { QueryProvider } from "@/providers/queryProvider";
-// import { AuthProvider } from "@/providers/sessionProvider";
 import { LangProvider } from "@/context/LangContext";
 import { RawCartProvider } from "@/context/CartContext";
 import { BuyProvider } from "@/context/BuyContext";
@@ -14,11 +13,9 @@ import { BuyProvider } from "@/context/BuyContext";
 import Layout from "@/components/Layout";
 import InjectPixelScript from "@/components/InjectPixelScript";
 import TrackVisit from "@/components/TrackVisit";
-
 import BuyModalContainerDynamic from "@/components/BuyModalContainerDynamic";
 import FloatingButtons from "@/components/FloatingButtons";
 
-// Fonts
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -37,10 +34,10 @@ export default function RootLayout({
   return (
     <html lang="uz" suppressHydrationWarning>
       <head>
-        {/* Verification Meta Tags */}
+        {/* Meta Verification */}
         <meta name="yandex-verification" content="aef60ba7c050b521" />
         <meta name="google-site-verification" content="UvbmZYZaowizMbMapriLrVKCoiGywdpBr50iEVlajJ4" />
-        
+
         {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
@@ -65,7 +62,7 @@ export default function RootLayout({
           }}
         />
 
-        {/* Meta Pixel (Facebook) */}
+        {/* Facebook Pixel */}
         <script
           dangerouslySetInnerHTML={{
             __html: `!function(f,b,e,v,n,t,s)
@@ -81,31 +78,60 @@ export default function RootLayout({
           }}
         />
 
-        {/* Yandex Metrika */}
+        {/* Yandex Metrika #1 — asosiy hisob (103208172) */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(m,e,t,r,i,k,a){
-              m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-              m[i].l=1*new Date();
-              for (var j = 0; j < document.scripts.length; j++) {
-                if (document.scripts[j].src === r) return;
-              }
-              k=e.createElement(t),a=e.getElementsByTagName(t)[0],
-              k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-            })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-            
-            ym(103208172, "init", {
-              clickmap:true,
-              trackLinks:true,
-              accurateTrackBounce:true,
-              webvisor:true
-            });`,
+            __html: `
+              (function(m,e,t,r,i,k,a){
+                m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                m[i].l=1*new Date();
+                for (var j = 0; j < document.scripts.length; j++) {
+                  if (document.scripts[j].src === r && m[i].a && m[i].a.length > 0) return;
+                }
+                k=e.createElement(t),a=e.getElementsByTagName(t)[0],
+                k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+              })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+              ym(103208172, "init", {
+                clickmap:true,
+                trackLinks:true,
+                accurateTrackBounce:true,
+                webvisor:true
+              });
+            `,
+          }}
+        />
+
+        {/* Yandex Metrika #2 — e-commerce uchun (103392899) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+
+              (function(m,e,t,r,i,k,a){
+                m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                m[i].l=1*new Date();
+                for (var j = 0; j < document.scripts.length; j++) {
+                  if (document.scripts[j].src === r && m[i].a && m[i].a.length > 1) return;
+                }
+                k=e.createElement(t),a=e.getElementsByTagName(t)[0],
+                k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+              })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+              ym(103392899, "init", {
+                clickmap:true,
+                trackLinks:true,
+                accurateTrackBounce:true,
+                webvisor:true,
+                ecommerce:"dataLayer"
+              });
+            `,
           }}
         />
       </head>
 
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
-        {/* Google Tag Manager (noscript) */}
+        {/* GTM noscript */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-KLMGC5HH"
@@ -115,7 +141,7 @@ export default function RootLayout({
           />
         </noscript>
 
-        {/* Facebook Pixel (noscript) */}
+        {/* Facebook Pixel noscript */}
         <noscript>
           <img
             height="1"
@@ -126,7 +152,7 @@ export default function RootLayout({
           />
         </noscript>
 
-        {/* Yandex Metrika (noscript) */}
+        {/* Yandex Metrika #1 noscript */}
         <noscript>
           <div>
             <img
@@ -136,29 +162,35 @@ export default function RootLayout({
             />
           </div>
         </noscript>
-        {/* <AuthProvider> */}
+
+        {/* Yandex Metrika #2 noscript */}
+        <noscript>
+          <div>
+            <img
+              src="https://mc.yandex.ru/watch/103392899"
+              style={{ position: "absolute", left: "-9999px" }}
+              alt=""
+            />
+          </div>
+        </noscript>
+
+        {/* App Providers */}
         <QueryProvider>
           <LangProvider>
             <RawCartProvider>
               <BuyProvider>
                 <Layout>
-                  {/* Server-side / Static components */}
                   <TrackVisit />
                   <InjectPixelScript />
                   {children}
-
                   <FloatingButtons />
-
-                  {/* Client-only components */}
                   <BuyModalContainerDynamic />
                   <ToastContainer />
-
                 </Layout>
               </BuyProvider>
             </RawCartProvider>
           </LangProvider>
         </QueryProvider>
-        {/* </AuthProvider> */}
       </body>
     </html>
   );
