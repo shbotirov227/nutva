@@ -6,15 +6,19 @@ import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { productBgColors } from "@/types/records";
 import PriceTable from "./components/PriceTable";
-// import SaleCard from "./components/SaleCard";
-// import SaleTotalCard from "./components/SaleTotalCard";
+import SaleCard from "./components/SaleCard";
+import SaleTotalCard from "./components/SaleTotalCard";
 import SaleHeroImg from "@/assets/images/sale-page-hero-img.png";
+import SaleCardImg1 from "@/assets/images/sale-total-card-img-1.png";
+import SaleCardImg2 from "@/assets/images/sale-total-card-img-2.png";
+import SaleCardImg3 from "@/assets/images/sale-total-card-img-3.png";
 import StarIcon from "@/assets/images/star-icon.svg";
-// import ProductGreen from "@/assets/images/product-green.png";
-// import ProductRed from "@/assets/images/product-red.png";
-// import ProductOrange from "@/assets/images/product-orange.png";
+import ProductGreen from "@/assets/images/product-green.png";
+import ProductRed from "@/assets/images/product-red.png";
+import ProductOrange from "@/assets/images/product-orange.png";
 import CheckedIcon from "@/assets/images/checked-icon.svg";
 import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 
 // const renderDiscount = (
 //   products: {
@@ -81,84 +85,96 @@ const SalePage = () => {
   const { t } = useTranslation();
   const color = productBgColors.Complex;
 
-  // const productsDataThree = [
-  //   {
-  //     title: "2 ta Complex: 990 000 x 2 = 1 980 000 so‘m (chegirmasiz narx: 2 340 000 so‘m) ",
-  //     itemData: [
-  //       {
-  //         title: "Nutva Complex",
-  //         discountPrice: "990 000",
-  //         originalPrice: "1 170 000",
-  //       },
-  //       {
-  //         title: "Nutva Complex",
-  //         discountPrice: "990 000",
-  //         originalPrice: "1 170 000",
-  //       },
-  //     ],
-  //     totalPriceSection: {
-  //       totalPrice: "1 980 000",
-  //       originalPrice: "2 340 000",
-  //       discountPrice: "360 000",
-  //     },
-  //   },
+  const productsDataThree = [
+    {
+      title: "2 ta Complex: 990 000 x 2 = 1 980 000 so'm (chegirmasiz narx: 2 340 000 so'm) ",
+      image: SaleCardImg1,
+      itemData: [
+        {
+          title: "Nutva Complex",
+          discountPrice: "990 000",
+          originalPrice: "1 170 000",
+        },
+        {
+          title: "Nutva Complex",
+          discountPrice: "990 000",
+          originalPrice: "1 170 000",
+        },
+      ],
+      totalPriceSection: {
+        totalPrice: "1 980 000",
+        originalPrice: "2 340 000",
+        discountPrice: "360 000",
+      },
+    },
 
-  //   {
-  //     title: "1ta Complex + 1ta Complex Extra + 1ta Gelmin Kids = 1 570 000 so'm (chegirmasiz narxi: 2 830 000 so'm)",
-  //     itemData: [
-  //       {
-  //         title: "Nutva Complex",
-  //         discountPrice: "640 000",
-  //         originalPrice: "1 170 000",
-  //       },
-  //       {
-  //         title: "Complex Extra",
-  //         discountPrice: "640 000",
-  //         originalPrice: "1 170 000",
-  //       },
-  //       {
-  //         title: "Gelmin Kids",
-  //         discountPrice: "290 000",
-  //         originalPrice: "490 000",
-  //       },
-  //     ],
-  //     totalPriceSection: {
-  //       totalPrice: "1 570 000",
-  //       originalPrice: "2 830 000",
-  //       discountPrice: "1 260 000",
-  //     },
-  //   },
+    {
+      title: "1ta Complex + 1ta Complex Extra + 1ta Gelmin Kids = 1 570 000 so'm (chegirmasiz narxi: 2 830 000 so'm)",
+      image: SaleCardImg2,
+      itemData: [
+        {
+          title: "Nutva Complex",
+          discountPrice: "640 000",
+          originalPrice: "1 170 000",
+        },
+        {
+          title: "Complex Extra",
+          discountPrice: "640 000",
+          originalPrice: "1 170 000",
+        },
+        {
+          title: "Gelmin Kids",
+          discountPrice: "290 000",
+          originalPrice: "490 000",
+        },
+      ],
+      totalPriceSection: {
+        totalPrice: "1 570 000",
+        originalPrice: "2 830 000",
+        discountPrice: "1 260 000",
+      },
+    },
 
-  //   {
-  //     title: "2ta Complex + 2ta Complex Extra + 1ta Gelmin Kids = 2 460 000 so'm (chegirmasiz narxi: 5 170 000 so'm)",
-  //     itemData: [
-  //       {
-  //         title: "Nutva Complex 2 ta",
-  //         discountPrice: "390 000",
-  //         originalPrice: "1 170 000",
-  //       },
-  //       {
-  //         title: "Complex Extra 2 ta",
-  //         discountPrice: "390 000",
-  //         originalPrice: "1 170 000",
-  //       },
-  //       {
-  //         title: "Gelmin Kids",
-  //         discountPrice: "220 000",
-  //         originalPrice: "490 000",
-  //       },
-  //     ],
-  //     totalPriceSection: {
-  //       totalPrice: "2 460 000",
-  //       originalPrice: "5 170 000",
-  //       discountPrice: "2 710 000",
-  //     },
-  //   },
-  // ];
+    {
+      title: "2ta Complex + 2ta Complex Extra + 1ta Gelmin Kids = 2 460 000 so'm (chegirmasiz narxi: 5 170 000 so'm)",
+      image: SaleCardImg3,
+      itemData: [
+        {
+          title: "Nutva Complex 2 ta",
+          discountPrice: "390 000",
+          originalPrice: "1 170 000",
+        },
+        {
+          title: "Complex Extra 2 ta",
+          discountPrice: "390 000",
+          originalPrice: "1 170 000",
+        },
+        {
+          title: "Gelmin Kids",
+          discountPrice: "220 000",
+          originalPrice: "490 000",
+        },
+      ],
+      totalPriceSection: {
+        totalPrice: "2 460 000",
+        originalPrice: "5 170 000",
+        discountPrice: "2 710 000",
+      },
+    },
+  ];
 
 
 
   return (
+    <AnimatePresence mode="popLayout">
+      <motion.div
+        layout
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.3 }}
+        className="w-full rounded-xl flex flex-col gap-4"
+      >
     <Container className="pt-32 pb-25">
       <div className="flex max-md:flex-col items-center justify-between text-center">
         <div className="w-[55%] max-md:w-full flex flex-col items-center justify-center">
@@ -171,7 +187,7 @@ const SalePage = () => {
             src={SaleHeroImg}
             alt="Sale"
             className="w-full object-cover"
-            priority
+            // priority
           />
         </div>
       </div>
@@ -196,7 +212,7 @@ const SalePage = () => {
       <section className="w-full mx-auto mt-10">
         <h4 className="text-3xl font-bold text-center mb-5" style={{ color }}>🎁 Chegirma misollari</h4>
 
-        {/* {productsDataThree.map((item, index) => {
+        {productsDataThree.map((item, index) => {
           // const isThree = item.itemData.length === 3;
 
           return (
@@ -206,7 +222,7 @@ const SalePage = () => {
               style={{ borderColor: color }}
             >
               <li className="text-xl font-bold bg-[#0FB759AB] px-5 py-7 text-white !list-disc" style={{ color }}>
-                {item.title}
+                {item?.title}
               </li>
 
               <div className="grid gap-6 p-5 grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-[60%_40%] items-center">
@@ -216,19 +232,19 @@ const SalePage = () => {
                     Mahsulotlar:
                   </h4>
                   <div
-                    className={`grid gap-6 ${item.itemData.length >= 3
+                    className={`grid gap-6 ${item?.itemData?.length >= 3
                       ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
                       : "grid-cols-1 sm:grid-cols-2"
                       }`}
                   >
-                    {item.itemData.map((product, pIndex) => (
+                    {item?.itemData?.map((product, pIndex) => (
                       <SaleCard
                         key={pIndex}
                         color={color}
-                        img={product.title.includes("Complex Extra") ? ProductRed : product.title.includes("Complex") ? ProductGreen : ProductOrange}
-                        title={product.title}
-                        discountPrice={product.discountPrice}
-                        originalPrice={product.originalPrice}
+                        img={product?.title?.includes("Complex Extra") ? ProductRed : product?.title?.includes("Complex") ? ProductGreen : ProductOrange}
+                        title={product?.title}
+                        discountPrice={product?.discountPrice}
+                        originalPrice={product?.originalPrice}
                       />
                     ))}
                   </div>
@@ -237,16 +253,17 @@ const SalePage = () => {
                 <div className="w-full mt-10 md:mt-0 flex justify-center">
                   <SaleTotalCard
                     color={color}
-                    totalPrice={item.totalPriceSection.totalPrice}
-                    originalPrice={item.totalPriceSection.originalPrice}
-                    discountPrice={item.totalPriceSection.discountPrice}
+                    image={item?.image}
+                    totalPrice={item?.totalPriceSection?.totalPrice}
+                    originalPrice={item?.totalPriceSection?.originalPrice}
+                    discountPrice={item?.totalPriceSection?.discountPrice}
                   />
                 </div>
               </div>
 
             </div>
           );
-        })} */}
+        })}
       </section>
 
 
@@ -261,7 +278,7 @@ const SalePage = () => {
               src={CheckedIcon}
               alt="Checked icon"
               className="inline-block mr-4 size-6"
-              priority
+              // priority
             />
 
             <p className="text-lg font-semibold text-gray-700" style={{ color }}>
@@ -274,7 +291,7 @@ const SalePage = () => {
               src={CheckedIcon}
               alt="Checked icon"
               className="inline-block mr-4 size-6"
-              priority
+              // priority
             />
 
             <p className="text-lg font-semibold text-gray-700" style={{ color }}>
@@ -288,7 +305,7 @@ const SalePage = () => {
               src={CheckedIcon}
               alt="Checked icon"
               className="inline-block mr-4 size-6"
-              priority
+              // priority
             />
 
             <p className="text-lg font-semibold text-gray-700" style={{ color }}>
@@ -305,7 +322,9 @@ const SalePage = () => {
         <Button className="mx-auto mt-10 bg-white text-[#339668] hover:text-white cursor-pointer p-5" size="lg">Xaridni boshlash</Button>
       </div>
 
-    </Container>
+        </Container>
+      </motion.div>
+    </AnimatePresence>
   )
 }
 

@@ -1,20 +1,21 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import tinycolor from "tinycolor2";
-import SaleHeroImg from "@/assets/images/sale-total-card-img-3.png";
 
 const SaleTotalCard = (
   {
     color,
+    image,
     totalPrice,
     originalPrice,
     discountPrice
   }: {
     color: string;
+    image: StaticImageData;
     totalPrice: string;
     originalPrice: string;
     discountPrice: string;
@@ -29,10 +30,10 @@ const SaleTotalCard = (
   return (
     <div className="w-full flex flex-col items-center justify-center text-center p-10">
       <Image
-        src={SaleHeroImg}
+        src={image}
         alt="Product"
         className="w-[60%] object-contain mt-5"
-        priority
+      // priority
       />
       <div className="w-full text-center mt-5 bg-linear-270 from-[#51FFAE] to-[#6DB19E] p-5 rounded-2xl">
         <p className="text-3xl font-semibold text-white bg-linear-270">

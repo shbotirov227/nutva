@@ -27,7 +27,7 @@ const SaleCard = ({
           src={img}
           className="w-30 h-30 object-contain mb-1"
           alt="Product"
-          priority
+          // priority
         />
         <div className="flex flex-col text-center">
           <h3 className="text-xl font-bold mb-3" style={{ color }}>{title}</h3>
