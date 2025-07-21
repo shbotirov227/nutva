@@ -6,13 +6,13 @@ import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { productBgColors } from "@/types/records";
 import PriceTable from "./components/PriceTable";
-import SaleCard from "./components/SaleCard";
-import SaleTotalCard from "./components/SaleTotalCard";
+// import SaleCard from "./components/SaleCard";
+// import SaleTotalCard from "./components/SaleTotalCard";
 import SaleHeroImg from "@/assets/images/sale-page-hero-img.png";
 import StarIcon from "@/assets/images/star-icon.svg";
-import ProductGreen from "@/assets/images/product-green.png";
-import ProductRed from "@/assets/images/product-red.png";
-import ProductOrange from "@/assets/images/product-orange.png";
+// import ProductGreen from "@/assets/images/product-green.png";
+// import ProductRed from "@/assets/images/product-red.png";
+// import ProductOrange from "@/assets/images/product-orange.png";
 import CheckedIcon from "@/assets/images/checked-icon.svg";
 import { Button } from "@/components/ui/button";
 
@@ -81,80 +81,80 @@ const SalePage = () => {
   const { t } = useTranslation();
   const color = productBgColors.Complex;
 
-  const productsDataThree = [
-    {
-      title: "2 ta Complex: 990 000 x 2 = 1 980 000 so‘m (chegirmasiz narx: 2 340 000 so‘m) ",
-      itemData: [
-        {
-          title: "Nutva Complex",
-          discountPrice: "990 000",
-          originalPrice: "1 170 000",
-        },
-        {
-          title: "Nutva Complex",
-          discountPrice: "990 000",
-          originalPrice: "1 170 000",
-        },
-      ],
-      totalPriceSection: {
-        totalPrice: "1 980 000",
-        originalPrice: "2 340 000",
-        discountPrice: "360 000",
-      },
-    },
+  // const productsDataThree = [
+  //   {
+  //     title: "2 ta Complex: 990 000 x 2 = 1 980 000 so‘m (chegirmasiz narx: 2 340 000 so‘m) ",
+  //     itemData: [
+  //       {
+  //         title: "Nutva Complex",
+  //         discountPrice: "990 000",
+  //         originalPrice: "1 170 000",
+  //       },
+  //       {
+  //         title: "Nutva Complex",
+  //         discountPrice: "990 000",
+  //         originalPrice: "1 170 000",
+  //       },
+  //     ],
+  //     totalPriceSection: {
+  //       totalPrice: "1 980 000",
+  //       originalPrice: "2 340 000",
+  //       discountPrice: "360 000",
+  //     },
+  //   },
 
-    {
-      title: "1ta Complex + 1ta Complex Extra + 1ta Gelmin Kids = 1 570 000 so'm (chegirmasiz narxi: 2 830 000 so'm)",
-      itemData: [
-        {
-          title: "Nutva Complex",
-          discountPrice: "640 000",
-          originalPrice: "1 170 000",
-        },
-        {
-          title: "Complex Extra",
-          discountPrice: "640 000",
-          originalPrice: "1 170 000",
-        },
-        {
-          title: "Gelmin Kids",
-          discountPrice: "290 000",
-          originalPrice: "490 000",
-        },
-      ],
-      totalPriceSection: {
-        totalPrice: "1 570 000",
-        originalPrice: "2 830 000",
-        discountPrice: "1 260 000",
-      },
-    },
+  //   {
+  //     title: "1ta Complex + 1ta Complex Extra + 1ta Gelmin Kids = 1 570 000 so'm (chegirmasiz narxi: 2 830 000 so'm)",
+  //     itemData: [
+  //       {
+  //         title: "Nutva Complex",
+  //         discountPrice: "640 000",
+  //         originalPrice: "1 170 000",
+  //       },
+  //       {
+  //         title: "Complex Extra",
+  //         discountPrice: "640 000",
+  //         originalPrice: "1 170 000",
+  //       },
+  //       {
+  //         title: "Gelmin Kids",
+  //         discountPrice: "290 000",
+  //         originalPrice: "490 000",
+  //       },
+  //     ],
+  //     totalPriceSection: {
+  //       totalPrice: "1 570 000",
+  //       originalPrice: "2 830 000",
+  //       discountPrice: "1 260 000",
+  //     },
+  //   },
 
-    {
-      title: "2ta Complex + 2ta Complex Extra + 1ta Gelmin Kids = 2 460 000 so'm (chegirmasiz narxi: 5 170 000 so'm)",
-      itemData: [
-        {
-          title: "Nutva Complex 2 ta",
-          discountPrice: "390 000",
-          originalPrice: "1 170 000",
-        },
-        {
-          title: "Complex Extra 2 ta",
-          discountPrice: "390 000",
-          originalPrice: "1 170 000",
-        },
-        {
-          title: "Gelmin Kids",
-          discountPrice: "220 000",
-          originalPrice: "490 000",
-        },
-      ],
-      totalPriceSection: {
-        totalPrice: "2 460 000",
-        originalPrice: "5 170 000",
-        discountPrice: "2 710 000",
-      },
-    },
-  ];
+  //   {
+  //     title: "2ta Complex + 2ta Complex Extra + 1ta Gelmin Kids = 2 460 000 so'm (chegirmasiz narxi: 5 170 000 so'm)",
+  //     itemData: [
+  //       {
+  //         title: "Nutva Complex 2 ta",
+  //         discountPrice: "390 000",
+  //         originalPrice: "1 170 000",
+  //       },
+  //       {
+  //         title: "Complex Extra 2 ta",
+  //         discountPrice: "390 000",
+  //         originalPrice: "1 170 000",
+  //       },
+  //       {
+  //         title: "Gelmin Kids",
+  //         discountPrice: "220 000",
+  //         originalPrice: "490 000",
+  //       },
+  //     ],
+  //     totalPriceSection: {
+  //       totalPrice: "2 460 000",
+  //       originalPrice: "5 170 000",
+  //       discountPrice: "2 710 000",
+  //     },
+  //   },
+  // ];
 
 
 
@@ -196,7 +196,7 @@ const SalePage = () => {
       <section className="w-full mx-auto mt-10">
         <h4 className="text-3xl font-bold text-center mb-5" style={{ color }}>🎁 Chegirma misollari</h4>
 
-        {productsDataThree.map((item, index) => {
+        {/* {productsDataThree.map((item, index) => {
           // const isThree = item.itemData.length === 3;
 
           return (
@@ -211,7 +211,6 @@ const SalePage = () => {
 
               <div className="grid gap-6 p-5 grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-[60%_40%] items-center">
 
-                {/* Left Column */}
                 <div>
                   <h4 className="text-lg font-bold my-4" style={{ color }}>
                     Mahsulotlar:
@@ -235,7 +234,6 @@ const SalePage = () => {
                   </div>
                 </div>
 
-                {/* Right Column */}
                 <div className="w-full mt-10 md:mt-0 flex justify-center">
                   <SaleTotalCard
                     color={color}
@@ -248,7 +246,7 @@ const SalePage = () => {
 
             </div>
           );
-        })}
+        })} */}
       </section>
 
 

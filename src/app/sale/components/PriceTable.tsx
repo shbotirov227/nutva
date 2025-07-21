@@ -11,7 +11,7 @@ const PriceTable = ({ color }: { color: string }) => {
     { quantity: "1 dona mahsulot", discount: "0 % to’liq narx" },
     { quantity: "2 dona mahsulot", discount: "15% - 20%" },
     { quantity: "3 yoki 4 dona mahsulot", discount: "40% - 45%" },
-    { quantity: "5 dona yoki undan ko’p mahsulot uchun", discount: "50% - 55%" },
+    { quantity: "5 dona yoki undan ko'p mahsulot uchun", discount: "50% - 55%" },
   ];
 
   return (
