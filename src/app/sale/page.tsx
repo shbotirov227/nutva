@@ -171,7 +171,7 @@ const SalePage = () => {
             src={SaleHeroImg}
             alt="Sale"
             className="w-full object-cover"
-            // priority
+            priority
           />
         </div>
       </div>
@@ -261,7 +261,7 @@ const SalePage = () => {
               src={CheckedIcon}
               alt="Checked icon"
               className="inline-block mr-4 size-6"
-              // priority
+              priority
             />
 
             <p className="text-lg font-semibold text-gray-700" style={{ color }}>
@@ -274,7 +274,7 @@ const SalePage = () => {
               src={CheckedIcon}
               alt="Checked icon"
               className="inline-block mr-4 size-6"
-              // priority
+              priority
             />
 
             <p className="text-lg font-semibold text-gray-700" style={{ color }}>
@@ -288,7 +288,7 @@ const SalePage = () => {
               src={CheckedIcon}
               alt="Checked icon"
               className="inline-block mr-4 size-6"
-              // priority
+              priority
             />
 
             <p className="text-lg font-semibold text-gray-700" style={{ color }}>
