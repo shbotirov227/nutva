@@ -5,6 +5,7 @@ import Image, { StaticImageData } from "next/image";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import tinycolor from "tinycolor2";
+import { useRouter } from "next/navigation";
 
 const SaleTotalCard = (
   {
@@ -22,6 +23,7 @@ const SaleTotalCard = (
   }) => {
 
   const { t } = useTranslation();
+  const router = useRouter();
 
   const tinycolorColor = tinycolor(color);
   const hoverColor = tinycolorColor.darken(7).toHexString();
@@ -55,6 +57,9 @@ const SaleTotalCard = (
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.backgroundColor = color;
+        }}
+        onClick={() => {
+          router.push("/product");
         }}
         variant="default"
         size="lg"
