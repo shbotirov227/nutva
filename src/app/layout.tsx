@@ -34,11 +34,35 @@ export default function RootLayout({
   return (
     <html lang="uz" suppressHydrationWarning>
       <head>
+        {/* ✅ SEO — Title & Meta Description */}
+        <title>Nutva Pharm — Tabiiy Biofaol Qo‘shimchalar</title>
+        <meta
+          name="description"
+          content="Nutva Pharm — bo‘g‘imlar, immunitet va umumiy salomatlikni qo‘llab-quvvatlovchi zamonaviy biofaol mahsulotlar. Shifobaxsh tarkib, yuqori sifat."
+        />
+
+        {/* Canonical */}
+        <link rel="canonical" href="https://nutva.uz/" />
+
+        {/* ✅ Social (Open Graph + Twitter) */}
+        <meta property="og:title" content="Nutva Pharm — Tabiiy Biofaol Qo‘shimchalar" />
+        <meta property="og:description" content="Nutva Pharm — bo‘g‘imlar, immunitet va umumiy salomatlikni qo‘llab-quvvatlovchi zamonaviy biofaol mahsulotlar." />
+        <meta property="og:url" content="https://nutva.uz/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://nutva.uz/logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Nutva Pharm — Tabiiy Biofaol Qo‘shimchalar" />
+        <meta name="twitter:description" content="Sifatli va ishonchli mahsulotlar bilan salomatligingizni qo‘llab-quvvatlang." />
+        <meta name="twitter:image" content="https://nutva.uz/logo.png" />
+
         {/* Meta Verification */}
         <meta name="yandex-verification" content="aef60ba7c050b521" />
         <meta name="google-site-verification" content="UvbmZYZaowizMbMapriLrVKCoiGywdpBr50iEVlajJ4" />
 
-        {/* Google Tag Manager */}
+        {/* Canonical and robots-friendly meta */}
+        <meta name="robots" content="index, follow" />
+
+        {/* ✅ Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -78,7 +102,7 @@ export default function RootLayout({
           }}
         />
 
-        {/* Yandex Metrika #1 — asosiy hisob (103208172) */}
+        {/* Yandex Metrika #1 */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -102,7 +126,7 @@ export default function RootLayout({
           }}
         />
 
-        {/* Yandex Metrika #2 — e-commerce uchun (103392899) */}
+        {/* Yandex Metrika #2 — e-commerce */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
