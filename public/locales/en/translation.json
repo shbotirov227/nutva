@@ -481,6 +481,7 @@
         "online": "Online",
         "typing": "Typing...",
         "typeMessage": "Type a message...",
-        "send": "Send"
+        "send": "Send",
+        "clearHistory": "Clear History"
     }
 }

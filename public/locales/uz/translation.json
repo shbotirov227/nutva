@@ -481,6 +481,7 @@
         "online": "Online",
         "typing": "Yozmoqda...",
         "typeMessage": "Xabarni yozing...",
-        "send": "Yuborish"
+        "send": "Yuborish",
+        "clearHistory": "Tarixni tozalash"
     }
 }

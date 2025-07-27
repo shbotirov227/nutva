@@ -30,10 +30,11 @@ type Message = {
 const ChatBox = ({ onClose }: { onClose: () => void }) => {
   const { t } = useTranslation();
   const [input, setInput] = useState("");
-  const [operatorMode, setOperatorMode] = useState(false);
+  const [operatorMode, setOperatorMode] = useState(true);
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
 
-  const [showSessionForm, setShowSessionForm] = useState(false);
+  // Operator session form states
+  const [showSessionForm, setShowSessionForm] = useState(true);
   const [userName, setUserName] = useState("");
   const [userPhone, setUserPhone] = useState("");
   const [sessionError, setSessionError] = useState("");
@@ -93,16 +94,31 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     setInput("");
   };
 
+  // Start operator session
   const handleStartSession = async () => {
     setSessionError("");
     const success = await startSession(userName, userPhone);
     if (success) {
       setShowSessionForm(false);
-      setUserName("");
-      setUserPhone("");
+      // Don't clear user data, let it be saved in cookie
+      // setUserName("");
+      // setUserPhone("");
     }
   };
 
+  // Clear all chat data function
+  const clearChatData = () => {
+    deleteCookie("chat_operator_messages");
+    deleteCookie("chat_ai_messages");
+    deleteCookie("chat_session_id");
+    deleteCookie("chat_admin_name");
+    setChatMessages([]);
+    // Optionally clear user info too
+    // deleteCookie("chat_user_name");
+    // deleteCookie("chat_user_phone");
+  };
+
+  // Mode switching handler - restored
   const handleModeSwitch = () => {
     if (operatorMode) {
       setOperatorMode(false);
@@ -110,15 +126,116 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
       setSessionError("");
     } else {
       setOperatorMode(true);
-      setShowSessionForm(true);
+      if (!sessionId || sessionClosed) {
+        setShowSessionForm(true);
+      }
       setSessionError("");
     }
+  };
+
+  const setCookie = (name: string, value: string, days: number = 7) => {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+  };
+
+  const getCookie = (name: string): string | null => {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  };
+
+  const deleteCookie = (name: string) => {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
   };
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [allMessages]);
 
+  useEffect(() => {
+    const savedOperatorMessages = getCookie("chat_operator_messages");
+    if (savedOperatorMessages) {
+      try {
+        const parsedMessages = JSON.parse(decodeURIComponent(savedOperatorMessages));
+        console.log("Loaded operator messages from cookie:", parsedMessages);
+      } catch (error) {
+        console.error("Error parsing operator messages from cookie:", error);
+        deleteCookie("chat_operator_messages");
+      }
+    }
+
+    const savedAIMessages = getCookie("chat_ai_messages");
+    if (savedAIMessages) {
+      try {
+        const parsedMessages = JSON.parse(decodeURIComponent(savedAIMessages));
+        setChatMessages(parsedMessages);
+      } catch (error) {
+        console.error("Error parsing AI messages from cookie:", error);
+        deleteCookie("chat_ai_messages");
+      }
+    }
+
+    const savedSessionId = getCookie("chat_session_id");
+    const savedAdminName = getCookie("chat_admin_name");
+    const savedUserName = getCookie("chat_user_name");
+    const savedUserPhone = getCookie("chat_user_phone");
+
+    if (savedSessionId) {
+      console.log("Found saved session:", { savedSessionId, savedAdminName });
+    }
+
+    if (savedUserName) setUserName(savedUserName);
+    if (savedUserPhone) setUserPhone(savedUserPhone);
+  }, []);
+
+  useEffect(() => {
+    if (operatorMessages.length > 0) {
+      setCookie("chat_operator_messages", encodeURIComponent(JSON.stringify(operatorMessages)));
+    }
+  }, [operatorMessages]);
+
+  useEffect(() => {
+    if (chatMessages.length > 0) {
+      setCookie("chat_ai_messages", encodeURIComponent(JSON.stringify(chatMessages)));
+    }
+  }, [chatMessages]);
+
+  useEffect(() => {
+    if (sessionId) {
+      setCookie("chat_session_id", sessionId);
+    } else {
+      deleteCookie("chat_session_id");
+    }
+  }, [sessionId]);
+
+  useEffect(() => {
+    if (adminName) {
+      setCookie("chat_admin_name", adminName);
+    } else {
+      deleteCookie("chat_admin_name");
+    }
+  }, [adminName]);
+
+  useEffect(() => {
+    if (userName) {
+      setCookie("chat_user_name", userName);
+    }
+  }, [userName]);
+
+  useEffect(() => {
+    if (userPhone) {
+      setCookie("chat_user_phone", userPhone);
+    }
+  }, [userPhone]);
+
+  // AI localStorage effects - commented out
+  /*
   useEffect(() => {
     const savedAI = localStorage.getItem("chat_ai");
     if (savedAI) setChatMessages(JSON.parse(savedAI));
@@ -127,6 +244,7 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
   useEffect(() => {
     localStorage.setItem("chat_ai", JSON.stringify(chatMessages));
   }, [chatMessages]);
+  */
 
   const startResizing = (dir: ResizeDirection) => (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -322,6 +440,7 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
         </div>
       )}
 
+      {/* Messages Area */}
       <div className="flex-1 overflow-y-auto p-3 space-y-2 text-sm bg-muted">
         {allMessages.map((msg, i) => (
           <div
@@ -361,25 +480,34 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
-            disabled={operatorMode && (!sessionId || sessionClosed)}
+            disabled={operatorMode ? (!sessionId || sessionClosed) : isPending}
           />
           <Button
             className="bg-primary text-primary-foreground cursor-pointer"
             onClick={handleSend}
-            disabled={isPending || (operatorMode && (!sessionId || sessionClosed))}
+            disabled={operatorMode ? (!sessionId || sessionClosed) : isPending}
           >
             {t("chat.send")}
           </Button>
         </div>
       )}
 
-      <div className="p-2 border-t bg-white text-center">
+      <div className="flex items-center justify-center p-2 border-t bg-white text-center">
         <Button
           onClick={handleModeSwitch}
           className="text-sm text-blue-500 hover:underline cursor-pointer"
           variant="link"
         >
           {operatorMode ? t("chat.connectToAI") : t("chat.connectToOperator")}
+        </Button>
+
+        <Button
+          onClick={clearChatData}
+          className="text-sm text-red-500 hover:underline cursor-pointer ml-4"
+          variant="link"
+          size="sm"
+        >
+          {t("chat.clearHistory")}
         </Button>
       </div>
 
