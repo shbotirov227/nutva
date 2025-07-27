@@ -33,13 +33,11 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
   const [operatorMode, setOperatorMode] = useState(false);
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
 
-  // Operator session form states
   const [showSessionForm, setShowSessionForm] = useState(false);
   const [userName, setUserName] = useState("");
   const [userPhone, setUserPhone] = useState("");
   const [sessionError, setSessionError] = useState("");
 
-  // Existing states
   const [position, setPosition] = useState({ x: window.innerWidth - 400, y: window.innerHeight - 540 });
   const [size, setSize] = useState({ width: 340, height: 460 });
 
@@ -50,7 +48,6 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
   const offsetRef = useRef({ x: 0, y: 0 });
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  // Operator chat hook
   const {
     messages: operatorMessages,
     sendMessage: sendToOperator,
@@ -62,10 +59,8 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     isStartingSession
   } = useOperatorChat(operatorMode);
 
-  // Determine which messages to show
   const allMessages = operatorMode ? operatorMessages : chatMessages;
 
-  // Existing AI chat mutation
   const { mutate, isPending } = useMutation({
     mutationFn: apiClient.postChatAI,
     onSuccess: (data) => {
@@ -79,21 +74,17 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     },
   });
 
-  // Enhanced send message handler
   const handleSend = () => {
     if (!input.trim()) return;
     const now = new Date().toISOString();
 
     if (operatorMode) {
-      // Check if session is active
       if (!sessionId || sessionClosed) {
         setSessionError(t("chat.startSessionFirst"));
         return;
       }
-      // sendToOperator will handle adding user message to state
       sendToOperator(input);
     } else {
-      // AI chat logic (existing)
       const userMsg: Message = { from: "user", text: input, timestamp: now };
       setChatMessages((prev) => [...prev, userMsg]);
       mutate(input);
@@ -102,7 +93,6 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     setInput("");
   };
 
-  // Start operator session
   const handleStartSession = async () => {
     setSessionError("");
     const success = await startSession(userName, userPhone);
@@ -113,22 +103,18 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     }
   };
 
-  // Mode switching handler
   const handleModeSwitch = () => {
     if (operatorMode) {
-      // Switching from operator to AI
       setOperatorMode(false);
       setShowSessionForm(false);
       setSessionError("");
     } else {
-      // Switching from AI to operator
       setOperatorMode(true);
       setShowSessionForm(true);
       setSessionError("");
     }
   };
 
-  // Existing effects
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [allMessages]);
@@ -270,7 +256,6 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
         height: size.height,
       }}
     >
-      {/* Header */}
       <div
         className="bg-primary text-primary-foreground px-4 py-2 flex justify-between items-center cursor-move"
         onMouseDown={(e) => {
@@ -295,7 +280,6 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
         </Button>
       </div>
 
-      {/* Operator Session Form */}
       {operatorMode && showSessionForm && (
         <div className="p-4 border-b bg-gray-50">
           <h3 className="text-sm font-medium mb-3">{t("chat.connectToOperator")}</h3>
@@ -324,7 +308,6 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
         </div>
       )}
 
-      {/* Connection Status for Operator Mode */}
       {operatorMode && !showSessionForm && (
         <div className="px-4 py-1 bg-gray-100 text-xs text-center">
           {isConnected ? (
@@ -339,7 +322,6 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
         </div>
       )}
 
-      {/* Messages Area */}
       <div className="flex-1 overflow-y-auto p-3 space-y-2 text-sm bg-muted">
         {allMessages.map((msg, i) => (
           <div
@@ -366,14 +348,12 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
           </div>
         ))}
 
-        {/* AI typing indicator */}
         {isPending && !operatorMode && (
           <div className="text-xs text-gray-500 italic">{t("chat.typing")}</div>
         )}
         <div ref={bottomRef} />
       </div>
 
-      {/* Input Area - Hidden when showing session form */}
       {!(operatorMode && showSessionForm) && (
         <div className="p-3 border-t bg-white flex items-center gap-2">
           <Input
@@ -393,7 +373,6 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
         </div>
       )}
 
-      {/* Mode Switch Button */}
       <div className="p-2 border-t bg-white text-center">
         <Button
           onClick={handleModeSwitch}
@@ -404,7 +383,6 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
         </Button>
       </div>
 
-      {/* Resize Handles */}
       {resizeHandles.map(({ dir, className, rotate }) => (
         <div
           key={dir}

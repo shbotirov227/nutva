@@ -26,7 +26,6 @@ export function useOperatorChat(enabled: boolean) {
 
   const BASE_URL = "https://nutva.uz/telegram-api";
 
-  // Start session function
   const startSession = async (name: string, phone: string): Promise<boolean> => {
     if (!name.trim() || !phone.trim()) {
       addSystemMessage(t("chat.nameRequired"));
@@ -64,7 +63,6 @@ export function useOperatorChat(enabled: boolean) {
     }
   };
 
-  // Connect WebSocket
   const connectWebSocket = (sessionId: string, adminName: string) => {
     if (socketRef.current) {
       socketRef.current.close();
@@ -76,7 +74,6 @@ export function useOperatorChat(enabled: boolean) {
       setIsConnected(true);
       addSystemMessage(t("chat.connectedToSession"));
 
-      // Send greeting if not sent yet
       if (!greetingSentRef.current) {
         const greeting = `Assalomu aleykum, mening ismim ${adminName}. Sizga qanday yordam bera olaman?`;
 
@@ -88,7 +85,6 @@ export function useOperatorChat(enabled: boolean) {
 
         setMessages(prev => [...prev, greetingMessage]);
 
-        // Save greeting to server
         fetch(`${BASE_URL}/messages/`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -111,15 +107,12 @@ export function useOperatorChat(enabled: boolean) {
       if (data.includes("Session has ended")) {
         handleSessionEnded();
       } else {
-        // Only process admin/operator messages, ignore user echoes
         if (data.includes("admin:") || data.includes("🧾 admin:")) {
-          // Extract only admin's text without prefixes
           let adminText = data;
           adminText = adminText.replace(/^🧾 admin: /, "");
           adminText = adminText.replace(/^admin: /, "");
           adminText = adminText.replace(/^🧾 /, "");
 
-          // Only add if it's not empty after cleaning
           if (adminText.trim()) {
             const operatorMessage: Message = {
               from: "operator",
@@ -129,7 +122,6 @@ export function useOperatorChat(enabled: boolean) {
             setMessages(prev => [...prev, operatorMessage]);
           }
         }
-        // Completely ignore messages that start with "user:" or contain user echoes
       }
     };
 
@@ -144,13 +136,12 @@ export function useOperatorChat(enabled: boolean) {
     };
   };
 
-  // Handle session ended
+
   const handleSessionEnded = () => {
     setSessionClosed(true);
     setIsConnected(false);
     addSystemMessage(t("chat.sessionEnded"));
 
-    // Clean up after 3 seconds
     setTimeout(() => {
       setMessages([]);
       setSessionId(null);
@@ -158,12 +149,9 @@ export function useOperatorChat(enabled: boolean) {
       greetingSentRef.current = false;
     }, 3000);
   };
-
-  // Send message to operator
   const sendMessage = async (text: string) => {
     if (!text.trim() || sessionClosed || !sessionId) return;
 
-    // Add user message to local state immediately
     const userMessage: Message = {
       from: "user",
       text,
@@ -192,7 +180,6 @@ export function useOperatorChat(enabled: boolean) {
     }
   };
 
-  // Add system message
   const addSystemMessage = (text: string) => {
     const systemMessage: Message = {
       from: "system",
@@ -202,7 +189,6 @@ export function useOperatorChat(enabled: boolean) {
     setMessages(prev => [...prev, systemMessage]);
   };
 
-  // Cleanup on unmount or when disabled
   useEffect(() => {
     if (!enabled) {
       if (socketRef.current) {
