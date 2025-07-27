@@ -147,7 +147,9 @@
             "problemRequired": "Problem is required",
             "regionRequired": "Region is required",
             "productNameRequired": "Product name is required",
-            "requestFailed": "Request failed"
+            "requestFailed": "Request failed",
+            "nameTooShort": "Name must be at least 2 characters long",
+            "nameInvalid": "Name must contain only letters"
         },
         "success": "Order accepted successfully",
         "applicationSuccess": "Application sent successfully",
@@ -482,6 +484,7 @@
         "typing": "Typing...",
         "typeMessage": "Type a message...",
         "send": "Send",
-        "clearHistory": "Clear History"
+        "clearHistory": "Clear History",
+        "startSessionFailed": "Failed to start session."
     }
 }

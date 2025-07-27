@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -10,6 +11,8 @@ import { useOperatorChat } from "@/hooks/useOperatorChat";
 import { cn } from "@/lib/utils";
 import { ListFilter, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { FormInputWrapper } from "./FormInputWrapper";
+import PhoneField from "./PhoneField";
 
 type ResizeDirection =
   | "top-left"
@@ -33,11 +36,12 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
   const [operatorMode, setOperatorMode] = useState(true);
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
 
-  // Operator session form states
   const [showSessionForm, setShowSessionForm] = useState(true);
   const [userName, setUserName] = useState("");
   const [userPhone, setUserPhone] = useState("");
   const [sessionError, setSessionError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
 
   const [position, setPosition] = useState({ x: window.innerWidth - 400, y: window.innerHeight - 540 });
   const [size, setSize] = useState({ width: 340, height: 460 });
@@ -57,7 +61,8 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     sessionId,
     adminName,
     sessionClosed,
-    isStartingSession
+    isStartingSession,
+    setMessages,
   } = useOperatorChat(operatorMode);
 
   const allMessages = operatorMode ? operatorMessages : chatMessages;
@@ -94,49 +99,85 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     setInput("");
   };
 
-  // Start operator session
+  const validateName = (name: string): string => {
+    if (!name.trim()) {
+      return t("form.errors.nameRequired");
+    }
+    if (name.length < 2) {
+      return t("form.errors.nameTooShort");
+    }
+    if (!/^[a-zA-Z\s]+$/.test(name)) {
+      return t("form.errors.nameInvalid");
+    }
+    return "";
+  };
+
+  const validatePhone = (phone: string): string => {
+    if (!phone.trim()) {
+      return t("form.errors.phoneRequired");
+    }
+    // if (!/^\+\d{1,4}\d{6,12}$/.test(phone)) {
+    //   return t("form.errors.phoneNotValid");
+    // }
+    return "";
+  };
+
   const handleStartSession = async () => {
     setSessionError("");
+    setNameError("");
+    setPhoneError("");
+
+    const nameValidationError = validateName(userName);
+    const phoneValidationError = validatePhone(userPhone);
+
+    if (nameValidationError || phoneValidationError) {
+      setNameError(nameValidationError);
+      setPhoneError(phoneValidationError);
+      return;
+    }
+
     const success = await startSession(userName, userPhone);
     if (success) {
       setShowSessionForm(false);
-      // Don't clear user data, let it be saved in cookie
-      // setUserName("");
-      // setUserPhone("");
+    } else {
+      setSessionError(t("chat.startSessionFailed"));
     }
   };
 
-  // Clear all chat data function
   const clearChatData = () => {
+    console.log("Clearing chat data...");
     deleteCookie("chat_operator_messages");
     deleteCookie("chat_ai_messages");
     deleteCookie("chat_session_id");
     deleteCookie("chat_admin_name");
+    deleteCookie("chat_messages");
     setChatMessages([]);
-    // Optionally clear user info too
-    // deleteCookie("chat_user_name");
-    // deleteCookie("chat_user_phone");
+    setMessages([]);
+    console.log("Chat data cleared, messages:", operatorMessages, chatMessages);
   };
 
-  // Mode switching handler - restored
   const handleModeSwitch = () => {
     if (operatorMode) {
       setOperatorMode(false);
       setShowSessionForm(false);
       setSessionError("");
+      setNameError("");
+      setPhoneError("");
     } else {
       setOperatorMode(true);
       if (!sessionId || sessionClosed) {
         setShowSessionForm(true);
       }
       setSessionError("");
+      setNameError("");
+      setPhoneError("");
     }
   };
 
-  const setCookie = (name: string, value: string, days: number = 7) => {
+  const setCookie = (name: string, value: string, days: number = 30) => {
     const expires = new Date();
     expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+    document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=/`;
   };
 
   const getCookie = (name: string): string | null => {
@@ -145,7 +186,7 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     for (let i = 0; i < ca.length; i++) {
       let c = ca[i];
       while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-      if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
     }
     return null;
   };
@@ -159,68 +200,21 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
   }, [allMessages]);
 
   useEffect(() => {
-    const savedOperatorMessages = getCookie("chat_operator_messages");
-    if (savedOperatorMessages) {
-      try {
-        const parsedMessages = JSON.parse(decodeURIComponent(savedOperatorMessages));
-        console.log("Loaded operator messages from cookie:", parsedMessages);
-      } catch (error) {
-        console.error("Error parsing operator messages from cookie:", error);
-        deleteCookie("chat_operator_messages");
-      }
-    }
-
-    const savedAIMessages = getCookie("chat_ai_messages");
-    if (savedAIMessages) {
-      try {
-        const parsedMessages = JSON.parse(decodeURIComponent(savedAIMessages));
-        setChatMessages(parsedMessages);
-      } catch (error) {
-        console.error("Error parsing AI messages from cookie:", error);
-        deleteCookie("chat_ai_messages");
-      }
-    }
-
-    const savedSessionId = getCookie("chat_session_id");
-    const savedAdminName = getCookie("chat_admin_name");
     const savedUserName = getCookie("chat_user_name");
-    const savedUserPhone = getCookie("chat_user_phone");
-
-    if (savedSessionId) {
-      console.log("Found saved session:", { savedSessionId, savedAdminName });
-    }
-
     if (savedUserName) setUserName(savedUserName);
-    if (savedUserPhone) setUserPhone(savedUserPhone);
-  }, []);
+    setUserPhone("");
 
-  useEffect(() => {
-    if (operatorMessages.length > 0) {
-      setCookie("chat_operator_messages", encodeURIComponent(JSON.stringify(operatorMessages)));
+    const savedOperatorMessages = getCookie("chat_messages");
+    if (savedOperatorMessages && operatorMode) {
+      try {
+        const parsedMessages = JSON.parse(savedOperatorMessages);
+        setMessages(parsedMessages);
+      } catch (error) {
+        console.error("Error parsing messages from cookie:", error);
+        deleteCookie("chat_messages");
+      }
     }
-  }, [operatorMessages]);
-
-  useEffect(() => {
-    if (chatMessages.length > 0) {
-      setCookie("chat_ai_messages", encodeURIComponent(JSON.stringify(chatMessages)));
-    }
-  }, [chatMessages]);
-
-  useEffect(() => {
-    if (sessionId) {
-      setCookie("chat_session_id", sessionId);
-    } else {
-      deleteCookie("chat_session_id");
-    }
-  }, [sessionId]);
-
-  useEffect(() => {
-    if (adminName) {
-      setCookie("chat_admin_name", adminName);
-    } else {
-      deleteCookie("chat_admin_name");
-    }
-  }, [adminName]);
+  }, [operatorMode]);
 
   useEffect(() => {
     if (userName) {
@@ -229,38 +223,8 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
   }, [userName]);
 
   useEffect(() => {
-    if (userPhone) {
-      setCookie("chat_user_phone", userPhone);
-    }
+    deleteCookie("chat_user_phone");
   }, [userPhone]);
-
-  // AI localStorage effects - commented out
-  /*
-  useEffect(() => {
-    const savedAI = localStorage.getItem("chat_ai");
-    if (savedAI) setChatMessages(JSON.parse(savedAI));
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("chat_ai", JSON.stringify(chatMessages));
-  }, [chatMessages]);
-  */
-
-  const startResizing = (dir: ResizeDirection) => (e: React.MouseEvent) => {
-    e.stopPropagation();
-    resizingRef.current = dir;
-    const rect = boxRef.current?.getBoundingClientRect();
-    if (rect) {
-      startRef.current = {
-        x: e.clientX,
-        y: e.clientY,
-        width: rect.width,
-        height: rect.height,
-        left: rect.left,
-        top: rect.top,
-      };
-    }
-  };
 
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => {
@@ -352,6 +316,22 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     return () => document.removeEventListener("keyup", onKeyUp);
   }, []);
 
+  const startResizing = (dir: ResizeDirection) => (e: React.MouseEvent) => {
+    e.stopPropagation();
+    resizingRef.current = dir;
+    const rect = boxRef.current?.getBoundingClientRect();
+    if (rect) {
+      startRef.current = {
+        x: e.clientX,
+        y: e.clientY,
+        width: rect.width,
+        height: rect.height,
+        left: rect.left,
+        top: rect.top,
+      };
+    }
+  };
+
   const resizeHandles: { dir: ResizeDirection; className: string; rotate?: string }[] = [
     { dir: "top", className: "top-0 left-0 w-full h-1 cursor-n-resize" },
     { dir: "bottom", className: "bottom-0 left-0 w-full h-1 cursor-s-resize" },
@@ -405,20 +385,32 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
             <Input
               placeholder={t("chat.enterName")}
               value={userName}
-              onChange={(e) => setUserName(e.target.value)}
+              onChange={(e) => {
+                setUserName(e.target.value);
+                setNameError(validateName(e.target.value));
+              }}
+              className={`w-full !py-5 rounded-lg border-gray-300 ${nameError ? "border-red-500" : ""}`}
             />
-            <Input
-              placeholder={t("chat.enterPhone")}
-              value={userPhone}
-              onChange={(e) => setUserPhone(e.target.value)}
-            />
-            {sessionError && (
-              <p className="text-red-500 text-xs">{sessionError}</p>
-            )}
+            {nameError && <p className="text-red-500 text-xs">{nameError}</p>}
+
+            <FormInputWrapper>
+              <PhoneField
+                placeholder={t("form.input.phone")}
+                phone={userPhone}
+                setPhone={(value) => {
+                  setUserPhone(value as string);
+                  setPhoneError(validatePhone(value as string));
+                }}
+                className={phoneError ? "border-red-500" : ""}
+              />
+            </FormInputWrapper>
+            {phoneError && <p className="text-red-500 text-xs">{phoneError}</p>}
+
+            {sessionError && <p className="text-red-500 text-xs">{sessionError}</p>}
             <Button
               onClick={handleStartSession}
-              disabled={isStartingSession || !userName.trim() || !userPhone.trim()}
-              className="w-full"
+              disabled={isStartingSession || !!nameError || !!phoneError || !userName.trim() || !userPhone.trim()}
+              className="w-full cursor-pointer"
             >
               {isStartingSession ? t("chat.connecting") : t("chat.startChat")}
             </Button>
@@ -493,13 +485,13 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
       )}
 
       <div className="flex items-center justify-center p-2 border-t bg-white text-center">
-        <Button
+        {/* <Button
           onClick={handleModeSwitch}
           className="text-sm text-blue-500 hover:underline cursor-pointer"
           variant="link"
         >
           {operatorMode ? t("chat.connectToAI") : t("chat.connectToOperator")}
-        </Button>
+        </Button> */}
 
         <Button
           onClick={clearChatData}

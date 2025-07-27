@@ -147,7 +147,9 @@
             "problemRequired": "Shikoyat kiritilishi shart",
             "regionRequired": "Viloyat kiritilishi shart",
             "productNameRequired": "Mahsulot nomi kiritilishi shart",
-            "requestFailed": "Xatolik yuz berdi"
+            "requestFailed": "Xatolik yuz berdi",
+            "nameTooShort": "Ism kamida 2 harf bo'lishi kerak",
+            "nameInvalid": "Ism faqat harflar bo'lishi kerak"
         },
         "success": "Buyurtma muvaffaqiyatli qabul qilindi",
         "applicationSuccess": "Ariza muvaffaqiyatli yuborildi",
@@ -482,6 +484,7 @@
         "typing": "Yozmoqda...",
         "typeMessage": "Xabarni yozing...",
         "send": "Yuborish",
-        "clearHistory": "Tarixni tozalash"
+        "clearHistory": "Tarixni tozalash",
+        "startSessionFailed": "Sessiya boshlashda xatolik yuz berdi."
     }
 }

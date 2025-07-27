@@ -24,11 +24,50 @@ export function useOperatorChat(enabled: boolean) {
   const socketRef = useRef<WebSocket | null>(null);
   const greetingSentRef = useRef(false);
 
-  const BASE_URL = "https://nutva.uz/telegram-api";
+  // const BASE_URL = process.env.NEXTAUTH_URL;
+  const BASE_URL = process.env.NEXT_TELEGRAM_API;
+  const WEBSOCKET_URL = process.env.NEXT_WEBSOCK_API;
+
+  useEffect(() => {
+    console.log("Environment variables:", {
+      BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+      WEBSOCKET_URL: process.env.NEXT_WEBSOCK_API,
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log("All env vars:", process.env);
+  }, []);
+
+  const validateName = (name: string): string => {
+    if (!name.trim()) {
+      return t("chat.nameRequired");
+    }
+    if (name.length < 2) {
+      return t("chat.nameTooShort");
+    }
+    if (!/^[a-zA-Z\s]+$/.test(name)) {
+      return t("chat.nameInvalid");
+    }
+    return "";
+  };
+
+  const validatePhone = (phone: string): string => {
+    if (!phone.trim()) {
+      return t("chat.phoneRequired");
+    }
+    // if (!/^\+\d{1,4}\d{6,12}$/.test(phone)) {
+    //   return t("chat.phoneInvalid");
+    // }
+    return "";
+  };
 
   const startSession = async (name: string, phone: string): Promise<boolean> => {
-    if (!name.trim() || !phone.trim()) {
-      addSystemMessage(t("chat.nameRequired"));
+    const nameValidationError = validateName(name);
+    const phoneValidationError = validatePhone(phone);
+
+    if (nameValidationError || phoneValidationError) {
+      addSystemMessage(nameValidationError || phoneValidationError);
       return false;
     }
 
@@ -38,7 +77,7 @@ export function useOperatorChat(enabled: boolean) {
       const response = await fetch(`${BASE_URL}/messages/start_session`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_name: name, user_phone: phone })
+        body: JSON.stringify({ user_name: name, user_phone: phone }),
       });
 
       if (!response.ok) {
@@ -68,22 +107,21 @@ export function useOperatorChat(enabled: boolean) {
       socketRef.current.close();
     }
 
-    socketRef.current = new WebSocket(`wss://nutva.uz/telegram-api/ws/${sessionId}`);
+    socketRef.current = new WebSocket(`${WEBSOCKET_URL}/${sessionId}`);
 
     socketRef.current.onopen = () => {
       setIsConnected(true);
       addSystemMessage(t("chat.connectedToSession"));
 
-      if (!greetingSentRef.current) {
+      if (!greetingSentRef.current && sessionId && !messages.some(m => m.from === "operator" && m.text.includes(adminName))) {
         const greeting = `Assalomu aleykum, mening ismim ${adminName}. Sizga qanday yordam bera olaman?`;
-
         const greetingMessage: Message = {
           from: "operator",
           text: greeting,
           timestamp: new Date().toISOString(),
         };
 
-        setMessages(prev => [...prev, greetingMessage]);
+        setMessages((prev) => [...prev, greetingMessage]);
 
         fetch(`${BASE_URL}/messages/`, {
           method: "POST",
@@ -91,8 +129,8 @@ export function useOperatorChat(enabled: boolean) {
           body: JSON.stringify({
             session_id: sessionId,
             sender: "admin",
-            content: greeting
-          })
+            // content: greeting,
+          }),
         }).catch((err) => {
           console.error("Failed to save greeting:", err);
         });
@@ -114,12 +152,21 @@ export function useOperatorChat(enabled: boolean) {
           adminText = adminText.replace(/^🧾 /, "");
 
           if (adminText.trim()) {
+            const lastMessage = messages[messages.length - 1];
+            if (
+              lastMessage?.from === "operator" &&
+              lastMessage.text === adminText.trim() &&
+              Math.abs(new Date(lastMessage.timestamp).getTime() - new Date().getTime()) < 1000
+            ) {
+              return;
+            }
+
             const operatorMessage: Message = {
               from: "operator",
               text: adminText.trim(),
               timestamp: new Date().toISOString(),
             };
-            setMessages(prev => [...prev, operatorMessage]);
+            setMessages((prev) => [...prev, operatorMessage]);
           }
         }
       }
@@ -136,19 +183,18 @@ export function useOperatorChat(enabled: boolean) {
     };
   };
 
-
   const handleSessionEnded = () => {
     setSessionClosed(true);
     setIsConnected(false);
     addSystemMessage(t("chat.sessionEnded"));
 
     setTimeout(() => {
-      setMessages([]);
       setSessionId(null);
       setAdminName("");
       greetingSentRef.current = false;
     }, 3000);
   };
+
   const sendMessage = async (text: string) => {
     if (!text.trim() || sessionClosed || !sessionId) return;
 
@@ -157,7 +203,7 @@ export function useOperatorChat(enabled: boolean) {
       text,
       timestamp: new Date().toISOString(),
     };
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
 
     try {
       const response = await fetch(`${BASE_URL}/messages/`, {
@@ -166,8 +212,8 @@ export function useOperatorChat(enabled: boolean) {
         body: JSON.stringify({
           session_id: sessionId,
           sender: "user",
-          content: text
-        })
+          content: text,
+        }),
       });
 
       if (response.status === 400) {
@@ -186,7 +232,28 @@ export function useOperatorChat(enabled: boolean) {
       text,
       timestamp: new Date().toISOString(),
     };
-    setMessages(prev => [...prev, systemMessage]);
+    setMessages((prev) => [...prev, systemMessage]);
+  };
+
+  const setCookie = (name: string, value: string, days: number = 30) => {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=/`;
+  };
+
+  const getCookie = (name: string): string | null => {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
+    }
+    return null;
+  };
+
+  const deleteCookie = (name: string) => {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
   };
 
   useEffect(() => {
@@ -197,8 +264,18 @@ export function useOperatorChat(enabled: boolean) {
       }
       setIsConnected(false);
       setSessionId(null);
-      setMessages([]);
       return;
+    }
+
+    const savedMessages = getCookie("chat_messages");
+    if (savedMessages) {
+      try {
+        const parsedMessages = JSON.parse(savedMessages);
+        setMessages(parsedMessages);
+      } catch (error) {
+        console.error("Error parsing messages from cookie:", error);
+        deleteCookie("chat_messages");
+      }
     }
 
     return () => {
@@ -207,6 +284,12 @@ export function useOperatorChat(enabled: boolean) {
       }
     };
   }, [enabled]);
+
+  useEffect(() => {
+    if (messages.length > 0) {
+      setCookie("chat_messages", JSON.stringify(messages));
+    }
+  }, [messages]);
 
   return {
     messages,
@@ -217,5 +300,6 @@ export function useOperatorChat(enabled: boolean) {
     adminName,
     sessionClosed,
     isStartingSession,
+    setMessages,
   };
 }
