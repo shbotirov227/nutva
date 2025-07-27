@@ -8,10 +8,10 @@ const PriceTable = ({ color }: { color: string }) => {
   const { t } = useTranslation();
 
   const priceData = [
-    { quantity: "1 dona mahsulot", discount: "0 % to’liq narx" },
-    { quantity: "2 dona mahsulot", discount: "15% - 20%" },
-    { quantity: "3 yoki 4 dona mahsulot", discount: "40% - 45%" },
-    { quantity: "5 dona yoki undan ko'p mahsulot uchun", discount: "50% - 55%" },
+    { quantity: t("sale.table.items.0.quantity"), discount: t("sale.table.items.0.discount") },
+    { quantity: t("sale.table.items.1.quantity"), discount: t("sale.table.items.1.discount") },
+    { quantity: t("sale.table.items.2.quantity"), discount: t("sale.table.items.2.discount") },
+    { quantity: t("sale.table.items.3.quantity"), discount: t("sale.table.items.3.discount") },
   ];
 
   return (

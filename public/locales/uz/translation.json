@@ -16,6 +16,7 @@
         "goBack": "Orqaga",
         "more": "Batafsil",
         "quantity": "dona",
+        "pcs": "ta",
         "sale": "chegirma",
         "clearCart": "Savatni tozalash",
         "saleUpperCase": "Chegirmalar",
@@ -326,7 +327,7 @@
         "accordionContent": {
             "1": "Barcha mahsulotlarimiz o'simlik ekstraktlari, minerallar va foydali vitaminlar asosida yaratilgan. Bo'yoqlar, antibiotiklar va konservantlar yo'q.",
             "2": "Yurtimiz bo'ylab minglab odamlar Nutva bilan sog'lig'ini tikladi. Ularning hikoyalari - bizning faxrimiz va biz ularni YouTube kanalimizga joylab boramiz.",
-            "3": "Nutva mahsulotlari tajribali mutaxassislar bilan birgalikda  ishlab chiqilgan bo’lib, u malakali shifokorlar tomonidan tavsiya etilmoqda.Mijozlarimiz doimiy tibbiy nazorat ostida va viloyatlararo bepul ko'riklar tashkil qilinib kelinmoqda",
+            "3": "Nutva mahsulotlari tajribali mutaxassislar bilan birgalikda  ishlab chiqilgan bo'lib, u malakali shifokorlar tomonidan tavsiya etilmoqda.Mijozlarimiz doimiy tibbiy nazorat ostida va viloyatlararo bepul ko'riklar tashkil qilinib kelinmoqda",
             "4": "Mahsulotlarimiz xalqaro sifat standartlariga javob beradi. Qadoqlari esa tushunarli va foydalanishga qulay."
         },
         "faqTitle": "Ko'p so'raladigan savollar",
@@ -368,9 +369,118 @@
         "saveFor": "tejab qoling",
         "button": "Ushbu chegirma asosida xarid qilish",
         "notSalePrice": "chegirmasiz narx",
-
         "table": {
-            "title": "Qancha ko'p xarid — shuncha katta chegirma!"
+            "title": "Qancha ko'p xarid — shuncha katta chegirma!",
+            "products_label": "Mahsulotlar:",
+            "items": [
+                {
+                    "quantity": "1 dona mahsulot",
+                    "discount": "0 % to'liq narx"
+                },
+                {
+                    "quantity": "2 dona mahsulot",
+                    "discount": "15% - 20%"
+                },
+                {
+                    "quantity": "3 yoki 4 dona mahsulot",
+                    "discount": "40% - 45%"
+                },
+                {
+                    "quantity": "5 dona yoki undan ko'p mahsulot uchun",
+                    "discount": "50% - 55%"
+                }
+            ]
+        },
+        "special_offers": "🎯 Chegirmadagi Maxsus Takliflar",
+        "buy_more_save_more": "Kop miqdorda xarid qiling — 55% gacha tejang!",
+        "best_price_quality": "Eng yaxshi narx va sifat kafolati!",
+        "discount_examples": "🎁 Chegirma misollari",
+        "how_discounts_work": "Chegirmalar qanday ishlaydi?",
+        "step_1": "1-qadam: Mahsulot(lar)ni tanlang",
+        "step_2": "2-qadam: Savatga joylang narx avtomatik kamayadi",
+        "step_3": "3-qadam: Buyurtma bering va yetkazib berishlarini kuting!",
+        "ready_for_discounts": "Ajoyib chegirmalarga tayyormisiz?",
+        "limited_offers": "Cheklangan takliflardan foydalanib qoling!",
+        "start_shopping": "Xaridni boshlash",
+        "products_data": {
+            "1": {
+                "title": "2 ta Complex: 990 000 x 2 = 1 980 000 so'm (chegirmasiz narx: 2 340 000 so'm)",
+                "items": [
+                    {
+                        "title": "Nutva Complex"
+                    },
+                    {
+                        "title": "Nutva Complex"
+                    }
+                ]
+            },
+            "2": {
+                "title": "1ta Complex + 1ta Complex Extra + 1ta Gelmin Kids = 1 570 000 so'm (chegirmasiz narxi: 2 830 000 so'm)",
+                "items": [
+                    {
+                        "title": "Nutva Complex"
+                    },
+                    {
+                        "title": "Complex Extra"
+                    },
+                    {
+                        "title": "Gelmin Kids"
+                    }
+                ]
+            },
+            "3": {
+                "title": "2ta Complex + 2ta Complex Extra + 1ta Gelmin Kids = 2 460 000 so'm (chegirmasiz narxi: 5 170 000 so'm)",
+                "items": [
+                    {
+                        "title": "Nutva Complex 2 ta"
+                    },
+                    {
+                        "title": "Complex Extra 2 ta"
+                    },
+                    {
+                        "title": "Gelmin Kids"
+                    }
+                ]
+            }
         }
+    },
+
+    "chat": {
+        "title": "Chat",
+        "aiChat": "AI bilan suhbat",
+        "operatorChat": "Operator bilan suhbat",
+        "connectToOperator": "Operator bilan bog'lanish",
+        "connectToAI": "AI bilan bog'lanish",
+        "startChat": "Chatni boshlash",
+        "connecting": "Ulanmoqda...",
+        "connected": "✅ Ulangan",
+        "disconnected": "❌ Uzilgan",
+        "sessionEnded": "❌ Sessiya yakunlandi",
+        "sessionNotStarted": "Sessiya boshlanmagan",
+        "enterName": "Ismingiz",
+        "enterPhone": "Telefon raqamingiz",
+        "nameRequired": "Ism va telefon raqami talab qilinadi",
+        "phoneRequired": "Telefon raqami to'liq bo'lishi kerak",
+        "startSessionFirst": "Avval operator bilan sessiyani boshlang!",
+        "cannotSendMessage": "Xabar yuborib bo'lmadi. Sessiya yakunlangan.",
+        "sendingError": "Xabar yuborishda xatolik.",
+        "serverConnectionError": "Serverga ulanishda xatolik yuz berdi.",
+        "noAdminAvailable": "Hozirda admin mavjud emas.",
+        "connectedToSession": "Chat sessiyasiga ulandi",
+        "sessionClosed": "Sessiya yopildi",
+        "connectionError": "Ulanish xatosi.",
+        "adminName": "Admin",
+        "operatorName": "Operator",
+        "systemMessage": "Tizim xabari",
+        "chatWithAdmin": "Admin bilan suhbat",
+        "pleaseWait": "Iltimos kuting...",
+        "adminWillRespond": "Admin tez orada javob beradi",
+        "sessionExpired": "Sessiya muddati tugadi",
+        "reconnecting": "Qayta ulanmoqda...",
+        "offline": "Offline",
+        "online": "Online",
+        "typing": "Yozmoqda...",
+        "typeMessage": "Xabarni yozing...",
+        "send": "Yuborish"
     }
 }

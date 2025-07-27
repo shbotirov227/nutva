@@ -16,6 +16,7 @@
         "goBack": "Go Back",
         "more": "More",
         "quantity": "pcs.",
+        "pcs": "pcs.",
         "sale": "sale",
         "clearCart": "Clear Cart",
         "saleUpperCase": "Discounts",
@@ -360,5 +361,126 @@
     "contact": {
         "title": "Contact us",
         "subtitle": "We are happy to answer your questions about our products and services."
+    },
+
+    "sale": {
+        "title": "SPECIAL OFFER!",
+        "subtitle": "The more you buy — the more you save!",
+        "saveFor": "save",
+        "button": "Shop with this discount",
+        "notSalePrice": "original price",
+        "table": {
+            "title": "The more you buy — the bigger the discount!",
+            "products_label": "Products:",
+            "items": [
+                {
+                    "quantity": "1 product",
+                    "discount": "0% full price"
+                },
+                {
+                    "quantity": "2 products",
+                    "discount": "15% - 20%"
+                },
+                {
+                    "quantity": "3 or 4 products",
+                    "discount": "40% - 45%"
+                },
+                {
+                    "quantity": "5 or more products",
+                    "discount": "50% - 55%"
+                }
+            ]
+        },
+        "special_offers": "🎯 Special Discount Offers",
+        "buy_more_save_more": "Buy more — save up to 55%!",
+        "best_price_quality": "Best price and quality guaranteed!",
+        "discount_examples": "🎁 Discount Examples",
+        "how_discounts_work": "How do discounts work?",
+        "step_1": "Step 1: Choose product(s)",
+        "step_2": "Step 2: Add to cart, price automatically reduces",
+        "step_3": "Step 3: Place your order and wait for delivery!",
+        "ready_for_discounts": "Ready for amazing discounts?",
+        "limited_offers": "Take advantage of limited offers!",
+        "start_shopping": "Start Shopping",
+        "products_data": {
+            "1": {
+                "title": "2 Complex: 990,000 x 2 = 1,980,000 UZS (original price: 2,340,000 UZS)",
+                "items": [
+                    {
+                        "title": "Nutva Complex"
+                    },
+                    {
+                        "title": "Nutva Complex"
+                    }
+                ]
+            },
+            "2": {
+                "title": "1 Complex + 1 Complex Extra + 1 Gelmin Kids = 1,570,000 UZS (original price: 2,830,000 UZS)",
+                "items": [
+                    {
+                        "title": "Nutva Complex"
+                    },
+                    {
+                        "title": "Complex Extra"
+                    },
+                    {
+                        "title": "Gelmin Kids"
+                    }
+                ]
+            },
+            "3": {
+                "title": "2 Complex + 2 Complex Extra + 1 Gelmin Kids = 2,460,000 UZS (original price: 5,170,000 UZS)",
+                "items": [
+                    {
+                        "title": "Nutva Complex 2 units"
+                    },
+                    {
+                        "title": "Complex Extra 2 units"
+                    },
+                    {
+                        "title": "Gelmin Kids"
+                    }
+                ]
+            }
+        }
+    },
+
+    "chat": {
+        "title": "Chat",
+        "aiChat": "Chat with AI",
+        "operatorChat": "Chat with Operator",
+        "connectToOperator": "Connect to Operator",
+        "connectToAI": "Connect to AI",
+        "startChat": "Start Chat",
+        "connecting": "Connecting...",
+        "connected": "✅ Connected",
+        "disconnected": "❌ Disconnected",
+        "sessionEnded": "❌ Session Ended",
+        "sessionNotStarted": "Session Not Started",
+        "enterName": "Your Name",
+        "enterPhone": "Your Phone Number",
+        "nameRequired": "Name and phone number are required",
+        "phoneRequired": "Phone number must be complete",
+        "startSessionFirst": "Start a session with the operator first!",
+        "cannotSendMessage": "Cannot send message. Session has ended.",
+        "sendingError": "Error sending message.",
+        "serverConnectionError": "Error connecting to the server.",
+        "noAdminAvailable": "No admin is currently available.",
+        "connectedToSession": "Connected to chat session",
+        "sessionClosed": "Session closed",
+        "connectionError": "Connection error.",
+        "adminName": "Admin",
+        "operatorName": "Operator",
+        "systemMessage": "System Message",
+        "chatWithAdmin": "Chat with Admin",
+        "pleaseWait": "Please wait...",
+        "adminWillRespond": "Admin will respond shortly",
+        "sessionExpired": "Session expired",
+        "reconnecting": "Reconnecting...",
+        "offline": "Offline",
+        "online": "Online",
+        "typing": "Typing...",
+        "typeMessage": "Type a message...",
+        "send": "Send"
     }
 }

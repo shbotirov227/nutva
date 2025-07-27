@@ -32,7 +32,7 @@ const SaleCard = ({
         <div className="flex flex-col text-center">
           <h3 className="text-xl font-bold mb-3" style={{ color }}>{title}</h3>
           <p className="text-xl font-bold text-[#FF0000] mb-1">{discountPrice} {t("common.sum")}</p>
-          <p className="text-[#7A7A7A] font-semibold line-through">{originalPrice} {t("common.sum")}</p>
+          <p className="text-[#7A7A7A] font-semibold line-through">{originalPrice} {t("sale.notSalePrice")}</p>
         </div>
       </div>
     </div>
