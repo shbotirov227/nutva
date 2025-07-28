@@ -33,7 +33,7 @@ type Message = {
 const ChatBox = ({ onClose }: { onClose: () => void }) => {
   const { t } = useTranslation();
   const [input, setInput] = useState("");
-  const [operatorMode, setOperatorMode] = useState(true);
+  const [operatorMode] = useState(true);
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
 
   const [showSessionForm, setShowSessionForm] = useState(true);
@@ -156,23 +156,23 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     console.log("Chat data cleared, messages:", operatorMessages, chatMessages);
   };
 
-  const handleModeSwitch = () => {
-    if (operatorMode) {
-      setOperatorMode(false);
-      setShowSessionForm(false);
-      setSessionError("");
-      setNameError("");
-      setPhoneError("");
-    } else {
-      setOperatorMode(true);
-      if (!sessionId || sessionClosed) {
-        setShowSessionForm(true);
-      }
-      setSessionError("");
-      setNameError("");
-      setPhoneError("");
-    }
-  };
+  // const handleModeSwitch = () => {
+  //   if (operatorMode) {
+  //     setOperatorMode(false);
+  //     setShowSessionForm(false);
+  //     setSessionError("");
+  //     setNameError("");
+  //     setPhoneError("");
+  //   } else {
+  //     setOperatorMode(true);
+  //     if (!sessionId || sessionClosed) {
+  //       setShowSessionForm(true);
+  //     }
+  //     setSessionError("");
+  //     setNameError("");
+  //     setPhoneError("");
+  //   }
+  // };
 
   const setCookie = (name: string, value: string, days: number = 30) => {
     const expires = new Date();
