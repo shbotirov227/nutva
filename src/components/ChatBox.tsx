@@ -215,7 +215,7 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
         deleteCookie("chat_messages");
       }
     }
-  }, [operatorMode]);
+  }, [operatorMode, setMessages]);
 
   useEffect(() => {
     if (userName) {
