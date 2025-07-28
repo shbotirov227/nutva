@@ -46,9 +46,12 @@ export function useOperatorChat(enabled: boolean) {
     if (name.length < 2) {
       return t("chat.nameTooShort");
     }
-    if (!/^[a-zA-Z\s]+$/.test(name)) {
+
+    const firstTwoChars = name.trim().substring(0, 2);
+    if (/^\d/.test(firstTwoChars.charAt(0)) || /^\d/.test(firstTwoChars.charAt(1))) {
       return t("chat.nameInvalid");
     }
+
     return "";
   };
 

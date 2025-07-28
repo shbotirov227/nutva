@@ -99,6 +99,7 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     setInput("");
   };
 
+
   const validateName = (name: string): string => {
     if (!name.trim()) {
       return t("form.errors.nameRequired");
@@ -106,9 +107,12 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     if (name.length < 2) {
       return t("form.errors.nameTooShort");
     }
-    if (!/^[a-zA-Z\s]+$/.test(name)) {
+
+    const firstTwoChars = name.trim().substring(0, 2);
+    if (/^\d/.test(firstTwoChars.charAt(0)) || /^\d/.test(firstTwoChars.charAt(1))) {
       return t("form.errors.nameInvalid");
     }
+
     return "";
   };
 
