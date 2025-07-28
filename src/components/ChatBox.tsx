@@ -120,6 +120,7 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     //   return t("form.errors.phoneNotValid");
     // }
     return "";
+    
   };
 
   const handleStartSession = async () => {
