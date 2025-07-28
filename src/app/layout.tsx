@@ -38,21 +38,22 @@ export default function RootLayout({
         <title>Nutva Pharm — Tabiiy Biofaol Qo‘shimchalar</title>
         <meta
           name="description"
-          content="Nutva Pharm — bo‘g‘imlar, immunitet va umumiy salomatlikni qo‘llab-quvvatlovchi zamonaviy biofaol mahsulotlar. Shifobaxsh tarkib, yuqori sifat."
+          content="Nutva Pharm —  ilmiy asoslangan, sifatli va tabiiy biofaol qo‘shimchalar.
+Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir."
         />
 
         {/* Canonical */}
         <link rel="canonical" href="https://nutva.uz/" />
 
         {/* ✅ Social (Open Graph + Twitter) */}
-        <meta property="og:title" content="Nutva Pharm — Tabiiy Biofaol Qo‘shimchalar" />
-        <meta property="og:description" content="Nutva Pharm — bo‘g‘imlar, immunitet va umumiy salomatlikni qo‘llab-quvvatlovchi zamonaviy biofaol mahsulotlar." />
+        <meta property="og:title" content="Nutva Pharm —  ilmiy asoslangan, sifatli va tabiiy biofaol qo‘shimchalar." />
+        <meta property="og:description" content="Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir." />
         <meta property="og:url" content="https://nutva.uz/" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://nutva.uz/logo.png" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Nutva Pharm — Tabiiy Biofaol Qo‘shimchalar" />
-        <meta name="twitter:description" content="Sifatli va ishonchli mahsulotlar bilan salomatligingizni qo‘llab-quvvatlang." />
+        <meta name="twitter:title" content="Nutva Pharm —  ilmiy asoslangan, sifatli va tabiiy biofaol qo‘shimchalar." />
+        <meta name="twitter:description" content="Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir." />
         <meta name="twitter:image" content="https://nutva.uz/logo.png" />
 
         {/* Meta Verification */}
