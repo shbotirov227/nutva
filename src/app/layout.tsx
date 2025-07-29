@@ -34,36 +34,11 @@ export default function RootLayout({
   return (
     <html lang="uz" suppressHydrationWarning>
       <head>
-        {/* ✅ SEO — Title & Meta Description */}
-        <title>Nutva Pharm — Tabiiy Biofaol Qo‘shimchalar</title>
-        <meta
-          name="description"
-          content="Nutva Pharm —  ilmiy asoslangan, sifatli va tabiiy biofaol qo‘shimchalar.
-Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir."
-        />
-
-        {/* Canonical */}
-        <link rel="canonical" href="https://nutva.uz/" />
-
-        {/* ✅ Social (Open Graph + Twitter) */}
-        <meta property="og:title" content="Nutva Pharm —  ilmiy asoslangan, sifatli va tabiiy biofaol qo‘shimchalar." />
-        <meta property="og:description" content="Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir." />
-        <meta property="og:url" content="https://nutva.uz/" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://nutva.uz/logo.png" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Nutva Pharm —  ilmiy asoslangan, sifatli va tabiiy biofaol qo‘shimchalar." />
-        <meta name="twitter:description" content="Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir." />
-        <meta name="twitter:image" content="https://nutva.uz/logo.png" />
-
         {/* Meta Verification */}
         <meta name="yandex-verification" content="aef60ba7c050b521" />
         <meta name="google-site-verification" content="UvbmZYZaowizMbMapriLrVKCoiGywdpBr50iEVlajJ4" />
 
-        {/* Canonical and robots-friendly meta */}
-        <meta name="robots" content="index, follow" />
-
-        {/* ✅ Google Tag Manager */}
+        {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -103,7 +78,7 @@ Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq 
           }}
         />
 
-        {/* Yandex Metrika #1 */}
+        {/* Yandex Metrika #1 — asosiy hisob (103208172) */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -127,7 +102,7 @@ Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq 
           }}
         />
 
-        {/* Yandex Metrika #2 — e-commerce */}
+        {/* Yandex Metrika #2 — e-commerce uchun (103392899) */}
         <script
           dangerouslySetInnerHTML={{
             __html: `

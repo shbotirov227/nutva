@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Head from "next/head";
 import Container from "@/components/Container";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
@@ -111,6 +112,42 @@ const SalePage = () => {
   ];
 
   return (
+     <>
+      {/* ✅ SEO Meta Tags */}
+      <Head>
+        <title>Chegirmalar — Nutva Pharm</title>
+        <meta
+          name="description"
+          content="Nutva Pharm'ning maxsus chegirma sahifasi! Biofaol qo‘shimchalarga katta chegirmalar bilan tanishing. Sifatli mahsulotlar, past narxlar."
+        />
+        <link rel="canonical" href="https://nutva.uz/sale" />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Chegirmalar — Nutva Pharm" />
+        <meta property="og:description" content="Maxsus chegirmalar, foydali paketlar va katta tejama imkoniyatlari. Faqat Nutva Pharm’da." />
+        <meta property="og:url" content="https://nutva.uz/sale" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://nutva.uz/logo.png" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Chegirmalar — Nutva Pharm" />
+        <meta name="twitter:description" content="Maxsus chegirmalar va biofaol mahsulotlar paketlari. Tezda xarid qiling!" />
+        <meta name="twitter:image" content="https://nutva.uz/logo.png" />
+
+        {/* Structured Data */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Chegirmalar — Nutva Pharm",
+            "url": "https://nutva.uz/sale",
+            "description": "Maxsus chegirmalar va biofaol mahsulotlar paketlari Nutva Pharm’dan. Sifatli qo‘shimchalarni chegirmada xarid qiling."
+          })
+        }} />
+      </Head>
+      {/* 🔽 Sahifa Kontenti */}
     <AnimatePresence mode="popLayout">
       <motion.div
         layout
@@ -283,6 +320,7 @@ const SalePage = () => {
         </Container>
       </motion.div>
     </AnimatePresence>
+    </>
   );
 };
 
