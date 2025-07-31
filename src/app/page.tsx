@@ -35,7 +35,7 @@ export default function App() {
         />
         <meta property="og:url" content="https://nutva.uz" />
         <meta property="og:site_name" content="Nutva Pharm" />
-        <meta property="og:image" content="https://nutva.uz/logo.png" />
+        <meta property="og:image" content="https://nutva.uz/seo_banner.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="website" />
@@ -50,7 +50,7 @@ export default function App() {
           name="twitter:description"
           content="Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir."
         />
-        <meta name="twitter:image" content="https://nutva.uz/logo.png" />
+        <meta name="twitter:image" content="https://nutva.uz/seo_banner.jpg" />
 
         {/* ✅ Favicon */}
         <link rel="icon" href="/favicon.ico" />
