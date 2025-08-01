@@ -3,7 +3,7 @@ export default function Head() {
     <>
       <meta name="author" content="Nutva Pharm" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta name="theme-color" content="#ffffff" />
+      <meta name="theme-color" content="#000000" />
       <link rel="icon" href="/favicon.ico" />
  
 
