@@ -16,6 +16,16 @@ import TrackVisit from "@/components/TrackVisit";
 import BuyModalContainerDynamic from "@/components/BuyModalContainerDynamic";
 import FloatingButtons from "@/components/FloatingButtons";
 
+// Fix TS: declare dataLayer globally
+declare global {
+  interface Window {
+    dataLayer: Record<string, unknown>[];
+    gtag: (...args: unknown[]) => void;
+    ym: (id: number, method: string, params?: Record<string, unknown>) => void;
+    fbq: (...args: unknown[]) => void;
+  }
+}
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -34,23 +44,18 @@ export default function RootLayout({
   return (
     <html lang="uz" suppressHydrationWarning>
       <head>
-        {/* Meta Verification */}
+        {/* Site verification */}
         <meta name="yandex-verification" content="aef60ba7c050b521" />
-        <meta name="google-site-verification" content="UvbmZYZaowizMbMapriLrVKCoiGywdpBr50iEVlajJ4" />
-
-        {/* Google Tag Manager */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-KLMGC5HH');`,
-          }}
+        <meta
+          name="google-site-verification"
+          content="UvbmZYZaowizMbMapriLrVKCoiGywdpBr50iEVlajJ4"
         />
 
         {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1CNZ3JV1T"></script>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-E1CNZ3JV1T"
+        ></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -58,6 +63,19 @@ export default function RootLayout({
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('config', 'G-E1CNZ3JV1T');
+            `,
+          }}
+        />
+
+        {/* Google Tag Manager */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-KLMGC5HH');
             `,
           }}
         />
@@ -78,7 +96,7 @@ export default function RootLayout({
           }}
         />
 
-        {/* Yandex Metrika #1 — asosiy hisob (103208172) */}
+        {/* Yandex Metrika #1 */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -102,7 +120,7 @@ export default function RootLayout({
           }}
         />
 
-        {/* Yandex Metrika #2 — e-commerce uchun (103392899) */}
+        {/* Yandex Metrika #2 */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -129,8 +147,10 @@ export default function RootLayout({
           }}
         />
       </head>
-
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
+      >
         {/* GTM noscript */}
         <noscript>
           <iframe
@@ -152,7 +172,7 @@ export default function RootLayout({
           />
         </noscript>
 
-        {/* Yandex Metrika #1 noscript */}
+        {/* Yandex Metrika noscripts */}
         <noscript>
           <div>
             <img
@@ -162,8 +182,6 @@ export default function RootLayout({
             />
           </div>
         </noscript>
-
-        {/* Yandex Metrika #2 noscript */}
         <noscript>
           <div>
             <img
@@ -174,7 +192,6 @@ export default function RootLayout({
           </div>
         </noscript>
 
-        {/* App Providers */}
         <QueryProvider>
           <LangProvider>
             <RawCartProvider>
