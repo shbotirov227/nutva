@@ -16,16 +16,6 @@ import TrackVisit from "@/components/TrackVisit";
 import BuyModalContainerDynamic from "@/components/BuyModalContainerDynamic";
 import FloatingButtons from "@/components/FloatingButtons";
 
-// Fix TS: declare dataLayer globally
-declare global {
-  interface Window {
-    dataLayer: Record<string, unknown>[];
-    gtag: (...args: unknown[]) => void;
-    ym: (id: number, method: string, params?: Record<string, unknown>) => void;
-    fbq: (...args: unknown[]) => void;
-  }
-}
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -36,6 +26,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const metadata = {
+  metadataBase: new URL("https://nutva.uz"),
+  verification: {
+    google: "UvbmZYZaowizMbMapriLrVKCoiGywdpBr50iEVlajJ4",
+    yandex: "aef60ba7c050b521",
+  },
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -44,13 +42,6 @@ export default function RootLayout({
   return (
     <html lang="uz" suppressHydrationWarning>
       <head>
-        {/* Site verification */}
-        <meta name="yandex-verification" content="aef60ba7c050b521" />
-        <meta
-          name="google-site-verification"
-          content="UvbmZYZaowizMbMapriLrVKCoiGywdpBr50iEVlajJ4"
-        />
-
         {/* Google Analytics */}
         <script
           async
