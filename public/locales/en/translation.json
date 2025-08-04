@@ -86,7 +86,7 @@
     },
     "aboutBrand": {
         "title": "About the brand",
-        "text": "Nutva Pharm is a modern brand created for a healthy lifestyle, producing natural and effective biofuel supplements. Our main goal is to support human health, strengthen immunity and provide solutions that can benefit the body without harm. In 2020, Nutva Pharm began to be recognized in the markets of Uzbekistan, Central Asia and Russia through its first product, Nutva Complex. Initially, having studied the local market, products were created on the basis of special compositions suitable for the needs of customers. To date, the Nutva Pharm range has separate lines for children, women, men and seniors. We develop each product based on a thorough scientific approach, environmentally friendly raw materials and the best traditions of folk medicine. Nutva Pharm is not just a biofaol supplement, it is a philosophy of healthy living in the harmony of nature and science."
+"text": "Nutva Pharm is a modern brand created for a healthy lifestyle, producing natural and effective bioactive supplements.\nOur main goal is to support human health, strengthen immunity, and provide solutions that benefit the body without harm.\nIn 2020, Nutva Pharm began to be recognized in the markets of Uzbekistan, Central Asia, and Russia through its first product, Nutva Complex. Having initially studied the local market, we created products based on special compositions tailored to the needs of customers.\nToday, the Nutva Pharm range includes separate product lines for children, women, men, and seniors. Each product is developed with a thorough scientific approach, environmentally friendly raw materials, and the best traditions of folk medicine.\nNutva Pharm is not just a bioactive supplement — it is a philosophy of healthy living in harmony with nature and science."
     },
     "aboutUs": {
         "title": "Take care of your health.",
@@ -204,7 +204,7 @@
             "tab": {
                 "1": {
                     "1": "A natural anti-parasitic complex for children. Helps combat worms, toxins, and skin issues.",
-                    "2": "Indov - 136.7 mg, Black asafoetida - 46.7 mg, Black comfrey - 37.7 mg, Yarrow - 12.5 mg, Pumpkin seed - 12.4 mg, Corn silk - 12.2 mg, Cinquefoil - 11.7 mg.",
+                    "2": "Arugula (Rocket) - 136.7 mg, Black asafoetida - 46.7 mg, Black comfrey - 37.7 mg, Yarrow - 12.5 mg, Pumpkin seed - 12.4 mg, Corn silk - 12.2 mg, Cinquefoil - 11.7 mg.",
                     "3": "2-5 years: 1 capsule. 5-16 years: 2 capsules. 16+ years: 3 capsules. To be taken before dinner. Recommended course: 3-6 months.",
                     "4": {
                         "image": "/img/products/nutva-complex/certificate.jpg"
@@ -231,7 +231,7 @@
             "tab": {
                 "1": {
                     "1": "A specially formulated complex for women's reproductive health. Restores hormonal balance and increases the chances of conception.",
-                    "2": "Inositol (Vitamin B8) - 74.6 mg, L-Arginine - 69.4 mg, Diindolylmethane - 48.4 mg, Coenzyme Q10 - 39.5 mg, Vitex Extract - 37.5 mg, Vitamin E - 34.2 mg, Turmeric - 14.8 mg, Burdock Root - 14.8 mg, Corn Silk - 14.7 mg, Echinacea - 14.5 mg, Ginger - 14.2 mg, Cinnamon - 13.9 mg, Flax Seeds - 13.5 mg, Zinc - 7.5 mg, Vitamin A - 0.5 mg, Vitamin B9 - 0.2 mg, Vitamin D3 - 15 mcg, Potassium Iodide - 0.0655 mg, Selenium (1%) - 0.0075 mg.",
+                    "2": "Inositol (Vitamin B8) - 74.6 mg, L-Arginine - 69.4 mg, Diindolylmethane - 48.4 mg, Coenzyme Q10 - 39.5 mg, Vitex Extract - 37.5 mg, Vitamin E - 34.2 mg, Turmeric - 14.8 mg, Burdock Root - 14.8 mg, Corn Silk - 14.7 mg, Echinacea - 14.5 mg, Ginger - 14.2 mg, Cinnamon - 13.9 mg, Flax Seeds - 13.5 mg, Zinc - 7.5 mg, Vitamin A - 0.5 mg, Vitamin B9 - 0.2 mg, Vitamin D3 - 15 mg, Potassium Iodide - 0.0655 mg, Selenium (1%) - 0.0075 mg.",
                     "4": {
                         "image": "/img/products/nutva-complex/certificate.jpg"
                     }
@@ -327,7 +327,7 @@
             "4": "Reliable and convenient"
         },
         "accordionContent": {
-            "1": "All our products are based on plant extracts, minerals and beneficial vitamins. No dyes, antibiotics or preservatives.",
+"1": "All our products are formulated with plant extracts, essential minerals, and beneficial vitamins.\nWe never use artificial dyes, antibiotics, or preservatives.",
             "2": "Thousands of people throughout our country have recovered their health with Nutva. Their stories are our pride and we're going to post them on our YouTube channel.",
             "3": "Nutva products are developed by experienced professionals and recommended by doctors. Our clients are under constant medical supervision and free inter-regional examinations are organized.",
             "4": "Our products meet international quality standards. The packaging is clear and easy to use."
