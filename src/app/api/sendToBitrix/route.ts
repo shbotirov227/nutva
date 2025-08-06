@@ -112,15 +112,17 @@ export async function POST(req: NextRequest) {
       TITLE: dealTitle,
       CONTACT_ID: contactId,
       SOURCE_ID: sourceId,
-      CATEGORY_ID: 0,
-      STAGE_ID: "UC_TCCXFR",
+      CATEGORY_ID: 0, // hotsales voronka
+      STAGE_ID: "UC_TCCXFR", // nutva site bosqichi (buni o'zing tasdiqlab ol)
       OPPORTUNITY: totalAmount,
       CURRENCY_ID: "UZS",
       IS_MANUAL_OPPORTUNITY: "Y",
-      ASSIGNED_BY_ID: 630 // 👈 assign to robi
+      ASSIGNED_BY_ID: 630, // 👈 robi
+      CREATED_BY_ID: 312    // 👈 foydalanuvchi ID (odatda admin yoki tizim foydalanuvchisi)
     }
   })
 });
+
 
   
 
