@@ -105,21 +105,23 @@ export async function POST(req: NextRequest) {
   const dealTitle = `${buyerName} — ${firstProductName}`;
 
   const dealRes = await fetch(`${baseUrl}/crm.deal.add.json`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      fields: {
-        TITLE: dealTitle,
-        CONTACT_ID: contactId,
-        SOURCE_ID: sourceId,
-        CATEGORY_ID: 2,
-        STAGE_ID: "C2:EXECUTING",
-        OPPORTUNITY: totalAmount,
-        CURRENCY_ID: "UZS",
-        IS_MANUAL_OPPORTUNITY: "Y"
-      }
-    })
-  });
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    fields: {
+      TITLE: dealTitle,
+      CONTACT_ID: contactId,
+      SOURCE_ID: sourceId,
+      CATEGORY_ID: 0,
+      STAGE_ID: "UC_TCCXFR",
+      OPPORTUNITY: totalAmount,
+      CURRENCY_ID: "UZS",
+      IS_MANUAL_OPPORTUNITY: "Y",
+      ASSIGNED_BY_ID: 630 // 👈 assign to robi
+    }
+  })
+});
+
   
 
   const dealData = await dealRes.json();
