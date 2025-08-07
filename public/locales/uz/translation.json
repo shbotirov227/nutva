@@ -36,8 +36,16 @@
         "contactAI": "AI bilan aloqa",
         "product": "mahsulot",
         "products": "mahsulotlar",
-        "box": "quti"
+        "box": "quti",
+        "callCenter": "Aloqa markazi",
+        "email": "Email",
+        "address": "Manzil",
+        "addressValue": "Uzbekiston, Toshkent",
+        "cooperationIssues": "Hamkorlik masalalari bo'yicha",
+        "quickLinks": "Tezkor havolalar",
+        "socialNetwork": "Ijtimoiy tarmoqlar"
     },
+
     "errors": {
         "notFound": "Sahifa topilmadi",
         "serverError": "Ichki server xatosi",
@@ -50,6 +58,7 @@
         "ageError": "Iltimos, haqiqiy yosh kiriting (1-120)",
         "emptyProducts": "Mahsulotlar mavjud emas"
     },
+    
     "nav": {
         "home": "Bosh sahifa",
         "about": "Biz haqimizda",
@@ -57,6 +66,11 @@
         "blog": "Blog",
         "contact": "Aloqa"
     },
+
+    "footer": {
+        "title": "NUTVA kompleksi-bu an'anaviy tibbiyot retseptlari bo'yicha o'rta Osiyo va Evropa o'simliklaridan tayyorlangan yuqori sifatli tabiiy va ekologik toza mahsulot."
+    },
+
     "blog": {
         "date": "Sana",
         "search": "Qidirish...",
@@ -68,7 +82,9 @@
         "popular": "Mashhur bloglar",
         "latest": "So'nggi bloglar"
     },
+
     "product": {
+        
         "tab": {
             "1": "Tavsif",
             "2": "Tarkibi",
@@ -76,6 +92,7 @@
             "4": "Sertifikatlar",
             "5": "Gijjalar"
         },
+
         "checkboxLabel": "3 tadan ko'p mahsulot tanlash",
         "consultation": "Bepul konsultatsiya",
         "addToCart": "Savatga qo'shish",
@@ -84,48 +101,59 @@
         "noProducts": "Mahsulotlar mavjud emas",
         "saleTitle": "MAXSUS TAKLIF! Qancha ko'p olsangiz — shuncha ko'p tejaysiz!"
     },
+
     "aboutBrand": {
         "title": "Brend haqida",
         "text": "Nutva Pharm - bu sog'lom hayot tarzi uchun yaratilgan, tabiiy va samarali biofaol qo'shimchalar ishlab chiqaruvchi zamonaviy brend. Bizning asosiy maqsadimiz - inson salomatligini qo'llab-quvvatlash, immunitetni mustahkamlash va organizmga zarar yetkazmasdan foyda beradigan yechimlarni taqdim etishdir. 2020-yilda Nutva Pharm o'zining ilk mahsuloti - Nutva Complex orqali O'zbekiston, O'rta Osiyo va Rossiya bozorlarida e'tirof etila boshladi. Dastlab mahalliy bozorni o'rganib, mijozlar ehtiyojiga mos maxsus tarkiblar asosida mahsulotlar yaratildi. Bugungi kunga kelib, Nutva Pharm assortimentida bolalar, ayollar, erkaklar va keksa yoshdagilar uchun alohida liniyalar mavjud. Biz har bir mahsulotni puxta ilmiy yondashuv, ekologik toza xomashyo va xalq tabobatining eng yaxshi an'analari asosida ishlab chiqamiz. Nutva Pharm - bu shunchaki biofaol qo'shimcha emas, bu - tabiat va ilm uyg'unligidagi sog'lom yashash falsafasi."
     },
+
     "aboutUs": {
         "title": "Sog'lig'ingizga g'amxo'rlik qiling",
         "subtitle": "Sog'lomlashtirish majmuasi"
     },
+
     "reviewSection": {
         "title": "Mijozlarimizning haqiqiy sharhlari",
         "subtitle": "NUTVA hayot sifatini yaxshilashga va kerakli natijalarga erishishga qanday yordam berishini bilib oling. Mahsulotimizni allaqachon sinab ko'rganlarning video sharhlari samaradorlik va sifatni tasdiqlaydi.",
+
         "videoData": {
             "1": {
                 "title": "70 yoshda raqsga tushyapman!",
                 "description": "Polliartrit, gonartroz va grijadan so'ng o'ynab yuribman![[BR]]Samarqand viloyati, Pastdarg'om tumanida 70 yoshli dehqon ayol bilan yuzma-yuz uchrashuv. Uning hayotidagi og'ir muammolar - beldagi grijalar, to'plangan poliartrit, tiza suyaklarining emirilishi, tutqanoq xurujlari va oshqozon yarasini engishda Nutva Complex qanday yordam berdi?[[BR]]Bu video -  dard bilan kurashayotganlar uchun haqiqiy ilhom manbai!"
             },
+
             "2": {
                 "title": "Spondiloartrozdan operasiyasiz tuzaldi",
                 "description": "Surxondaryolik opamizda 6 ta umurtqa suyagida jarohat aniqlangan edi.[[BR]]Shifokorlar operasiyani maslahat bergan. Ammo u umidini yo'qotmadi. U operasiyasiz shifo topdi![[BR]]🎥 Bu hikoya - operasiyasiz shifo topish mumkinligiga ishonch beradi.[[BR]]To'liq videoni ko'ring va o'zingiz xulosa chiqaring![[BR]]Ko'z yosh bilan boshlangan hikoya - raqs bilan tugadi."
             },
+
             "3": {
                 "title": "Samarqandda shifo - Nutva Complex natijalari",
                 "description": "Nutva asoschisi Alijon G'aybullaev va shifokorlar jamoasi Samarqandda 100 dan ortiq yurtdoshimizni qabul qildi.[[BR]]Ularga professional maslahatlar va tibbiy tekshiruvlar o'tkazildi.[[BR]]Alijon G'aybullaev shaxsan bemorlar bilan suhbatlashdi va Nutva Complexni qabul qilgandan keyingi real o'zgarishlari, yurakdan chiqqan so'zlari va umid bilan to'lgan taassurotlarini tingladi."
             },
+
             "4": {
                 "title": "Falajlik, Morfin, Aseptik Nekroz - barchasi ortda qoldi",
                 "description": "Farg'ona viloyati, Furqat tumanidan bo'lgan Gulchehra opa og'ir xatolik tufayli falaj holatiga tushib qolgan edi. Oyoqlari harakatdan to'xtagan, yotoqqa mixlanib qolgan bu ayolni nafaqat og'riq, balki umidsizlik ham qiynagan.[[BR]]Bugun esa u yurishga yaqin, hayotga bo'lgan ishonchi tiklangan. Tabib Alijon G'aybullaev, Bahora Qodiralieva va jurnalist Oybek Rixsibekov Gulchehra opaning holidan xabardor bo'lib, xonadonlariga tashrif buyurdi."
             },
+
             "5": {
                 "title": "Otinoyi 3 yillik oyoq og'rig'idan halos bo'ldi",
                 "description": "Bu giyoh zo'r ekan , engil bo'ldim! Naxotki,  og'riqlardan qutuldim[[BR]]Toshkent viloyati Bekobod tumanidan bo'lgan Xoji Onamiz bizni nechi oydan beri kutgan ekan. Tabib Alijon bilan gaplashib , rahmatimni , minnatdorchligimni o'zim aytaman deb niyat qilgan ekan. 3 yildan beri tizza va  oyoq og'rig'i uxlashga ham qo'ymagan. Zinalarda yurolmasdim hatto endi mana davo topdim deb  Nutva jamoasi va Tabibga samimiy tashakkurlar bildirdi."
             }
         }
     },
+
     "saleSection": {
         "title": "Hoziroq chegirmaga ega bo'ling",
         "subtitle": "NUTVA-bo'g'imlar, suyaklar, ovqat hazm qilish va immunitetni qo'llab-quvvatlash uchun tabiiy komplekslar. Arizani to'ldiring va bugun sog'lomlashtirish kursiga chegirma oling.",
         "button": "Arizani yuboring"
     },
+
     "form": {
         "title": "Bolangiz salomatligi uchun bugunoq buyurtma bering",
         "subtitle": "🚚 O'zbekiston bo'ylab bepul yetkazib berish",
+
         "input": {
             "name": "Ism",
             "phone": "Telefon raqam",
@@ -138,6 +166,7 @@
             "quantity": "Miqdori",
             "message": "Xabar"
         },
+
         "errors": {
             "nameRequired": "Ism kiritilishi shart",
             "phoneRequired": "Telefon raqami to'liq bo'lishi kerak",
@@ -151,6 +180,7 @@
             "nameTooShort": "Ism kamida 2 harf bo'lishi kerak",
             "nameInvalid": "Ism faqat harflar bo'lishi kerak"
         },
+
         "success": "Buyurtma muvaffaqiyatli qabul qilindi",
         "applicationSuccess": "Ariza muvaffaqiyatli yuborildi",
         "fillAllFields": "Barcha maydonlarni to'ldiring",
@@ -159,14 +189,17 @@
         "email": "Email",
         "shortNumber": "Qisqa raqami"
     },
+
     "formModal": {
         "title": "To'liq ma'lumot va buyurtma uchun:",
         "subtitle": "Ismingiz va telefon raqamingiz hamda quyidagi ma'lumotlarni qoldiring - mutaxassislarimiz siz bilan bog'lanadi!"
     },
+
     "contactModal": {
         "title": "Salomatligingiz bo'yicha savolingiz bormi?",
         "subtitle": "Raqamingizni qoldiring - shifokorlarimiz bepul maslahat uchun tez orada bog'lanadi."
     },
+
     "button": {
         "heroButton": "Buyurtma berish",
         "consultationButton": "Konsultatsiya olish",
@@ -175,6 +208,7 @@
         "cancelButton": "Bekor qilish",
         "sendMessage": "Xabarni yuborish"
     },
+
     "products": {
         "complex": {
             "tab": {
@@ -188,6 +222,7 @@
                 }
             }
         },
+
         "complexExtra": {
             "tab": {
                 "1": {
@@ -200,6 +235,7 @@
                 }
             }
         },
+
         "gelminKids": {
             "tab": {
                 "1": {
@@ -210,6 +246,7 @@
                         "image": "/img/products/nutva-gelmin-kids/certificate.jpg"
                     }
                 },
+
                 "gijjalar": {
                     "1": {
                         "title": "Gijjalar:",
@@ -227,6 +264,7 @@
                 }
             }
         },
+
         "fertiliaWomen": {
             "tab": {
                 "1": {
@@ -238,6 +276,7 @@
                 }
             }
         },
+
         "virisMen": {
             "tab": {
                 "1": {
@@ -250,6 +289,7 @@
                 }
             }
         },
+
         "additional": {
             "title": "Qo'shimcha:",
             "1": "Quyidagi kasalliklarda samarali yordam beradi:",
@@ -258,6 +298,7 @@
             "4": "Gonartroz - tizza bo'g'imining surunkali degenerativ kasalligi;",
             "5": "Poliartrit - bo'g'imlarning yallig'lanishi;",
             "6": "Osteoporoz - suyaklarning sinishi osonligi;",
+
             "complex": {
                 "title": "Quyidagi kasalliklarda samarali yordam beradi:",
                 "1": "Koksartroz - son bo'g'imining yemirilishi, yurishda og'riq va harakat cheklanishi bilan kechadi;",
@@ -266,6 +307,7 @@
                 "4": "Grija - umurtqa oraliq diskining chiqib ketishi, asabni siqib, qo'l-oyoqda og'riq va uvishishga sabab bo'ladi;",
                 "5": "Poliartrit - bir nechta bo'g'imlarning yallig'lanishi, shish, qattiqlik va harakatda og'riq bilan kechadi."
             },
+
             "gelminKids": {
                 "title": "Quyidagi kasalliklarda samarali yordam beradi:",
                 "1": "Ostritsa (Enterobioz) - Eng ko'p uchraydigan gijja turi, ayniqsa bolalarda. Tunda orqa chiqaruv yo'li atrofida qichishish, bezovtalik, ishtahasizlik bilan namoyon bo'ladi. Juda yuqumli.",
@@ -274,6 +316,7 @@
                 "4": "Toksokara (Toksokaroz) - Ichakda yashovchi mikroskopik parazit. Asosan it va mushuklardan yuqadi. Inson tanasida ko'chib yuradi. Belgilari: qattiq allergik reaksiya, isitma, ko'z va ichki a'zolarga zarar yetkazishi mumkin.",
                 "5": "Lentasimon gijja - uzun, tasmaga o'xshash gijja turi bo'lib, pishmagan go'sht orqali yuqadi; belgilari: qorin og'rig'i, ozib ketish, bosh aylanish, najasda gijja bo'laklari; xavfi - organizmda ozuqa moddalar yetishmovchiligi, kamqonlik va kuchsizlanish."
             },
+
             "complexExtra": {
                 "title": "Quyidagi kasalliklarda samarali yordam beradi:",
                 "1": "Gepatoz - Jigar hujayralariga yog' to'planishi (yog'li gepatoz). Ko'pincha noqulay ovqatlanish, kamharakat hayot tarzi va semizlikdan kelib chiqadi. Jigar funksiyasi pasayadi.",
@@ -284,6 +327,7 @@
                 "6": "Ich qotishi (qabziyat) - Hajmi kam va qattiq axlat chiqishi. Sababi: kam suv ichish, kamharakat, ovqatda vitaminlar yetishmasligi. Noqulaylik, shish va uyqusizlikka olib keladi.",
                 "7": "Ichak faoliyati buzilishi - Diareya, shishish, og'riq, qabziyat - ichakning noto'g'ri ishlash belgilaridir. Sababi: stress, infeksiya yoki noto'g'ri ovqatlanish."
             },
+
             "fertiliaWomen": {
                 "title": "Quyidagi kasalliklarda samarali yordam beradi:",
                 "1": "Vaginit - Qin devorining yallig'lanishi. Odatda infeksiya yoki gormonal o'zgarishlar sababli yuzaga keladi. Belgilari: ajralma, qichishish, achishish.",
@@ -301,6 +345,7 @@
                 "13": "Funksional kista - Tuxumdon funksiyasi bilan bog'liq bo'lgan oddiy kistalar. Gormonal nomutanosiblik sababli yuzaga keladi.",
                 "14": "Infeksion kasalliklar - Jinsiy yo'l bilan yuqadigan yoki ichki jinsiy a'zolarga zarar yetkazuvchi bakterial, virusli yoki zamburug'li infeksiyalar."
             },
+
             "virisMen": {
                 "title": "Quyidagi kasalliklarda samarali yordam beradi:",
                 "1": "Sistit - Siydik pufagi yallig'lanishi. Ayollarda ko'p uchrasa-da, erkaklarda ham og'riqli siyish va tez-tez siyishga olib keladi.",
@@ -317,23 +362,29 @@
             }
         }
     },
+    
     "about": {
         "features": "Xususiyatlari",
         "whyChoose": "Nutvani  nima uchun tanlash kerak?",
+
         "accordionQuestions": {
             "1": "Tabiiy tarkib",
             "2": "Natijasi isbotlangan",
             "3": "Shifokorlar bilan hamkorlik",
             "4": "Ishonchli va qulay"
         },
+
         "accordionContent": {
             "1": "Barcha mahsulotlarimiz o'simlik ekstraktlari, minerallar va foydali vitaminlar asosida yaratilgan. Bo'yoqlar, antibiotiklar va konservantlar yo'q.",
             "2": "Yurtimiz bo'ylab minglab odamlar Nutva bilan sog'lig'ini tikladi. Ularning hikoyalari - bizning faxrimiz va biz ularni YouTube kanalimizga joylab boramiz.",
             "3": "Nutva mahsulotlari tajribali mutaxassislar bilan birgalikda  ishlab chiqilgan bo'lib, u malakali shifokorlar tomonidan tavsiya etilmoqda.Mijozlarimiz doimiy tibbiy nazorat ostida va viloyatlararo bepul ko'riklar tashkil qilinib kelinmoqda",
             "4": "Mahsulotlarimiz xalqaro sifat standartlariga javob beradi. Qadoqlari esa tushunarli va foydalanishga qulay."
         },
+
         "faqTitle": "Ko'p so'raladigan savollar",
+
         "faq": {
+
             "title": {
                 "1": "Nutva nima uchun ichiladi?",
                 "2": "Tarkibida kimyoviy moddalar yoki gormon bormi?",
@@ -346,6 +397,7 @@
                 "9": "Homiladorlar yoki emizikli ayollar ichishi mumkinmi?",
                 "10": "Qayerdan xarid qilish mumkin?"
             },
+
             "content": {
                 "1": "Bu mahsulot suyak, bo'g'im kasalliklari  uchun iste'mol qilinadi.",
                 "2": "Yo'q. Faqatgina tabiiy giyohlarni ekstraktlari, gormon va kimyoviy moddalarsiz tayyorlangan.",
@@ -360,6 +412,7 @@
             }
         }
     },
+
     "contact": {
         "title": "Biz bilan bog'laning",
         "subtitle": "Mahsulot va xizmatlarimiz bo'yicha savollaringizga javob berishdan mamnunmiz."
@@ -371,9 +424,11 @@
         "saveFor": "tejab qoling",
         "button": "Ushbu chegirma asosida xarid qilish",
         "notSalePrice": "chegirmasiz narx",
+
         "table": {
             "title": "Qancha ko'p xarid — shuncha katta chegirma!",
             "products_label": "Mahsulotlar:",
+
             "items": [
                 {
                     "quantity": "1 dona mahsulot",
@@ -393,6 +448,7 @@
                 }
             ]
         },
+
         "special_offers": "🎯 Chegirmadagi Maxsus Takliflar",
         "buy_more_save_more": "Kop miqdorda xarid qiling — 55% gacha tejang!",
         "best_price_quality": "Eng yaxshi narx va sifat kafolati!",
@@ -404,6 +460,7 @@
         "ready_for_discounts": "Ajoyib chegirmalarga tayyormisiz?",
         "limited_offers": "Cheklangan takliflardan foydalanib qoling!",
         "start_shopping": "Xaridni boshlash",
+
         "products_data": {
             "1": {
                 "title": "2 ta Complex: 990 000 x 2 = 1 980 000 so'm (chegirmasiz narx: 2 340 000 so'm)",
@@ -416,6 +473,7 @@
                     }
                 ]
             },
+
             "2": {
                 "title": "1ta Complex + 1ta Complex Extra + 1ta Gelmin Kids = 1 570 000 so'm (chegirmasiz narxi: 2 830 000 so'm)",
                 "items": [
@@ -430,6 +488,7 @@
                     }
                 ]
             },
+
             "3": {
                 "title": "2ta Complex + 2ta Complex Extra + 1ta Gelmin Kids = 2 460 000 so'm (chegirmasiz narxi: 5 170 000 so'm)",
                 "items": [

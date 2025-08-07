@@ -36,8 +36,16 @@
         "contactAI": "Contact AI",
         "product": "product",
         "products": "products",
-        "box": "box"
+        "box": "box",
+        "callCenter": "Call Center",
+        "email": "Email",
+        "address": "Address",
+        "addressValue": "Uzbekistan, Tashkent",
+        "cooperationIssues": "On cooperation issues",
+        "quickLinks": "Quick links",
+        "socialNetwork": "Social networks"
     },
+
     "errors": {
         "notFound": "Page not found",
         "serverError": "Internal server error",
@@ -50,6 +58,7 @@
         "ageError": "Please enter real age (1-120)",
         "emptyProducts": "No products available"
     },
+
     "nav": {
         "home": "Home",
         "about": "About Us",
@@ -57,6 +66,11 @@
         "blog": "Blog",
         "contact": "Contact Us"
     },
+
+    "footer": {
+        "title": "NUTVA kompleksi-bu an'anaviy tibbiyot retseptlari bo'yicha o'rta Osiyo va Evropa o'simliklaridan tayyorlangan yuqori sifatli tabiiy va ekologik toza mahsulot."
+    },
+
     "blog": {
         "date": "Date",
         "search": "Search...",
@@ -68,7 +82,9 @@
         "popular": "Popular",
         "latest": "Latest"
     },
+
     "product": {
+        
         "tab": {
             "1": "Description",
             "2": "Composition",
@@ -76,6 +92,7 @@
             "4": "Certification",
             "5": "Helminths"
         },
+
         "checkboxLabel": "Select more than 3 products",
         "consultation": "Free consultation",
         "addToCart": "Add to cart",
@@ -84,48 +101,59 @@
         "noProducts": "No products available",
         "saleTitle": "SPECIAL OFFER! The more you buy — the more you save!"
     },
+
     "aboutBrand": {
         "title": "About the brand",
-"text": "Nutva Pharm is a modern brand created for a healthy lifestyle, producing natural and effective bioactive supplements.\nOur main goal is to support human health, strengthen immunity, and provide solutions that benefit the body without harm.\nIn 2020, Nutva Pharm began to be recognized in the markets of Uzbekistan, Central Asia, and Russia through its first product, Nutva Complex. Having initially studied the local market, we created products based on special compositions tailored to the needs of customers.\nToday, the Nutva Pharm range includes separate product lines for children, women, men, and seniors. Each product is developed with a thorough scientific approach, environmentally friendly raw materials, and the best traditions of folk medicine.\nNutva Pharm is not just a bioactive supplement — it is a philosophy of healthy living in harmony with nature and science."
+        "text": "Nutva Pharm is a modern brand created for a healthy lifestyle, producing natural and effective bioactive supplements.\nOur main goal is to support human health, strengthen immunity, and provide solutions that benefit the body without harm.\nIn 2020, Nutva Pharm began to be recognized in the markets of Uzbekistan, Central Asia, and Russia through its first product, Nutva Complex. Having initially studied the local market, we created products based on special compositions tailored to the needs of customers.\nToday, the Nutva Pharm range includes separate product lines for children, women, men, and seniors. Each product is developed with a thorough scientific approach, environmentally friendly raw materials, and the best traditions of folk medicine.\nNutva Pharm is not just a bioactive supplement — it is a philosophy of healthy living in harmony with nature and science."
     },
+
     "aboutUs": {
         "title": "Take care of your health.",
         "subtitle": "Wellness complex"
     },
+
     "reviewSection": {
         "title": "Real feedback from our customers",
         "subtitle": "Find out how NUTVA helps to improve the quality of life and achieve the desired results. Video reviews from those who have already tried our product confirm the effectiveness and quality.",
+
         "videoData": {
             "1": {
                 "title": "Dancing at the age of 70!",
                 "description": "After polyarthritis, gonarthrosis, and a herniated disc, I'm moving freely again![[BR]]A face-to-face meeting with a 70-year-old female farmer from the Pastdargom district of Samarkand region. Her serious health issues — spinal hernias, accumulated polyarthritis, knee joint degradation, seizures, and stomach ulcers — were all overcome with the help of Nutva Complex.[[BR]]This video is a true source of inspiration for those fighting pain!"
             },
+
             "2": {
                 "title": "Recovered from spondyloarthrosis without surgery",
                 "description": "Our sister from Surkhandarya had injuries in 6 vertebrae.[[BR]]Doctors recommended surgery. But she didn't lose hope — and recovered without an operation![[BR]]🎥 This story proves that healing without surgery is possible.[[BR]]Watch the full video and draw your own conclusions![[BR]]A story that started with tears ended with a dance."
             },
+
             "3": {
                 "title": "Healing in Samarkand — Nutva Complex results",
                 "description": "Nutva founder Alijon G'aybullaev and his team of doctors welcomed over 100 people in Samarkand.[[BR]]They provided professional consultations and medical check-ups.[[BR]]Alijon G'aybullaev personally met with patients and listened to their heartfelt testimonials and real improvements after using Nutva Complex."
             },
+
             "4": {
                 "title": "Paralysis, Morphine, Aseptic Necrosis — all left behind",
                 "description": "Gulchehra apa from Furqat district of Fergana region became paralyzed due to a serious medical mistake. Her legs stopped moving, and she was bedridden, suffering not only from pain but also hopelessness.[[BR]]Today she is close to walking again and has regained faith in life. Healer Alijon G'aybullaev, Bahora Qodiralieva, and journalist Oybek Rixsibekov visited her at home to check on her condition."
             },
+
             "5": {
                 "title": "Otinoyi relieved of 3-year leg pain",
                 "description": "This herb is amazing, I feel lighter! I can't believe I got rid of the pain![[BR]]Our grandmother from Bekobod district, Tashkent region, had been waiting for us for months. She said she wanted to personally thank healer Alijon. For 3 years, she suffered from knee and leg pain that wouldn't even let her sleep. She couldn't climb stairs, but now she says she found healing and sincerely thanked the Nutva team and the healer."
             }
         }
     },
+
     "saleSection": {
         "title": "Get a discount right now",
         "subtitle": "NUTVA — natural complexes to support joints, bones, digestion and immunity. Apply and get a discount on the wellness course today.",
         "button": "Send a request"
     },
+
     "form": {
         "title": "Order already today for the health of your child",
         "subtitle": "🚚 Free delivery to all Uzbekistan",
+
         "input": {
             "name": "Name",
             "phone": "Phone number",
@@ -138,6 +166,7 @@
             "quantity": "Quantity",
             "message": "Message"
         },
+
         "errors": {
             "nameRequired": "Name is required",
             "phoneRequired": "Phone number must be fully specified",
@@ -151,6 +180,7 @@
             "nameTooShort": "Name must be at least 2 characters long",
             "nameInvalid": "Name must contain only letters"
         },
+
         "success": "Order accepted successfully",
         "applicationSuccess": "Application sent successfully",
         "fillAllFields": "Fill in all fields",
@@ -159,14 +189,17 @@
         "email": "Email",
         "shortNumber": "Short number"
     },
+
     "formModal": {
         "title": "For full information and ordering:",
         "subtitle": "Leave your name and phone number, as well as the following information - our specialists will contact you!"
     },
+
     "contactModal": {
         "title": "Do you have any questions about your health?",
         "subtitle": "Leave your phone number and our operators will contact you as soon as possible."
     },
+
     "button": {
         "heroButton": "Order",
         "consultationButton": "Consultation",
@@ -175,6 +208,7 @@
         "cancelButton": "Cancel",
         "sendMessage": "Send message"
     },
+
     "products": {
         "complex": {
             "tab": {
@@ -188,6 +222,7 @@
                 }
             }
         },
+
         "complexExtra": {
             "tab": {
                 "1": {
@@ -200,6 +235,7 @@
                 }
             }
         },
+
         "gelminKids": {
             "tab": {
                 "1": {
@@ -210,6 +246,7 @@
                         "image": "/img/products/nutva-complex/certificate.jpg"
                     }
                 },
+
                 "gijjalar": {
                     "1": {
                         "title": "Helminths (Worms):",
@@ -219,6 +256,7 @@
                         "4": "Pinworms — cause itching in the anal area, insomnia, and reinfection due to cyclical egg-laying.",
                         "5": "Dwarf tapeworm — very small, lives in the intestines, increases the risk of autoinvasion."
                     },
+
                     "2": {
                         "title": "Prevention and Diagnosis:",
                         "1": "Prevention: hygiene, trimming children's nails, consuming washed fruits and vegetables.",
@@ -227,6 +265,7 @@
                 }
             }
         },
+
         "fertiliaWomen": {
             "tab": {
                 "1": {
@@ -238,6 +277,7 @@
                 }
             }
         },
+
         "virisMen": {
             "tab": {
                 "1": {
@@ -250,6 +290,7 @@
                 }
             }
         },
+
         "additional": {
             "title": "Additional:",
             "1": "Effectively helps with the following diseases:",
@@ -258,6 +299,7 @@
             "4": "Gonarthrosis - chronic degenerative disease of the knee joint;",
             "5": "Polyarthritis - inflammation of the joints;",
             "6": "Osteoporosis - fragility of the bones;",
+            
             "complex": {
                 "title": "Effectively helps with the following conditions:",
                 "1": "Coxarthrosis - degeneration of the hip joint, causing pain while walking and limited mobility;",
@@ -266,6 +308,7 @@
                 "4": "Herniated disc - protrusion of an intervertebral disc, compressing nerves and causing pain and numbness in limbs;",
                 "5": "Polyarthritis - inflammation of multiple joints, with swelling, stiffness, and pain during movement."
             },
+
             "gelminKids": {
                 "title": "Effectively helps with the following conditions:",
                 "1": "Pinworms (Enterobiasis) - the most common type of worm, especially in children. Symptoms include nighttime itching around the anus, restlessness, and loss of appetite. Highly contagious.",
@@ -274,6 +317,7 @@
                 "4": "Toxocariasis (Toxocara) - microscopic parasites transmitted from dogs or cats. They migrate through the human body. Symptoms: severe allergic reactions, fever, damage to eyes and internal organs.",
                 "5": "Tapeworms - long, ribbon-like worms transmitted through undercooked meat. Symptoms: abdominal pain, weight loss, dizziness, worm segments in stool. Risks include nutrient deficiency, anemia, and weakness."
             },
+
             "complexExtra": {
                 "title": "Effectively helps with the following conditions:",
                 "1": "Hepatosis - fat accumulation in liver cells (fatty liver). Often caused by poor diet, sedentary lifestyle, and obesity. Liver function declines.",
@@ -284,6 +328,7 @@
                 "6": "Constipation - infrequent, hard stool. Causes: low water intake, sedentary lifestyle, lack of vitamins. Leads to discomfort, bloating, and insomnia.",
                 "7": "Bowel dysfunction - diarrhea, bloating, pain, constipation. Causes: stress, infection, or poor diet."
             },
+
             "fertiliaWomen": {
                 "title": "Effective for the following conditions:",
                 "1": "Vaginitis - Inflammation of the vaginal wall. Usually caused by infection or hormonal changes. Symptoms: discharge, itching, burning.",
@@ -301,6 +346,7 @@
                 "13": "Functional cyst - Simple ovarian cysts related to ovarian function. Caused by hormonal imbalance.",
                 "14": "Infectious diseases - Bacterial, viral, or fungal infections affecting internal reproductive organs."
             },
+
             "virisMen": {
                 "title": "Effective for the following conditions:",
                 "1": "Cystitis - Inflammation of the bladder. Although more common in women, men may also experience painful and frequent urination.",
@@ -317,23 +363,29 @@
             }
         }
     },
+
     "about": {
         "features": "Features",
         "whyChoose": "Why choose Nutva?",
+
         "accordionQuestions": {
             "1": "Natural composition",
             "2": "The result is proven",
             "3": "Collaboration with doctors",
             "4": "Reliable and convenient"
         },
+
         "accordionContent": {
-"1": "All our products are formulated with plant extracts, essential minerals, and beneficial vitamins.\nWe never use artificial dyes, antibiotics, or preservatives.",
+            "1": "All our products are formulated with plant extracts, essential minerals, and beneficial vitamins.\nWe never use artificial dyes, antibiotics, or preservatives.",
             "2": "Thousands of people throughout our country have recovered their health with Nutva. Their stories are our pride and we're going to post them on our YouTube channel.",
             "3": "Nutva products are developed by experienced professionals and recommended by doctors. Our clients are under constant medical supervision and free inter-regional examinations are organized.",
             "4": "Our products meet international quality standards. The packaging is clear and easy to use."
         },
+
         "faqTitle": "Frequently asked questions",
+
         "faq": {
+
             "title": {
                 "1": "Why is Nutva used?",
                 "2": "Does it contain chemicals or hormones?",
@@ -346,6 +398,7 @@
                 "9": "Can pregnant or breastfeeding women take it?",
                 "10": "Where can I buy it?"
             },
+
             "content": {
                 "1": "This product is used for joint and bone-related conditions.",
                 "2": "No. It contains only natural herbal extracts, with no hormones or chemical substances.",
@@ -360,6 +413,7 @@
             }
         }
     },
+
     "contact": {
         "title": "Contact us",
         "subtitle": "We are happy to answer your questions about our products and services."
@@ -371,9 +425,11 @@
         "saveFor": "save",
         "button": "Shop with this discount",
         "notSalePrice": "original price",
+
         "table": {
             "title": "The more you buy — the bigger the discount!",
             "products_label": "Products:",
+
             "items": [
                 {
                     "quantity": "1 product",
@@ -393,6 +449,7 @@
                 }
             ]
         },
+
         "special_offers": "🎯 Special Discount Offers",
         "buy_more_save_more": "Buy more — save up to 55%!",
         "best_price_quality": "Best price and quality guaranteed!",
@@ -404,6 +461,7 @@
         "ready_for_discounts": "Ready for amazing discounts?",
         "limited_offers": "Take advantage of limited offers!",
         "start_shopping": "Start Shopping",
+
         "products_data": {
             "1": {
                 "title": "2 Complex: 990,000 x 2 = 1,980,000 UZS (original price: 2,340,000 UZS)",
@@ -416,6 +474,7 @@
                     }
                 ]
             },
+
             "2": {
                 "title": "1 Complex + 1 Complex Extra + 1 Gelmin Kids = 1,570,000 UZS (original price: 2,830,000 UZS)",
                 "items": [
@@ -430,6 +489,7 @@
                     }
                 ]
             },
+            
             "3": {
                 "title": "2 Complex + 2 Complex Extra + 1 Gelmin Kids = 2,460,000 UZS (original price: 5,170,000 UZS)",
                 "items": [

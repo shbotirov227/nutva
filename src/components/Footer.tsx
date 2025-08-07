@@ -5,6 +5,7 @@ import Container from "./Container";
 import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 
 const FooterLinks = [
   { id: 1, title: "Главная", url: "/" },
@@ -15,11 +16,11 @@ const FooterLinks = [
 ];
 
 const SocialLinks = [
-  { id: 1, title: "Facebook", url: "https://www.facebook.com/NUTVAC0MPLEX" },
+  { id: 1, title: "Youtube", url: "https://www.youtube.com/@NutvaUz" },
   { id: 2, title: "Instagram", url: "https://www.instagram.com/nutva.uz" },
-  { id: 3, title: "Twitter", url: "https://x.com/Nutva_uz" },
-  { id: 4, title: "Telegram", url: "https://t.me/nutva_uz" },
-  { id: 5, title: "Youtube", url: "https://www.youtube.com/@NutvaUz" },
+  { id: 3, title: "Telegram", url: "https://t.me/nutva_uz" },
+  { id: 4, title: "Facebook", url: "https://www.facebook.com/NUTVAC0MPLEX" },
+  { id: 5, title: "Twitter", url: "https://x.com/Nutva_uz" },
 ];
 
 const FooterLink = ({ title, url, className }: { title: string; url: string; className?: string }) => {
@@ -55,6 +56,9 @@ const PhoneLink = ({ title, url, className }: { title: string; url: string; clas
 };
 
 const Footer = () => {
+
+  const { t } = useTranslation();
+
   return (
     <footer className="bg-[#2B2B2B] text-white pt-16 pb-10">
       <Container className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -68,17 +72,16 @@ const Footer = () => {
             className="mb-6"
           />
           <p className="text-sm leading-relaxed text-white/80">
-            NUTVA Complex — это натуральный и экологически чистый продукт высокого качества, созданный из трав Средней Азии и Европы по рецептам народной медицины.
+            {t("footer.title")}
           </p>
         </div>
 
-        {/* CONTACTS */}
         <div>
-          <h4 className="text-xl font-semibold mb-4">Контакты</h4>
+          <h4 className="text-xl font-semibold mb-4">{t("nav.contact")}</h4>
           <ul className="text-sm space-y-3 text-white/80">
 
             <li>
-              <span className="block font-medium text-white">Колл-центр:</span>
+              <span className="block font-medium text-white">{t("common.callCenter")}:</span>
               <ul className="ml-4 space-y-1">
                 <PhoneLink title="1294" url="tel:1294" />
                 <PhoneLink title="+998 71 211-11-12" url="tel:+998712111112" />
@@ -86,19 +89,19 @@ const Footer = () => {
             </li>
 
             <li>
-              <span className="block font-medium text-white">Эл. адрес:</span>
+              <span className="block font-medium text-white">{t("common.email")}:</span>
               <Link href="mailto:info@nutva.uz" className="ml-4 underline">
                 info@nutva.uz
               </Link>
             </li>
 
             <li>
-              <span className="block font-medium text-white">Адрес:</span>
-              <span className="ml-4">Узбекистан, Ташкент</span>
+              <span className="block font-medium text-white">{t("common.address")}:</span>
+              <span className="ml-4">{t("common.addressValue")}</span>
             </li>
 
             <li>
-              <span className="block font-medium text-white">По вопросам сотрудничества:</span>
+              <span className="block font-medium text-white">{t("common.cooperationIssues")}:</span>
               <ul className="ml-4 space-y-1">
                 <PhoneLink title="+998 95 185-10-01" url="tel:+998951851001" />
                 <PhoneLink title="info@nutva.uz" url="mailto:info@nutva.uz" />
@@ -108,7 +111,7 @@ const Footer = () => {
         </div>
 
         <div>
-          <h4 className="text-xl font-semibold mb-4">Быстрые ссылки</h4>
+          <h4 className="text-xl font-semibold mb-4">{t("common.quickLinks")}</h4>
           <ul className="space-y-3 text-sm text-white/80">
             {FooterLinks.map((link) => (
               <FooterLink key={link.title} title={link.title} url={link.url} />
@@ -117,7 +120,7 @@ const Footer = () => {
         </div>
 
         <div>
-          <h4 className="text-xl font-semibold mb-4">Социальные сети</h4>
+          <h4 className="text-xl font-semibold mb-4">{t("common.socialLinks")}</h4>
           <ul className="space-y-3 text-sm text-white/80">
             {SocialLinks.map((link) => (
               <FooterLink key={link.title} title={link.title} url={link.url} />
