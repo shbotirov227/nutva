@@ -7,14 +7,6 @@ import Link from "next/link";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 
-const FooterLinks = [
-  { id: 1, title: "Главная", url: "/" },
-  { id: 2, title: "Продукты", url: "/product" },
-  { id: 3, title: "О бренде", url: "/about-us" },
-  { id: 4, title: "Блог", url: "/blog" },
-  { id: 5, title: "Контакты", url: "/contact" },
-];
-
 const SocialLinks = [
   { id: 1, title: "Youtube", url: "https://www.youtube.com/@NutvaUz" },
   { id: 2, title: "Instagram", url: "https://www.instagram.com/nutva.uz" },
@@ -56,8 +48,15 @@ const PhoneLink = ({ title, url, className }: { title: string; url: string; clas
 };
 
 const Footer = () => {
-
   const { t } = useTranslation();
+
+  const FooterLinks = [
+    { id: 1, title: t("nav.home"), url: "/" },
+    { id: 2, title: t("nav.products"), url: "/product" },
+    { id: 3, title: t("nav.about"), url: "/about-us" },
+    { id: 4, title: t("nav.blog"), url: "/blog" },
+    { id: 5, title: t("nav.contact"), url: "/contact" },
+  ];
 
   return (
     <footer className="bg-[#2B2B2B] text-white pt-16 pb-10">
