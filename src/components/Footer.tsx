@@ -120,7 +120,7 @@ const Footer = () => {
         </div>
 
         <div>
-          <h4 className="text-xl font-semibold mb-4">{t("common.socialLinks")}</h4>
+          <h4 className="text-xl font-semibold mb-4">{t("common.socialNetwork")}</h4>
           <ul className="space-y-3 text-sm text-white/80">
             {SocialLinks.map((link) => (
               <FooterLink key={link.title} title={link.title} url={link.url} />
