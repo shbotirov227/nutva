@@ -4,7 +4,6 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
 
-  // Keraksiz query parametrlardan tozalash (masalan: ?srsltid=...)
   const paramsToRemove = ["srsltid", "utm_source", "utm_medium", "utm_campaign"];
   let hasRedirect = false;
 
@@ -15,7 +14,6 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // Redirect faqat query o‘zgargan bo‘lsa amalga oshiriladi
   if (hasRedirect) {
     return NextResponse.redirect(url, 301);
   }
@@ -23,7 +21,6 @@ export function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-// Faqat kerakli route'larda ishlashi uchun
 export const config = {
   matcher: ["/", "/:path*"],
 };

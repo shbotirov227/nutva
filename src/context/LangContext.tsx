@@ -11,7 +11,6 @@ type LangContextType = {
 
 const LangContext = createContext<LangContextType | undefined>(undefined);
 
-// Custom hook localStorage bilan ishlash uchun
 function useLocalStorage(key: string, initialValue: string) {
   const [storedValue, setStoredValue] = useState(initialValue);
   const [isLoading, setIsLoading] = useState(true);
@@ -47,13 +46,12 @@ function useLocalStorage(key: string, initialValue: string) {
 
 export const LangProvider = ({ children }: { children: React.ReactNode }) => {
   const [lang, setLangStorage, isLoading] = useLocalStorage("lang", "uz");
-  const availableLangs = ["uz", "ru", "en"]; // Mavjud tillar
+  const availableLangs = ["uz", "ru", "en"];
 
   const setLang = (newLang: string) => {
     if (availableLangs.includes(newLang)) {
       setLangStorage(newLang);
 
-      // Document til atributini o'zgartirish (SEO uchun)
       if (typeof document !== 'undefined') {
         document.documentElement.lang = newLang;
       }
@@ -83,13 +81,11 @@ export const useLang = () => {
   return context;
 };
 
-// Helper hook - til yuklanishini kutish uchun
 export const useIsLangReady = () => {
   const { isLoading } = useLang();
   return !isLoading;
 };
 
-// Helper hook - til o'zgartirishni hook orqali
 export const useLangSwitcher = () => {
   const { lang, setLang, availableLangs } = useLang();
 
