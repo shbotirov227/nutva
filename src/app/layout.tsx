@@ -28,9 +28,93 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   metadataBase: new URL("https://nutva.uz"),
+  title: "Nutva Pharm — Ilmiy asoslangan biofaol qo‘shimchalar",
+  description:
+    "Nutva Pharm — ilmiy asoslangan, sifatli va tabiiy biofaol qo‘shimchalar. Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
+ keywords: [
+  // 🔷 Brend nomlari
+  "Nutva", "Нутва",
+  "Nutva Pharm", "Нутва Фарм",
+  "nutva.uz", "nutva uz", "Нутва УЗ",
+
+  // 🔷 Mahsulot nomlari
+  "Nutva Complex", "Нутва Комплекс",
+  "Nutva Extra", "Нутва Экстра",
+  "Nutva Gelmin Kids", "Нутва Гельмин Кидс",
+  "Nutva Fertilia Women", "Нутва Фертилия Вумен",
+  "Nutva Viris Men", "Нутва Вирис Мен",
+  "Nutva Complex Extra", "Нутва Комплекс Экстра",
+
+  // 🔷 Qo‘shimcha turlari
+  "biologik faol qo‘shimchalar", "биологик фаол қўшимчалар",
+  "bioaktiv qo‘shimchalar", "биоактив қўшимчалар",
+  "BAT", "БАТ",
+  "BAA", "БАА",
+  "o'simlik ekstraktlari", "ўсимлик экстрактлари",
+  "vitaminlar", "витаминлар",
+  "mineral qo‘shimchalar", "минерал қўшимчалар",
+
+  // 🔷 Foyda va maqsadlar
+  "ilmiy asoslangan qo‘shimchalar", "илмий асосланган қўшимчалар",
+  "immunitetni kuchaytiruvchi vositalar", "иммунитетни кучайтирувчи воситалар",
+  "gormonal balans uchun qo‘shimchalar", "гормонал мувозанат учун қўшимчалар",
+  "hazmni yaxshilovchi vositalar", "ҳазмни яхшилайдиган воситалар",
+  "sertifikatlangan qo‘shimchalar", "сертификатланган қўшимчалар",
+
+  // 🔷 Sog‘liq muammolari uchun
+  "ayollar salomatligi uchun qo‘shimchalar", "аёллар саломатлиги учун қўшимчалар",
+  "homiladorlikni rejalashtirish", "ҳомиладорликни режалаштириш",
+  "bolalar uchun BAT", "болалар учун БАТ",
+  "oshqozon-ichak salomatligi", "ошқозон-ичак саломатлиги",
+
+  // 🔷 Suyak, bo‘g‘im va boshqa kasalliklar
+  "osteoporoz davolash", "остеопороз даволаш",
+  "gonartroz davo", "гоноартроз даво",
+  "koksartroz uchun qo‘shimchalar", "коксартроз учун қўшимчалар",
+  "umurtqa churrasi uchun vosita", "умуртқа чурраси учун восита",
+  "artroz va artrit qo‘shimchalari", "артроз ва артрит учун БАТ",
+  "oyoqlarning shishishi uchun", "оёқ шишиши учун восита",
+
+  // 🔷 Lokalizatsiya (geotargeting)
+  "BAT Toshkent", "БАТ Тошкент",
+  "BAT Samarqand", "БАТ Самарқанд",
+  "BAT Buxoro", "БАТ Бухоро",
+  "BAT Farg‘ona", "БАТ Фарғона",
+  "BAT Andijon", "БАТ Андижон",
+  "BAT Namangan", "БАТ Наманган",
+  "biologik faol qo‘shimcha O‘zbekiston", "биологик фаол қўшимча Ўзбекистонда",
+  "sifatli BAT O‘zbekistonda", "сифатли БАТ Ўзбекистонда"
+ ],
+  authors: [{ name: "Nutva Pharm" }],
+  robots: "index, follow",
+  alternates: {
+    canonical: "https://nutva.uz/",
+  },
   verification: {
     google: "UvbmZYZaowizMbMapriLrVKCoiGywdpBr50iEVlajJ4",
     yandex: "aef60ba7c050b521",
+  },
+  openGraph: {
+    title: "Nutva Pharm — Ilmiy asoslangan biofaol qo‘shimchalar",
+    description:
+      "Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
+    url: "https://nutva.uz",
+    siteName: "Nutva Pharm",
+    images: [
+      {
+        url: "https://nutva.uz/seo_banner.jpg",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nutva Pharm — Ilmiy asoslangan biofaol qo‘shimchalar",
+    description:
+      "Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
+    images: ["https://nutva.uz/seo_banner.jpg"],
   },
 };
 
@@ -42,6 +126,27 @@ export default function RootLayout({
   return (
     <html lang="uz" suppressHydrationWarning>
       <head>
+        <title>Nutva Pharm — Ilmiy asoslangan biofaol qo‘shimchalar</title>
+        <meta name="description" content="Nutva Pharm — ilmiy asoslangan, sifatli va tabiiy biofaol qo‘shimchalar. Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir." />
+        <meta name="keywords" content="nutva, bioaktiv qo‘shimchalar, sog‘liq, nutva uz, vitaminlar, tabiiy dori, o'simlik ekstraktlari" />
+        <meta name="author" content="Nutva Pharm" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://nutva.uz/" />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://nutva.uz/" />
+        <meta property="og:title" content="Nutva Pharm — Ilmiy asoslangan biofaol qo‘shimchalar" />
+        <meta property="og:description" content="Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir." />
+        <meta property="og:image" content="https://nutva.uz/seo_banner.jpg" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://nutva.uz/" />
+        <meta name="twitter:title" content="Nutva Pharm — Ilmiy asoslangan biofaol qo‘shimchalar" />
+        <meta name="twitter:description" content="Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir." />
+        <meta name="twitter:image" content="https://nutva.uz/seo_banner.jpg" />
+
         {/* Google Analytics */}
         <script
           async
@@ -163,7 +268,7 @@ export default function RootLayout({
           />
         </noscript>
 
-        {/* Yandex Metrika noscripts */}
+        {/* Yandex Metrika noscript */}
         <noscript>
           <div>
             <img
