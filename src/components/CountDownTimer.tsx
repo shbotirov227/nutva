@@ -1,23 +1,22 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useMemo } from 'react';
-import { Clock, Gift, Tag } from 'lucide-react';
+import { useState, useEffect, useMemo } from "react";
+import { Clock, Gift, Tag } from "lucide-react";
+import { Button } from "./ui/button";
+import { redirect } from "next/navigation";
+import { FormModal } from "./FormModal";
 
 interface CountdownTimerProps {
-  /** Unikal localStorage kalit (masalan: countdown:product:123) — shart */
   storageKey: string;
-  /** Har bir sikl davomiyligi (ms) — shart (masalan 3 soat = 3*60*60*1000) */
   resetDurationMs: number;
-
-  /** Faqat birinchi safar uchun boshlang'ich deadline (ixtiyoriy) */
   targetTime?: Date;
-
-  /** Timer tugaganda avtomatik qayta boshlash (default: true) */
   loop?: boolean;
-
   discountPercentage?: number;
   title?: string;
   subtitle?: string;
+  color?: string;
+  bgColor?: string;
+  products?: { productId: string; quantity: number; total?: number }[];
 }
 
 export function CountdownTimer({
@@ -26,16 +25,18 @@ export function CountdownTimer({
   targetTime,
   loop = true,
   discountPercentage = 15,
-  title = 'Chegirma tugashiga',
-  subtitle = 'Bugun xarid qilganlar uchun',
+  title = "Chegirma tugashiga",
+  subtitle = "Bugun xarid qilganlar uchun",
+  color,
+  bgColor,
+  products
 }: CountdownTimerProps) {
   const [expiresAt, setExpiresAt] = useState<number | null>(null);
   const [now, setNow] = useState<number>(Date.now());
   const [isExpired, setIsExpired] = useState(false);
 
-  // expiry ni o‘rnatish: localStorage -> (targetTime || now+resetDurationMs)
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     const saved = window.localStorage.getItem(storageKey);
     const savedNum = saved ? Number(saved) : NaN;
@@ -57,14 +58,12 @@ export function CountdownTimer({
     setIsExpired(false);
   }, [storageKey, resetDurationMs, targetTime]);
 
-  // Har 1 soniyada vaqtni yangilash
   useEffect(() => {
     if (!expiresAt) return;
     const id = window.setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(id);
   }, [expiresAt]);
 
-  // Multi-tab sinxron
   useEffect(() => {
     const onStorage = (e: StorageEvent) => {
       if (e.key === storageKey && e.newValue) {
@@ -75,18 +74,17 @@ export function CountdownTimer({
         }
       }
     };
-    window.addEventListener('storage', onStorage);
-    return () => window.removeEventListener('storage', onStorage);
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
   }, [storageKey]);
 
-  // Tugaganda: loop bo'lsa qayta boshlash, bo‘lmasa “tugadi” holatida qoladi
   useEffect(() => {
     if (!expiresAt) return;
     if (now >= expiresAt) {
       if (loop) {
         const next = Date.now() + resetDurationMs;
         setExpiresAt(next);
-        if (typeof window !== 'undefined') {
+        if (typeof window !== "undefined") {
           window.localStorage.setItem(storageKey, String(next));
         }
         setIsExpired(false);
@@ -96,16 +94,14 @@ export function CountdownTimer({
     }
   }, [now, expiresAt, loop, resetDurationMs, storageKey]);
 
-  // Qolgan vaqtni hisoblash
   const remaining = useMemo(() => {
     if (!expiresAt) return 0;
     return Math.max(0, expiresAt - now);
   }, [expiresAt, now]);
 
-  // UI: kunlarni soatlarga qo‘shib yuboramiz (senga hozirgi layoutda d/h/m/s bo‘lishi shart emas)
   const { hours, minutes, seconds } = useMemo(() => {
     let ms = remaining;
-    const totalHours = Math.floor(ms / 3_600_000); // 60*60*1000
+    const totalHours = Math.floor(ms / 3_600_000);
     ms %= 3_600_000;
     const minutes = Math.floor(ms / 60_000);
     ms %= 60_000;
@@ -113,40 +109,57 @@ export function CountdownTimer({
     return { hours: totalHours, minutes, seconds };
   }, [remaining]);
 
-  if (expiresAt === null) return null; // SSR/hydration guard
+  if (expiresAt === null) return null;
 
   if (isExpired && !loop) {
     return (
-      <div className="bg-gradient-to-r from-red-500 to-red-600 text-white p-4 rounded-lg shadow-lg text-center">
+      <div
+        className="text-white p-4 rounded-lg shadow-lg text-center"
+        style={{
+          background: `linear-gradient(to right, ${color}, ${bgColor})`,
+        }}
+      >
         <p className="font-semibold">Chegirma tugadi!</p>
         <p className="text-sm opacity-90">Keyingi aksiyani kuting</p>
       </div>
     );
   }
 
+
+
   return (
     <div className="relative overflow-hidden">
-      {/* Animated background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 via-green-500 to-emerald-600 animate-pulse"></div>
+      <div
+        className="absolute inset-0 animate-pulse"
+        style={{
+          background: `linear-gradient(to right, ${bgColor}, ${color}, ${bgColor})`,
+        }}
+      ></div>
 
-      {/* Main content */}
-      <div className="relative bg-gradient-to-r from-emerald-500 to-green-600 text-white p-6 rounded-xl shadow-2xl border border-emerald-300">
-        {/* Glowing effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-green-500/20 rounded-xl blur-sm"></div>
+      <div className="relative text-white p-6 rounded-xl shadow-2xl border"
+        style={{
+          background: `linear-gradient(to right, ${color}, ${bgColor})`,
+          borderColor: color,
+        }}
+      >
+        <div
+          className="absolute inset-0 rounded-xl blur-sm"
+          style={{
+            background: `linear-gradient(to left, ${color}33, ${bgColor}33)`,
+          }}
+        ></div>
 
         <div className="relative z-10">
-          {/* Header with icon */}
           <div className="flex items-center justify-center gap-2 mb-4">
             <Clock className="w-6 h-6 animate-pulse" />
             <h3 className="text-lg font-bold">{title}</h3>
           </div>
 
-          {/* Countdown display */}
           <div className="flex justify-center items-center gap-4 mb-4">
             <div className="text-center">
               <div className="bg-white/20 backdrop-blur-sm rounded-lg p-3 min-w-[60px] border border-white/30">
                 <div className="text-2xl font-bold tabular-nums">
-                  {hours.toString().padStart(2, '0')}
+                  {hours.toString().padStart(2, "0")}
                 </div>
                 <div className="text-xs uppercase tracking-wide opacity-90">Soat</div>
               </div>
@@ -157,7 +170,7 @@ export function CountdownTimer({
             <div className="text-center">
               <div className="bg-white/20 backdrop-blur-sm rounded-lg p-3 min-w-[60px] border border-white/30">
                 <div className="text-2xl font-bold tabular-nums">
-                  {minutes.toString().padStart(2, '0')}
+                  {minutes.toString().padStart(2, "0")}
                 </div>
                 <div className="text-xs uppercase tracking-wide opacity-90">Daqiqa</div>
               </div>
@@ -168,14 +181,13 @@ export function CountdownTimer({
             <div className="text-center">
               <div className="bg-white/20 backdrop-blur-sm rounded-lg p-3 min-w-[60px] border border-white/30">
                 <div className="text-2xl font-bold tabular-nums animate-pulse">
-                  {seconds.toString().padStart(2, '0')}
+                  {seconds.toString().padStart(2, "0")}
                 </div>
                 <div className="text-xs uppercase tracking-wide opacity-90">Soniya</div>
               </div>
             </div>
           </div>
 
-          {/* Discount info */}
           <div className="text-center">
             <div className="flex items-center justify-center gap-2 mb-2">
               <Gift className="w-5 h-5" />
@@ -187,15 +199,22 @@ export function CountdownTimer({
             </div>
           </div>
 
-          {/* Call to action */}
           <div className="mt-4 text-center">
-            <button className="bg-white text-green-600 px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition-all duration-200 transform hover:scale-105 shadow-lg">
+            <FormModal
+              products={products}
+              btnColor={color}
+            >
+            <Button
+              className={`bg-white px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition-all duration-200 transform hover:scale-105 shadow-lg cursor-pointer`}
+              style={{ color }}
+              onClick={() => redirect("/")}
+            >
               Hoziroq xarid qiling!
-            </button>
+              </Button>
+            </FormModal>
           </div>
         </div>
 
-        {/* Decorative elements */}
         <div className="absolute top-2 right-2 w-2 h-2 bg-white/50 rounded-full animate-ping"></div>
         <div className="absolute bottom-2 left-2 w-1 h-1 bg-white/50 rounded-full animate-ping delay-1000"></div>
       </div>

@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -145,17 +143,20 @@ export default function ProductDetailPage() {
               </div>
             </motion.div>
           </AnimatePresence>
-           <div className="space-y-4">
-            
+          <div className="space-y-4">
+
             <CountdownTimer
-  storageKey={`countdown:product:${id}`}     // har productga unique key
-  resetDurationMs={24 * 60 * 60 * 1000}      // 24 soatlik sikl
-  // targetTime={new Date(Date.now() + 24 * 60 * 60 * 1000)} // ixtiyoriy: faqat birinchi safar
-  // loop={true}                               // default true: tugasa avtomatik qayta boshlaydi
-  discountPercentage={15}
-  title="Chegirma tugashiga"
-  subtitle="Bugun xarid qilganlar uchun"
-/>
+              storageKey={`countdown:product:${id}`}
+              resetDurationMs={24 * 60 * 60 * 1000}
+              // targetTime={new Date(Date.now() + 24 * 60 * 60 * 1000)}
+              // loop={true}
+              color={color}
+              bgColor={bgColor}
+              products={[{ productId: product.id, quantity: 1 }]}
+              discountPercentage={15}
+              title="Chegirma tugashiga"
+              subtitle="Bugun xarid qilganlar uchun"
+            />
 
           </div>
 
