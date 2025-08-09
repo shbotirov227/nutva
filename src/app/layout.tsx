@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import type { Metadata } from "next";
+/* src/app/layout.tsx */
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import { ToastContainer } from "react-toastify";
@@ -19,6 +20,12 @@ import FloatingButtons from "@/components/FloatingButtons";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#fffff",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nutva.uz"),
@@ -44,9 +51,9 @@ export const metadata: Metadata = {
     "ilmiy asoslangan qo‘shimchalar", "илмий асосланган қўшимчалар",
     "immunitetni kuchaytiruvchi vositalar", "иммунитетни кучайтирувчи воситалар",
     "gormonal balans uchun qo‘shimchalar", "гормонал мувозанат учун қўшимчалар",
-    "hazmni yaxshilovchi vositalar", "ҳазмни яхшилайдиган воситалар",
+    "hazmni yaxshilovchi vositalar", "ҳазмни яхшилайдиган восitalar",
     "sertifikatlangan qo‘shimchalar", "сертификатланган қўшимчалар",
-    "ayollar salomatligi uchun qo‘shimchalar", "аёллар саломатлиги учун қўшимчалар",
+    "ayollar salomatligi uchun qo‘shimchalar", "аёллар саломатligi учун қўшимчалар",
     "homiladorlikni rejalashtirish", "ҳомиладорликни режалаштириш",
     "bolalar uchun BAT", "болалар учун БАТ",
     "oshqozon-ichak salomatligi", "ошқозон-ичак саломатлиги",
@@ -63,7 +70,7 @@ export const metadata: Metadata = {
     "BAT Andijon", "БАТ Андижон",
     "BAT Namangan", "БАТ Наманган",
     "biologik faol qo‘shimcha O‘zbekiston", "биологик фаол қўшимча Ўзбекистонда",
-    "sifatli BAT O‘zbekistonda", "сифатли БАТ Ўзбекистонда",
+    "sifatli BAT O‘zbekistonda", "сифатli БАТ Ўзбекистонда",
   ],
   authors: [{ name: "Nutva Pharm" }],
   robots: "index, follow",
@@ -78,9 +85,7 @@ export const metadata: Metadata = {
       "Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
     url: "https://nutva.uz",
     siteName: "Nutva Pharm",
-    images: [
-      { url: "https://nutva.uz/seo_banner.jpg", width: 1200, height: 630 },
-    ],
+    images: [{ url: "https://nutva.uz/seo_banner.jpg", width: 1200, height: 630 }],
     type: "website",
   },
   twitter: {
@@ -89,6 +94,11 @@ export const metadata: Metadata = {
     description:
       "Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
     images: ["https://nutva.uz/seo_banner.jpg"],
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -170,6 +180,41 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
+
+        {/* Organization JSON-LD (moved from head.tsx) */}
+        <Script
+          id="org-ldjson"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Nutva Pharm",
+              url: "https://nutva.uz",
+              logo: "https://nutva.uz/logo.png",
+              sameAs: [
+                "https://www.instagram.com/nutva_extra/",
+                "https://www.instagram.com/gelmin_kids/",
+                "https://www.instagram.com/viris.men/",
+                "https://www.instagram.com/nutva_fertilia/",
+                "https://www.instagram.com/nutva.uz/",
+                "https://t.me/nutvacomplex_extra",
+                "https://t.me/nutva_gelminkids",
+                "https://t.me/nutva_virismen",
+                "https://t.me/nutva_fertiliawomen",
+                "https://t.me/Nutva_Complex",
+                "https://t.me/nutvauz",
+                "https://www.facebook.com/profile.php?id=61576285561357",
+                "https://www.facebook.com/profile.php?id=61576231412052",
+                "https://www.facebook.com/profile.php?id=61576134155901",
+                "https://www.facebook.com/profile.php?id=61576354677800",
+                "https://www.facebook.com/NUTVAC0MPLEX",
+                "https://www.youtube.com/@NutvaUz?sub_confirmation=1",
+              ],
+            }),
+          }}
+        />
       </head>
 
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
@@ -208,7 +253,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <BuyProvider>
                 <Layout>
                   <TrackVisit />
-                  {/* Agar bu komponent ham pixel/GA/Yandex qo‘shsa, dublikat bo‘lmasin */}
+                  {/* If InjectPixelScript also adds analytics, remove to avoid duplicates */}
                   <InjectPixelScript />
                   {children}
                   <FloatingButtons />
