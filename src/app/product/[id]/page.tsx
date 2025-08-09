@@ -36,6 +36,7 @@ import { getProductDetailMiddleImage } from "@/helper/getProductDetailMiddleImag
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { getProductMedia } from "@/helper/getProductMedia";
 import { useCart } from "@/context/CartContext";
+import { CountdownTimer } from "@/components/CountDownTimer";
 
 const certificateImages = [
   CertificateImg1,
@@ -144,6 +145,19 @@ export default function ProductDetailPage() {
               </div>
             </motion.div>
           </AnimatePresence>
+           <div className="space-y-4">
+            
+            <CountdownTimer
+  storageKey={`countdown:product:${id}`}     // har productga unique key
+  resetDurationMs={24 * 60 * 60 * 1000}      // 24 soatlik sikl
+  // targetTime={new Date(Date.now() + 24 * 60 * 60 * 1000)} // ixtiyoriy: faqat birinchi safar
+  // loop={true}                               // default true: tugasa avtomatik qayta boshlaydi
+  discountPercentage={15}
+  title="Chegirma tugashiga"
+  subtitle="Bugun xarid qilganlar uchun"
+/>
+
+          </div>
 
           <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="my-10">
             <TabsList className="grid grid-cols-4 sm:grid-cols-4 max-[450px]:grid-cols-3 max-[350px]:grid-cols-2 mb-5 justify-center gap-4 bg-transparent">
