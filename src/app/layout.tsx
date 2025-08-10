@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable @next/next/next-script-for-ga */
 /* eslint-disable @next/next/no-img-element */
 /* src/app/layout.tsx */
 import type { Metadata, Viewport } from "next";
@@ -26,12 +24,15 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#fffff",
+  themeColor: "#ffffff", // fixed
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nutva.uz"),
-  title: "Nutva Pharm — Ilmiy asoslangan biofaol qo'shimchalar",
+  title: {
+    default: "Nutva Pharm — Ilmiy asoslangan biofaol qo'shimchalar",
+    template: "%s — Nutva Pharm",
+  },
   description:
     "Nutva Pharm — ilmiy asoslangan, sifatli va tabiiy biofaol qo‘shimchalar. Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
   keywords: [
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
     "BAT", "БАТ", "BAA", "БАА",
     "o'simlik ekstraktlari", "ўсимлик экстрактлари",
     "vitaminlar", "витаминлар",
-    "mineral qo‘shimchalar", "минерал қўшимчалар",
+    "mineral qo‘shimchalar", "минерал қўshimчалар",
     "ilmiy asoslangan qo‘shimchalar", "илмий асосланган қўшимчалар",
     "immunitetni kuchaytiruvchi vositalar", "иммунитетни кучайтирувчи воситалар",
     "gormonal balans uchun qo‘shimchalar", "гормонал мувозанат учун қўшимчалар",
@@ -76,15 +77,14 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Nutva Pharm" }],
   robots: "index, follow",
-  alternates: { canonical: "https://nutva.uz/" },
+  // ⛔ removed global canonical; set per-page canonicals
   verification: {
     google: "UvbmZYZaowizMbMapriLrVKCoiGywdpBr50iEVlajJ4",
     yandex: "aef60ba7c050b521",
   },
   openGraph: {
     title: "Nutva Pharm — Ilmiy asoslangan biofaol qo'shimchalar",
-    description:
-      "Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
+    description: "Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
     url: "https://nutva.uz",
     siteName: "Nutva Pharm",
     images: [{ url: "https://nutva.uz/seo_banner.jpg", width: 1200, height: 630 }],
@@ -93,14 +93,12 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Nutva Pharm — Ilmiy asoslangan biofaol qo'shimchalar",
-    description:
-      "Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
+    description: "Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
     images: ["https://nutva.uz/seo_banner.jpg"],
   },
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -109,11 +107,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="uz" suppressHydrationWarning>
       <head>
         {/* GA4 */}
-        <Script
-          id="ga4-src"
-          src="https://www.googletagmanager.com/gtag/js?id=G-E1CNZ3JV1T"
-          strategy="afterInteractive"
-        />
+        <Script id="ga4-src" src="https://www.googletagmanager.com/gtag/js?id=G-E1CNZ3JV1T" strategy="afterInteractive" />
         <Script
           id="ga4-init"
           strategy="afterInteractive"
@@ -170,20 +164,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: `
               window.ym = window.ym || function(){(ym.a=ym.a||[]).push(arguments)};
               ym.l = 1*new Date();
-
-              ym(103208172, "init", {
-                clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true
-              });
-
+              ym(103208172, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
               window.dataLayer = window.dataLayer || [];
-              ym(103392899, "init", {
-                clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, ecommerce:"dataLayer"
-              });
+              ym(103392899, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, ecommerce:"dataLayer" });
             `,
           }}
         />
 
-        {/* Organization JSON-LD (moved from head.tsx) */}
+        {/* Organization JSON-LD */}
         <Script
           id="org-ldjson"
           type="application/ld+json"
@@ -222,23 +210,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
         {/* GTM noscript */}
         <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-KLMGC5HH"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
+          <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KLMGC5HH" height="0" width="0" style={{ display: "none", visibility: "hidden" }} />
         </noscript>
 
         {/* Facebook Pixel noscript */}
         <noscript>
-          <img
-            height="1"
-            width="1"
-            alt=""
-            style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=766139842501655&ev=PageView&noscript=1"
-          />
+          <img height="1" width="1" alt="" style={{ display: "none" }} src="https://www.facebook.com/tr?id=766139842501655&ev=PageView&noscript=1" />
         </noscript>
 
         {/* Yandex Metrika noscript */}
@@ -255,7 +232,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <BuyProvider>
                 <Layout>
                   <TrackVisit />
-                  {/* If InjectPixelScript also adds analytics, remove to avoid duplicates */}
                   <InjectPixelScript />
                   {children}
                   <FloatingButtons />

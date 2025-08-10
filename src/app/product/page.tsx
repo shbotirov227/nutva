@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 import ProductsClient from "./ProductsClient";
 
 export const metadata: Metadata = {
-  title: "Mahsulotlar — Nutva Pharm",
+  title: "Mahsulotlar",
   description:
     "Nutva Pharm mahsulotlari: ilmiy asoslangan, sertifikatlangan biofaol qo‘shimchalar. Tez yetkazib berish va rasmiy kafolat.",
   alternates: { canonical: "https://nutva.uz/product" },
   openGraph: {
-    title: "Mahsulotlar — Nutva Pharm",
+    title: "Mahsulotlar",
     description:
       "Nutva Pharm katalogi: bo‘g‘imlar, immunitet, gormonal balans va boshqalar uchun qo‘shimchalar.",
     url: "https://nutva.uz/product",
@@ -18,15 +18,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mahsulotlar — Nutva Pharm",
-    description:
-      "Ilmiy asoslangan biofaol qo‘shimchalar katalogi.",
+    title: "Mahsulotlar",
+    description: "Ilmiy asoslangan biofaol qo‘shimchalar katalogi.",
     images: ["https://nutva.uz/seo_banner.jpg"],
   },
   robots: "index, follow",
 };
 
 export default function Page() {
-  // Pure server wrapper; SEO handled here
   return <ProductsClient />;
 }
