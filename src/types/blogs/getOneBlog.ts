@@ -20,4 +20,5 @@ export type GetOneBlogType = {
   media: BlogMediaType[];
 
   viewCount?: number;
+  author?: string;
 };

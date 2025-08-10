@@ -1,233 +1,450 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
-import { GetOneBlogType } from "@/types/blogs/getOneBlog";
+import type { GetOneBlogType } from "@/types/blogs/getOneBlog";
 import BlogsComponent from "@/containers/Blogs";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { ArrowBigLeftDash, Calendar, Eye } from "lucide-react";
+import { ArrowLeft, CalendarDays, Eye, Share2, Timer, Link as LinkIcon, Copy, Tag } from "lucide-react";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { useLang } from "@/context/LangContext";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 import { apiClient } from "@/lib/apiClient";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import Head from "next/head"; // only for JSON-LD injection
 
-export default function BlogDetail({ blog: initalBlog, id }: { blog: GetOneBlogType, id: string }) {
+const tt = (t: (k: string) => string, key: string, fallback: string) => {
+  const v = t(key);
+  return v === key ? fallback : v;
+};
+const stripHtml = (html: string) => html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+const estimateReadingTime = (html: string, wpm = 220) => Math.max(1, Math.round(stripHtml(html).split(" ").filter(Boolean).length / wpm));
+type TocItem = { id: string; text: string; level: number };
+
+function ensureIdsOnHeadings(html: string): string {
+  if (!html) return html;
+  const c = document.createElement("div");
+  c.innerHTML = html;
+  c.querySelectorAll("h1,h2,h3").forEach((el) => {
+    if (!el.id) {
+      const id = (el.textContent || "")
+        .toLowerCase()
+        .replace(/[^\p{L}\p{N}]+/gu, "-")
+        .replace(/(^-|-$)+/g, "");
+      if (id) el.id = id;
+    }
+  });
+  return c.innerHTML;
+}
+function buildTocFromHtml(html: string): TocItem[] {
+  if (!html) return [];
+  const c = document.createElement("div");
+  c.innerHTML = html;
+  return Array.from(c.querySelectorAll("h1,h2,h3")).map((el) => ({
+    id: el.id,
+    text: el.textContent || "",
+    level: Number(el.tagName.substring(1)),
+  }));
+}
+function openSharePopup(url: string) {
+  const w = 760,
+    h = 600;
+  const y = window.top?.outerHeight ? Math.max(0, (window.top.outerHeight - h) / 2) : 0;
+  const x = window.top?.outerWidth ? Math.max(0, (window.top.outerWidth - w) / 2) : 0;
+  window.open(url, "_blank", `scrollbars=1,resizable=1,width=${w},height=${h},top=${y},left=${x}`);
+}
+const absMedia = (url: string) => (url?.startsWith("http") ? url : `https://www.api.nutvahealth.uz/uploads/${url}`);
+
+export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlogType; id: string }) {
   const [mounted, setMounted] = useState(false);
-  const [blog, setBlog] = useState<GetOneBlogType>(initalBlog);
-  const [loading, setLoading] = useState(false);
+  const [blog, setBlog] = useState<GetOneBlogType>(initialBlog);
+  const [safeHtml, setSafeHtml] = useState<string>(initialBlog?.content || "");
+  const [toc, setToc] = useState<TocItem[]>([]);
+  const [progress, setProgress] = useState(0);
+  const [copied, setCopied] = useState(false);
+
+  const contentRef = useRef<HTMLDivElement | null>(null);
   const { lang, isLoading } = useLang();
   const router = useRouter();
   const searchParams = useSearchParams();
   const { t } = useTranslation();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
 
+  // one view per session
   useEffect(() => {
-    if (!id) return;
-
+    if (!id || typeof window === "undefined") return;
     const key = `viewed-blog-${id}`;
-    if (typeof window === "undefined") return;
-
-    const alreadyViewed = sessionStorage.getItem(key);
-    if (alreadyViewed === "true") return;
-
-    const trackView = async () => {
+    if (sessionStorage.getItem(key) === "true") return;
+    (async () => {
       try {
         await apiClient.postBlogView(id);
         sessionStorage.setItem(key, "true");
-
-        setBlog((prev) =>
-          prev ? { ...prev, viewCount: (prev.viewCount || 0) + 1 } : prev
-        );
-
-        console.log("✅ View counted and updated immediately");
+        setBlog((prev) => (prev ? { ...prev, viewCount: (prev.viewCount || 0) + 1 } : prev));
       } catch (err) {
-        console.error("❌ Failed to track view:", err);
+        console.error("Failed to track view:", err);
       }
-    };
-
-    trackView();
+    })();
   }, [id]);
 
-
+  // refetch on lang change + ensure IDs
   useEffect(() => {
     if (!mounted) return;
-
-    const fetchBlogData = async () => {
-      setLoading(true);
+    const fetchBlog = async () => {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/BlogPost/${id}?lang=${lang}`,
-          {
-            cache: "no-store",
-          }
-        );
-
-        if (response.ok) {
-          const newBlog: GetOneBlogType = await response.json();
-          setBlog(newBlog);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/BlogPost/${id}?lang=${lang}`, { cache: "no-store" });
+        if (res.ok) {
+          const data: GetOneBlogType = await res.json();
+          setBlog(data);
+          setSafeHtml(ensureIdsOnHeadings(data?.content || ""));
         }
-      } catch (error) {
-        console.error("Error fetching blog data:", error);
-      } finally {
-        setLoading(false);
+      } catch (e) {
+        console.error("Error fetching blog:", e);
       }
     };
-
-    const currentLang = searchParams.get('lang') || 'uz';
+    const currentLang = searchParams.get("lang") || "uz";
     if (lang !== currentLang) {
-      const newSearchParams = new URLSearchParams(searchParams);
-      newSearchParams.set('lang', lang);
-      router.push(`?${newSearchParams.toString()}`, { scroll: false });
-
-      fetchBlogData();
+      const next = new URLSearchParams(searchParams);
+      next.set("lang", lang);
+      router.push(`?${next.toString()}`, { scroll: false });
+      fetchBlog();
+    } else if (initialBlog?.content) {
+      setSafeHtml(ensureIdsOnHeadings(initialBlog.content));
     }
-  }, [lang, isLoading, mounted, id, router, searchParams]);
+  }, [lang, isLoading, mounted, id, initialBlog?.content, router, searchParams]);
+
+  // TOC + progress
+  useEffect(() => setToc(buildTocFromHtml(safeHtml)), [safeHtml]);
+  useEffect(() => {
+    const onScroll = () => {
+      const el = contentRef.current;
+      if (!el) return;
+      const total = el.scrollHeight - window.innerHeight * 0.6;
+      const scrolled = Math.min(total, Math.max(0, window.scrollY + window.innerHeight - el.offsetTop));
+      setProgress(total > 0 ? Math.round((scrolled / total) * 100) : 0);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  const pageUrl = typeof window !== "undefined" ? window.location.href : `${process.env.NEXT_PUBLIC_SITE_URL || "https://nutva.uz"}/blog/${id}?lang=${lang}`;
+  const coverUrl = useMemo(() => {
+    const first = blog?.media?.find((m) => m.mediaType === "Image" || m.mediaType === "ImageUrl");
+    return first ? absMedia(first.url) : null;
+  }, [blog]);
+  const firstVideo = blog?.media?.find((m) => m.mediaType === "Video" || m.mediaType === "YoutubeUrl");
+  const readingMin = estimateReadingTime(blog?.content || "");
+
+  // share
+  const handleNativeShare = async () => {
+    try {
+      if (navigator.share) await navigator.share({ title: blog?.title || "Nutva", text: blog?.metaDescription || "", url: pageUrl });
+    } catch {}
+  };
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(pageUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {}
+  };
+  const shareTo = useCallback(
+    (provider: "telegram" | "x" | "facebook") => {
+      const title = encodeURIComponent(blog?.title || "Nutva Blog");
+      const url = encodeURIComponent(pageUrl);
+      if (provider === "telegram") openSharePopup(`https://t.me/share/url?url=${url}&text=${title}`);
+      if (provider === "x") openSharePopup(`https://twitter.com/intent/tweet?url=${url}&text=${title}`);
+      if (provider === "facebook") openSharePopup(`https://www.facebook.com/sharer/sharer.php?u=${url}`);
+    },
+    [blog?.title, pageUrl]
+  );
 
   if (!mounted || !blog) return null;
 
+  // ---------- JSON-LD (Article + optional Video + Breadcrumbs) ----------
+  const articleLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: blog.title,
+    description: blog.metaDescription || undefined,
+    datePublished: blog.createdAt || undefined,
+    dateModified: blog.updatedAt || blog.createdAt || undefined,
+    mainEntityOfPage: pageUrl,
+    image: coverUrl ? [coverUrl] : undefined,
+    author: blog.author ? { "@type": "Person", name: blog.author } : undefined,
+    publisher: {
+      "@type": "Organization",
+      name: "Nutva",
+      logo: { "@type": "ImageObject", url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://nutva.uz"}/logo.png` },
+    },
+  };
+
+  const videoLd =
+    firstVideo
+      ? firstVideo.mediaType === "Video"
+        ? {
+            "@context": "https://schema.org",
+            "@type": "VideoObject",
+            name: blog.title,
+            description: blog.metaDescription || undefined,
+            contentUrl: absMedia(firstVideo.url),
+            uploadDate: blog.createdAt || undefined,
+            thumbnailUrl: coverUrl ? [coverUrl] : undefined,
+          }
+        : {
+            "@context": "https://schema.org",
+            "@type": "VideoObject",
+            name: blog.title,
+            description: blog.metaDescription || undefined,
+            embedUrl: firstVideo.url.includes("embed")
+              ? firstVideo.url
+              : (() => {
+                  try {
+                    const u = new URL(firstVideo.url);
+                    const id = u.hostname.includes("youtu.be")
+                      ? u.pathname.slice(1)
+                      : u.searchParams.get("v");
+                    return id ? `https://www.youtube.com/embed/${id}` : firstVideo.url;
+                  } catch {
+                    return firstVideo.url;
+                  }
+                })(),
+            uploadDate: blog.createdAt || undefined,
+            thumbnailUrl: coverUrl ? [coverUrl] : undefined,
+          }
+      : null;
+
+  const breadcrumbsLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Bosh sahifa", item: process.env.NEXT_PUBLIC_SITE_URL || "https://nutva.uz" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${process.env.NEXT_PUBLIC_SITE_URL || "https://nutva.uz"}/blog` },
+      { "@type": "ListItem", position: 3, name: blog.title, item: pageUrl },
+    ],
+  };
 
   return (
-    <div className="space-y-6">
-      {/* {loading && (
-        <div className="flex justify-center items-center py-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+    <>
+      {/* Only JSON-LD here. All meta/OG/Twitter handled in generateMetadata (server). */}
+      <Head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
+        {videoLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoLd) }} />}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsLd) }} />
+      </Head>
+
+      {/* progress bar */}
+      <div className="fixed left-0 top-0 z-[60] h-1 w-full bg-transparent">
+        <div className="h-full bg-gradient-to-r from-emerald-500 via-lime-500 to-amber-400 transition-[width]" style={{ width: `${progress}%` }} />
+      </div>
+
+      <div className="space-y-6">
+        {/* Top actions */}
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <Button onClick={() => router.push("/blog")} size="sm" variant="outline" className="gap-2 self-start">
+            <ArrowLeft className="h-4 w-4" />
+            {tt(t, "common.goBack", "Orqaga")}
+          </Button>
+
+          {/* Mobile: 2-col grid (Share + More) */}
+          <div className="sm:hidden grid w-full grid-cols-2 gap-2">
+            <Button size="sm" variant="secondary" className="gap-2" onClick={handleNativeShare}>
+              <Share2 className="h-4 w-4" />
+              {tt(t, "common.share", "Ulashish")}
+            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button size="sm" variant="outline" className="w-full">{tt(t, "common.more", "Boshqa")}</Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => shareTo("telegram")}>Telegram</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => shareTo("x")}>X</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => shareTo("facebook")}>Facebook</DropdownMenuItem>
+                <DropdownMenuItem onClick={copyLink}>
+                  {copied ? (
+                    <span className="inline-flex items-center gap-2"><Copy className="h-3.5 w-3.5" /> {tt(t, "common.copied", "Nusxa olindi")}</span>
+                  ) : (
+                    <span className="inline-flex items-center gap-2"><LinkIcon className="h-3.5 w-3.5" /> {tt(t, "common.copyLink", "Havolani nusxalash")}</span>
+                  )}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          {/* Desktop: inline row */}
+          <div className="hidden sm:flex items-center gap-2">
+            <Button variant="outline" size="sm" onClick={() => shareTo("telegram")}><Share2 className="mr-2 h-4 w-4" />Telegram</Button>
+            <Button variant="outline" size="sm" onClick={() => shareTo("x")}>X</Button>
+            <Button variant="outline" size="sm" onClick={() => shareTo("facebook")}>Facebook</Button>
+            <Button variant="secondary" size="sm" onClick={copyLink}>
+              {copied ? <><Copy className="mr-2 h-4 w-4" /> {tt(t,"common.copied","Nusxa olindi")}</> : <><LinkIcon className="mr-2 h-4 w-4" /> {tt(t,"common.copyLink","Havolani nusxalash")}</>}
+            </Button>
+          </div>
         </div>
-      )} */}
 
-      <Button
-        onClick={() => {
-          router.push("/blog");
-        }}
-        size={"lg"}
-        className="flex items-center text-lg gap-2 cursor-pointer"
-      >
-        <ArrowBigLeftDash className="size-6" />
-        <span>{t("common.goBack")}</span>
-      </Button>
+        {/* Hero */}
+        <div className={clsx("relative overflow-hidden rounded-3xl border bg-gradient-to-br from-emerald-50 to-white", "shadow-[0_10px_40px_rgba(16,185,129,0.15)]")}>
+          {coverUrl && (
+            <div className="relative aspect-[16/8] w-full">
+              <Image src={coverUrl} alt={blog.title} fill priority className="object-cover" sizes="100vw" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
+            </div>
+          )}
 
-      <Card className={`shadow-[10px_10px_10px_rgba(0,0,0,0.1),_10px_10px_10px_rgba(0,0,0,0.1)] ${loading ? "opacity-50" : ""}`}>
-        <CardHeader className="w-full mx-auto">
-          {blog?.media?.length > 0 && (
-            <div
-              className={clsx(
-                "grid gap-4",
-                blog.media.length === 1 ? "grid-cols-1" : "grid-cols-1 md:grid-cols-2"
-              )}
-            >
-              {blog.media.map((media, index) => {
-                const isExternal = media.url.startsWith("http");
-                const mediaUrl = isExternal
-                  ? media.url
-                  : `https://www.api.nutvahealth.uz/uploads/${media.url}`;
+          <div className={clsx("p-5 sm:p-8 lg:p-10", coverUrl ? "lg:-mt-24 relative z-10" : "")}>
+            <Card className="mx-auto w-full max-w-5xl rounded-2xl border-0 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/80">
+              <CardHeader>
+                <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                  {blog?.createdAt && (
+                    <div className="inline-flex items-center gap-2">
+                      <CalendarDays className="h-4 w-4" />
+                      {new Date(blog.createdAt).toLocaleDateString("uz-UZ", { day: "2-digit", month: "2-digit", year: "numeric" })}
+                    </div>
+                  )}
+                  {typeof blog?.viewCount === "number" && (
+                    <>
+                      <span className="opacity-40">•</span>
+                      <div className="inline-flex items-center gap-2">
+                        <Eye className="h-4 w-4" />
+                        {blog.viewCount} {tt(t, "common.views", "ko‘rish")}
+                      </div>
+                    </>
+                  )}
+                  {blog?.content && (
+                    <>
+                      <span className="opacity-40">•</span>
+                      <div className="inline-flex items-center gap-2">
+                        <Timer className="h-4 w-4" />
+                        ~{readingMin} {tt(t, "common.minRead", "daq. o‘qish")}
+                      </div>
+                    </>
+                  )}
+                </div>
 
-                return (
-                  <div
-                    key={index}
-                    className="w-full aspect-vide rounded overflow-hidden flex items-center justify-center"
-                  >
-                    {(() => {
-                      switch (media.mediaType) {
-                        case "Image":
-                        case "ImageUrl":
-                          return (
-                            <Image
-                              src={mediaUrl}
-                              alt={media.altText || `Image ${index + 1}`}
-                              width={800}
-                              height={450}
-                              className="max-w-full max-h-full object-contain"
-                              loading="lazy"
-                            />
-                          );
+                <h1 className="mt-2 text-balance text-2xl font-bold leading-tight sm:text-3xl lg:text-4xl">
+                  {blog.title}
+                </h1>
 
-                        case "Video":
-                          return (
-                            <video
-                              controls
-                              className="w-full h-full object-contain"
-                            >
-                              <source src={mediaUrl} type="video/mp4" />
-                              Sizning brauzeringiz videoni qo‘llab-quvvatlamaydi.
-                            </video>
-                          );
-
-                        case "YoutubeUrl":
-                          return (
-                            <YouTubeEmbed
-                              link={mediaUrl}
-                              className="w-full h-full"
-                              onPlay={() => console.log("YouTube video playing")}
-                            />
-                          );
-
-                        default:
-                          return null;
-                      }
-                    })()}
+                {blog?.metaKeywords && (
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {blog.metaKeywords
+                      .split(",")
+                      .map((k) => k.trim())
+                      .filter(Boolean)
+                      .slice(0, 6)
+                      .map((kw, i) => (
+                        <Badge key={i} variant="secondary" className="inline-flex items-center gap-1">
+                          <Tag className="h-3.5 w-3.5" />
+                          {kw}
+                        </Badge>
+                      ))}
                   </div>
-                );
-              })}
-            </div>
-          )}
-        </CardHeader>
+                )}
+              </CardHeader>
 
-
-
-        <CardContent>
-          <div className="flex max-md:flex-col justify-between items-center mb-6">
-            <h1 className="text-2xl font-bold">{blog.title}</h1>
-
-            <div className="flex max-md:flex-col items-center gap-6">
-              {blog.viewCount ? (
-                <div className="flex items-center max-md:justify-end justify-center gap-3">
-                  <Eye size={22} />
-                  <p className="text-gray-500 text-base">
-                    <span className="font-semibold">{blog.viewCount}</span> views
-                  </p>
-                </div>
-              ) : null}
-
-              {blog?.createdAt && (
-                <div className="flex items-center justify-center gap-3">
-                  <Calendar size={18} />
-                  <p className="text-gray-500 text-base">
-                    {new Date(blog?.createdAt).toLocaleDateString("uz-UZ", {
-                      day: "numeric",
-                      month: "numeric",
-                      year: "numeric",
+              <CardContent className="pb-6">
+                {/* gallery */}
+                {blog?.media?.length > 1 && (
+                  <div className={clsx("mb-6 grid gap-3", blog.media.length === 2 ? "grid-cols-2" : "grid-cols-2 md:grid-cols-3")}>
+                    {blog.media.slice(1).map((m, idx) => {
+                      const src = absMedia(m.url);
+                      if (m.mediaType === "YoutubeUrl") {
+                        return (
+                          <div key={idx} className="relative aspect-video overflow-hidden rounded-xl border">
+                            <YouTubeEmbed link={src} className="absolute inset-0 h-full w-full" />
+                          </div>
+                        );
+                      }
+                      if (m.mediaType === "Video") {
+                        return (
+                          <div key={idx} className="relative aspect-video overflow-hidden rounded-xl border">
+                            <video controls className="h-full w-full object-cover">
+                              <source src={src} type="video/mp4" />
+                            </video>
+                          </div>
+                        );
+                      }
+                      return (
+                        <div key={idx} className="relative aspect-video overflow-hidden rounded-xl border">
+                          <Image src={src} alt={m.altText || `image-${idx + 1}`} fill className="object-cover" />
+                        </div>
+                      );
                     })}
-                  </p>
+                  </div>
+                )}
+
+                <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_300px]">
+                  {/* content */}
+                  <article
+                    ref={contentRef}
+                    className={clsx(
+                      "prose prose-neutral max-w-none leading-relaxed",
+                      "[&>h2]:scroll-mt-24 [&>h3]:scroll-mt-24 prose-h2:mt-10 prose-h2:mb-4 prose-h3:mt-8 prose-h3:mb-3",
+                      "prose-img:rounded-xl prose-img:border prose-img:shadow-sm prose-a:underline-offset-4 hover:prose-a:underline"
+                    )}
+                    dangerouslySetInnerHTML={{ __html: safeHtml || "" }}
+                  />
+
+                  {/* sticky TOC + CTA */}
+                  <aside className="order-first lg:order-none">
+                    <div className="lg:sticky lg:top-24 lg:max-h-[70vh] lg:overflow-auto">
+                      {toc.length > 0 && (
+                        <div className="mb-6 rounded-xl border bg-card p-4 shadow-sm">
+                          <p className="mb-3 text-sm font-semibold tracking-wide text-muted-foreground">
+                            {tt(t, "common.tableOfContents", "Mundarija")}
+                          </p>
+                          <ul className="space-y-2 text-sm">
+                            {toc.map((item) => (
+                              <li key={item.id} className={clsx(item.level >= 3 ? "pl-4" : "")}>
+                                <a href={`#${item.id}`} className="line-clamp-2 text-muted-foreground transition hover:text-foreground">
+                                  {item.text}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      <div className="rounded-2xl border bg-gradient-to-br from-emerald-50 to-white p-5 shadow-sm">
+                        <h3 className="text-lg font-semibold">Sizga mos mahsulotni tanlang</h3>
+                        <p className="mt-1 text-sm text-muted-foreground">
+                          Blog mavzusiga mos biologik faol qo‘shimchalarni ko‘ring.
+                        </p>
+                        <div className="mt-4 flex flex-col gap-2">
+                          <Button size="sm" className="w-full" onClick={() => router.push("/product")}>
+                            Mahsulotlarni ko‘rish
+                          </Button>
+                          <Button size="sm" variant="outline" className="w-full" onClick={() => router.push("/contact")}>
+                            Maslahat olish
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </aside>
                 </div>
-              )}
-            </div>
+              </CardContent>
+            </Card>
           </div>
+        </div>
 
-          {blog?.content ? (
-            <div
-              className="prose max-w-none prose-lg text-base leading-loose"
-              dangerouslySetInnerHTML={{ __html: blog?.content }}
-            />
-          ) : (
-            <p className="text-red-500 font-semibold">Kontent mavjud emas.</p>
-          )}
-
-          {/* {blog?.metaKeywords && (
-          <div className="mt-4">
-            <h2 className="text-lg font-semibold">Meta Keywords:</h2>
-            <p className="text-gray-600">{blog?.metaKeywords}</p>
-          </div>
-        )} */}
-        </CardContent>
-
-      </Card>
-
-      <BlogsComponent />
-    </div>
+        {/* related */}
+        <div className="my-10">
+          <Separator />
+        </div>
+        <section aria-label="More from Nutva">
+          <BlogsComponent />
+        </section>
+      </div>
+    </>
   );
 }
