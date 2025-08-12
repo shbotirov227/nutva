@@ -5,6 +5,8 @@ import Products from "@/containers/Products";
 import AboutBrandSection from "@/containers/AboutBrandSection";
 import Reviews from "@/containers/Reviews";
 import SaleSection from "@/containers/SaleSection";
+import { useEffect, useState } from "react";
+import { DiscountPopup } from "@/components/DiscountPopup";
 
 // SEO uchun to‘g‘ri metadata export qilinmoqda
 // export const metadata = {
@@ -42,14 +44,24 @@ import SaleSection from "@/containers/SaleSection";
 // };
 
 export default function HomePage() {
+  const [showDiscount, setShowDiscount] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowDiscount(true), 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <main>
-      <HeroSection />
-      <Products isAviableBackground />
-      <Blogs />
-      <AboutBrandSection />
-      <Reviews />
-      <SaleSection />
-    </main>
+    <>
+      <main>
+        <HeroSection />
+        <Products isAviableBackground />
+        <Blogs />
+        <AboutBrandSection />
+        <Reviews />
+        <SaleSection />
+      </main>
+      <DiscountPopup isVisible={showDiscount} onClose={() => setShowDiscount(false)} />
+    </>
   );
 }

@@ -134,8 +134,7 @@ const BlogCard = ({ id, media, title, content }: BlogCardProps) => {
 
         {/* Corner chip */}
         <div className="absolute right-3 top-3 z-20 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold text-emerald-900 shadow">
-          {/* feel free to swap this text via i18n if you have tags/categories */}
-          Nutva Yangiliklar
+          {t("common.nutvaNews")}
         </div>
       </Card>
     </motion.article>

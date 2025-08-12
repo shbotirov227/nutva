@@ -27,7 +27,7 @@
         "total": "Jami",
         "yourCart": "Sizning savatingiz",
         "emptyCart": "Sizning savatingiz bo'sh",
-        "blogs": "Bloglar",
+    "blogs": "Yangiliklar",
         "soon": "Tez orada sotuvga chiqadi...",
         "send": "Yuborish",
         "typing": "Yozmoqda...",
@@ -42,8 +42,20 @@
         "address": "Manzil",
         "addressValue": "Uzbekiston, Toshkent",
         "cooperationIssues": "Hamkorlik masalalari bo'yicha",
-        "quickLinks": "Tezkor havolalar",
-        "socialNetwork": "Ijtimoiy tarmoqlar"
+    "quickLinks": "Tezkor havolalar",
+    "socialNetwork": "Ijtimoiy tarmoqlar",
+    "emptyCartHint": "Mahsulotlarni ko'rib chiqing va savatga qo'shing.",
+    "continueShopping": "Xarid qilishni davom etish",
+    "inCart": "savatda",
+    "decreaseQuantity": "Miqdorni kamaytirish",
+    "increaseQuantity": "Miqdorni oshirish",
+    "share": "Ulashish",
+    "copied": "Nusxa olindi",
+    "copyLink": "Havolani nusxalash",
+    "views": "ko‘rish",
+    "minRead": "daq. o‘qish",
+    "tableOfContents": "Mundarija",
+    "nutvaNews": "Nutva Yangiliklar"
     },
 
     "errors": {
@@ -63,7 +75,7 @@
         "home": "Bosh sahifa",
         "about": "Biz haqimizda",
         "products": "Mahsulotlar",
-        "blog": "Blog",
+    "blog": "Yangiliklar",
         "contact": "Aloqa"
     },
 
@@ -78,9 +90,9 @@
         "clearFilter": "Filtrni tozalash",
         "noResults": "Natija topilmadi",
         "loadMore": "Ko'proq yuklash",
-        "noBlogs": "Bloglar mavjud emas",
-        "popular": "Mashhur bloglar",
-        "latest": "So'nggi bloglar"
+    "noBlogs": "Yangiliklar mavjud emas",
+    "popular": "Mashhur yangiliklar",
+    "latest": "So'nggi yangiliklar"
     },
 
     "product": {
@@ -99,7 +111,10 @@
         "remoreFromCart": "Savatdan o'chirish",
         "addedToCart": "Savatga qo'shildi",
         "noProducts": "Mahsulotlar mavjud emas",
-        "saleTitle": "MAXSUS TAKLIF! Qancha ko'p olsangiz — shuncha ko'p tejaysiz!"
+    "saleTitle": "MAXSUS TAKLIF! Qancha ko'p olsangiz — shuncha ko'p tejaysiz!",
+    "officialProduct": "Rasmiy mahsulot",
+    "natural": "100% tabiiy",
+    "fastDelivery": "Tez yetkazish"
     },
 
     "aboutBrand": {
@@ -401,7 +416,7 @@
             "content": {
                 "1": "Bu mahsulot suyak, bo'g'im kasalliklari  uchun iste'mol qilinadi.",
                 "2": "Yo'q. Faqatgina tabiiy giyohlarni ekstraktlari, gormon va kimyoviy moddalarsiz tayyorlangan.",
-                "3": "O'zbekistonda, xalqaro GMP standartlariga mos ishlab chiqarilgan.",
+                "3": "O'zbekistonda, xalqaro ISO standartlariga mos ishlab chiqarilgan.",
                 "4": "10 kun 1 mahal (1 kapsula), keyin esa har kuni 2 kapsuladan ovqatdan keyin suv bilan ichiladi. Bir qutida 60 kapsula - bu 1 oyga yetadi.",
                 "5": "Kasallik darajasiga qarab. Odatda - 12 oylik kurs tavsiya qilinadi. Surunkali kasalliklar esa uzoqroq muddat davom ettiriladi.",
                 "6": "Har bir organizm har xil. Lekin o'rtacha 6 oy ichida sezilarli yengillik bo'lishi mumkin.",
@@ -545,5 +560,44 @@
         "send": "Yuborish",
         "clearHistory": "Tarixni tozalash",
         "startSessionFailed": "Sessiya boshlashda xatolik yuz berdi."
+    }
+,
+    "discountPopup": {
+        "title": "Siz uchun maxsus chegirma",
+        "subtitle": "Sog'lig'ingiz uchun sifatli qo'shimchalar",
+        "ariaDiscount": "25% chegirma – birinchi buyurtmangiz uchun, bosib mahsulotlarga o‘ting",
+        "discountLabel": "25% chegirma",
+        "discountForFirst": "Birinchi buyurtmangiz uchun",
+        "qualityGuarantee": "Yuqori sifat kafolati",
+        "limitedTimeOffer": "Cheklangan vaqt taklifi",
+        "hours": "Soat",
+        "minutes": "Daq",
+        "seconds": "Son",
+        "claimDiscount": "Chegirmani oling",
+        "later": "Keyinroq",
+        "benefitNatural": "Tabiiy",
+        "benefitQuality": "Sifatli",
+        "benefitFreeDelivery": "Bepul yetkazish"
+    },
+    "blogSidebar": {
+        "title": "Sizga mos mahsulotni tanlang",
+        "subtitle": "Blog mavzusiga mos biologik faol qo‘shimchalarni ko‘ring.",
+        "viewProducts": "Mahsulotlarni ko‘rish",
+        "getConsultation": "Maslahat olish"
+    },
+    "cart": {
+        "freeShippingActive": "Bepul yetkazib berish faollashdi!",
+        "leftForFreeShipping": "Bepul yetkazib berish uchun qolgan summa:",
+        "qualityAssurance": "Sifat nazorati (ISO)",
+        "returnPolicy": "Qaytarish siyosati: 7 kun",
+        "fastDelivery": "Tez yetkazib berish",
+        "orderSummary": "Buyurtma xulosasi",
+        "subtotal": "Oraliq summa",
+        "savings": "Tejalgan summa",
+        "delivery": "Yetkazib berish",
+        "free": "Bepul",
+        "calculatedAtNext": "Keyingi bosqichda",
+        "secureCheckout": "To‘lov xavfsiz va shifrlangan.",
+        "saved": "Tejaldi"
     }
 }

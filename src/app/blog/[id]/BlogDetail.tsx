@@ -8,7 +8,8 @@ import { useTranslation } from "react-i18next";
 import type { GetOneBlogType } from "@/types/blogs/getOneBlog";
 import BlogsComponent from "@/containers/Blogs";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { ArrowLeft, CalendarDays, Eye, Share2, Timer, Link as LinkIcon, Copy, Tag } from "lucide-react";
+import { ArrowLeft, CalendarDays, Eye, Share2, Timer, Link as LinkIcon, Copy, Tag, Instagram } from "lucide-react";
+import { shareInstagramStoryWeb, shareFacebookWeb, shareTelegramWeb } from "@/lib/share";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { useLang } from "@/context/LangContext";
 import { Button } from "@/components/ui/button";
@@ -50,13 +51,6 @@ function buildTocFromHtml(html: string): TocItem[] {
     text: el.textContent || "",
     level: Number(el.tagName.substring(1)),
   }));
-}
-function openSharePopup(url: string) {
-  const w = 760,
-    h = 600;
-  const y = window.top?.outerHeight ? Math.max(0, (window.top.outerHeight - h) / 2) : 0;
-  const x = window.top?.outerWidth ? Math.max(0, (window.top.outerWidth - w) / 2) : 0;
-  window.open(url, "_blank", `scrollbars=1,resizable=1,width=${w},height=${h},top=${y},left=${x}`);
 }
 const absMedia = (url: string) => (url?.startsWith("http") ? url : `https://www.api.nutvahealth.uz/uploads/${url}`);
 
@@ -159,14 +153,35 @@ export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlog
     } catch {}
   };
   const shareTo = useCallback(
-    (provider: "telegram" | "x" | "facebook") => {
-      const title = encodeURIComponent(blog?.title || "Nutva Blog");
-      const url = encodeURIComponent(pageUrl);
-      if (provider === "telegram") openSharePopup(`https://t.me/share/url?url=${url}&text=${title}`);
-      if (provider === "x") openSharePopup(`https://twitter.com/intent/tweet?url=${url}&text=${title}`);
-      if (provider === "facebook") openSharePopup(`https://www.facebook.com/sharer/sharer.php?u=${url}`);
+    (provider: "telegram" | "facebook" | "instagram") => {
+      const fbAppId = process.env.NEXT_PUBLIC_FB_APP_ID;
+  const title = blog?.title || "Nutva News";
+      const url = pageUrl;
+
+      if (provider === "telegram") {
+        shareTelegramWeb(url, title);
+        return;
+      }
+      if (provider === "facebook") {
+        shareFacebookWeb({
+          pageUrl: url,
+          quote: blog?.metaDescription || title,
+          hashtag: "Nutva",
+          appId: fbAppId,
+        });
+        return;
+      }
+      if (provider === "instagram") {
+        shareInstagramStoryWeb({
+          title,
+            coverUrl: coverUrl,
+          pageUrl: url,
+          brand: "nutva.uz",
+        });
+        return;
+      }
     },
-    [blog?.title, pageUrl]
+    [blog?.title, blog?.metaDescription, pageUrl, coverUrl]
   );
 
   if (!mounted || !blog) return null;
@@ -268,7 +283,7 @@ export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlog
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={() => shareTo("telegram")}>Telegram</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => shareTo("x")}>X</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => shareTo("instagram")}>Instagram Stories</DropdownMenuItem>
                 <DropdownMenuItem onClick={() => shareTo("facebook")}>Facebook</DropdownMenuItem>
                 <DropdownMenuItem onClick={copyLink}>
                   {copied ? (
@@ -284,7 +299,7 @@ export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlog
           {/* Desktop: inline row */}
           <div className="hidden sm:flex items-center gap-2">
             <Button variant="outline" size="sm" onClick={() => shareTo("telegram")}><Share2 className="mr-2 h-4 w-4" />Telegram</Button>
-            <Button variant="outline" size="sm" onClick={() => shareTo("x")}>X</Button>
+            <Button variant="outline" size="sm" onClick={() => shareTo("instagram")}><Instagram className="mr-2 h-4 w-4" />Instagram Stories</Button>
             <Button variant="outline" size="sm" onClick={() => shareTo("facebook")}>Facebook</Button>
             <Button variant="secondary" size="sm" onClick={copyLink}>
               {copied ? <><Copy className="mr-2 h-4 w-4" /> {tt(t,"common.copied","Nusxa olindi")}</> : <><LinkIcon className="mr-2 h-4 w-4" /> {tt(t,"common.copyLink","Havolani nusxalash")}</>}
@@ -416,16 +431,16 @@ export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlog
                       )}
 
                       <div className="rounded-2xl border bg-gradient-to-br from-emerald-50 to-white p-5 shadow-sm">
-                        <h3 className="text-lg font-semibold">Sizga mos mahsulotni tanlang</h3>
+                        <h3 className="text-lg font-semibold">{tt(t, "blogSidebar.title", "Sizga mos mahsulotni tanlang")}</h3>
                         <p className="mt-1 text-sm text-muted-foreground">
-                          Blog mavzusiga mos biologik faol qo‘shimchalarni ko‘ring.
+                          {tt(t, "blogSidebar.subtitle", "Blog mavzusiga mos biologik faol qo‘shimchalarni ko‘ring.")}
                         </p>
                         <div className="mt-4 flex flex-col gap-2">
-                          <Button size="sm" className="w-full" onClick={() => router.push("/product")}>
-                            Mahsulotlarni ko‘rish
+                          <Button size="sm" className="w-full" onClick={() => router.push("/product")}> 
+                            {tt(t, "blogSidebar.viewProducts", "Mahsulotlarni ko‘rish")}
                           </Button>
                           <Button size="sm" variant="outline" className="w-full" onClick={() => router.push("/contact")}>
-                            Maslahat olish
+                            {tt(t, "blogSidebar.getConsultation", "Maslahat olish")}
                           </Button>
                         </div>
                       </div>

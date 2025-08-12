@@ -7,14 +7,14 @@ export async function generateMetadata(): Promise<Metadata> {
   const lang = cookieStore.get("lang")?.value || "uz";
 
   return {
-    title: lang === "ru" ? "Nutva - Блог" : lang === "en" ? "Nutva - Blog" : "Nutva - Blog Maqolalari",
+    title: lang === "ru" ? "Nutva - Новости" : lang === "en" ? "Nutva - News" : "Nutva - Yangiliklar",
     description:
       lang === "ru"
         ? "Последние статьи и советы о здоровье"
         : lang === "en"
           ? "Latest articles and health tips"
           : "So'nggi maqolalar va sog'liq bo'yicha maslahatlar",
-    keywords: "blog, maqola, nutva, sog'liq, wellness",
+    keywords: "news, yangiliklar, maqola, nutva, sog'liq, wellness",
   };
 }
 

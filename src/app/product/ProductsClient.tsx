@@ -162,7 +162,7 @@ export default function ProductsClient() {
                       ) : null}
                       <span className="inline-flex items-center gap-1 rounded-full bg-white/90 text-emerald-900 px-2.5 py-1 text-[11px] font-semibold shadow">
                         <BadgeCheck className="w-3.5 h-3.5" />
-                        Rasmiy mahsulot
+                        {t("product.officialProduct", "Rasmiy mahsulot")}
                       </span>
                     </div>
 
@@ -215,13 +215,13 @@ export default function ProductsClient() {
                     {/* Trust row */}
                     <div className="mt-3 grid grid-cols-3 gap-2 text-[11px] text-emerald-900/80">
                       <span className="inline-flex items-center gap-1">
-                        <Leaf className="w-4 h-4" /> 100% tabiiy
+                        <Leaf className="w-4 h-4" /> {t("product.natural", "100% tabiiy")}
                       </span>
                       <span className="inline-flex items-center gap-1">
-                        <ShieldCheck className="w-4 h-4" /> GMP
+                        <ShieldCheck className="w-4 h-4" /> ISO
                       </span>
                       <span className="inline-flex items-center gap-1">
-                        <Truck className="w-4 h-4" /> Tez yetkazish
+                        <Truck className="w-4 h-4" /> {t("product.fastDelivery", "Tez yetkazish")}
                       </span>
                     </div>
 

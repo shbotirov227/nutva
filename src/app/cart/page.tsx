@@ -12,7 +12,7 @@ import { useCartWithDiscounts } from "@/hooks/useCartWithDiscounts";
 import { formatPrice } from "@/lib/formatPrice";
 import EmptyCartImg from "@/assets/images/empty-cart-img.png";
 import { useCart } from "@/context/CartContext";
-import { Trash2, ChevronLeft, ShieldCheck, Truck } from "lucide-react";
+import { Trash2, ChevronLeft, ShieldCheck, Truck, Leaf } from "lucide-react";
 import clsx from "clsx";
 
 export default function CartPage() {
@@ -39,15 +39,13 @@ export default function CartPage() {
             className="w-full m-auto max-w-[360px] h-full object-contain"
           />
           <h1 className="mt-6 text-2xl font-extrabold text-emerald-900">{t("common.emptyCart")}</h1>
-          <p className="text-emerald-800/70 mt-2 text-sm">
-            {t("common.emptyCartHint", "Mahsulotlarni ko‘rib chiqing va savatga qo‘shing.")}
-          </p>
+          <p className="text-emerald-800/70 mt-2 text-sm">{t("common.emptyCartHint")}</p>
           <Link
             href="/"
             className="mt-6 inline-flex items-center gap-2 rounded-xl border border-emerald-300 px-4 py-2 text-emerald-900 hover:bg-emerald-50 font-semibold"
           >
             <ChevronLeft className="w-5 h-5" />
-            {t("common.continueShopping", "Xarid qilishni davom etish")}
+            {t("common.continueShopping")}
           </Link>
         </div>
       </Container>
@@ -79,8 +77,8 @@ export default function CartPage() {
             <Truck className="w-5 h-5 text-emerald-700" />
             <span className="text-emerald-800 font-semibold text-center">
               {leftForFree === 0
-                ? t("cart.freeShippingActive", "Bepul yetkazib berish faollashdi!")
-                : t("cart.leftForFreeShipping", "Bepul yetkazib berish uchun qolgan summa:")}{" "}
+                ? t("cart.freeShippingActive")
+                : t("cart.leftForFreeShipping")} {" "}
               {leftForFree > 0 && (
                 <span className="text-emerald-900">
                   {formatPrice(leftForFree)} {t("common.sum")}
@@ -112,15 +110,15 @@ export default function CartPage() {
           <div className="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-3 text-emerald-900/80 text-sm">
             <div className="rounded-xl border border-emerald-200/60 bg-white/80 p-3 flex items-center gap-2">
               <ShieldCheck className="w-5 h-5" />
-              <span>{t("cart.qualityAssurance", "Sifat nazorati (GMP)")}</span>
+              <span>{t("cart.qualityAssurance")}</span>
             </div>
             <div className="rounded-xl border border-emerald-200/60 bg-white/80 p-3 flex items-center gap-2">
-              <span>↩️</span>
-              <span>{t("cart.returnPolicy", "Qaytarish siyosati: 7 kun")}</span>
+              <Leaf className="w-5 h-5 text-emerald-700" />
+              <span className="font-semibold">{t("product.natural")}</span>
             </div>
             <div className="rounded-xl border border-emerald-200/60 bg-white/80 p-3 flex items-center gap-2">
               <Truck className="w-5 h-5" />
-              <span>{t("cart.fastDelivery", "Tez yetkazib berish")}</span>
+              <span>{t("cart.fastDelivery")}</span>
             </div>
           </div>
 
@@ -129,7 +127,7 @@ export default function CartPage() {
             className="mt-4 inline-flex items-center gap-2 text-emerald-900 hover:text-emerald-800 font-semibold"
           >
             <ChevronLeft className="w-5 h-5" />
-            {t("common.continueShopping", "Xarid qilishni davom etish")}
+            {t("common.continueShopping")}
           </Link>
         </section>
 
@@ -137,13 +135,13 @@ export default function CartPage() {
         <aside className="lg:sticky lg:top-28 self-start">
           <div className="rounded-2xl border border-emerald-200/60 bg-white/80 p-5 shadow-xl backdrop-blur supports-[backdrop-filter]:bg-white/70">
             <h2 className="text-xl font-extrabold text-emerald-900">
-              {t("cart.orderSummary", "Buyurtma xulosasi")}
+              {t("cart.orderSummary")}
             </h2>
 
             {/* Price breakdown */}
             <div className="mt-5 space-y-2 text-sm">
               <div className="flex items-center justify-between">
-                <span className="text-emerald-900/80">{t("cart.subtotal", "Oraliq summa")}</span>
+                <span className="text-emerald-900/80">{t("cart.subtotal")}</span>
                 <span className="font-semibold text-emerald-900">
                   {formatPrice(originalTotal)} {t("common.sum")}
                 </span>
@@ -151,7 +149,7 @@ export default function CartPage() {
 
               {savings > 0 && (
                 <div className="flex items-center justify-between">
-                  <span className="text-emerald-900/80">{t("cart.savings", "Tejalgan summa")}</span>
+                  <span className="text-emerald-900/80">{t("cart.savings")}</span>
                   <span className="font-semibold text-emerald-700">
                     − {formatPrice(savings)} {t("common.sum")}
                   </span>
@@ -159,9 +157,9 @@ export default function CartPage() {
               )}
 
               <div className="flex items-center justify-between">
-                <span className="text-emerald-900/80">{t("cart.delivery", "Yetkazib berish")}</span>
+                <span className="text-emerald-900/80">{t("cart.delivery")}</span>
                 <span className="font-semibold text-emerald-900">
-                  {leftForFree === 0 ? t("cart.free", "Bepul") : t("cart.calculatedAtNext", "Keyingi bosqichda")}
+                  {leftForFree === 0 ? t("cart.free") : t("cart.calculatedAtNext")}
                 </span>
               </div>
 
@@ -186,10 +184,7 @@ export default function CartPage() {
               </Button>
             </FormModal>
 
-            <p className="mt-3 text-[12px] text-emerald-900/70 flex items-center gap-1">
-              <ShieldCheck className="w-4 h-4" />
-              {t("cart.secureCheckout", "To‘lov xavfsiz va shifrlangan.")}
-            </p>
+           
           </div>
         </aside>
       </div>

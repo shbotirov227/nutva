@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Container from "@/components/Container";
 import type { GetOneBlogType } from "@/types/blogs/getOneBlog";
 import BlogDetail from "./BlogDetail";
@@ -167,9 +167,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 
       icons: {
         icon: [{ url: "/favicon.ico" }],
-        apple: [{ url: "/apple-touch-icon.png" }],
       },
-      themeColor: "#10b981",
     };
   } catch (e) {
     console.error("generateMetadata error:", e);
@@ -180,6 +178,11 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     };
   }
 }
+
+// Move themeColor to viewport export per Next.js guidance (avoids warning)
+export const viewport: Viewport = {
+  themeColor: "#10b981",
+};
 
 export default async function BlogPostPage({ params, searchParams }: Props) {
   try {

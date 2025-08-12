@@ -27,7 +27,7 @@
         "total": "Total",
         "yourCart": "Your Cart",
         "emptyCart": "Your cart is empty",
-        "blogs": "Blogs",
+    "blogs": "News",
         "soon": "It will soon go on sale...",
         "send": "Send",
         "typing": "Typing...",
@@ -43,7 +43,19 @@
         "addressValue": "Uzbekistan, Tashkent",
         "cooperationIssues": "On cooperation issues",
         "quickLinks": "Quick links",
-        "socialNetwork": "Social networks"
+    "socialNetwork": "Social networks",
+    "emptyCartHint": "Browse products and add them to your cart.",
+    "continueShopping": "Continue shopping",
+    "inCart": "in cart",
+    "decreaseQuantity": "Decrease quantity",
+    "increaseQuantity": "Increase quantity",
+    "share": "Share",
+    "copied": "Copied",
+    "copyLink": "Copy link",
+    "views": "views",
+    "minRead": "min read",
+    "tableOfContents": "Table of contents",
+    "nutvaNews": "Nutva News"
     },
 
     "errors": {
@@ -63,7 +75,7 @@
         "home": "Home",
         "about": "About Us",
         "products": "Products",
-        "blog": "Blog",
+    "blog": "News",
         "contact": "Contact Us"
     },
 
@@ -78,9 +90,9 @@
         "clearFilter": "Clear Filter",
         "noResults": "No results found",
         "loadMore": "Load More",
-        "noBlogs": "No blogs available",
-        "popular": "Popular",
-        "latest": "Latest"
+    "noBlogs": "No news available",
+    "popular": "Popular news",
+    "latest": "Latest news"
     },
 
     "product": {
@@ -99,7 +111,10 @@
         "remoreFromCart": "Remove from cart",
         "addedToCart": "Added to cart",
         "noProducts": "No products available",
-        "saleTitle": "SPECIAL OFFER! The more you buy — the more you save!"
+    "saleTitle": "SPECIAL OFFER! The more you buy — the more you save!",
+    "officialProduct": "Official product",
+    "natural": "100% natural",
+    "fastDelivery": "Fast delivery"
     },
 
     "aboutBrand": {
@@ -402,7 +417,7 @@
             "content": {
                 "1": "This product is used for joint and bone-related conditions.",
                 "2": "No. It contains only natural herbal extracts, with no hormones or chemical substances.",
-                "3": "It is produced in Uzbekistan in accordance with international GMP standards.",
+                "3": "It is produced in Uzbekistan in accordance with international ISO standards.",
                 "4": "Take 1 capsule once a day for 10 days. Then continue with 2 capsules daily after meals with water. One box contains 60 capsules - enough for 1 month.",
                 "5": "Depends on the condition. Usually, a 12-month course is recommended. For chronic illnesses, a longer duration may be needed.",
                 "6": "Results vary by individual. However, noticeable relief is often experienced within 6 months.",
@@ -546,5 +561,46 @@
         "send": "Send",
         "clearHistory": "Clear History",
         "startSessionFailed": "Failed to start session."
+    }
+,
+    "discountPopup": {
+        "title": "Special discount for you",
+        "subtitle": "High-quality supplements for your health",
+        "ariaDiscount": "25% discount – for your first order, click to view products",
+        "discountLabel": "25% discount",
+        "discountForFirst": "For your first order",
+        "qualityGuarantee": "High quality guarantee",
+        "limitedTimeOffer": "Limited time offer",
+        "hours": "Hours",
+        "minutes": "Min",
+        "seconds": "Sec",
+        "claimDiscount": "Claim discount",
+        "later": "Later",
+        "benefitNatural": "Natural",
+        "benefitQuality": "Quality",
+        "benefitFreeDelivery": "Free delivery"
+    }
+,
+    "cart": {
+        "freeShippingActive": "Free shipping activated!",
+        "leftForFreeShipping": "Left for free shipping:",
+        "qualityAssurance": "Quality control (ISO)",
+        "returnPolicy": "Return policy: 7 days",
+        "fastDelivery": "Fast delivery",
+        "orderSummary": "Order summary",
+        "subtotal": "Subtotal",
+        "savings": "You saved",
+        "delivery": "Delivery",
+        "free": "Free",
+        "calculatedAtNext": "Calculated at next step",
+        "secureCheckout": "Payment is secure and encrypted.",
+        "saved": "Saved"
+    }
+,
+    "blogSidebar": {
+        "title": "Choose the product that suits you",
+        "subtitle": "See dietary supplements related to the blog topic.",
+        "viewProducts": "View products",
+        "getConsultation": "Get consultation"
     }
 }
