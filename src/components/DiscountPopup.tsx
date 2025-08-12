@@ -67,7 +67,7 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
               {/* Close Button */}
               <button
                 onClick={onClose}
-                className="absolute right-4 top-4 z-10 p-2 rounded-full bg-white/80 hover:bg-white transition-colors shadow-sm"
+                className="absolute right-4 top-4 z-10 p-2 rounded-full bg-white/80 hover:bg-white transition-colors shadow-sm cursor-pointer"
               >
                 <X className="w-4 h-4 text-gray-600" />
               </button>
@@ -99,7 +99,7 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="group relative w-full rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 p-6 text-center text-white shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400"
-                  aria-label={t("discountPopup.ariaDiscount", "25% chegirma – birinchi buyurtmangiz uchun, bosib mahsulotlarga o‘ting")}
+                  aria-label={t("discountPopup.ariaDiscount", "25% chegirma – birinchi buyurtmangiz uchun, bosib mahsulotlarga o'ting")}
                 >
                   {/* Click hint (moved to bottom-right corner) */}
                   <div className="pointer-events-none absolute right-2 bottom-2 inline-flex items-center gap-1 rounded-full bg-white/20 px-2 py-1 text-[10px] font-medium tracking-wide text-white/90">
@@ -150,7 +150,7 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
                 className="px-6 pb-6 space-y-3"
               >
                 <Button
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl shadow-lg"
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl shadow-lg cursor-pointer"
                   onClick={handleDiscountClick}
                 >
                   {t("discountPopup.claimDiscount", "Chegirmani oling")}
@@ -159,7 +159,7 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
                 <Button
                   variant="ghost"
                   onClick={onClose}
-                  className="w-full text-emerald-700 hover:bg-emerald-100 py-2"
+                  className="w-full text-emerald-700 hover:bg-emerald-100 py-2 cursor-pointer"
                 >
                   {t("discountPopup.later", "Keyinroq")}
                 </Button>

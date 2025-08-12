@@ -36,7 +36,7 @@ type P = {
   description?: string;
   imageUrls?: string[];
   price?: number;
-  // ixtiyoriy: agar backendda eski narx bo‘lsa −% ko‘rsatamiz
+  // ixtiyoriy: agar backendda eski narx bo'lsa −% ko'rsatamiz
   oldPrice?: number;
 };
 
@@ -178,7 +178,7 @@ export default function ProductsClient() {
                         fill
                         priority={false}
                         sizes="(max-width: 1024px) 100vw, 33vw"
-                        className="object-contain p-4"
+                        className="object-contain p-4 cursor-pointer"
                         onClick={() => router.push(`/product/${product.id}`)}
                       />
                     </motion.div>
@@ -229,7 +229,7 @@ export default function ProductsClient() {
                     <div className="mt-5 flex gap-2">
                       <Button
                         size="lg"
-                        className="group flex-1 font-bold"
+                        className="group flex-1 font-bold cursor-pointer"
                         style={{
                           background: "linear-gradient(90deg, #10B981, #34D399)",
                           color: "#fff",
@@ -245,10 +245,10 @@ export default function ProductsClient() {
                         size="lg"
                         variant="outline"
                         onClick={() => handleAdd(product)}
-                        className="flex-1 border-emerald-300 text-emerald-900 hover:bg-emerald-50 font-semibold"
-                        aria-label={`${product.name} savatga qo‘shish`}
+                        className="flex-1 border-emerald-300 text-emerald-900 hover:bg-emerald-50 font-semibold cursor-pointer"
+                        aria-label={`${product.name} savatga qo'shish`}
                       >
-                        <ShoppingCart className="mr-2 w-5 h-5" />
+                        <ShoppingCart className="mr-0 w-5 h-5" />
                         {t("product.addToCart")}
                       </Button>
                     </div>
