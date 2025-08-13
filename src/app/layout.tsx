@@ -24,7 +24,7 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#ffffff", // fixed
+  themeColor: "#ffffff",
 };
 
 export const metadata: Metadata = {
@@ -35,7 +35,9 @@ export const metadata: Metadata = {
   },
   description:
     "Nutva Pharm — ilmiy asoslangan, sifatli va tabiiy biofaol qo‘shimchalar. Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
+  // Important: keywords are low-weight, but we include them as requested.
   keywords: [
+    // Brand & products
     "Nutva", "Нутва",
     "Nutva Pharm", "Нутва Фарм",
     "nutva.uz", "nutva uz", "Нутва УЗ",
@@ -45,18 +47,20 @@ export const metadata: Metadata = {
     "Nutva Fertilia Women", "Нутва Фертилия Вумен",
     "Nutva Viris Men", "Нутва Вирис Мен",
     "Nutva Complex Extra", "Нутва Комплекс Экстра",
+
+    // Existing generic terms (uz/ru)
     "biologik faol qo‘shimchalar", "биологик фаол қўшимчалар",
     "bioaktiv qo‘shimchalar", "биоактив қўшимчалар",
     "BAT", "БАТ", "BAA", "БАА",
     "o'simlik ekstraktlari", "ўсимлик экстрактлари",
     "vitaminlar", "витаминлар",
-    "mineral qo‘shimchalar", "минерал қўshimчалар",
+    "mineral qo‘shimchalar", "минерал қўшимчалар",
     "ilmiy asoslangan qo‘shimchalar", "илмий асосланган қўшимчалар",
     "immunitetni kuchaytiruvchi vositalar", "иммунитетни кучайтирувчи воситалар",
     "gormonal balans uchun qo‘shimchalar", "гормонал мувозанат учун қўшимчалар",
-    "hazmni yaxshilovchi vositalar", "ҳазмни яхшилайдиган восitalar",
+    "hazmni yaxshilovchi vositalar", "ҳазмни яхшилайдиган воситалар",
     "sertifikatlangan qo‘shimchalar", "сертификатланган қўшимчалар",
-    "ayollar salomatligi uchun qo‘shimchalar", "аёллар саломатligi учун қўшимчалар",
+    "ayollar salomatligi uchun qo‘shimchalar", "аёллар саломатлиги учун қўшимчалар",
     "homiladorlikni rejalashtirish", "ҳомиладорликни режалаштириш",
     "bolalar uchun BAT", "болалар учун БАТ",
     "oshqozon-ichak salomatligi", "ошқозон-ичак саломатлиги",
@@ -74,31 +78,84 @@ export const metadata: Metadata = {
     "BAT Namangan", "БАТ Наманган",
     "biologik faol qo‘shimcha O‘zbekiston", "биологик фаол қўшимча Ўзбекистонда",
     "sifatli BAT O‘zbekistonda", "сифатli БАТ Ўзбекистонда",
+
+    // ➕ Requested RU queries (verbatim)
+    "био активные добавки",
+    "био активные добавки ташкент",
+    "бады в ташкенте",
+    "купить бады ташкент",
+    "бады для восстановления суставов",
+    "бады цена",
+    "бады в узбекистан",
+    "заказать бады в ташкенте",
+    "витамины бады",
+    "витамины и бады для суставов",
+    "бад узбекистон",
+    "эффективные бады для суставов",
+    "бад в ташкент",
+    "витамины бады ташкент",
+    "купить бады",
+    "бады для костей",
+    "заказать бады",
+    "бады для лечения суставов",
+    "бады витамины",
+    "бады ташкент",
+    "бады для суставов",
+    "бады купить ташкент",
+    "бады купить",
+    "бады для роста костей",
   ],
-  authors: [{ name: "Nutva Pharm" }],
-  robots: "index, follow",
-  // ⛔ removed global canonical; set per-page canonicals
+  authors: [{ name: "Nutva Pharm", url: "https://nutva.uz" }],
+  creator: "Nutva Pharm",
+  publisher: "Nutva Pharm",
+  // Fine-grained robots (Google respects these; Yandex follows standard robots)
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    noarchive: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+    },
+  },
+  referrer: "origin-when-cross-origin",
+  formatDetection: {
+    telephone: false,
+    address: false,
+    email: false,
+  },
+  
   verification: {
     google: "UvbmZYZaowizMbMapriLrVKCoiGywdpBr50iEVlajJ4",
     yandex: "aef60ba7c050b521",
   },
   openGraph: {
     title: "Nutva Pharm — Ilmiy asoslangan biofaol qo'shimchalar",
-    description: "Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
+    description:
+      "Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
     url: "https://nutva.uz",
     siteName: "Nutva Pharm",
-    images: [{ url: "https://nutva.uz/seo_banner.jpg", width: 1200, height: 630 }],
+    images: [{ url: "https://nutva.uz/seo_banner.jpg", width: 1200, height: 630, alt: "Nutva Pharm" }],
     type: "website",
+    locale: "uz_UZ",
+    alternateLocale: ["ru_RU"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Nutva Pharm — Ilmiy asoslangan biofaol qo'shimchalar",
-    description: "Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
+    description:
+      "Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
     images: ["https://nutva.uz/seo_banner.jpg"],
   },
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
+    // add apple touch icon if you have it:
+    // apple: "/apple-touch-icon.png",
   },
 };
 
@@ -127,7 +184,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              (function(w,d,s,l,i){w[l]=w[l]||[]).push({'gtm.start':
               new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
               j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -165,7 +222,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               window.ym = window.ym || function(){(ym.a=ym.a||[]).push(arguments)};
               ym.l = 1*new Date();
               ym(103208172, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
-              window.dataLayer = window.dataLayer || [];
               ym(103392899, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, ecommerce:"dataLayer" });
             `,
           }}
@@ -180,6 +236,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
+              "@id": "https://nutva.uz/#organization",
               name: "Nutva Pharm",
               url: "https://nutva.uz",
               logo: "https://nutva.uz/logo.png",
@@ -202,6 +259,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 "https://www.facebook.com/NUTVAC0MPLEX",
                 "https://www.youtube.com/@NutvaUz?sub_confirmation=1",
               ],
+              areaServed: "UZ",
+            }),
+          }}
+        />
+
+        {/* WebSite JSON-LD (Sitelinks Search) — ensure /search exists with ?q= */}
+        <Script
+          id="website-ldjson"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "@id": "https://nutva.uz/#website",
+              url: "https://nutva.uz",
+              name: "Nutva Pharm",
+              inLanguage: ["uz-UZ", "ru-RU"],
+              potentialAction: {
+                "@type": "SearchAction",
+                target: "https://nutva.uz/search?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
             }),
           }}
         />
@@ -210,7 +290,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
         {/* GTM noscript */}
         <noscript>
-          <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KLMGC5HH" height="0" width="0" style={{ display: "none", visibility: "hidden" }} />
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-KLMGC5HH"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
         </noscript>
 
         {/* Facebook Pixel noscript */}
