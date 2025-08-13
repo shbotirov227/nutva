@@ -475,6 +475,8 @@
         "ready_for_discounts": "Ajoyib chegirmalarga tayyormisiz?",
         "limited_offers": "Cheklangan takliflardan foydalanib qoling!",
         "start_shopping": "Xaridni boshlash",
+    "price_per_unit_badge": "1 dona narxi",
+    "price_per_unit_tooltip": "Ko'plik to'plamdagi mahsulotning bir dona narxi",
 
         "products_data": {
             "1": {

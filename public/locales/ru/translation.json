@@ -476,6 +476,8 @@
         "ready_for_discounts": "Готовы к невероятным скидкам?",
         "limited_offers": "Воспользуйтесь ограниченными предложениями!",
         "start_shopping": "Начать покупки",
+    "price_per_unit_badge": "за шт.",
+    "price_per_unit_tooltip": "Цена указана за единицу в наборе",
 
         "products_data": {
             "1": {

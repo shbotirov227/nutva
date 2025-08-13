@@ -476,6 +476,8 @@
         "ready_for_discounts": "Ready for amazing discounts?",
         "limited_offers": "Take advantage of limited offers!",
         "start_shopping": "Start Shopping",
+    "price_per_unit_badge": "per unit",
+    "price_per_unit_tooltip": "Indicates price per unit in a multi-pack",
 
         "products_data": {
             "1": {

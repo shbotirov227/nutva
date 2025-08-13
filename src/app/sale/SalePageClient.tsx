@@ -86,13 +86,13 @@ const SalePageClient: React.FC = () => {
       itemData: [
         {
           title: `Complex 2 ${t("common.pcs")}`,
-          discountPrice: "390 000",
+          discountPrice: "560 000",
           originalPrice: "1 170 000",
           productImage: ProductGreen,
         },
         {
           title: `Complex Extra 2 ${t("common.pcs")}`,
-          discountPrice: "390 000",
+          discountPrice: "560 000",
           originalPrice: "1 170 000",
           productImage: ProductRed,
         },
@@ -119,6 +119,26 @@ const SalePageClient: React.FC = () => {
     description:
       "Nutva Pharm chegirmalari: Complex, Complex Extra va Gelmin Kids bo‘yicha paketli takliflar.",
     isPartOf: { "@type": "WebSite", name: "Nutva Pharm", url: "https://nutva.uz" },
+  };
+
+  // Helper to map a product title to its image (centralized logic)
+  const imageForTitle = (title: string) => {
+    switch (true) {
+      case title.startsWith("Complex Extra"):
+        return ProductRed;
+      case title.startsWith("Complex"):
+        return ProductGreen;
+      case title.startsWith("Gelmin Kids"):
+        return ProductOrange;
+      default:
+        return ProductGreen;
+    }
+  };
+
+  // Detect multi-quantity titles (e.g., "Complex 2 pcs") to show per-unit badge
+  const isMultiQtyTitle = (title: string) => {
+    const pcs = t("common.pcs");
+    return title.includes(` 2 ${pcs}`); // We only flag the 2x bundle per request
   };
 
   return (
@@ -203,36 +223,25 @@ const SalePageClient: React.FC = () => {
                             : "grid-cols-1 sm:grid-cols-2"
                         }`}
                       >
-                        {item.itemData.map((product, pIndex) => {
-                          const productImage = () => {
-                            switch (product.title) {
-                              case "Complex":
-                                return ProductGreen;
-                              case "Complex Extra":
-                                return ProductRed;
-                              case "Gelmin Kids":
-                                return ProductOrange;
-                              case `Complex 1 ${t("common.pcs")}`:
-                              case `Complex 2 ${t("common.pcs")}`:
-                                return ProductGreen;
-                              case `Complex Extra 1 ${t("common.pcs")}`:
-                              case `Complex Extra 2 ${t("common.pcs")}`:
-                                return ProductRed;
-                              default:
-                                return ProductGreen;
-                            }
-                          };
-                          return (
+                        {item.itemData.map((product, pIndex) => (
+                          <div key={pIndex} className="relative">
                             <SaleCard
-                              key={pIndex}
                               color={color}
-                              img={productImage()}
+                              img={imageForTitle(product.title)}
                               title={product.title}
                               discountPrice={product.discountPrice}
                               originalPrice={product.originalPrice}
                             />
-                          );
-                        })}
+                            {isMultiQtyTitle(product.title) && (
+                              <span
+                                className="absolute top-2 right-2 rounded-full bg-white/90 border px-2 py-1 text-[11px] font-semibold text-gray-700 shadow-sm"
+                                title={t("sale.price_per_unit_tooltip")}
+                              >
+                                {t("sale.price_per_unit_badge")}
+                              </span>
+                            )}
+                          </div>
+                        ))}
                       </div>
                     </div>
 
