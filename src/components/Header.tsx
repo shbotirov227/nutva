@@ -60,6 +60,7 @@ const Header: React.FC = () => {
     { href: "/sale", label: t("common.saleUpperCase") },
     { href: "/about-us", label: t("nav.about") },
     { href: "/blog", label: t("nav.blog") },
+    { href: "/certificates", label: t("nav.certificates") },
     { href: "/contact", label: t("nav.contact") },
     // { href: "/admin", label: "Admin" },
   ].filter(link => !!link.href && !!link.label), [t]);

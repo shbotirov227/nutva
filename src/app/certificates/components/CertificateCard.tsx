@@ -99,7 +99,7 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
               
 							{/* Overlay on hover */}
 							<div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl flex items-end justify-center pb-4">
-								<div className="text-white text-sm bg-black/50 px-3 py-1 rounded-full backdrop-blur-sm">
+								<div className="text-white text-sm bg-black/50 px-3 py-1 rounded-full backdrop-blur-sm cursor-pointer">
 									{t('certificates.clickToZoom')}
 								</div>
 							</div>
@@ -125,7 +125,7 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
 							onClick={() => setOpen(true)}
 							variant="outline" 
 							size="sm" 
-							className="flex-1 bg-gradient-to-r from-[#51FFAE] to-[#6DB19E] text-white border-0 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+							className="flex-1 bg-gradient-to-r from-[#51FFAE] to-[#6DB19E] text-white border-0 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
 						>
 							<Eye className="w-4 h-4 mr-2" />
 							{t('certificates.view')}
@@ -141,7 +141,7 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
 							<Button 
 								variant="secondary" 
 								size="sm"
-								className="w-full bg-white border-2 border-emerald-200 text-emerald-700 hover:bg-emerald-50 hover:border-emerald-300 transition-all duration-300 shadow-sm hover:shadow-md"
+								className="w-full bg-white border-2 border-emerald-200 text-emerald-700 hover:bg-emerald-50 hover:border-emerald-300 transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
 							>
 								<Download className="w-4 h-4 mr-2" />
 								{t('certificates.download')}

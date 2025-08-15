@@ -131,14 +131,14 @@ export default function CertificatesPage() {
 							value={query}
 							onChange={(e) => setQuery(e.target.value)}
 							placeholder={t("certificates.searchPlaceholder") as string}
-							className="pl-10 h-12 text-base"
+							className="pl-10 h-12 text-base placeholder:text-slate-500 dark:placeholder:text-slate-500 border-slate-200 dark:border-slate-700 focus:border-slate-300 dark:focus:border-slate-600 bg-white dark:bg-slate-900 focus:ring-0"
 						/>
 					</div>
 
 					<Tabs value={category} onValueChange={(v) => setCategory(v as (typeof CATEGORIES)[number])} className="w-full sm:w-auto">
 						<TabsList className="flex flex-wrap gap-2 bg-transparent p-0">
 							{CATEGORIES.map((cat) => (
-								<TabsTrigger key={cat} value={cat} className="data-[state=active]:bg-slate-900 data-[state=active]:text-white">
+								<TabsTrigger key={cat} value={cat} className="data-[state=active]:bg-slate-900 data-[state=active]:text-white cursor-pointer transition-all duration-300">
 									{cat === "Все"
 										? t("certificates.categories.all")
 										: cat === "Документация"
