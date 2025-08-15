@@ -90,14 +90,6 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
                     onLoad={() => setIsImageLoaded(true)}
                     priority={false}
                   />
-                    {/* <iframe
-                      src={imageSrc}
-                      title={displayTitle}
-                      className="object-contain transition-transform duration-500 group-hover:scale-105"
-                      onLoad={() => setIsImageLoaded(true)}
-                      width="100%"
-                      height="100%"
-                    /> */}
                   {!isImageLoaded && (
                     <div className="absolute inset-0 bg-gradient-to-br from-slate-200 to-slate-300 animate-pulse flex items-center justify-center rounded-xl">
                       <Award className="w-12 h-12 text-slate-400" />
