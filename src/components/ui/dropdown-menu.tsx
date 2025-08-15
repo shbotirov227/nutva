@@ -101,11 +101,33 @@ export function DropdownMenuContent({
 export function DropdownMenuItem({
   onClick,
   children,
+  asChild = false,
+  className = "",
 }: {
   onClick?: () => void;
   children: React.ReactNode;
+  asChild?: boolean;
+  className?: string;
 }) {
   const ctx = React.useContext(MenuCtx)!;
+  if (asChild && React.isValidElement(children)) {
+    type ChildProps = { onClick?: (e: React.MouseEvent<HTMLElement>) => void; className?: string } & Record<string, unknown>;
+    const child = children as React.ReactElement<ChildProps>;
+    const origOnClick = child.props.onClick;
+    const mergedClass = [child.props.className, "w-full rounded-sm px-3 py-2 text-left text-base hover:bg-muted", className]
+      .filter(Boolean)
+      .join(" ");
+    return React.cloneElement(child, {
+      role: "menuitem",
+      onClick: (e: React.MouseEvent<HTMLElement>) => {
+        origOnClick?.(e);
+        onClick?.();
+        ctx.setOpen(false);
+      },
+      className: mergedClass,
+    });
+  }
+
   return (
     <button
       type="button"
@@ -114,7 +136,7 @@ export function DropdownMenuItem({
         onClick?.();
         ctx.setOpen(false);
       }}
-      className="w-full rounded-sm px-3 py-2 text-left text-sm hover:bg-muted"
+      className={`w-full rounded-sm px-3 py-2 text-left text-base hover:bg-muted ${className}`}
     >
       {children}
     </button>

@@ -75,6 +75,7 @@
         "home": "Home",
         "about": "About Us",
         "products": "Products",
+    "certificates": "Certificates",
     "blog": "News",
         "contact": "Contact Us"
     },
@@ -605,4 +606,60 @@
         "viewProducts": "View products",
         "getConsultation": "Get consultation"
     }
+        ,
+        "certificates": {
+            "badge": "Certificates & Quality",
+            "heroTitle": "Verified quality of Nutva Pharm",
+            "heroSubtitle": "Here are key documents confirming the safety, quality, and compliance of Nutva Pharm products.",
+            "searchPlaceholder": "Search by title, description, issuer…",
+                "categories": {
+                    "all": "All",
+                    "documentation": "Documentation",
+                    "permission": "Permission",
+                    "safety": "Safety",
+                    "halal": "Halal"
+                },
+            "found": "Found: {{count}}",
+            "forQuery": "for query “{{query}}”",
+            "view": "View",
+            "download": "Download",
+            "clickToZoom": "Click to zoom",
+            "pdfDoc": "PDF document",
+            "close": "Close",
+            "pdfFallback": "Could not display the PDF.",
+                "openInNewTab": "Open in a new tab",
+                "items": {
+                    "1": {
+                        "title": "Certificate of Conformity — Nutva Pharm",
+                        "description": "Official confirmation of Nutva Pharm products' compliance.",
+                        "issuer": "Certification Body"
+                    },
+                    "2": {
+                        "title": "Permission for Distribution",
+                        "description": "A document authorizing production/distribution of products.",
+                        "issuer": "Competent Authority"
+                    },
+                    "3": {
+                        "title": "Sanitary-Epidemiological Conclusion",
+                        "description": "Sanitary and epidemiological conclusion.",
+                        "issuer": "SES"
+                    }
+                            ,
+                            "4": {
+                                "title": "Halal Certificate — Nutva Pharm",
+                                "description": "Halal certification for Nutva Pharm products.",
+                                "issuer": "Certification Body"
+                            },
+                            "5": {
+                                "title": "ISO 9001:2015 — Nutva Pharm",
+                                "description": "ISO 9001:2015 certificate (Quality Management System).",
+                                "issuer": "Certification Body"
+                            },
+                            "6": {
+                                "title": "ISO 22000:2018 — Nutva Pharm",
+                                "description": "ISO 22000:2018 certificate (Food Safety Management System).",
+                                "issuer": "Certification Body"
+                            }
+                }
+        }
 }

@@ -75,6 +75,7 @@
         "home": "Bosh sahifa",
         "about": "Biz haqimizda",
         "products": "Mahsulotlar",
+    "certificates": "Sertifikatlar",
     "blog": "Yangiliklar",
         "contact": "Aloqa"
     },
@@ -601,5 +602,61 @@
         "calculatedAtNext": "Keyingi bosqichda",
         "secureCheckout": "To‘lov xavfsiz va shifrlangan.",
         "saved": "Tejaldi"
+    }
+    ,
+    "certificates": {
+        "badge": "Sertifikatlar va sifat",
+        "heroTitle": "Nutva Pharm sifat tasdiqlangan",
+        "heroSubtitle": "Bu yerda Nutva Pharm mahsulotlarining xavfsizligi, sifati va muvofiqligini tasdiqlovchi asosiy hujjatlar jamlangan.",
+        "searchPlaceholder": "Sarlavha, tavsif, nashriyot bo'yicha qidirish…",
+        "categories": {
+            "all": "Barchasi",
+            "documentation": "Hujjatlar",
+            "permission": "Ruxsatnoma",
+            "safety": "Xavfsizlik",
+            "halal": "Halal"
+        },
+        "found": "Topildi: {{count}}",
+        "forQuery": "\"{{query}}\" bo'yicha",
+        "view": "Ko'rish",
+        "download": "Yuklab olish",
+        "clickToZoom": "Kattalashtirish uchun bosing",
+        "pdfDoc": "PDF hujjat",
+        "close": "Yopish",
+        "pdfFallback": "PDF ko'rsatib bo'lmadi.",
+        "openInNewTab": "Yangi oynada ochish",
+        "items": {
+            "1": {
+                "title": "Muvofiqlik sertifikati — Nutva Pharm",
+                "description": "Nutva Pharm mahsulotlarining muvofiqligi rasmiy tasdiqlangan.",
+                "issuer": "Sertifikatlash organi"
+            },
+            "2": {
+                "title": "Ishlab chiqarish/realizatsiya uchun ruxsatnoma",
+                "description": "Mahsulotlarni ishlab chiqarish/realizatsiya qilishga ruxsat beruvchi hujjat.",
+                "issuer": "Vakolatli organ"
+            },
+            "3": {
+                "title": "SES xulosasi",
+                "description": "Sanitariya-epidemiologik xulosa.",
+                "issuer": "SES"
+            }
+            ,
+            "4": {
+                "title": "Halal sertifikati — Nutva Pharm",
+                "description": "Nutva Pharm mahsulotlari uchun Halal sertifikati.",
+                "issuer": "Sertifikatlash organi"
+            },
+            "5": {
+                "title": "ISO 9001:2015 — Nutva Pharm",
+                "description": "ISO 9001:2015 sertifikati (Sifat menejmenti tizimi).",
+                "issuer": "Sertifikatlash organi"
+            },
+            "6": {
+                "title": "ISO 22000:2018 — Nutva Pharm",
+                "description": "ISO 22000:2018 sertifikati (Oziq-ovqat xavfsizligi boshqaruv tizimi).",
+                "issuer": "Sertifikatlash organi"
+            }
+        }
     }
 }

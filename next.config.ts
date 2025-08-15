@@ -23,6 +23,16 @@ const nextConfig: NextConfig = {
     ];
   },
 
+  async redirects() {
+    return [
+      {
+        source: "/ceritificates",
+        destination: "/certificates",
+        permanent: true,
+      },
+    ];
+  },
+
   env: {
     NEXT_PUBLIC_BASE_URL: "https://nutva.uz/api",
     NEXT_PUBLIC_API_URL: "https://nutva.uz/api",
