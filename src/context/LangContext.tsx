@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 type LangContextType = {
   lang: string;
@@ -21,6 +22,15 @@ function useLocalStorage(key: string, initialValue: string) {
         const item = window.localStorage.getItem(key);
         if (item) {
           setStoredValue(item);
+          // Keep cookie in sync if exists with different value
+          if (Cookies.get(key) !== item) {
+            Cookies.set(key, item, { expires: 365, path: "/" });
+          }
+        } else {
+          // Initialize both localStorage and cookie with default
+          window.localStorage.setItem(key, initialValue);
+          Cookies.set(key, initialValue, { expires: 365, path: "/" });
+          setStoredValue(initialValue);
         }
       }
     } catch (error) {
@@ -28,13 +38,14 @@ function useLocalStorage(key: string, initialValue: string) {
     } finally {
       setIsLoading(false);
     }
-  }, [key]);
+  }, [key, initialValue]);
 
   const setValue = (value: string) => {
     try {
       setStoredValue(value);
       if (typeof window !== 'undefined') {
         window.localStorage.setItem(key, value);
+  Cookies.set(key, value, { expires: 365, path: "/" });
       }
     } catch (error) {
       console.error(`Error setting localStorage key "${key}":`, error);

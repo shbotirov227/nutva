@@ -28,6 +28,14 @@ export default withAuth(
       PUBLIC_FILE.test(pathname) ||
       pathname.startsWith("/_next")
     ) {
+      // If the URL already has a locale segment, reflect it in the cookie for consistency
+      const localeMatch = pathname.match(/^\/(uz|ru|en)(?:\/|$)/);
+      if (localeMatch) {
+        const res = NextResponse.next();
+        res.cookies.set("lang", localeMatch[1], { path: "/", maxAge: 60 * 60 * 24 * 365 });
+        return res;
+      }
+
       return NextResponse.next();
     }
 
@@ -36,12 +44,23 @@ export default withAuth(
     );
 
     if (pathnameIsMissingLocale) {
-      const lang =
-        req.cookies.get("lang")?.value || fallbackLng;
+      const cookieLang = req.cookies.get("lang")?.value;
+      const lang = locales.includes(cookieLang || "") ? (cookieLang as string) : fallbackLng;
 
       const url = req.nextUrl.clone();
       url.pathname = `/${lang}${pathname}`;
-      return NextResponse.redirect(url);
+      const res = NextResponse.redirect(url);
+      // Ensure cookie exists on first visit so client detection uses it
+      res.cookies.set("lang", lang, { path: "/", maxAge: 60 * 60 * 24 * 365 });
+      return res;
+    }
+
+    // Keep cookie synced with the current locale segment when it exists
+    const localeMatch = pathname.match(/^\/(uz|ru|en)(?:\/|$)/);
+    if (localeMatch) {
+      const res = NextResponse.next();
+      res.cookies.set("lang", localeMatch[1], { path: "/", maxAge: 60 * 60 * 24 * 365 });
+      return res;
     }
 
     return NextResponse.next();
