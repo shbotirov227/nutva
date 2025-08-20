@@ -81,6 +81,30 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
 
   if (!product || !product || !mounted) return null;
 
+  // Small helper for smooth vertical collapse/expand animations
+  const Collapse: React.FC<{ show: boolean; className?: string; children: React.ReactNode }> = ({
+    show,
+    className,
+    children,
+  }) => (
+    <AnimatePresence initial={false} mode="popLayout">
+      {show && (
+        <motion.div
+          key="collapse"
+          layout
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{ duration: 0.25, ease: "easeInOut" }}
+          style={{ overflow: "hidden" }}
+          className={className}
+        >
+          {children}
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+
   return (
     <AnimatePresence mode="popLayout">
       <motion.div
@@ -88,7 +112,7 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -10 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.3, layout: { duration: 0.25 } }}
         className="w-full rounded-xl flex flex-col gap-4"
       >
         <Card
@@ -102,7 +126,7 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.3, layout: { duration: 0.25 } }}
                 className="w-full rounded-xl flex flex-col gap-4"
               >
                 <div className="mb-4">
@@ -111,8 +135,8 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
                 </div>
                   <p className="text-xl mt-1 text-red-600 font-semibold">{t("product.saleTitle")}</p>
 
-                {discountPercent > 0 && (
-                  <div className="flex gap-2 items-center mb-4">
+                <Collapse show={discountPercent > 0} className="mb-4">
+                  <div className="flex gap-2 items-center">
                     <Badge className="bg-yellow-400 text-black text-base font-semibold px-2 py-1 rounded-full">
                       -{discountPercent}%
                     </Badge>
@@ -120,7 +144,7 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
                       {t("common.saleUpperCase")}
                     </Badge>
                   </div>
-                )}
+                </Collapse>
               </motion.div>
             </AnimatePresence>
 
@@ -131,15 +155,15 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.3, layout: { duration: 0.25 } }}
                   className="w-full rounded-xl flex flex-col gap-4"
                 >
-                  {discountPercent > 0 && (
+                  <Collapse show={discountPercent > 0}>
                     <div className="flex items-center text-base font-semibold text-red-600 gap-1 mb-4 bg-white p-4 rounded-lg">
                       <Flame className="w-4 h-4" />
                       {t("common.forYou")} {discountPercent}% {t("common.sale")} • {isChecked ? count : quantity} {t("common.quantity")}
                     </div>
-                  )}
+                  </Collapse>
                 </motion.div>
               </AnimatePresence>
 
@@ -149,7 +173,7 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.3, layout: { duration: 0.25 } }}
                   className="w-full rounded-xl flex flex-col gap-4"
                 >
                   <div className="flex justify-between bg-white rounded-lg p-4">
@@ -160,7 +184,7 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -10 }}
-                          transition={{ duration: 0.3 }}
+                          transition={{ duration: 0.3, layout: { duration: 0.25 } }}
                           className="w-full rounded-xl flex flex-col gap-4"
                         >
                           <Button
@@ -202,7 +226,7 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.3, layout: { duration: 0.25 } }}
                   className="w-full rounded-xl flex flex-col gap-4"
                 >
                   <div className="flex items-center gap-3 mt-4">
@@ -217,56 +241,45 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
                   </div>
                 </motion.div>
               </AnimatePresence>
-              <AnimatePresence mode="popLayout">
-                <motion.div
-                  layout
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="w-full rounded-xl flex flex-col gap-4"
-                >
-                  {isChecked && (
-                    <div className="flex items-center justify-center mt-4 bg-white py-3 rounded-lg">
-                      <Button
-                        size={"sm"}
-                        style={{ backgroundColor: color }}
-                        className="cursor-pointer text-base flex items-center justify-center text-center"
-                        onClick={() => setCount((prev) => Math.max(prev - 1, 1))}
-                      >
-                        <Minus />
-                      </Button>
+              <Collapse show={isChecked}>
+                <div className="flex items-center justify-center mt-4 bg-white py-3 rounded-lg">
+                  <Button
+                    size={"sm"}
+                    style={{ backgroundColor: color }}
+                    className="cursor-pointer text-base flex items-center justify-center text-center"
+                    onClick={() => setCount((prev) => Math.max(prev - 1, 1))}
+                  >
+                    <Minus />
+                  </Button>
 
-                      <p className="mx-5 font-bold text-2xl">{count}</p>
+                  <p className="mx-5 font-bold text-2xl">{count}</p>
 
-                      <Button
-                        size={"sm"}
-                        style={{ backgroundColor: color }}
-                        className="cursor-pointer text-base flex items-center justify-center text-center"
-                        onClick={() => setCount((prev) => prev + 1)}
-                      >
-                        <Plus />
-                      </Button>
-                    </div>
-                  )}
-                </motion.div>
-              </AnimatePresence>
+                  <Button
+                    size={"sm"}
+                    style={{ backgroundColor: color }}
+                    className="cursor-pointer text-base flex items-center justify-center text-center"
+                    onClick={() => setCount((prev) => prev + 1)}
+                  >
+                    <Plus />
+                  </Button>
+                </div>
+              </Collapse>
 
             </div>
 
-            <div className="flex items-center gap-5 mb-4">
+            <motion.div layout transition={{ layout: { duration: 0.25 } }} className="flex items-center gap-5 mb-4">
               <div
                 style={{ color: selectedQuantity === 1 ? color : "red" }}
                 className="text-3xl font-bold"
               >
                 {formatPrice(totalPrice)} {t("common.sum", "so'm")}
               </div>
-              {!(selectedQuantity === 1) ? (
-                <span className="text-gray-500 text-lg line-through">
+              <Collapse show={selectedQuantity !== 1}>
+                <span className="text-gray-500 text-lg line-through block">
                   {formatPrice(basePrice * selectedQuantity)} {t("common.sum")}
                 </span>
-              ) : null}
-            </div>
+              </Collapse>
+            </motion.div>
 
             {/* <div className="flex items-center justify-start gap-5"> */}
             <FormModal

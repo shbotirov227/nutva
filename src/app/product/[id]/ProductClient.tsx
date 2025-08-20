@@ -25,7 +25,7 @@ import CertificateImg5 from "@/assets/images/certificate_1748945174-4.png";
 import CertificateImg6 from "@/assets/images/certificate_1748945174-5.png";
 import ProductDetailSkeleton from "@/components/ProductDetailSkleton";
 import type { GetOneProductType } from "@/types/products/getOneProduct";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { getProductKeyFromName } from "@/helper/getProductKeyFromName";
 import { getProductDetailMiddleImage } from "@/helper/getProductDetailMiddleImage";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
@@ -108,36 +108,38 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
       <div className="relative z-10">
         <Container>
           <AnimatePresence mode="popLayout">
-            <motion.div
-              layout
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-              className="w-full rounded-xl flex flex-col gap-4"
-            >
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-8">
-                <div className="w-full">
-                  <Image
-                    src={product?.imageUrls?.[0] || ProductImage}
-                    alt={product?.name || "Product Image"}
-                    width={500}
-                    height={500}
-                    priority
-                    className="w-full h-auto max-w-full object-contain rounded-2xl"
-                  />
-                </div>
+            <LayoutGroup id={`product-detail-${product.id}`}>
+              <motion.div
+                layout
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3, layout: { duration: 0.25 } }}
+                className="w-full rounded-xl flex flex-col gap-4"
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-8">
+                  <motion.div layout layoutId={`product-image-${product.id}`} className="w-full">
+                    <Image
+                      src={product?.imageUrls?.[0] || ProductImage}
+                      alt={product?.name || "Product Image"}
+                      width={500}
+                      height={500}
+                      priority
+                      className="w-full h-auto max-w-full object-contain rounded-2xl"
+                    />
+                  </motion.div>
 
-                <div className="w-full">
-                  <ProductPriceCard
-                    product={product}
-                    color={color}
-                    bgColor={bgColor}
-                    onClick={handleBuyClick}
-                  />
+                  <motion.div layout layoutId={`price-card-${product.id}`} className="w-full">
+                    <ProductPriceCard
+                      product={product}
+                      color={color}
+                      bgColor={bgColor}
+                      onClick={handleBuyClick}
+                    />
+                  </motion.div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </LayoutGroup>
           </AnimatePresence>
 
           <div className="space-y-4">
