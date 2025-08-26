@@ -113,7 +113,9 @@ export async function generateMetadata(
   const title = trim(rawTitle, 60);
   const description = trim(rawDesc, 160);
 
-  const url = `https://nutva.uz/product/${id}`;
+  const base = "https://nutva.uz";
+  const localizedPath = `/${lang}/product/${id}`;
+  const url = `${base}${localizedPath}`;
   const rawImage = product.imageUrls?.[0] || "https://nutva.uz/seo_banner.jpg";
   const image = ensureHttps(rawImage) || "https://nutva.uz/seo_banner.jpg";
 
@@ -126,13 +128,24 @@ export async function generateMetadata(
     title,
     description,
     keywords,
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      languages: {
+        uz: `${base}/uz/product/${id}`,
+        ru: `${base}/ru/product/${id}`,
+        en: `${base}/en/product/${id}`,
+      },
+    },
     openGraph: {
       url,
       siteName: "Nutva Pharm",
       title,
       description,
       images: [{ url: image, width: 1200, height: 630, alt: title }],
+      locale: lang === "ru" ? "ru_RU" : lang === "en" ? "en_US" : "uz_UZ",
+      alternateLocale: ["uz_UZ", "ru_RU", "en_US"].filter(
+        (l) => l !== (lang === "ru" ? "ru_RU" : lang === "en" ? "en_US" : "uz_UZ")
+      ),
     },
     twitter: {
       card: "summary_large_image",
@@ -165,7 +178,9 @@ export default async function Page({ params }: { params: RouteParams }) {
   const title = trim(rawTitle, 60);
   const description = trim(rawDesc, 160);
 
-  const url = `https://nutva.uz/product/${id}`;
+  const base = "https://nutva.uz";
+  const localizedPath = `/${lang}/product/${id}`;
+  const url = `${base}${localizedPath}`;
   const rawImage = product.imageUrls?.[0] || "https://nutva.uz/seo_banner.jpg";
   const image = ensureHttps(rawImage) || "https://nutva.uz/seo_banner.jpg";
 

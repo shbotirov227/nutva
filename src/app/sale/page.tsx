@@ -1,5 +1,6 @@
 // app/sale/page.tsx
 import type { Metadata } from "next";
+import { cookies, headers } from "next/headers";
 import SalePageClient from "./SalePageClient";
 const SITE = "https://nutva.uz";
 const PATH = "/sale";
@@ -25,26 +26,30 @@ const t = {
 
 
 export async function generateMetadata(): Promise<Metadata> {
-  // Next can’t read the URL here without a request object.
-  // If you need perfect locale detection, wire this to your i18n routing.
-  const locale: "uz" | "ru" | "en" = "uz";
+  const c = await cookies();
+  const h = await headers();
+  const cookieLang = c.get("lang")?.value?.toLowerCase();
+  const hdrLang = h.get("x-lang")?.toLowerCase();
+  const locale = (["uz", "ru", "en"].includes(cookieLang || "")
+    ? cookieLang
+    : (["uz", "ru", "en"].includes(hdrLang || "") ? hdrLang : "uz")) as "uz" | "ru" | "en";
   const { title, desc } = t[locale];
 
   return {
     title,
     description: desc,
     alternates: {
-      canonical: `${SITE}${PATH}`,
+      canonical: `${SITE}/${locale}${PATH}`,
       languages: {
-        uz: `${SITE}/sale`,
+        uz: `${SITE}/uz/sale`,
         ru: `${SITE}/ru/sale`,
         en: `${SITE}/en/sale`,
-        "x-default": `${SITE}/sale`,
+        "x-default": `${SITE}/uz/sale`,
       },
     },
     openGraph: {
       type: "website",
-      url: `${SITE}${PATH}`,
+      url: `${SITE}/${locale}${PATH}`,
       siteName: "Nutva Pharm",
       title,
       description: desc,

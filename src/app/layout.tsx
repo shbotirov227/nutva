@@ -28,14 +28,28 @@ export const viewport: Viewport = {
   themeColor: "#ffffff",
 };
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const cookieLang = cookieStore.get("lang")?.value?.toLowerCase();
+  const lang = ["uz", "ru", "en"].includes(cookieLang || "") ? (cookieLang as "uz" | "ru" | "en") : "uz";
+  const ogLocale = lang === "ru" ? "ru_RU" : lang === "en" ? "en_US" : "uz_UZ";
+  const titles = {
+    uz: "Nutva Pharm — Ilmiy asoslangan biofaol qo'shimchalar",
+    ru: "Nutva Pharm — Научно обоснованные биологически активные добавки",
+    en: "Nutva Pharm — Science‑backed dietary supplements",
+  } as const;
+  const descriptions = {
+    uz: "Nutva Pharm — ilmiy asoslangan, sifatli va tabiiy biofaol qo‘shimchalar. Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
+    ru: "Nutva Pharm — научно обоснованные, сертифицированные и натуральные БАДы. Каждый продукт — точное решение для восстановления и укрепления здоровья.",
+    en: "Nutva Pharm — science‑backed, certified and natural supplements. Each product is a precise solution to restore and strengthen your health.",
+  } as const;
+  return {
   metadataBase: new URL("https://nutva.uz"),
   title: {
-    default: "Nutva Pharm — Ilmiy asoslangan biofaol qo'shimchalar",
+    default: titles[lang],
     template: "%s — Nutva Pharm",
   },
-  description:
-    "Nutva Pharm — ilmiy asoslangan, sifatli va tabiiy biofaol qo‘shimchalar. Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
+  description: descriptions[lang],
   // Important: keywords are low-weight, but we include them as requested.
   keywords: [
     // Brand & products
@@ -135,22 +149,29 @@ export const metadata: Metadata = {
     yandex: "aef60ba7c050b521",
   },
   openGraph: {
-    title: "Nutva Pharm — Ilmiy asoslangan biofaol qo'shimchalar",
-    description:
-      "Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
-    url: "https://nutva.uz",
+  title: titles[lang],
+  description: descriptions[lang],
+  url: `https://nutva.uz/${lang}`,
     siteName: "Nutva Pharm",
     images: [{ url: "https://nutva.uz/seo_banner.jpg", width: 1200, height: 630, alt: "Nutva Pharm" }],
     type: "website",
-    locale: "uz_UZ",
-    alternateLocale: ["ru_RU"],
+    locale: ogLocale,
+    alternateLocale: ["uz_UZ", "ru_RU", "en_US"].filter((l) => l !== ogLocale),
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nutva Pharm — Ilmiy asoslangan biofaol qo'shimchalar",
-    description:
-      "Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
+  title: titles[lang],
+  description: descriptions[lang],
     images: ["https://nutva.uz/seo_banner.jpg"],
+  },
+  alternates: {
+    canonical: `https://nutva.uz/${lang}`,
+    languages: {
+      uz: "https://nutva.uz/uz",
+      ru: "https://nutva.uz/ru",
+      en: "https://nutva.uz/en",
+      "x-default": "https://nutva.uz/uz",
+    },
   },
   icons: {
     icon: "/favicon.ico",
@@ -158,7 +179,8 @@ export const metadata: Metadata = {
     // add apple touch icon if you have it:
     // apple: "/apple-touch-icon.png",
   },
-};
+  };
+}
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // Resolve lang on server from cookie; fallback to uz
