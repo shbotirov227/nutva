@@ -11,6 +11,7 @@ import { Button } from "./ui/button";
 import { AnimatePresence, motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 // import { AnimatePresence } from "framer-motion";
+import { useLang } from "@/context/LangContext";
 
 const NavLink = ({
   href,
@@ -47,6 +48,7 @@ const Header: React.FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(true);
   const { t } = useTranslation();
+  const { lang } = useLang();
   const { cart } = useCart();
   const cartCount = cart.length;
 
@@ -54,16 +56,19 @@ const Header: React.FC = () => {
     setMounted(true);
   }, []);
 
-  const navLinks = useMemo(() => [
-    { href: "/", label: t("nav.home") },
-    { href: "/product", label: t("nav.products") },
-    { href: "/sale", label: t("common.saleUpperCase") },
-    { href: "/about-us", label: t("nav.about") },
-    { href: "/blog", label: t("nav.blog") },
-    { href: "/certificates", label: t("nav.certificates") },
-    { href: "/contact", label: t("nav.contact") },
-    // { href: "/admin", label: "Admin" },
-  ].filter(link => !!link.href && !!link.label), [t]);
+  const navLinks = useMemo(() => {
+    const prefix = `/${lang}`;
+    return [
+      { href: `${prefix}/`, label: t("nav.home") },
+      { href: `${prefix}/product`, label: t("nav.products") },
+      { href: `${prefix}/sale`, label: t("common.saleUpperCase") },
+      { href: `${prefix}/about-us`, label: t("nav.about") },
+      { href: `${prefix}/blog`, label: t("nav.blog") },
+      { href: `${prefix}/certificates`, label: t("nav.certificates") },
+      { href: `${prefix}/contact`, label: t("nav.contact") },
+      // { href: `${prefix}/admin`, label: "Admin" },
+    ].filter(link => !!link.href && !!link.label);
+  }, [t, lang]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -133,7 +138,7 @@ const Header: React.FC = () => {
       >
         <Container>
           <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center">
+            <Link href={`/${lang}`} className="flex items-center">
               <Image
                 src="/nutva-logo.png"
                 alt="Logo"
@@ -154,7 +159,7 @@ const Header: React.FC = () => {
             </nav>
             <div className="flex items-center justify-between gap-5">
               {/* <div className="flex items-center justify-between"> */}
-              <Link href="/cart" className="relative">
+              <Link href={`/${lang}/cart`} className="relative">
                 <ShoppingCart className="cursor-pointer" size={25} />
                 {cartCount > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
@@ -202,7 +207,7 @@ const Header: React.FC = () => {
             aria-modal="true"
           >
             <div className="flex items-center justify-between p-4">
-              <Link href="/" onClick={() => setMobileMenu(false)}>
+              <Link href={`/${lang}`} onClick={() => setMobileMenu(false)}>
                 <Image
                   src="/nutva-logo.png"
                   alt="Logo"

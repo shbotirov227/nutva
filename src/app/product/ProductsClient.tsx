@@ -179,7 +179,7 @@ export default function ProductsClient() {
                         priority={false}
                         sizes="(max-width: 1024px) 100vw, 33vw"
                         className="object-contain p-4 cursor-pointer"
-                        onClick={() => router.push(`/product/${product.id}`)}
+                        onClick={() => router.push(`/${lang}/product/${product.id}`)}
                       />
                     </motion.div>
                   </div>
@@ -187,7 +187,7 @@ export default function ProductsClient() {
                   {/* Body */}
                   <div className="p-5">
                     <Link
-                      href={`/product/${product.id}`}
+                      href={`/${lang}/product/${product.id}`}
                       className="block text-emerald-900 font-bold text-lg leading-snug hover:underline underline-offset-4 line-clamp-1"
                     >
                       {product.name}
@@ -234,7 +234,7 @@ export default function ProductsClient() {
                           background: "linear-gradient(90deg, #10B981, #34D399)",
                           color: "#fff",
                         }}
-                        onClick={() => router.push(`/product/${product.id}`)}
+                        onClick={() => router.push(`/${lang}/product/${product.id}`)}
                         aria-label={`${product.name} haqida batafsil`}
                       >
                         {t("common.more")}

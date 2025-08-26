@@ -15,6 +15,7 @@ import {
 import { BlogMediaType } from "@/types/blogs/getOneBlog";
 import DefaultImg from "@/assets/images/default-img.png";
 import { useTranslation } from "react-i18next";
+import { useLang } from "@/context/LangContext";
 
 type BlogCardProps = {
   id: string;
@@ -44,6 +45,7 @@ function youTubeThumb(url: string) {
 
 const BlogCard = ({ id, media, title, content }: BlogCardProps) => {
   const { t } = useTranslation();
+  const { lang } = useLang();
   const isYouTube = media?.mediaType === "YoutubeUrl" && !!media.url;
   const isImage =
     media?.mediaType === "Image" || media?.mediaType === "ImageUrl";
@@ -83,7 +85,7 @@ const BlogCard = ({ id, media, title, content }: BlogCardProps) => {
 
         {/* Media */}
         <Link
-          href={`/blog/${id}`}
+          href={`/${lang}/blog/${id}`}
           className="relative block overflow-hidden rounded-b-none"
         >
           <div className="relative aspect-[16/9] w-full">
@@ -122,7 +124,7 @@ const BlogCard = ({ id, media, title, content }: BlogCardProps) => {
 
         <CardFooter className="px-5 pb-5">
           <Link
-            href={`/blog/${id}`}
+            href={`/${lang}/blog/${id}`}
             className="inline-flex items-center gap-2 rounded-xl px-4 py-2 font-semibold text-white shadow-md transition-all
                        bg-gradient-to-r from-emerald-600 to-emerald-500 hover:opacity-95"
             aria-label={t("common.more") as string}

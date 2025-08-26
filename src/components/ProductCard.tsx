@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { GetOneProductType } from "@/types/products/getOneProduct";
 // import { ProductName } from "@/types/enums";
 import { FormModal } from "./FormModal";
+import { useLang } from "@/context/LangContext";
 
 type ProductCardProps = {
   id: string;
@@ -45,6 +46,7 @@ const ProductCard = ({
 }: ProductCardProps) => {
   const { addToCart } = useCart();
   const { t } = useTranslation();
+  const { lang } = useLang();
 
   const handleAddToCart = () => {
     if (!product) return;
@@ -101,7 +103,7 @@ const ProductCard = ({
         {/* More link at bottom on mobile */}
         <div className="block sm:hidden text-center mt-2">
           <Link
-            href={`/product/${id}`}
+            href={`/${lang}/product/${id}`}
             className="text-white font-semibold underline px-6 py-2 block"
           >
             {t("common.more")}
@@ -111,7 +113,7 @@ const ProductCard = ({
         {/* More link on desktop */}
         <div className="hidden sm:block mt-2">
           <Link
-            href={`/product/${id}`}
+            href={`/${lang}/product/${id}`}
             className="text-white font-semibold underline px-6 py-2 inline-block"
           >
             {t("common.more")}

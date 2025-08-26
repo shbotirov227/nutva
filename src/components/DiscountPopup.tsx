@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Leaf, Clock } from "lucide-react";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import { useLang } from "@/context/LangContext";
 
 interface DiscountPopupProps {
   isVisible: boolean;
@@ -17,6 +18,7 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
   const [timeLeft, setTimeLeft] = useState({ hours: 2, minutes: 30, seconds: 0 });
   const router = useRouter();
   const { t } = useTranslation();
+  const { lang } = useLang();
 
   useEffect(() => {
     if (!isVisible) return;
@@ -38,7 +40,7 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
   }, [isVisible]);
 
   const handleDiscountClick = () => {
-    router.push("/product");
+    router.push(`/${lang}/product`);
     onClose();
   };
 

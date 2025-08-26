@@ -201,7 +201,7 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
         })}
       </Swiper>
 
-      <div className="flex items-center justify-center mt-10">
+  <div className="flex items-center justify-center mt-10">
         <ContactFormModal>
           <Button
             style={{ backgroundColor: activeColor }}
@@ -216,13 +216,7 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
             {t("product.consultation")}
           </Button>
         </ContactFormModal>
-        {/* <Link
-          href="/contact"
-          className="inline-flex items-center justify-center mx-auto text-white text-lg px-8 py-4 font-semibold rounded-lg shadow-md transition-all duration-500"
-          style={{ backgroundColor: activeColor }}
-        >
-          {t("product.consultation")}
-        </Link> */}
+  { /* Contact CTA moved to modal. Locale-aware route handled elsewhere if needed. */ }
       </div>
     </div>
   );

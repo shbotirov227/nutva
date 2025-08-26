@@ -1,16 +1,17 @@
 import { notFound } from "next/navigation";
 import type { Metadata, Viewport } from "next";
+import { cookies, headers } from "next/headers";
 import Container from "@/components/Container";
 import type { GetOneBlogType } from "@/types/blogs/getOneBlog";
 import BlogDetail from "./BlogDetail";
-import RedirectIfNoLang from "@/components/RedirectIfNoLang";
 
 // Support async params in newer Next
 type MaybePromise<T> = T | Promise<T>;
 type Props = {
   params: MaybePromise<{ id: string }>;
-  searchParams: MaybePromise<{ lang?: string }>;
 };
+
+type Lang = "uz" | "ru" | "en";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://nutva.uz";
 const ABS = (path: string) => new URL(path, SITE_URL).toString();
@@ -32,10 +33,19 @@ function ytIdFromUrl(u: string): string | null {
   return null;
 }
 
-export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
+async function resolveLang(): Promise<Lang> {
+  const c = await cookies();
+  const h = await headers();
+  const fromCookie = c.get("lang")?.value?.toLowerCase();
+  const fromHeader = h.get("x-lang")?.toLowerCase();
+  const cand = (fromCookie || fromHeader || "uz") as Lang;
+  return (["uz", "ru", "en"].includes(cand) ? cand : "uz") as Lang;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const { id } = await params;
-    const { lang = "uz" } = await searchParams;
+    const lang = await resolveLang();
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/BlogPost/${id}?lang=${lang}`, {
       cache: "no-store",
@@ -83,12 +93,12 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
         : undefined;
 
     // Canonical + alternates (hreflang)
-    const pagePath = `/blog/${id}`;
-    const canonical = `${ABS(pagePath)}?lang=${lang}`;
+    const pagePath = `/${lang}/blog/${id}`;
+    const canonical = ABS(pagePath);
     const alternatesLanguages: Record<string, string> = {
-      uz: `${ABS(pagePath)}?lang=uz`,
-      ru: `${ABS(pagePath)}?lang=ru`,
-      en: `${ABS(pagePath)}?lang=en`,
+      uz: ABS(`/uz/blog/${id}`),
+      ru: ABS(`/ru/blog/${id}`),
+      en: ABS(`/en/blog/${id}`),
     };
 
     const plainText = (post.content ? post.content.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim() : "");
@@ -184,10 +194,10 @@ export const viewport: Viewport = {
   themeColor: "#10b981",
 };
 
-export default async function BlogPostPage({ params, searchParams }: Props) {
+export default async function BlogPostPage({ params }: Props) {
   try {
     const { id } = await params;
-    const { lang = "uz" } = await searchParams;
+  const lang = await resolveLang();
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/BlogPost/${id}?lang=${lang}`, {
       cache: "no-store",
@@ -198,7 +208,6 @@ export default async function BlogPostPage({ params, searchParams }: Props) {
 
     return (
       <Container className="pt-28 pb-24 max-w-6xl">
-        <RedirectIfNoLang langFromUrl={lang} id={id} />
         <BlogDetail blog={blog} id={id} />
       </Container>
     );

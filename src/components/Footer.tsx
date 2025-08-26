@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
+import { useLang } from "@/context/LangContext";
 
 const SocialLinks = [
   { id: 1, title: "Youtube", url: "https://www.youtube.com/@NutvaUz" },
@@ -49,13 +50,15 @@ const PhoneLink = ({ title, url, className }: { title: string; url: string; clas
 
 const Footer = () => {
   const { t } = useTranslation();
+  const { lang } = useLang();
 
+  const prefix = `/${lang}`;
   const FooterLinks = [
-    { id: 1, title: t("nav.home"), url: "/" },
-    { id: 2, title: t("nav.products"), url: "/product" },
-    { id: 3, title: t("nav.about"), url: "/about-us" },
-    { id: 4, title: t("nav.blog"), url: "/blog" },
-    { id: 5, title: t("nav.contact"), url: "/contact" },
+    { id: 1, title: t("nav.home"), url: `${prefix}/` },
+    { id: 2, title: t("nav.products"), url: `${prefix}/product` },
+    { id: 3, title: t("nav.about"), url: `${prefix}/about-us` },
+    { id: 4, title: t("nav.blog"), url: `${prefix}/blog` },
+    { id: 5, title: t("nav.contact"), url: `${prefix}/contact` },
   ];
 
   return (

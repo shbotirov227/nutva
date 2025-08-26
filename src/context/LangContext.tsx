@@ -19,19 +19,13 @@ function useLocalStorage(key: string, initialValue: string) {
   useEffect(() => {
     try {
       if (typeof window !== 'undefined') {
-        const item = window.localStorage.getItem(key);
-        if (item) {
-          setStoredValue(item);
-          // Keep cookie in sync if exists with different value
-          if (Cookies.get(key) !== item) {
-            Cookies.set(key, item, { expires: 365, path: "/" });
-          }
-        } else {
-          // Initialize both localStorage and cookie with default
-          window.localStorage.setItem(key, initialValue);
-          Cookies.set(key, initialValue, { expires: 365, path: "/" });
-          setStoredValue(initialValue);
-        }
+  const cookieVal = Cookies.get(key);
+  const lsVal = window.localStorage.getItem(key);
+  const preferred = (cookieVal || lsVal || initialValue);
+  setStoredValue(preferred);
+  // Sync both stores to preferred value
+  if (lsVal !== preferred) window.localStorage.setItem(key, preferred);
+  if (cookieVal !== preferred) Cookies.set(key, preferred, { expires: 365, path: "/" });
       }
     } catch (error) {
       console.error(`Error reading localStorage key "${key}":`, error);
@@ -44,7 +38,7 @@ function useLocalStorage(key: string, initialValue: string) {
     try {
       setStoredValue(value);
       if (typeof window !== 'undefined') {
-        window.localStorage.setItem(key, value);
+  window.localStorage.setItem(key, value);
   Cookies.set(key, value, { expires: 365, path: "/" });
       }
     } catch (error) {

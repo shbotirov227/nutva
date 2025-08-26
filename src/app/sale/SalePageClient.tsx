@@ -21,11 +21,13 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import Script from "next/script";
+import { useLang } from "@/context/LangContext";
 
 const SalePageClient: React.FC = () => {
   const { t } = useTranslation();
   const color = productBgColors.Complex;
   const router = useRouter();
+  const { lang } = useLang();
 
   const productsDataThree = [
     {
@@ -297,7 +299,7 @@ const SalePageClient: React.FC = () => {
               <Button
                 size="lg"
                 className="mx-auto mt-10 bg-white text-[#339668] hover:text-white cursor-pointer p-5"
-                onClick={() => router.push("/product")}
+                onClick={() => router.push(`/${lang}/product`)}
               >
                 {t("sale.start_shopping")}
               </Button>

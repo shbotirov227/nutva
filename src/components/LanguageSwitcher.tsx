@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslation } from "react-i18next";
+import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 // import Cookies from "js-cookie";
@@ -17,14 +18,21 @@ export default function LanguageSwitcher() {
   const { i18n } = useTranslation();
   const { lang, setLang } = useLang();
   const queryClient = useQueryClient();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const handleChange = (value: string) => {
     i18n.changeLanguage(value);
-
-    // localStorage.setItem("lang", value);
-    // Cookies.set("lang", value);
     setLang(value);
     queryClient.invalidateQueries();
+
+    // Prefix URL path with selected locale and keep rest
+    try {
+      const current = pathname || "/";
+      const m = current.match(/^\/(uz|ru|en)(?:\/(.*))?$/);
+      const rest = m ? (m[2] ? `/${m[2]}` : "/") : current;
+      router.push(`/${value}${rest}`);
+    } catch {}
   };
 
   return (

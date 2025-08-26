@@ -266,7 +266,7 @@ export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlog
       <div className="space-y-6">
         {/* Top actions */}
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <Button onClick={() => router.push("/blog")} size="sm" variant="outline" className="gap-2 self-start">
+          <Button onClick={() => router.push(`/${lang}/blog`)} size="sm" variant="outline" className="gap-2 self-start">
             <ArrowLeft className="h-4 w-4" />
             {tt(t, "common.goBack", "Orqaga")}
           </Button>
@@ -436,10 +436,10 @@ export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlog
                           {tt(t, "blogSidebar.subtitle", "Blog mavzusiga mos biologik faol qo‘shimchalarni ko‘ring.")}
                         </p>
                         <div className="mt-4 flex flex-col gap-2">
-                          <Button size="sm" className="w-full" onClick={() => router.push("/product")}> 
+                          <Button size="sm" className="w-full" onClick={() => router.push(`/${lang}/product`)}> 
                             {tt(t, "blogSidebar.viewProducts", "Mahsulotlarni ko‘rish")}
                           </Button>
-                          <Button size="sm" variant="outline" className="w-full" onClick={() => router.push("/contact")}>
+                          <Button size="sm" variant="outline" className="w-full" onClick={() => router.push(`/${lang}/contact`)}>
                             {tt(t, "blogSidebar.getConsultation", "Maslahat olish")}
                           </Button>
                         </div>

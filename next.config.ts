@@ -16,10 +16,12 @@ const nextConfig: NextConfig = {
 
   async rewrites() {
     return [
-      {
-        source: "/api/:path*",
-        destination: "https://nutva.uz/api/:path*",
-      },
+      // Locale-prefixed pages rewrite to underlying routes
+      { source: "/:lang(uz|ru|en)", destination: "/" },
+      { source: "/:lang(uz|ru|en)/:path*", destination: "/:path*" },
+
+      // API proxy
+      { source: "/api/:path*", destination: "https://nutva.uz/api/:path*" },
     ];
   },
 

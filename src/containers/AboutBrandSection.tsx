@@ -6,10 +6,12 @@ import DefaultImg from "@/assets/images/default-img.png";
 import AboutBrandImg from "@/assets/images/about-brand-img.jpg";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
+import { useLang } from "@/context/LangContext";
 
 export default function AboutBrandSection() {
 
   const { t } = useTranslation();
+  const { lang } = useLang();
 
   return (
     <div
@@ -39,7 +41,7 @@ export default function AboutBrandSection() {
               {t("aboutBrand.text")}
             </p>
             <Link
-              href="/about-us"
+              href={`/${lang}/about-us`}
               className="bg-[#218A4F] hover:bg-[#365343] text-white text-md px-6 py-2 rounded-md"
             >
               {t("common.more")}

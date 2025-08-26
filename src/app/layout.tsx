@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 /* src/app/layout.tsx */
 import type { Metadata, Viewport } from "next";
+import { cookies } from "next/headers";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import { ToastContainer } from "react-toastify";
@@ -159,9 +160,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Resolve lang on server from cookie; fallback to uz
+  const cookieStore = await cookies();
+  const cookieLang = cookieStore.get("lang")?.value as string | undefined;
+  const lang = ["uz", "ru", "en"].includes((cookieLang || "").toLowerCase())
+    ? (cookieLang as "uz" | "ru" | "en")
+    : "uz";
   return (
-    <html lang="uz" suppressHydrationWarning>
+    <html lang={lang} suppressHydrationWarning>
       <head>
         {/* GA4 */}
         <Script id="ga4-src" src="https://www.googletagmanager.com/gtag/js?id=G-E1CNZ3JV1T" strategy="afterInteractive" />
