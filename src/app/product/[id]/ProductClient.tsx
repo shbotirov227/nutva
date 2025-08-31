@@ -17,12 +17,6 @@ import ProductsComponent from "@/containers/Products";
 import SaleSection from "@/containers/SaleSection";
 import ProductImage from "@/assets/images/product-green.png";
 import DefaultVideoImg from "@/assets/images/reviewcard-img.png";
-import CertificateImg1 from "@/assets/images/certificate-img1.png";
-import CertificateImg2 from "@/assets/images/certificate_1748945174-1.png";
-import CertificateImg3 from "@/assets/images/certificate_1748945174-2.png";
-import CertificateImg4 from "@/assets/images/certificate_1748945174-3.png";
-import CertificateImg5 from "@/assets/images/certificate_1748945174-4.png";
-import CertificateImg6 from "@/assets/images/certificate_1748945174-5.png";
 import ProductDetailSkeleton from "@/components/ProductDetailSkleton";
 import type { GetOneProductType } from "@/types/products/getOneProduct";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
@@ -32,15 +26,13 @@ import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { getProductMedia } from "@/helper/getProductMedia";
 import { useCart } from "@/context/CartContext";
 import { CountdownTimer } from "@/components/CountDownTimer";
+import dynamic from "next/dynamic";
 
-const certificateImages = [
-  CertificateImg1,
-  CertificateImg2,
-  CertificateImg3,
-  CertificateImg4,
-  CertificateImg5,
-  CertificateImg6,
-];
+// Lazy-load heavy certificate images only when the Certificates tab is opened
+const ProductCertificates = dynamic(() => import("../../../components/ProductCertificates"), {
+  ssr: false,
+  loading: () => <div className="my-12 text-center text-sm text-muted-foreground">Loading certificates…</div>,
+});
 
 type Props = {
   id: string;
@@ -54,25 +46,25 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
   const { t } = useTranslation();
   useCart();
 
-  const {
-    data: product,
-    isLoading,
-    refetch,
-  } = useQuery<GetOneProductType, Error, GetOneProductType, [string, string, string]>({
+  const { data: product, isLoading } = useQuery<GetOneProductType, Error, GetOneProductType, [string, string, string]>({
     queryKey: ["product", id, lang],
     queryFn: () => apiClient.getOneProductById(id, lang),
-    // v5: placeholderData — SSR natijasini darhol ko‘rsatadi, keyin fresh bilan almashtiradi
-    placeholderData: initialProduct,
-    staleTime: 0,
-    gcTime: 5 * 60 * 1000,
-    refetchOnMount: "always",
-    refetchOnWindowFocus: false,
-    enabled: Boolean(id && lang),
+    // Seed cache with SSR data and avoid refetch on mount; it will become stale after staleTime
+    initialData: initialProduct,
+    initialDataUpdatedAt: Date.now(),
+  staleTime: 60 * 1000,
+  gcTime: 5 * 60 * 1000,
+  refetchOnMount: false,
+  refetchOnWindowFocus: false,
+  enabled: Boolean(id && lang),
   });
 
+  // Reference initialLang to satisfy TS/ESLint and allow future behavior per language if needed
   useEffect(() => {
-    if (initialLang !== lang) refetch();
-  }, [lang, initialLang, refetch]);
+    // no-op: when SSR lang differs, next navigation will handle data refresh via queryKey
+  }, [initialLang]);
+
+  // When lang changes, TanStack will refetch due to queryKey change; no manual refetch needed.
 
   useEffect(() => {
     if (id) {
@@ -299,21 +291,7 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
                   </TabsContent>
 
                   <TabsContent value="4">
-                    <div className="w-full px-4">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-12">
-                        {certificateImages.map((item, idx) => (
-                          <div key={`certificate-${idx}`} className="flex justify-center">
-                            <Image
-                              src={item.src}
-                              alt={`Certificate ${idx + 1}`}
-                              width={250}
-                              height={350}
-                              className="w-full max-w-[250px] h-auto object-contain rounded-xl"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                    <ProductCertificates />
                   </TabsContent>
 
                   <TabsContent value="5">

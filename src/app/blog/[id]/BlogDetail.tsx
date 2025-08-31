@@ -10,7 +10,8 @@ import BlogsComponent from "@/containers/Blogs";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { ArrowLeft, CalendarDays, Eye, Share2, Timer, Link as LinkIcon, Copy, Tag, Instagram } from "lucide-react";
 import { shareInstagramStoryWeb, shareFacebookWeb, shareTelegramWeb } from "@/lib/share";
-import YouTubeEmbed from "@/components/YouTubeEmbed";
+import dynamic from "next/dynamic";
+const YouTubeEmbed = dynamic(() => import("@/components/YouTubeEmbed"), { ssr: false });
 import { useLang } from "@/context/LangContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -383,7 +384,7 @@ export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlog
                       if (m.mediaType === "Video") {
                         return (
                           <div key={idx} className="relative aspect-video overflow-hidden rounded-xl border">
-                            <video controls className="h-full w-full object-cover">
+                            <video controls className="h-full w-full object-cover" preload="metadata">
                               <source src={src} type="video/mp4" />
                             </video>
                           </div>
@@ -391,7 +392,7 @@ export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlog
                       }
                       return (
                         <div key={idx} className="relative aspect-video overflow-hidden rounded-xl border">
-                          <Image src={src} alt={m.altText || `image-${idx + 1}`} fill className="object-cover" />
+                          <Image src={src} alt={m.altText || `image-${idx + 1}`} fill className="object-cover" loading="lazy" decoding="async" />
                         </div>
                       );
                     })}

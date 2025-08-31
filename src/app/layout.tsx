@@ -1,8 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 /* src/app/layout.tsx */
 import type { Metadata, Viewport } from "next";
-import { cookies } from "next/headers";
-import { Geist, Geist_Mono } from "next/font/google";
+import { cookies, headers } from "next/headers";
 import Script from "next/script";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,8 +18,7 @@ import TrackVisit from "@/components/TrackVisit";
 import BuyModalContainerDynamic from "@/components/BuyModalContainerDynamic";
 import FloatingButtons from "@/components/FloatingButtons";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+// Fonts are provided via system fallbacks in globals.css to avoid external fetches
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -30,8 +28,11 @@ export const viewport: Viewport = {
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
+  const h = await headers();
+  const headerLang = h.get("x-lang")?.toLowerCase();
   const cookieLang = cookieStore.get("lang")?.value?.toLowerCase();
-  const lang = ["uz", "ru", "en"].includes(cookieLang || "") ? (cookieLang as "uz" | "ru" | "en") : "uz";
+  const candidate = headerLang || cookieLang || "uz";
+  const lang = (["uz", "ru", "en"].includes(candidate) ? candidate : "uz") as "uz" | "ru" | "en";
   const ogLocale = lang === "ru" ? "ru_RU" : lang === "en" ? "en_US" : "uz_UZ";
   const titles = {
     uz: "Nutva Pharm — Ilmiy asoslangan biofaol qo'shimchalar",
@@ -318,7 +319,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
       </head>
 
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
+  <body className="antialiased" suppressHydrationWarning>
         {/* GTM noscript */}
         <noscript>
           <iframe

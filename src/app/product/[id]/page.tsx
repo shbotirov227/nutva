@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { cookies, headers } from "next/headers";
 import ProductDetailClient from "./ProductClient";
 import type { GetOneProductType } from "@/types/products/getOneProduct";
+import { cache } from "react";
 
 type Lang = "uz" | "ru" | "en";
 type RouteParams = Promise<{ id: string }>;
@@ -48,12 +49,18 @@ interface ProductOptionalFields {
   breadcrumb?: Array<{ name: string; url: string }>;
 }
 
-async function getProduct(id: string, lang: Lang): Promise<GetOneProductType & ProductOptionalFields> {
+const getProduct = cache(async function getProduct(
+  id: string,
+  lang: Lang
+): Promise<GetOneProductType & ProductOptionalFields> {
   const base = "https://nutva.uz/api";
-  const res = await fetch(`${base}/Product/${id}?lang=${lang}`, { cache: "no-store" });
+  const res = await fetch(`${base}/Product/${id}?lang=${lang}`, {
+    // Reuse result within the same request and revalidate periodically in production
+    next: { revalidate: 60 },
+  });
   if (!res.ok) throw new Error("Failed to fetch product");
   return res.json();
-}
+});
 
 /** ---- JSON-LD types ---- */
 interface AggregateRatingLD {

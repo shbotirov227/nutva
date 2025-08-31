@@ -10,11 +10,12 @@ import { apiClient } from "@/lib/apiClient";
 import { useLang } from "@/context/LangContext";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 // import { GetOneBannerType } from "@/types/banner/getOneBanner";
 import { useTranslated } from "@/hooks/useTranslated";
-import "swiper/css/pagination";
 import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/effect-fade";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 
@@ -22,7 +23,7 @@ const HeroSection = () => {
   const { lang } = useLang();
   const { t } = useTranslation();
 
-  const { data: banner = [] } = useQuery({
+  const { data: banner = [], isLoading } = useQuery({
     queryKey: ["banner", lang],
     queryFn: () => apiClient.getBanner(lang),
     refetchOnWindowFocus: false,
@@ -32,62 +33,105 @@ const HeroSection = () => {
   const localized = useTranslated(banner);
 
   return (
-    <div className="relative min-h-screen pt-[56px]">
+    <div className="relative min-h-[calc(100svh-56px)] pt-[56px]">
+      {/* Global background */}
       <div
-        className="absolute inset-0 -z-10 bg-cover bg-center brightness-50"
-        style={{
-          backgroundImage: `url(/hero-bg2.webp)`,
-        }}
-      ></div>
+        className="absolute inset-0 -z-20 bg-cover bg-center brightness-75 transform-gpu origin-center will-change-transform scale-[1.08]"
+        style={{ backgroundImage: `url(/hero-bg2.webp)` }}
+        aria-hidden
+      />
+      {/* Background dark overlay (soft) */}
+      <div className="absolute inset-0 -z-10 bg-black/15" aria-hidden />
+      {/* Subtle radial glow (behind overlay for balanced contrast) */}
+      <div className="pointer-events-none absolute inset-0 -z-20 bg-[radial-gradient(60%_40%_at_50%_20%,rgba(16,185,129,0.2)_0%,transparent_65%)]" aria-hidden />
 
-      <Swiper
-        modules={[Autoplay]}
-        autoplay={{ delay: 2000, disableOnInteraction: false }}
-        loop
-        speed={1000}
-        className="w-full h-full"
-      >
-        {localized.map((item: any, idx: number) => {
-          return (
-            <SwiperSlide key={item.id || item.title || idx} className="cursor-grab active:cursor-grabbing">
-              <Container className="flex flex-col md:flex-row items-center justify-around gap-6 sm:gap-10 w-full px-4 sm:px-6 min-h-screen">
-                <div className="flex flex-col md:flex-row items-center justify-center gap-6 max-md:flex-col-reverse sm:gap-10 w-full px-4 sm:px-6 min-h-screen">
+      {isLoading ? (
+        <Container className="min-h-[calc(100svh-56px)] flex items-center">
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="space-y-4">
+              <div className="h-10 w-3/4 rounded-lg bg-white/10 animate-pulse" />
+              <div className="h-4 w-full rounded bg-white/10 animate-pulse" />
+              <div className="h-4 w-5/6 rounded bg-white/10 animate-pulse" />
+              <div className="h-12 w-40 rounded-md bg-white/10 animate-pulse" />
+            </div>
+            <div className="mx-auto h-64 w-64 md:h-80 md:w-80 rounded-2xl bg-white/10 animate-pulse" />
+          </div>
+        </Container>
+      ) : (
+        <Swiper
+          modules={[Autoplay, Pagination]}
+          autoplay={{ delay: 3500, disableOnInteraction: false }}
+          loop
+          speed={700}
+          slidesPerView={1}
+          pagination={{ clickable: true }}
+          className="w-full h-full"
+        >
+          {localized.map((item: any, idx: number) => {
+            const images: string[] = Array.isArray(item?.imageUrls) ? item.imageUrls : [];
+            const mainImage = images[0];
+            const hasLink = Boolean(item?.link);
+            const isExternal = hasLink && /^https?:\/\//.test(item.link);
+            return (
+              <SwiperSlide key={item.id || item.title || idx} className="cursor-grab active:cursor-grabbing">
+                <Container className="w-full min-h-[calc(100svh-56px)] flex items-center">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-8 items-center w-full">
+                    {/* Left: content card */}
+                    <div className="relative max-w-2xl order-2 md:order-1">
+                      <div className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur-md p-6 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
+                        <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow">
+                          {item?.title}
+                        </h1>
+                        {item?.subtitle && (
+                          <p className="mt-4 text-white/90 text-base sm:text-lg md:text-xl leading-relaxed">
+                            {item.subtitle}
+                          </p>
+                        )}
+                        {hasLink && (
+                          <div className="mt-6">
+                            <Link
+                              href={item.link}
+                              {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                              className="inline-flex items-center justify-center rounded-lg px-5 py-3 text-base font-semibold text-white shadow-lg transition-all"
+                              style={{ background: "linear-gradient(90deg,#10b981,#0ea5e9)" }}
+                              aria-label={t("common.more")}
+                            >
+                              {t("common.more")}
+                            </Link>
+                          </div>
+                        )}
+                      </div>
+                    </div>
 
-                  <div className="text-start max-md:text-center text-white max-w-2xl">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4">
-                      {item?.title}
-                    </h1>
-                    <p className="text-base sm:text-lg md:text-xl md:leading-relaxed mb-4 md:mb-6">
-                      {item?.subtitle}
-                    </p>
-                    <Link
-                      href={item?.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white bg-[rgba(255,255,255,0.3)] hover:bg-[rgba(255,255,255,0.4)] px-4 py-2 rounded-md transition-all delay-75"
-                    >
-                      {t("common.more")}
-                    </Link>
+                    {/* Right: visual */}
+                    <div className="relative flex justify-center md:justify-end items-center order-1 md:order-2">
+                      {/* Accent blobs */}
+                      <div className="absolute -right-8 -top-8 h-40 w-40 rounded-full blur-3xl opacity-40 bg-emerald-400" aria-hidden />
+                      <div className="absolute right-0 bottom-0 h-28 w-28 rounded-full blur-2xl opacity-30 bg-sky-400" aria-hidden />
+
+            {mainImage ? (
+                        <Image
+                          src={mainImage}
+                          alt={item?.title ? `${item.title} — banner` : `banner-${idx + 1}`}
+                          width={640}
+                          height={640}
+              sizes="(max-width: 768px) 65vw, 30vw"
+                          priority={idx === 0}
+                          loading={idx === 0 ? "eager" : "lazy"}
+                          decoding="async"
+              className="w-[60vw] max-w-[420px] md:max-w-[520px] h-auto object-contain drop-shadow-2xl"
+                        />
+                      ) : (
+                        <div className="h-64 w-64 md:h-80 md:w-80 rounded-2xl bg-white/10" />
+                      )}
+                    </div>
                   </div>
-
-                  <div className="flex flex-wrap justify-center gap-4">
-                    {item?.imageUrls?.map((image: string, i: number) => (
-                      <Image
-                        key={image}
-                        src={image}
-                        alt={`banner-image-${i}`}
-                        width={450}
-                        height={450}
-                        className="w-[220px] sm:w-[300px] md:w-[400px] lg:w-[450px] h-auto"
-                      />
-                    ))}
-                  </div>
-                </div>
-              </Container>
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
+                </Container>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      )}
     </div>
   );
 };

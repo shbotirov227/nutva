@@ -162,7 +162,7 @@ export default function ProductsClient() {
                       ) : null}
                       <span className="inline-flex items-center gap-1 rounded-full bg-white/90 text-emerald-900 px-2.5 py-1 text-[11px] font-semibold shadow">
                         <BadgeCheck className="w-3.5 h-3.5" />
-                        {t("product.officialProduct", "Rasmiy mahsulot")}
+                        {t("product.halal", "Halal")}
                       </span>
                     </div>
 

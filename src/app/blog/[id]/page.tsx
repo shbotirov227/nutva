@@ -4,6 +4,7 @@ import { cookies, headers } from "next/headers";
 import Container from "@/components/Container";
 import type { GetOneBlogType } from "@/types/blogs/getOneBlog";
 import BlogDetail from "./BlogDetail";
+import { cache } from "react";
 
 // Support async params in newer Next
 type MaybePromise<T> = T | Promise<T>;
@@ -42,25 +43,33 @@ async function resolveLang(): Promise<Lang> {
   return (["uz", "ru", "en"].includes(cand) ? cand : "uz") as Lang;
 }
 
+const getBlog = cache(async (id: string, lang: Lang): Promise<GetOneBlogType> => {
+  const base = process.env.NEXT_PUBLIC_API_URL;
+  const res = await fetch(`${base}/BlogPost/${id}?lang=${lang}`, {
+    next: { revalidate: 60 },
+  });
+  if (!res.ok) throw new Error("Failed to fetch blog post");
+  return res.json();
+});
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const { id } = await params;
     const lang = await resolveLang();
+    let post: GetOneBlogType | null = null;
+    try {
+      post = await getBlog(id, lang);
+    } catch {
+      post = null;
+    }
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/BlogPost/${id}?lang=${lang}`, {
-      cache: "no-store",
-      // headers: { 'accept-language': lang } // optional
-    });
-
-    if (!res.ok) {
+    if (!post) {
       return {
         title: "Blog Post",
         description: "Post not found",
         robots: { index: false, follow: false },
       };
     }
-
-    const post: GetOneBlogType = await res.json();
 
     // IMAGES
     const imageUrls =
@@ -198,13 +207,8 @@ export default async function BlogPostPage({ params }: Props) {
   try {
     const { id } = await params;
   const lang = await resolveLang();
-
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/BlogPost/${id}?lang=${lang}`, {
-      cache: "no-store",
-    });
-    if (!res.ok) return notFound();
-
-    const blog: GetOneBlogType = await res.json();
+  const blog = await getBlog(id, lang).catch(() => null);
+  if (!blog) return notFound();
 
     return (
       <Container className="pt-28 pb-24 max-w-6xl">

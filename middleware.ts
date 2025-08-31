@@ -31,7 +31,7 @@ export default function middleware(req: NextRequest) {
         cleaned = true;
       }
     }
-    if (cleaned) {
+  if (cleaned) {
       url.search = searchParams.toString();
       return NextResponse.redirect(url, 301);
     }
@@ -59,6 +59,7 @@ export default function middleware(req: NextRequest) {
   const res = NextResponse.redirect(url);
   res.cookies.set("lang", lang, { path: "/", maxAge: 60 * 60 * 24 * 365 });
   res.headers.set("x-lang", lang);
+  res.headers.set("content-language", lang);
   return res;
     }
 
@@ -73,6 +74,7 @@ export default function middleware(req: NextRequest) {
       // Keep cookie in sync
       res.cookies.set("lang", currentLocale, { path: "/", maxAge: 60 * 60 * 24 * 365 });
       res.headers.set("x-lang", currentLocale);
+      res.headers.set("content-language", currentLocale);
       return res;
     }
 
