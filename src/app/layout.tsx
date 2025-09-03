@@ -44,8 +44,12 @@ export async function generateMetadata(): Promise<Metadata> {
     ru: "Nutva Pharm — научно обоснованные, сертифицированные и натуральные БАДы. Каждый продукт — точное решение для восстановления и укрепления здоровья.",
     en: "Nutva Pharm — science‑backed, certified and natural supplements. Each product is a precise solution to restore and strengthen your health.",
   } as const;
+  // Build correct absolute URLs in both prod and local dev
+  const proto = h.get("x-forwarded-proto") || (process.env.VERCEL ? "https" : "http");
+  const host = h.get("host") || "nutva.uz";
+  const baseUrl = `${proto}://${host}`;
   return {
-  metadataBase: new URL("https://nutva.uz"),
+  metadataBase: new URL(baseUrl),
   title: {
     default: titles[lang],
     template: "%s — Nutva Pharm",
@@ -175,9 +179,8 @@ export async function generateMetadata(): Promise<Metadata> {
     },
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    // add apple touch icon if you have it:
+    icon: "/favicon.ico?v=2",
+    shortcut: "/favicon.ico?v=2",
     // apple: "/apple-touch-icon.png",
   },
   };

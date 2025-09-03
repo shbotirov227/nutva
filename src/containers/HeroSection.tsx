@@ -36,7 +36,7 @@ const HeroSection = () => {
     <div className="relative min-h-[calc(100svh-56px)] pt-[56px]">
       {/* Global background */}
       <div
-        className="absolute inset-0 -z-20 bg-cover bg-center brightness-75 transform-gpu origin-center will-change-transform scale-[1.08]"
+        className="absolute inset-0 -z-30 bg-cover bg-center md:bg-[position:62%_center] brightness-75 transform-gpu origin-center will-change-transform scale-[1.08]"
         style={{ backgroundImage: `url(/hero-bg2.webp)` }}
         aria-hidden
       />
@@ -72,12 +72,15 @@ const HeroSection = () => {
             const mainImage = images[0];
             const hasLink = Boolean(item?.link);
             const isExternal = hasLink && /^https?:\/\//.test(item.link);
+            // Default: place text card on the right for all slides on desktop.
+            // Allow API to override with item.cardPosition: 'left' | 'right'.
+            const cardOnRight = item?.cardPosition ? item.cardPosition === "right" : true;
             return (
               <SwiperSlide key={item.id || item.title || idx} className="cursor-grab active:cursor-grabbing">
                 <Container className="w-full min-h-[calc(100svh-56px)] flex items-center">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-8 items-center w-full">
                     {/* Left: content card */}
-                    <div className="relative max-w-2xl order-2 md:order-1">
+                    <div className={`relative max-w-2xl order-2 ${cardOnRight ? "md:order-2 md:justify-self-end" : "md:order-1"}`}>
                       <div className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur-md p-6 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
                         <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow">
                           {item?.title}
@@ -104,10 +107,10 @@ const HeroSection = () => {
                     </div>
 
                     {/* Right: visual */}
-                    <div className="relative flex justify-center md:justify-end items-center order-1 md:order-2">
+                    <div className={`relative flex justify-center ${cardOnRight ? "md:justify-start md:order-1 md:pl-10" : "md:justify-end md:order-2 md:pr-6"} items-center order-1`}>
                       {/* Accent blobs */}
-                      <div className="absolute -right-8 -top-8 h-40 w-40 rounded-full blur-3xl opacity-40 bg-emerald-400" aria-hidden />
-                      <div className="absolute right-0 bottom-0 h-28 w-28 rounded-full blur-2xl opacity-30 bg-sky-400" aria-hidden />
+                      <div className={`absolute ${cardOnRight ? "-left-8 -top-8" : "-right-8 -top-8"} h-40 w-40 rounded-full blur-3xl opacity-40 bg-emerald-400`} aria-hidden />
+                      <div className={`absolute ${cardOnRight ? "left-0 bottom-0" : "right-0 bottom-0"} h-28 w-28 rounded-full blur-2xl opacity-30 bg-sky-400`} aria-hidden />
 
             {mainImage ? (
                         <Image
@@ -119,7 +122,7 @@ const HeroSection = () => {
                           priority={idx === 0}
                           loading={idx === 0 ? "eager" : "lazy"}
                           decoding="async"
-              className="w-[60vw] max-w-[420px] md:max-w-[520px] h-auto object-contain drop-shadow-2xl"
+              className={`w-[54vw] max-w-[420px] md:max-w-[480px] h-auto object-contain drop-shadow-2xl md:translate-y-1 ${cardOnRight ? "md:translate-x-6" : "md:-translate-x-2"}`}
                         />
                       ) : (
                         <div className="h-64 w-64 md:h-80 md:w-80 rounded-2xl bg-white/10" />
