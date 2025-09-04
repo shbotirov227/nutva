@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
         CONTACT_ID: contactId,
         SOURCE_ID: "WEB",
         CATEGORY_ID: 0,
-        STAGE_ID: "UC_TCCXFR",
+        STAGE_ID: "NEW",
       }
     })
   });

@@ -113,7 +113,7 @@ export async function POST(req: NextRequest) {
       CONTACT_ID: contactId,
       SOURCE_ID: sourceId,
       CATEGORY_ID: 0, // hotsales voronka
-      STAGE_ID: "UC_TCCXFR", // nutva site bosqichi (buni o'zing tasdiqlab ol)
+      STAGE_ID: "NEW", // nutva site bosqichi (buni o'zing tasdiqlab ol)
       OPPORTUNITY: totalAmount,
       CURRENCY_ID: "UZS",
       IS_MANUAL_OPPORTUNITY: "Y",
