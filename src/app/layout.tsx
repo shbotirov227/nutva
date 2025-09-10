@@ -189,10 +189,11 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // Resolve lang on server from cookie; fallback to uz
   const cookieStore = await cookies();
-  const cookieLang = cookieStore.get("lang")?.value as string | undefined;
-  const lang = ["uz", "ru", "en"].includes((cookieLang || "").toLowerCase())
-    ? (cookieLang as "uz" | "ru" | "en")
-    : "uz";
+  const h = await headers();
+  const headerLang = h.get("x-lang")?.toLowerCase();
+  const cookieLang = cookieStore.get("lang")?.value?.toLowerCase();
+  const candidate = headerLang || cookieLang || "uz";
+  const lang = (["uz", "ru", "en"].includes(candidate) ? candidate : "uz") as "uz" | "ru" | "en";
   return (
     <html lang={lang} suppressHydrationWarning>
       <head>

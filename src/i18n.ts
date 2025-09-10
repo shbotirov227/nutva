@@ -5,6 +5,17 @@ import LanguageDetector from "i18next-browser-languagedetector"
 
 const Languages = ["uz", "ru", "en"] as const
 
+// Helper to read lang from <html lang> or URL on first load (SSR/CSR safe guards inside detectors)
+const getInitialLang = () => {
+  if (typeof document !== 'undefined') {
+    const tag = document.documentElement.getAttribute('lang');
+    if (tag && ["uz","ru","en"].includes(tag)) return tag;
+    const m = window.location.pathname.match(/^\/(uz|ru|en)(?:\/|$)/);
+    if (m) return m[1];
+  }
+  return undefined;
+};
+
 i18n
   .use(Backend)
   .use(LanguageDetector)
@@ -17,10 +28,13 @@ i18n
       escapeValue: false,
     },
     detection: {
-  order: ["cookie", "localStorage", "navigator"],
-  lookupCookie: "lang",
-  lookupLocalStorage: "lang",
-  caches: ["cookie", "localStorage"],
+      // Prefer explicit signals: <html lang>, path prefix, cookie; then localStorage; finally navigator
+      order: ["htmlTag", "path", "cookie", "localStorage", "navigator"],
+      lookupCookie: "lang",
+      lookupLocalStorage: "lang",
+      caches: ["cookie", "localStorage"],
+      htmlTag: typeof document !== 'undefined' ? document.documentElement : undefined,
+      lookupFromPathIndex: 0,
     },
     backend: {
       loadPath: "/locales/{{lng}}/{{ns}}.json",
@@ -28,6 +42,7 @@ i18n
     react: {
       useSuspense: false,
     },
+    lng: getInitialLang(),
   })
 
 export default i18n

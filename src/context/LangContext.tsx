@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import i18n from "@/i18n";
 
 type LangContextType = {
   lang: string;
@@ -21,8 +22,15 @@ function useLocalStorage(key: string, initialValue: string) {
       if (typeof window !== 'undefined') {
   const cookieVal = Cookies.get(key);
   const lsVal = window.localStorage.getItem(key);
-  const preferred = (cookieVal || lsVal || initialValue);
+  // Read locale from the URL path (highest priority on first load)
+  const pathMatch = window.location.pathname.match(/^\/(uz|ru|en)(?:\/|$)/);
+  const pathLang = pathMatch?.[1];
+  const preferred = (pathLang || cookieVal || lsVal || initialValue);
   setStoredValue(preferred);
+  // Ensure i18next follows the resolved language immediately
+  if (i18n.language !== preferred) {
+    void i18n.changeLanguage(preferred);
+  }
   // Sync both stores to preferred value
   if (lsVal !== preferred) window.localStorage.setItem(key, preferred);
   if (cookieVal !== preferred) Cookies.set(key, preferred, { expires: 365, path: "/" });
@@ -40,6 +48,10 @@ function useLocalStorage(key: string, initialValue: string) {
       if (typeof window !== 'undefined') {
   window.localStorage.setItem(key, value);
   Cookies.set(key, value, { expires: 365, path: "/" });
+      }
+      // Keep i18next in sync with context updates
+      if (i18n.language !== value) {
+        void i18n.changeLanguage(value);
       }
     } catch (error) {
       console.error(`Error setting localStorage key "${key}":`, error);

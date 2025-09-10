@@ -37,11 +37,11 @@ export default function middleware(req: NextRequest) {
     }
 
     // Skip non-page assets and API
-    if (pathname.startsWith("/api") || PUBLIC_FILE.test(pathname) || pathname.startsWith("/_next")) {
+  if (pathname.startsWith("/api") || PUBLIC_FILE.test(pathname) || pathname.startsWith("/_next")) {
       // If the URL already has a locale segment, reflect it in the cookie for consistency
       const localeMatch = pathname.match(/^\/(uz|ru|en)(?:\/|$)/);
       if (localeMatch) {
-        const res = NextResponse.next();
+    const res = NextResponse.next();
         res.cookies.set("lang", localeMatch[1], { path: "/", maxAge: 60 * 60 * 24 * 365 });
         return res;
       }
@@ -58,7 +58,6 @@ export default function middleware(req: NextRequest) {
       url.pathname = `/${lang}${pathname}`;
   const res = NextResponse.redirect(url);
   res.cookies.set("lang", lang, { path: "/", maxAge: 60 * 60 * 24 * 365 });
-  res.headers.set("x-lang", lang);
   res.headers.set("content-language", lang);
   return res;
     }
@@ -70,10 +69,12 @@ export default function middleware(req: NextRequest) {
       const rest = localeMatch[2] ? `/${localeMatch[2]}` : "/";
       const rewriteUrl = req.nextUrl.clone();
       rewriteUrl.pathname = rest;
-  const res = NextResponse.rewrite(rewriteUrl);
+      // Forward locale to the rewritten request so SSR picks it immediately
+      const requestHeaders = new Headers(req.headers);
+      requestHeaders.set("x-lang", currentLocale);
+      const res = NextResponse.rewrite(rewriteUrl, { request: { headers: requestHeaders } });
       // Keep cookie in sync
       res.cookies.set("lang", currentLocale, { path: "/", maxAge: 60 * 60 * 24 * 365 });
-      res.headers.set("x-lang", currentLocale);
       res.headers.set("content-language", currentLocale);
       return res;
     }
