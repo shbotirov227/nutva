@@ -28,6 +28,7 @@ import { toast } from "react-toastify";
 import EmptyCartImg from "@/assets/images/empty-cart-img.png";
 import Container from "@/components/Container";
 import clsx from "clsx";
+import { getFirstNormalizedImage } from "@/lib/imageUtils";
 
 type P = {
   id: string;
@@ -113,7 +114,7 @@ export default function ProductsClient() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
             {products.map((product) => {
-              const cover = product.imageUrls?.[0] || (NoImage as unknown as string);
+              const cover = getFirstNormalizedImage(product.imageUrls, NoImage.src);
 
               const pct =
                 product.oldPrice && product.price && product.oldPrice > product.price

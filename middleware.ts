@@ -16,7 +16,6 @@ import type { NextRequest } from "next/server";
 
 const PUBLIC_FILE = /\.(.*)$/;
 const locales = ["uz", "ru", "en"] as const;
-const fallbackLng = "uz" as const;
 
 export default function middleware(req: NextRequest) {
     const url = req.nextUrl.clone();
@@ -50,16 +49,23 @@ export default function middleware(req: NextRequest) {
 
     const hasLocale = locales.some((l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`));
 
-    // 2) If missing locale, redirect to preferred (cookie or fallback)
+    // 2) If missing locale, force redirect to UZ for first-time visitors
     if (!hasLocale) {
       const cookieLang = req.cookies.get("lang")?.value;
-      const isSupported = cookieLang && locales.includes(cookieLang as (typeof locales)[number]);
-      const lang = (isSupported ? (cookieLang as (typeof locales)[number]) : fallbackLng);
+      
+      // Always default to UZ unless explicit valid cookie exists
+      let lang = "uz"; // Force default to Uzbek
+      
+      // Only respect cookie if it exists and is valid
+      if (cookieLang && locales.includes(cookieLang as (typeof locales)[number])) {
+        lang = cookieLang as (typeof locales)[number];
+      }
+      
       url.pathname = `/${lang}${pathname}`;
-  const res = NextResponse.redirect(url);
-  res.cookies.set("lang", lang, { path: "/", maxAge: 60 * 60 * 24 * 365 });
-  res.headers.set("content-language", lang);
-  return res;
+      const res = NextResponse.redirect(url);
+      res.cookies.set("lang", lang, { path: "/", maxAge: 60 * 60 * 24 * 365 });
+      res.headers.set("content-language", lang);
+      return res;
     }
 
     // 3) If locale exists in path, rewrite to underlying route without the prefix

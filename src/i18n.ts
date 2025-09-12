@@ -28,12 +28,10 @@ i18n
       escapeValue: false,
     },
     detection: {
-      // Prefer explicit signals: <html lang>, path prefix, cookie; then localStorage; finally navigator
-      order: ["htmlTag", "path", "cookie", "localStorage", "navigator"],
+      // Strict order: URL path first, then cookie, ignore browser language completely
+      order: ["path", "cookie"],
       lookupCookie: "lang",
-      lookupLocalStorage: "lang",
-      caches: ["cookie", "localStorage"],
-      htmlTag: typeof document !== 'undefined' ? document.documentElement : undefined,
+      caches: ["cookie"],
       lookupFromPathIndex: 0,
     },
     backend: {

@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset 
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+                      http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+>
+
+  <!-- 🔝 Bosh sahifa - UZ (default) -->
+  <url>
+    <loc>https://nutva.uz/uz</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz"/>
+  </url>
+  
+  <!-- 🔝 Bosh sahifa - RU -->
+  <url>
+    <loc>https://nutva.uz/ru</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz"/>
+  </url>
+  
+  <!-- 🔝 Bosh sahifa - EN -->
+  <url>
+    <loc>https://nutva.uz/en</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz"/>
+  </url>
+
+  <!-- 🛒 Mahsulotlar sahifasi - UZ -->
+  <url>
+    <loc>https://nutva.uz/uz/product</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/product"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/product"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/product"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/product"/>
+  </url>
+  
+  <!-- 🛒 Mahsulotlar sahifasi - RU -->
+  <url>
+    <loc>https://nutva.uz/ru/product</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/product"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/product"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/product"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/product"/>
+  </url>
+  
+  <!-- 🛒 Mahsulotlar sahifasi - EN -->
+  <url>
+    <loc>https://nutva.uz/en/product</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/product"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/product"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/product"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/product"/>
+  </url>
+
+  <!-- ✅ Individual mahsulotlar - UZ -->
+  <url>
+    <loc>https://nutva.uz/uz/product/2ca86164-5e10-449d-a854-b80f0173a3f5</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/product/2ca86164-5e10-449d-a854-b80f0173a3f5"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/product/2ca86164-5e10-449d-a854-b80f0173a3f5"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/product/2ca86164-5e10-449d-a854-b80f0173a3f5"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/product/2ca86164-5e10-449d-a854-b80f0173a3f5"/>
+  </url>
+  
+  <!-- ✅ Individual mahsulotlar - RU -->
+  <url>
+    <loc>https://nutva.uz/ru/product/2ca86164-5e10-449d-a854-b80f0173a3f5</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/product/2ca86164-5e10-449d-a854-b80f0173a3f5"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/product/2ca86164-5e10-449d-a854-b80f0173a3f5"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/product/2ca86164-5e10-449d-a854-b80f0173a3f5"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/product/2ca86164-5e10-449d-a854-b80f0173a3f5"/>
+  </url>
+  
+  <!-- ✅ Individual mahsulotlar - EN -->
+  <url>
+    <loc>https://nutva.uz/en/product/2ca86164-5e10-449d-a854-b80f0173a3f5</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/product/2ca86164-5e10-449d-a854-b80f0173a3f5"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/product/2ca86164-5e10-449d-a854-b80f0173a3f5"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/product/2ca86164-5e10-449d-a854-b80f0173a3f5"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/product/2ca86164-5e10-449d-a854-b80f0173a3f5"/>
+  </url>
+  
+  <!-- Nutva Gelmin Kids - UZ -->
+  <url>
+    <loc>https://nutva.uz/uz/product/0406b946-cd9a-4171-91e2-e9f3e3016596</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/product/0406b946-cd9a-4171-91e2-e9f3e3016596"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/product/0406b946-cd9a-4171-91e2-e9f3e3016596"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/product/0406b946-cd9a-4171-91e2-e9f3e3016596"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/product/0406b946-cd9a-4171-91e2-e9f3e3016596"/>
+  </url>
+  
+  <!-- Nutva Gelmin Kids - RU -->
+  <url>
+    <loc>https://nutva.uz/ru/product/0406b946-cd9a-4171-91e2-e9f3e3016596</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/product/0406b946-cd9a-4171-91e2-e9f3e3016596"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/product/0406b946-cd9a-4171-91e2-e9f3e3016596"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/product/0406b946-cd9a-4171-91e2-e9f3e3016596"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/product/0406b946-cd9a-4171-91e2-e9f3e3016596"/>
+  </url>
+  
+  <!-- Nutva Gelmin Kids - EN -->
+  <url>
+    <loc>https://nutva.uz/en/product/0406b946-cd9a-4171-91e2-e9f3e3016596</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/product/0406b946-cd9a-4171-91e2-e9f3e3016596"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/product/0406b946-cd9a-4171-91e2-e9f3e3016596"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/product/0406b946-cd9a-4171-91e2-e9f3e3016596"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/product/0406b946-cd9a-4171-91e2-e9f3e3016596"/>
+  </url>
+  
+  <!-- Nutva Complex Extra - UZ -->
+  <url>
+    <loc>https://nutva.uz/uz/product/f3146c53-0e85-49d3-8a8f-017fc7baa97c</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/product/f3146c53-0e85-49d3-8a8f-017fc7baa97c"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/product/f3146c53-0e85-49d3-8a8f-017fc7baa97c"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/product/f3146c53-0e85-49d3-8a8f-017fc7baa97c"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/product/f3146c53-0e85-49d3-8a8f-017fc7baa97c"/>
+  </url>
+  
+  <!-- Nutva Complex Extra - RU -->
+  <url>
+    <loc>https://nutva.uz/ru/product/f3146c53-0e85-49d3-8a8f-017fc7baa97c</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/product/f3146c53-0e85-49d3-8a8f-017fc7baa97c"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/product/f3146c53-0e85-49d3-8a8f-017fc7baa97c"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/product/f3146c53-0e85-49d3-8a8f-017fc7baa97c"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/product/f3146c53-0e85-49d3-8a8f-017fc7baa97c"/>
+  </url>
+  
+  <!-- Nutva Complex Extra - EN -->
+  <url>
+    <loc>https://nutva.uz/en/product/f3146c53-0e85-49d3-8a8f-017fc7baa97c</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/product/f3146c53-0e85-49d3-8a8f-017fc7baa97c"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/product/f3146c53-0e85-49d3-8a8f-017fc7baa97c"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/product/f3146c53-0e85-49d3-8a8f-017fc7baa97c"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/product/f3146c53-0e85-49d3-8a8f-017fc7baa97c"/>
+  </url>
+  
+  <!-- Nutva Complex - UZ -->
+  <url>
+    <loc>https://nutva.uz/uz/product/09de8997-9a58-429d-ba9f-8ac06c6dac05</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/product/09de8997-9a58-429d-ba9f-8ac06c6dac05"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/product/09de8997-9a58-429d-ba9f-8ac06c6dac05"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/product/09de8997-9a58-429d-ba9f-8ac06c6dac05"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/product/09de8997-9a58-429d-ba9f-8ac06c6dac05"/>
+  </url>
+  
+  <!-- Nutva Complex - RU -->
+  <url>
+    <loc>https://nutva.uz/ru/product/09de8997-9a58-429d-ba9f-8ac06c6dac05</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/product/09de8997-9a58-429d-ba9f-8ac06c6dac05"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/product/09de8997-9a58-429d-ba9f-8ac06c6dac05"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/product/09de8997-9a58-429d-ba9f-8ac06c6dac05"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/product/09de8997-9a58-429d-ba9f-8ac06c6dac05"/>
+  </url>
+  
+  <!-- Nutva Complex - EN -->
+  <url>
+    <loc>https://nutva.uz/en/product/09de8997-9a58-429d-ba9f-8ac06c6dac05</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/product/09de8997-9a58-429d-ba9f-8ac06c6dac05"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/product/09de8997-9a58-429d-ba9f-8ac06c6dac05"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/product/09de8997-9a58-429d-ba9f-8ac06c6dac05"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/product/09de8997-9a58-429d-ba9f-8ac06c6dac05"/>
+  </url>
+  
+  <!-- Nutva Fertilia Women - UZ -->
+  <url>
+    <loc>https://nutva.uz/uz/product/fcda59dd-a987-483b-9f82-9d937b004807</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/product/fcda59dd-a987-483b-9f82-9d937b004807"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/product/fcda59dd-a987-483b-9f82-9d937b004807"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/product/fcda59dd-a987-483b-9f82-9d937b004807"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/product/fcda59dd-a987-483b-9f82-9d937b004807"/>
+  </url>
+  
+  <!-- Nutva Fertilia Women - RU -->
+  <url>
+    <loc>https://nutva.uz/ru/product/fcda59dd-a987-483b-9f82-9d937b004807</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/product/fcda59dd-a987-483b-9f82-9d937b004807"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/product/fcda59dd-a987-483b-9f82-9d937b004807"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/product/fcda59dd-a987-483b-9f82-9d937b004807"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/product/fcda59dd-a987-483b-9f82-9d937b004807"/>
+  </url>
+  
+  <!-- Nutva Fertilia Women - EN -->
+  <url>
+    <loc>https://nutva.uz/en/product/fcda59dd-a987-483b-9f82-9d937b004807</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/product/fcda59dd-a987-483b-9f82-9d937b004807"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/product/fcda59dd-a987-483b-9f82-9d937b004807"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/product/fcda59dd-a987-483b-9f82-9d937b004807"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/product/fcda59dd-a987-483b-9f82-9d937b004807"/>
+  </url>
+
+    <!-- ℹ️ About Us - UZ -->
+  <url>
+    <loc>https://nutva.uz/uz/about-us</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/about-us"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/about-us"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/about-us"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/about-us"/>
+  </url>
+  
+  <!-- ℹ️ About Us - RU -->
+  <url>
+    <loc>https://nutva.uz/ru/about-us</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/about-us"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/about-us"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/about-us"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/about-us"/>
+  </url>
+  
+  <!-- ℹ️ About Us - EN -->
+  <url>
+    <loc>https://nutva.uz/en/about-us</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/about-us"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/about-us"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/about-us"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/about-us"/>
+  </url>
+  
+  <!-- 📞 Contact - UZ -->
+  <url>
+    <loc>https://nutva.uz/uz/contact</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/contact"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/contact"/>
+  </url>
+  
+  <!-- 📞 Contact - RU -->
+  <url>
+    <loc>https://nutva.uz/ru/contact</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/contact"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/contact"/>
+  </url>
+  
+  <!-- 📞 Contact - EN -->
+  <url>
+    <loc>https://nutva.uz/en/contact</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/contact"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/contact"/>
+  </url>
+  
+  <!-- 📰 Blog - UZ -->
+  <url>
+    <loc>https://nutva.uz/uz/blog</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/blog"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/blog"/>
+  </url>
+  
+  <!-- 📰 Blog - RU -->
+  <url>
+    <loc>https://nutva.uz/ru/blog</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/blog"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/blog"/>
+  </url>
+  
+  <!-- 📰 Blog - EN -->
+  <url>
+    <loc>https://nutva.uz/en/blog</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/blog"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/blog"/>
+  </url>
+  
+  <!-- 🏷️ Sale - UZ -->
+  <url>
+    <loc>https://nutva.uz/uz/sale</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/sale"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/sale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/sale"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/sale"/>
+  </url>
+  
+  <!-- 🏷️ Sale - RU -->
+  <url>
+    <loc>https://nutva.uz/ru/sale</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/sale"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/sale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/sale"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/sale"/>
+  </url>
+  
+  <!-- 🏷️ Sale - EN -->
+  <url>
+    <loc>https://nutva.uz/en/sale</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/sale"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/sale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/sale"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/sale"/>
+  </url>
+  
+  <!-- 📜 Certificates - UZ -->
+  <url>
+    <loc>https://nutva.uz/uz/certificates</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/certificates"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/certificates"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/certificates"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/certificates"/>
+  </url>
+  
+  <!-- 📜 Certificates - RU -->
+  <url>
+    <loc>https://nutva.uz/ru/certificates</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/certificates"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/certificates"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/certificates"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/certificates"/>
+  </url>
+  
+  <!-- 📜 Certificates - EN -->
+  <url>
+    <loc>https://nutva.uz/en/certificates</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://nutva.uz/uz/certificates"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nutva.uz/ru/certificates"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nutva.uz/en/certificates"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nutva.uz/uz/certificates"/>
+  </url>
+
+</urlset>
+
+</urlset>

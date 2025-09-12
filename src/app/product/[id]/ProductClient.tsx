@@ -19,6 +19,7 @@ import ProductImage from "@/assets/images/product-green.png";
 import DefaultVideoImg from "@/assets/images/reviewcard-img.png";
 import ProductDetailSkeleton from "@/components/ProductDetailSkleton";
 import type { GetOneProductType } from "@/types/products/getOneProduct";
+import { getFirstNormalizedImage } from "@/lib/imageUtils";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { getProductKeyFromName } from "@/helper/getProductKeyFromName";
 import { getProductDetailMiddleImage } from "@/helper/getProductDetailMiddleImage";
@@ -112,7 +113,7 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-8">
                   <motion.div layout layoutId={`product-image-${product.id}`} className="w-full">
                     <Image
-                      src={product?.imageUrls?.[0] || ProductImage}
+                      src={getFirstNormalizedImage(product?.imageUrls, ProductImage.src)}
                       alt={product?.name || "Product Image"}
                       width={500}
                       height={500}

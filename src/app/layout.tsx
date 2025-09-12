@@ -17,6 +17,8 @@ import InjectPixelScript from "@/components/InjectPixelScript";
 import TrackVisit from "@/components/TrackVisit";
 import BuyModalContainerDynamic from "@/components/BuyModalContainerDynamic";
 import FloatingButtons from "@/components/FloatingButtons";
+import { WebVitals } from "@/components/WebVitals";
+import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistration";
 
 // Fonts are provided via system fallbacks in globals.css to avoid external fetches
 
@@ -55,6 +57,12 @@ export async function generateMetadata(): Promise<Metadata> {
     template: "%s — Nutva Pharm",
   },
   description: descriptions[lang],
+  
+  // Performance: Preload critical resources
+  other: {
+    'preload-hero-bg': '/hero-bg2.webp',
+    'preload-logo': '/header-nutva-logo.png',
+  },
   // Important: keywords are low-weight, but we include them as requested.
   keywords: [
     // Brand & products
@@ -197,7 +205,34 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang={lang} suppressHydrationWarning>
       <head>
-        {/* GA4 */}
+        {/* Critical resource preloading for performance */}
+        <link
+          rel="preload"
+          href="/hero-bg2.webp"
+          as="image"
+          type="image/webp"
+        />
+        <link
+          rel="preload"
+          href="/header-nutva-logo.png"
+          as="image"
+          type="image/png"
+        />
+        
+        {/* DNS prefetch for external domains */}
+        <link rel="dns-prefetch" href="//nutva.uz" />
+        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="//connect.facebook.net" />
+        <link rel="dns-prefetch" href="//mc.yandex.ru" />
+        
+        {/* PWA Manifest */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#10b981" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Nutva Pharm" />
+        
+        {/* GTM head tag */}
         <Script id="ga4-src" src="https://www.googletagmanager.com/gtag/js?id=G-E1CNZ3JV1T" strategy="afterInteractive" />
         <Script
           id="ga4-init"
@@ -212,22 +247,28 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           }}
         />
 
-        {/* GTM */}
-        <Script
-          id="gtm-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){
-                w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-                var f=d.getElementsByTagName(s)[0],
-                    j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
-                j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-                f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-KLMGC5HH');
-            `,
-          }}
-        />
+        {/* GTM head tag - optimized loading */}
+        <Script id="gtm" strategy="lazyOnload">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-KLMGC5HH');`}
+        </Script>
+
+        {/* Facebook Pixel - optimized loading */}
+        <Script id="fb-pixel" strategy="lazyOnload">
+          {`!function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '766139842501655');
+          fbq('track', 'PageView');`}
+        </Script>
 
         {/* Facebook Pixel */}
         <Script
@@ -248,11 +289,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           }}
         />
 
-        {/* Yandex Metrika – single loader, two counters */}
-        <Script id="ym-src" src="https://mc.yandex.ru/metrika/tag.js" strategy="afterInteractive" />
+        {/* Yandex Metrika – optimized loading */}
+        <Script id="ym-src" src="https://mc.yandex.ru/metrika/tag.js" strategy="lazyOnload" />
         <Script
           id="ym-init"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               window.ym = window.ym || function(){(ym.a=ym.a||[]).push(arguments)};
@@ -267,7 +308,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Script
           id="org-ldjson"
           type="application/ld+json"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
@@ -304,7 +345,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Script
           id="website-ldjson"
           type="application/ld+json"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
@@ -352,6 +393,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <RawCartProvider>
               <BuyProvider>
                 <Layout>
+                  <ServiceWorkerRegistration />
+                  <WebVitals />
                   <TrackVisit />
                   <InjectPixelScript />
                   {children}

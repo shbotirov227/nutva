@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { X, Equal, MinusIcon, PlusIcon, ShieldCheck, Leaf } from "lucide-react";
 import { formatPrice } from "@/lib/formatPrice";
 import { useMemo } from "react";
+import { getFirstNormalizedImage } from "@/lib/imageUtils";
 
 type Discount = {
   basePrice: number;     // bir dona uchun nominal narx (chegirmasiz)
@@ -52,7 +53,7 @@ export default function CartItem({ item }: Props) {
       <div className="relative flex items-center justify-center sm:justify-start">
         <div className="relative">
           <Image
-            src={item.imageUrls?.[0] || (NoImage as unknown as string)}
+            src={getFirstNormalizedImage(item.imageUrls, NoImage.src)}
             alt={`${item.name} — image`}
             width={180}
             height={180}

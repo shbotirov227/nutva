@@ -20,20 +20,33 @@ function useLocalStorage(key: string, initialValue: string) {
   useEffect(() => {
     try {
       if (typeof window !== 'undefined') {
-  const cookieVal = Cookies.get(key);
-  const lsVal = window.localStorage.getItem(key);
-  // Read locale from the URL path (highest priority on first load)
-  const pathMatch = window.location.pathname.match(/^\/(uz|ru|en)(?:\/|$)/);
-  const pathLang = pathMatch?.[1];
-  const preferred = (pathLang || cookieVal || lsVal || initialValue);
-  setStoredValue(preferred);
-  // Ensure i18next follows the resolved language immediately
-  if (i18n.language !== preferred) {
-    void i18n.changeLanguage(preferred);
-  }
-  // Sync both stores to preferred value
-  if (lsVal !== preferred) window.localStorage.setItem(key, preferred);
-  if (cookieVal !== preferred) Cookies.set(key, preferred, { expires: 365, path: "/" });
+        // Read locale from the URL path (highest priority)
+        const pathMatch = window.location.pathname.match(/^\/(uz|ru|en)(?:\/|$)/);
+        const pathLang = pathMatch?.[1];
+        
+        // If URL has language, use it
+        if (pathLang && ["uz", "ru", "en"].includes(pathLang)) {
+          setStoredValue(pathLang);
+          if (i18n.language !== pathLang) {
+            void i18n.changeLanguage(pathLang);
+          }
+          // Sync stores
+          window.localStorage.setItem(key, pathLang);
+          Cookies.set(key, pathLang, { expires: 365, path: "/" });
+        } else {
+          // No URL language - force Uzbek for first-time visitors
+          const preferred = "uz";
+          setStoredValue(preferred);
+          if (i18n.language !== preferred) {
+            void i18n.changeLanguage(preferred);
+          }
+          // Clear any existing cache that might cause Russian
+          window.localStorage.removeItem(key);
+          Cookies.remove(key, { path: "/" });
+          // Set fresh Uzbek preference
+          window.localStorage.setItem(key, preferred);
+          Cookies.set(key, preferred, { expires: 365, path: "/" });
+        }
       }
     } catch (error) {
       console.error(`Error reading localStorage key "${key}":`, error);

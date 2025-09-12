@@ -13,6 +13,7 @@ import { FormModal } from "./FormModal";
 import { useLang } from "@/context/LangContext";
 import { BadgeCheck, Leaf, Truck, ShoppingCart } from "lucide-react";
 import { toast } from "react-toastify";
+import { getFirstNormalizedImage } from "@/lib/imageUtils";
 
 type ProductCardProps = {
   id: string;
@@ -162,7 +163,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
         {image?.length > 0 ? (
           <Image
-            src={image[0]}
+            src={getFirstNormalizedImage(image, NoImage.src)}
             alt={`${title} — Nutva`}
             width={0}
             height={0}
