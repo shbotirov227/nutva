@@ -1,11 +1,10 @@
 // app/product/[id]/page.tsx
 import type { Metadata } from "next";
-import { cookies, headers } from "next/headers";
 import ProductDetailClient from "./ProductClient";
 import type { GetOneProductType } from "@/types/products/getOneProduct";
+import { resolveLang, getOgLocale, getAlternateLocales, buildLocalizedUrls, type Lang } from "@/lib/langUtils";
 import { cache } from "react";
 
-type Lang = "uz" | "ru" | "en";
 type RouteParams = Promise<{ id: string }>;
 
 function ensureHttps(url?: string): string | undefined {
@@ -20,16 +19,6 @@ function ensureHttps(url?: string): string | undefined {
   } catch {
     return url;
   }
-}
-
-async function resolveLang(): Promise<Lang> {
-  // Next 15: cookies()/headers() — async
-  const c = await cookies();
-  const h = await headers();
-  const fromCookie = c.get("lang")?.value?.toLowerCase();
-  const fromHeader = h.get("x-lang")?.toLowerCase();
-  const candidate = (fromCookie || fromHeader || "uz") as Lang;
-  return (["uz", "ru", "en"].includes(candidate) ? candidate : "uz") as Lang;
 }
 
 const trim = (s: string, n: number) =>
@@ -120,9 +109,9 @@ export async function generateMetadata(
   const title = trim(rawTitle, 60);
   const description = trim(rawDesc, 160);
 
-  const base = "https://nutva.uz";
-  const localizedPath = `/${lang}/product/${id}`;
-  const url = `${base}${localizedPath}`;
+  const ogLocale = getOgLocale(lang);
+  const alternateLocales = getAlternateLocales(lang);
+  const localizedUrls = buildLocalizedUrls(`/product/${id}`);
   const rawImage = product.imageUrls?.[0] || "https://nutva.uz/seo_banner.jpg";
   const image = ensureHttps(rawImage) || "https://nutva.uz/seo_banner.jpg";
 
@@ -136,23 +125,17 @@ export async function generateMetadata(
     description,
     keywords,
     alternates: {
-      canonical: url,
-      languages: {
-        uz: `${base}/uz/product/${id}`,
-        ru: `${base}/ru/product/${id}`,
-        en: `${base}/en/product/${id}`,
-      },
+      canonical: localizedUrls[lang],
+      languages: localizedUrls,
     },
     openGraph: {
-      url,
+      url: localizedUrls[lang],
       siteName: "Nutva Pharm",
       title,
       description,
       images: [{ url: image, width: 1200, height: 630, alt: title }],
-      locale: lang === "ru" ? "ru_RU" : lang === "en" ? "en_US" : "uz_UZ",
-      alternateLocale: ["uz_UZ", "ru_RU", "en_US"].filter(
-        (l) => l !== (lang === "ru" ? "ru_RU" : lang === "en" ? "en_US" : "uz_UZ")
-      ),
+      locale: ogLocale,
+      alternateLocale: alternateLocales,
     },
     twitter: {
       card: "summary_large_image",
@@ -185,9 +168,8 @@ export default async function Page({ params }: { params: RouteParams }) {
   const title = trim(rawTitle, 60);
   const description = trim(rawDesc, 160);
 
-  const base = "https://nutva.uz";
-  const localizedPath = `/${lang}/product/${id}`;
-  const url = `${base}${localizedPath}`;
+  const localizedUrls = buildLocalizedUrls(`/product/${id}`);
+  const url = localizedUrls[lang];
   const rawImage = product.imageUrls?.[0] || "https://nutva.uz/seo_banner.jpg";
   const image = ensureHttps(rawImage) || "https://nutva.uz/seo_banner.jpg";
 

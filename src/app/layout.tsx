@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 /* src/app/layout.tsx */
 import type { Metadata, Viewport } from "next";
-import { cookies, headers } from "next/headers";
+import { headers } from "next/headers";
 import Script from "next/script";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,6 +11,7 @@ import { QueryProvider } from "@/providers/queryProvider";
 import { LangProvider } from "@/context/LangContext";
 import { RawCartProvider } from "@/context/CartContext";
 import { BuyProvider } from "@/context/BuyContext";
+import { resolveLang, getOgLocale, getAlternateLocales, buildLocalizedUrls, getHomePageContent } from "@/lib/langUtils";
 
 import Layout from "@/components/Layout";
 import InjectPixelScript from "@/components/InjectPixelScript";
@@ -29,34 +30,28 @@ export const viewport: Viewport = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  const cookieStore = await cookies();
-  const h = await headers();
-  const headerLang = h.get("x-lang")?.toLowerCase();
-  const cookieLang = cookieStore.get("lang")?.value?.toLowerCase();
-  const candidate = headerLang || cookieLang || "uz";
-  const lang = (["uz", "ru", "en"].includes(candidate) ? candidate : "uz") as "uz" | "ru" | "en";
-  const ogLocale = lang === "ru" ? "ru_RU" : lang === "en" ? "en_US" : "uz_UZ";
-  const titles = {
-    uz: "Nutva Pharm — Ilmiy asoslangan biofaol qo'shimchalar",
-    ru: "Nutva Pharm — Научно обоснованные биологически активные добавки",
-    en: "Nutva Pharm — Science‑backed dietary supplements",
-  } as const;
-  const descriptions = {
-    uz: "Nutva Pharm — ilmiy asoslangan, sifatli va tabiiy biofaol qo‘shimchalar. Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir.",
-    ru: "Nutva Pharm — научно обоснованные, сертифицированные и натуральные БАДы. Каждый продукт — точное решение для восстановления и укрепления здоровья.",
-    en: "Nutva Pharm — science‑backed, certified and natural supplements. Each product is a precise solution to restore and strengthen your health.",
-  } as const;
+  const lang = await resolveLang();
+  const content = getHomePageContent(lang);
+  const ogLocale = getOgLocale(lang);
+  const alternateLocales = getAlternateLocales(lang);
+  
   // Build correct absolute URLs in both prod and local dev
+  const h = await headers();
   const proto = h.get("x-forwarded-proto") || (process.env.VERCEL ? "https" : "http");
   const host = h.get("host") || "nutva.uz";
   const baseUrl = `${proto}://${host}`;
+  
+  // Get current path for building alternate URLs
+  const pathname = h.get("x-pathname") || `/${lang}`;
+  const localizedUrls = buildLocalizedUrls(pathname, baseUrl);
+  
   return {
   metadataBase: new URL(baseUrl),
   title: {
-    default: titles[lang],
+    default: content.title,
     template: "%s — Nutva Pharm",
   },
-  description: descriptions[lang],
+  description: content.description,
   
   // Performance: Preload critical resources
   other: {
@@ -77,35 +72,35 @@ export async function generateMetadata(): Promise<Metadata> {
     "Nutva Complex Extra", "Нутва Комплекс Экстра",
 
     // Existing generic terms (uz/ru)
-    "biologik faol qo‘shimchalar", "биологик фаол қўшимчалар",
-    "bioaktiv qo‘shimchalar", "биоактив қўшимчалар",
+    "biologik faol qo'shimchalar", "биологик фаол қўшимчалар",
+    "bioaktiv qo'shimchalar", "биоактив қўшимчалар",
     "BAT", "БАТ", "BAA", "БАА",
     "o'simlik ekstraktlari", "ўсимлик экстрактлари",
     "vitaminlar", "витаминлар",
-    "mineral qo‘shimchalar", "минерал қўшимчалар",
-    "ilmiy asoslangan qo‘shimchalar", "илмий асосланган қўшимчалар",
+    "mineral qo'shimchalar", "минерал қўшимчалар",
+    "ilmiy asoslangan qo'shimchalar", "илмий асосланган қўшимчалар",
     "immunitetni kuchaytiruvchi vositalar", "иммунитетни кучайтирувчи воситалар",
-    "gormonal balans uchun qo‘shimchalar", "гормонал мувозанат учун қўшимчалар",
+    "gormonal balans uchun qo'shimchalar", "гормонал мувозанат учун қўшимчалар",
     "hazmni yaxshilovchi vositalar", "ҳазмни яхшилайдиган воситалар",
-    "sertifikatlangan qo‘shimchalar", "сертификатланган қўшимчалар",
-    "ayollar salomatligi uchun qo‘shimchalar", "аёллар саломатлиги учун қўшимчалар",
+    "sertifikatlangan qo'shimchalar", "сертификатланган қўшимчалар",
+    "ayollar salomatligi uchun qo'shimchalar", "аёллар саломатлиги учун қўшимчалар",
     "homiladorlikni rejalashtirish", "ҳомиладорликни режалаштириш",
     "bolalar uchun BAT", "болалар учун БАТ",
     "oshqozon-ichak salomatligi", "ошқозон-ичак саломатлиги",
     "osteoporoz davolash", "остеопороз даволаш",
     "gonartroz davo", "гоноартроз даво",
-    "koksartroz qo‘shimchalari", "коксартроз учун қўшимчалар",
+    "koksartroz qo'shimchalari", "коксартроз учун қўшимчалар",
     "umurtqa churrasi vosita", "умуртқа чурраси учун восита",
-    "artroz va artrit qo‘shimchalari", "артроз ва артрит учун БАТ",
+    "artroz va artrit qo'shimchalari", "артроз ва артрит учун БАТ",
     "oyoqlarning shishishi uchun", "оёқ шишиши учун восита",
     "BAT Toshkent", "БАТ Тошкент",
     "BAT Samarqand", "БАТ Самарқанд",
     "BAT Buxoro", "БАТ Бухоро",
-    "BAT Farg‘ona", "БАТ Фарғона",
+    "BAT Farg'ona", "БАТ Фарғона",
     "BAT Andijon", "БАТ Андижон",
     "BAT Namangan", "БАТ Наманган",
-    "biologik faol qo‘shimcha O‘zbekiston", "биологик фаол қўшимча Ўзбекистонда",
-    "sifatli BAT O‘zbekistonda", "сифатli БАТ Ўзбекистонда",
+    "biologik faol qo'shimcha O'zbekiston", "биологик фаол қўшимча Ўзбекистонда",
+    "sifatli BAT O'zbekistonda", "сифатli БАТ Ўзбекистонда",
 
     // ➕ Requested RU queries (verbatim)
     "био активные добавки",
@@ -162,29 +157,24 @@ export async function generateMetadata(): Promise<Metadata> {
     yandex: "aef60ba7c050b521",
   },
   openGraph: {
-  title: titles[lang],
-  description: descriptions[lang],
-  url: `https://nutva.uz/${lang}`,
+    title: content.title,
+    description: content.description,
+    url: localizedUrls[lang],
     siteName: "Nutva Pharm",
     images: [{ url: "https://nutva.uz/seo_banner.jpg", width: 1200, height: 630, alt: "Nutva Pharm" }],
     type: "website",
     locale: ogLocale,
-    alternateLocale: ["uz_UZ", "ru_RU", "en_US"].filter((l) => l !== ogLocale),
+    alternateLocale: alternateLocales,
   },
   twitter: {
     card: "summary_large_image",
-  title: titles[lang],
-  description: descriptions[lang],
+    title: content.title,
+    description: content.description,
     images: ["https://nutva.uz/seo_banner.jpg"],
   },
   alternates: {
-    canonical: `https://nutva.uz/${lang}`,
-    languages: {
-      uz: "https://nutva.uz/uz",
-      ru: "https://nutva.uz/ru",
-      en: "https://nutva.uz/en",
-      "x-default": "https://nutva.uz/uz",
-    },
+    canonical: localizedUrls[lang],
+    languages: localizedUrls,
   },
   icons: {
     icon: "/favicon.ico?v=2",
@@ -196,12 +186,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // Resolve lang on server from cookie; fallback to uz
-  const cookieStore = await cookies();
-  const h = await headers();
-  const headerLang = h.get("x-lang")?.toLowerCase();
-  const cookieLang = cookieStore.get("lang")?.value?.toLowerCase();
-  const candidate = headerLang || cookieLang || "uz";
-  const lang = (["uz", "ru", "en"].includes(candidate) ? candidate : "uz") as "uz" | "ru" | "en";
+  const lang = await resolveLang();
   return (
     <html lang={lang} suppressHydrationWarning>
       <head>

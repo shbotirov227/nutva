@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import type { Metadata, Viewport } from "next";
-import { cookies, headers } from "next/headers";
 import Container from "@/components/Container";
 import type { GetOneBlogType } from "@/types/blogs/getOneBlog";
 import BlogDetail from "./BlogDetail";
+import { resolveLang, getOgLocale, getAlternateLocales, buildLocalizedUrls, type Lang } from "@/lib/langUtils";
 import { cache } from "react";
 
 // Support async params in newer Next
@@ -11,8 +11,6 @@ type MaybePromise<T> = T | Promise<T>;
 type Props = {
   params: MaybePromise<{ id: string }>;
 };
-
-type Lang = "uz" | "ru" | "en";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://nutva.uz";
 const ABS = (path: string) => new URL(path, SITE_URL).toString();
@@ -32,15 +30,6 @@ function ytIdFromUrl(u: string): string | null {
     }
   } catch {}
   return null;
-}
-
-async function resolveLang(): Promise<Lang> {
-  const c = await cookies();
-  const h = await headers();
-  const fromCookie = c.get("lang")?.value?.toLowerCase();
-  const fromHeader = h.get("x-lang")?.toLowerCase();
-  const cand = (fromCookie || fromHeader || "uz") as Lang;
-  return (["uz", "ru", "en"].includes(cand) ? cand : "uz") as Lang;
 }
 
 const getBlog = cache(async (id: string, lang: Lang): Promise<GetOneBlogType> => {
@@ -101,14 +90,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           })()
         : undefined;
 
-    // Canonical + alternates (hreflang)
-    const pagePath = `/${lang}/blog/${id}`;
-    const canonical = ABS(pagePath);
-    const alternatesLanguages: Record<string, string> = {
-      uz: ABS(`/uz/blog/${id}`),
-      ru: ABS(`/ru/blog/${id}`),
-      en: ABS(`/en/blog/${id}`),
-    };
+    // Use the new language utilities
+    const ogLocale = getOgLocale(lang);
+    const alternateLocales = getAlternateLocales(lang);
+    const localizedUrls = buildLocalizedUrls(`/blog/${id}`);
 
     const plainText = (post.content ? post.content.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim() : "");
     const description = post.metaDescription || plainText.slice(0, 160);
@@ -131,8 +116,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         .filter(Boolean),
 
       alternates: {
-        canonical,
-        languages: alternatesLanguages,
+        canonical: localizedUrls[lang],
+        languages: localizedUrls,
       },
 
       // Robots
@@ -146,8 +131,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       openGraph: {
         type: "article",
         siteName: "Nutva",
-        locale: lang === "ru" ? "ru_RU" : lang === "en" ? "en_US" : "uz_UZ",
-        url: canonical,
+        locale: ogLocale,
+        alternateLocale: alternateLocales,
+        url: localizedUrls[lang],
         title: post.metaTitle || post.title,
         description,
         images: ogImages,

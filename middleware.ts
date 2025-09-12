@@ -75,9 +75,10 @@ export default function middleware(req: NextRequest) {
       const rest = localeMatch[2] ? `/${localeMatch[2]}` : "/";
       const rewriteUrl = req.nextUrl.clone();
       rewriteUrl.pathname = rest;
-      // Forward locale to the rewritten request so SSR picks it immediately
+      // Forward locale AND original pathname to the rewritten request so SSR picks it immediately
       const requestHeaders = new Headers(req.headers);
       requestHeaders.set("x-lang", currentLocale);
+      requestHeaders.set("x-pathname", pathname); // Add original pathname for lang detection
       const res = NextResponse.rewrite(rewriteUrl, { request: { headers: requestHeaders } });
       // Keep cookie in sync
       res.cookies.set("lang", currentLocale, { path: "/", maxAge: 60 * 60 * 24 * 365 });
