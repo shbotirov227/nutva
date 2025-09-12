@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import Image, { type StaticImageData } from "next/image";
 import { Building, Eye, Download, Award, Shield } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import Link from "next/link";
 
 interface Certificate {
   id: number;
@@ -122,15 +121,33 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
 
           {/* Enhanced Actions */}
           <div className="flex gap-3 pt-2">
-            <Button
-              onClick={() => setOpen(true)}
-              variant="outline"
-              size="sm"
-              className="flex-1 bg-gradient-to-r from-[#51FFAE] to-[#6DB19E] text-white border-0 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
-            >
-              <Eye className="w-4 h-4 mr-2" />
-              {t("certificates.view")}
-            </Button>
+            {isPdf ? (
+              <a
+                href={imageSrc}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1"
+              >
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full bg-gradient-to-r from-[#51FFAE] to-[#6DB19E] text-white border-0 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+                >
+                  <Eye className="w-4 h-4 mr-2" />
+                  {t("certificates.view")}
+                </Button>
+              </a>
+            ) : (
+              <Button
+                onClick={() => setOpen(true)}
+                variant="outline"
+                size="sm"
+                className="flex-1 bg-gradient-to-r from-[#51FFAE] to-[#6DB19E] text-white border-0 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+              >
+                <Eye className="w-4 h-4 mr-2" />
+                {t("certificates.view")}
+              </Button>
+            )}
 
             <a
               href={imageSrc}
@@ -150,8 +167,8 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
             </a>
           </div>
 
-          {/* Lightweight Modal */}
-          {open && (
+          {/* Lightweight Modal - Only for non-PDF files */}
+          {open && !isPdf && (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
               <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setOpen(false)} />
               <div className="relative z-10 max-w-5xl w-full max-h-[90vh] bg-white rounded-xl shadow-2xl overflow-hidden border">
@@ -171,29 +188,15 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
                   </Button>
 
                 </div>
-                {isPdf ? (
-                  <div className="p-0">
-                    <object data={imageSrc} type="application/pdf" className="w-full h-[80vh]" aria-label={displayTitle}>
-                      <div className="p-6 text-center text-sm text-slate-600">
-                        {t("certificates.pdfFallback")}
-                        <Link href={imageSrc} target="_blank" rel="noopener noreferrer" className="text-emerald-700 underline">
-                          {t("certificates.openInNewTab")}
-                        </Link>
-                        .
-                      </div>
-                    </object>
-                  </div>
-                ) : (
-                  <div className="p-4 overflow-auto">
-                    <Image
-                      src={imageSrc}
-                      alt={displayTitle}
-                      width={1600}
-                      height={1200}
-                      className="w-full h-auto rounded-lg object-contain"
-                    />
-                  </div>
-                )}
+                <div className="p-4 overflow-auto">
+                  <Image
+                    src={imageSrc}
+                    alt={displayTitle}
+                    width={1600}
+                    height={1200}
+                    className="w-full h-auto rounded-lg object-contain"
+                  />
+                </div>
               </div>
             </div>
           )}
