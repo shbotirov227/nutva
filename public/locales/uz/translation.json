@@ -87,13 +87,15 @@
     "blog": {
         "date": "Sana",
         "search": "Qidirish...",
+        "selectDate": "Sanani tanlang",
         "mostViews": "Eng ko'p ko'rilganlar",
         "clearFilter": "Filtrni tozalash",
         "noResults": "Natija topilmadi",
         "loadMore": "Ko'proq yuklash",
     "noBlogs": "Yangiliklar mavjud emas",
     "popular": "Mashhur yangiliklar",
-    "latest": "So'nggi yangiliklar"
+    "latest": "So'nggi yangiliklar",
+    "subtitle": "Sog'liq va salomatlik haqida so'nggi ma'lumotlar"
     },
 
     "product": {

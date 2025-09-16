@@ -87,13 +87,15 @@
     "blog": {
         "date": "Date",
         "search": "Search...",
+        "selectDate": "Select date",
         "mostViews": "Most Views",
         "clearFilter": "Clear Filter",
         "noResults": "No results found",
         "loadMore": "Load More",
     "noBlogs": "No news available",
     "popular": "Popular news",
-    "latest": "Latest news"
+    "latest": "Latest news",
+    "subtitle": "Latest news about health and wellness"
     },
 
     "product": {

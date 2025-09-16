@@ -9,7 +9,6 @@ import BlogCard from "@/components/BlogCard";
 import Container from "@/components/Container";
 import FilterBar from "@/components/FilterBar";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowDown } from "lucide-react";
 import { apiClient } from "@/lib/apiClient";
 // import EmptyCartImg from "@/assets/images/empty-cart-img.png";
@@ -65,8 +64,18 @@ export default function BlogClient() {
   if (!mounted) return null;
 
   return (
-    <div className="pt-32 pb-25">
+    <div className="pt-32 pb-20">
       <Container>
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+            {t("common.blogs", "Yangiliklar")}
+          </h1>
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            {t("blog.subtitle", "Sog'liq va salomatlik haqida so'nggi ma'lumotlar")}
+          </p>
+        </div>
+
         <FilterBar
           search={search}
           setSearch={setSearch}
@@ -76,30 +85,40 @@ export default function BlogClient() {
           setSelectedCats={setSelectedCats}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
           {isLoading ? (
             Array.from({ length: 6 }).map((_, idx) => (
               <div
                 key={idx}
-                className="w-full h-[300px] rounded-xl flex flex-col gap-4 p-4 bg-gray-200"
+                className="w-full rounded-2xl bg-white border border-gray-100 shadow-sm overflow-hidden animate-pulse"
               >
-                <Skeleton className="w-full h-[180px] rounded-md" />
-                <Skeleton className="w-3/4 h-6" />
-                <Skeleton className="w-full h-4" />
-                <Skeleton className="w-5/6 h-4" />
+                <div className="aspect-[16/9] bg-gray-200" />
+                <div className="p-6 space-y-4">
+                  <div className="h-6 bg-gray-200 rounded w-3/4" />
+                  <div className="space-y-2">
+                    <div className="h-4 bg-gray-200 rounded" />
+                    <div className="h-4 bg-gray-200 rounded w-5/6" />
+                    <div className="h-4 bg-gray-200 rounded w-2/3" />
+                  </div>
+                  <div className="h-10 bg-gray-200 rounded-xl w-28 mt-6" />
+                </div>
               </div>
             ))
           ) : (
             <AnimatePresence mode="popLayout">
-              {filteredBlogs.map((blog) => (
+              {filteredBlogs.map((blog, index) => (
                 <motion.div
                   key={blog.id}
                   layout
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="w-full rounded-xl flex flex-col gap-4 px-5"
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ 
+                    duration: 0.4, 
+                    delay: index * 0.05,
+                    ease: "easeOut" 
+                  }}
+                  className="w-full"
                 >
                   <BlogCard
                     id={blog.id}
@@ -114,33 +133,56 @@ export default function BlogClient() {
           )}
         </div>
 
-        {/* <div className="text-center text-gray-500 my-10">
-            {t("blog.noBlogs")}
-          </div> */}
+        {/* Empty State */}
         {!filteredBlogs.length && !isLoading && (
-
-          <div>
-            <Image
-              src={EmptyCartImg}
-              alt="No image"
-              width={0}
-              height={0}
-              sizes="100vw"
-              className="w-full m-auto max-w-[350px] h-full object-contain rounded-xl border shadow-none border-none"
-            />
-            <p className="text-muted-foreground text-xl text-center mt-10">{t("blog.noBlogs")}</p>
-          </div>
+          <motion.div 
+            className="text-center py-20"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <div className="max-w-md mx-auto">
+              <Image
+                src={EmptyCartImg}
+                alt="No results found"
+                width={300}
+                height={200}
+                className="mx-auto mb-8 opacity-75"
+              />
+              <h3 className="text-2xl font-semibold text-gray-900 mb-3">
+                {t("blog.noBlogs", "Yangiliklar topilmadi")}
+              </h3>
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                Boshqa kalit so&apos;z bilan qidiring yoki filtrlarni tozalang.
+              </p>
+              {(search || selectedDate || selectedCats.length > 0) && (
+                <Button
+                  onClick={() => {
+                    setSearch("");
+                    setSelectedDate(undefined);
+                    setSelectedCats([]);
+                  }}
+                  className="bg-emerald-600 hover:bg-emerald-700 px-8 py-3 rounded-xl font-semibold"
+                >
+                  Filtrlarni tozalash
+                </Button>
+              )}
+            </div>
+          </motion.div>
         )}
 
+        {/* Load More Button */}
         {filteredBlogs.length > 0 && filteredBlogs.length < blogs.length && (
-          <Button
-            onClick={() => setVisibleCount((prev) => prev + 6)}
-            size="lg"
-            className="my-10 mx-auto  flex gap-2 bg-[#218A4F] text-white hover:bg-[#365343]"
-          >
-            <ArrowDown size={20} />
-            {t("blog.loadMore")}
-          </Button>
+          <div className="text-center mt-16">
+            <Button
+              onClick={() => setVisibleCount((prev) => prev + 6)}
+              size="lg"
+              className="px-10 py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+            >
+              <ArrowDown className="w-5 h-5 mr-3" />
+              {t("blog.loadMore", "Ko&apos;proq yuklash")}
+            </Button>
+          </div>
         )}
       </Container>
     </div>
