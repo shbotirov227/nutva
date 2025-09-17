@@ -10,10 +10,11 @@ const Layout = ({ children }: { children: ReactNode }) => {
 	const pathname = usePathname();
 
 	const isAdminRoute = pathname.startsWith("/admin") || pathname.startsWith("/login");
+	const isTaplinksRoute = pathname.startsWith("/taplinks");
 
 	return (
 		<div className="flex flex-col min-h-screen">
-			{!isAdminRoute && <Header />}
+			{!isAdminRoute && !isTaplinksRoute && <Header />}
 
 			<AnimatePresence mode="wait">
 				<motion.main
@@ -28,7 +29,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
 				</motion.main>
 			</AnimatePresence>
 
-			{!isAdminRoute && <Footer />}
+			{!isAdminRoute && !isTaplinksRoute && <Footer />}
 		</div>
 	);
 };
