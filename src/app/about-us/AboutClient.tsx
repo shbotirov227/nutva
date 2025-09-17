@@ -24,16 +24,16 @@ export default function AboutClient() {
   }));
 
   return (
-    <section className="bg-[#BEE1B5] py-20 px-4">
+    <section className="pt-32 pb-20 px-4" style={{ backgroundColor: '#DCFCE8' }}>
       <Container>
         <div className="max-w-6xl mx-auto !mb-0">
           {/* One H1 only */}
           <div className="grid md:grid-cols-2 gap-10 items-center mb-14">
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold text-[#1A3929] mb-3 text-center md:text-left">
+              <h1 className="text-2xl md:text-3xl font-bold text-emerald-900 mb-3 text-center md:text-left">
                 {t("aboutUs.title")}
               </h1>
-              <p className="text-sm md:text-base text-[#1A3929] text-center md:text-left">
+              <p className="text-sm md:text-base text-emerald-700/80 text-center md:text-left">
                 {t("aboutUs.subtitle")} <br />
                 <strong className="text-[20px] md:text-[24px]"></strong> {t("aboutBrand.text")}
               </p>
@@ -52,7 +52,7 @@ export default function AboutClient() {
 
           <div className="text-center mb-14">
             <ContactFormModal>
-              <Button className="w-full md:w-[634px] h-[58px] bg-[#267A41] hover:bg-[#1F6335] text-white px-6 py-3 rounded-xl text-lg md:text-2xl cursor-pointer">
+              <Button className="w-full md:w-[634px] h-[58px] bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl text-lg md:text-2xl cursor-pointer">
                 {t("button.freeConsultation")}
               </Button>
             </ContactFormModal>
@@ -60,17 +60,17 @@ export default function AboutClient() {
 
           {/* Why choose */}
           <div className="max-w-6xl mx-auto mt-[60px] px-4 md:px-6">
-            <p className="text-xs md:text-sm uppercase tracking-widest text-[#1A3929] text-center md:text-left">
+            <p className="text-xs md:text-sm uppercase tracking-widest text-emerald-900 text-center md:text-left">
               {t("about.features")}
             </p>
-            <h2 className="text-xl md:text-2xl font-semibold text-[#1A3929] mb-10 text-center md:text-left">
+            <h2 className="text-xl md:text-2xl font-semibold text-emerald-900 mb-10 text-center md:text-left">
               {t("about.whyChoose")}
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
               <div className="relative space-y-4">
                 <div
-                  className="absolute left-0 w-[4px] h-6 bg-[#1A3929] rounded transition-all duration-300"
+                  className="absolute left-0 w-[4px] h-6 bg-emerald-900 rounded transition-all duration-300"
                   style={{ top: `${selectedFeature * 2.5}rem` }}
                 />
                 {features.map((feature, index) => {
@@ -80,7 +80,7 @@ export default function AboutClient() {
                       key={index}
                       onClick={() => setSelectedFeature(index)}
                       className={cn(
-                        "pl-4 relative w-full text-left text-[#1A3929] text-sm md:text-base cursor-pointer transition-all duration-150 ease-in-out",
+                        "pl-4 relative w-full text-left text-emerald-900 text-sm md:text-base cursor-pointer transition-all duration-150 ease-in-out",
                         isActive ? "font-bold scale-105 ml-1" : "font-normal scale-100"
                       )}
                     >
@@ -89,7 +89,7 @@ export default function AboutClient() {
                   );
                 })}
               </div>
-              <div className="md:col-span-2 text-[#1A3929]">
+              <div className="md:col-span-2 text-emerald-900">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={selectedFeature}
@@ -118,7 +118,7 @@ export default function AboutClient() {
           </div>
 
           {/* FAQ */}
-          <h2 className="text-xl md:text-2xl font-bold text-[#1A3929] text-center my-10">
+          <h2 className="text-xl md:text-2xl font-bold text-emerald-900 text-center my-10">
             {t("about.faqTitle")}
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
@@ -133,11 +133,11 @@ export default function AboutClient() {
                   className="w-full"
                   key={itemValue}
                 >
-                  <AccordionItem value={itemValue} className="bg-white rounded-lg shadow-sm">
-                    <AccordionTrigger className="text-left bg-[#267A41] hover:bg-[#1F6335] text-white px-4 py-4 md:py-6 text-sm md:text-base cursor-pointer">
+                  <AccordionItem value={itemValue} className="bg-white rounded-lg shadow-sm border border-green-100">
+                    <AccordionTrigger className="text-left bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-4 md:py-6 text-sm md:text-base cursor-pointer">
                       {t(`about.faq.title.${index + 1}`)}
                     </AccordionTrigger>
-                    <AccordionContent className="text-[#1A3929] p-6 text-sm md:text-base">
+                    <AccordionContent className="text-emerald-900 p-6 text-sm md:text-base">
                       {t(`about.faq.content.${index + 1}`)}
                     </AccordionContent>
                   </AccordionItem>

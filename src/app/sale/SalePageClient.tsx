@@ -160,17 +160,17 @@ const SalePageClient: React.FC = () => {
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3 }}
           className="w-full rounded-xl flex flex-col gap-4"
+          style={{ backgroundColor: '#DCFCE8', minHeight: '100vh' }}
         >
           <Container className="pt-32 pb-25">
             <div className="flex max-md:flex-col items-center justify-between text-center">
               <div className="w-[55%] max-md:w-full flex flex-col items-center justify-center">
                 <h1
-                  className="text-6xl max-md:text-4xl font-bold mb-5"
-                  style={{ color }}
+                  className="text-6xl max-md:text-4xl font-bold mb-5 text-emerald-900"
                 >
                   {t("sale.title")}
                 </h1>
-                <p className="text-3xl max-md:text-2xl" style={{ color }}>
+                <p className="text-3xl max-md:text-2xl text-emerald-700/80">
                   {t("sale.subtitle")}
                 </p>
               </div>
@@ -183,8 +183,8 @@ const SalePageClient: React.FC = () => {
             <PriceTable color={color} />
 
             <section
-              className="w-full mx-auto my-10 rounded-2xl font-semibold p-15 text-white bg-[#0FB759AB] border-2"
-              style={{ borderColor: color }}
+              className="w-full mx-auto my-10 rounded-2xl font-semibold p-15 text-white bg-white border-2 shadow-lg"
+              style={{ borderColor: color, background: 'linear-gradient(135deg, #10b981, #059669)' }}
             >
               <p className="text-2xl text-center mb-2">{t("sale.special_offers")}</p>
               <p className="text-2xl text-center mb-2">{t("sale.buy_more_save_more")}</p>
@@ -196,26 +196,25 @@ const SalePageClient: React.FC = () => {
             </section>
 
             <section className="w-full mx-auto mt-10">
-              <h4 className="text-3xl font-bold text-center mb-5" style={{ color }}>
+              <h4 className="text-3xl font-bold text-center mb-5 text-emerald-900">
                 {t("sale.discount_examples")}
               </h4>
 
               {productsDataThree.map((item, index) => (
                 <div
                   key={index}
-                  className="w-full mx-auto my-10 bg-white rounded-2xl shadow-lg border-2 overflow-hidden"
-                  style={{ borderColor: color }}
+                  className="w-full mx-auto my-10 bg-white rounded-2xl shadow-lg border border-green-200 overflow-hidden"
                 >
                   <li
-                    className="text-xl font-bold bg-[#0FB759AB] px-5 py-7 text-white !list-disc"
-                    style={{ color }}
+                    className="text-xl font-bold px-5 py-7 text-white !list-disc"
+                    style={{ background: 'linear-gradient(135deg, #10b981, #059669)' }}
                   >
                     {item.title}
                   </li>
 
                   <div className="grid gap-6 p-5 grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-[60%_40%] items-center">
                     <div>
-                      <h4 className="text-lg font-bold my-4" style={{ color }}>
+                      <h4 className="text-lg font-bold my-4 text-emerald-900">
                         {t("sale.table.products_label")}
                       </h4>
                       <div
@@ -262,31 +261,33 @@ const SalePageClient: React.FC = () => {
             </section>
 
             <div
-              className="w-full mx-auto my-15 bg-white rounded-2xl shadow-lg border-2 overflow-hidden"
-              style={{ borderColor: color }}
+              className="w-full mx-auto my-15 bg-white rounded-2xl shadow-lg border border-green-200 overflow-hidden"
             >
-              <h2 className="text-xl font-bold bg-[#0FB759AB] text-center px-5 py-7 text-white">
+              <h2 
+                className="text-xl font-bold text-center px-5 py-7 text-white"
+                style={{ background: 'linear-gradient(135deg, #10b981, #059669)' }}
+              >
                 {t("sale.how_discounts_work")}
               </h2>
 
               <div className="flex flex-col lg:flex-row justify-center gap-7 p-7">
-                <div className="flex items-center rounded-2xl p-5 bg-[#32BF6833]">
+                <div className="flex items-center rounded-2xl p-5 bg-white shadow-md border border-green-100">
                   <Image src={CheckedIcon} alt="Checked icon" className="inline-block mr-4 size-6" />
-                  <p className="text-lg font-semibold text-gray-700" style={{ color }}>
+                  <p className="text-lg font-semibold text-emerald-900">
                     {t("sale.step_1")}
                   </p>
                 </div>
 
-                <div className="flex items-center rounded-2xl p-5 bg-[#32BF6833]">
+                <div className="flex items-center rounded-2xl p-5 bg-white shadow-md border border-green-100">
                   <Image src={CheckedIcon} alt="Checked icon" className="inline-block mr-4 size-6" />
-                  <p className="text-lg font-semibold text-gray-700" style={{ color }}>
+                  <p className="text-lg font-semibold text-emerald-900">
                     {t("sale.step_2")}
                   </p>
                 </div>
 
-                <div className="flex items-center rounded-2xl p-5 bg-[#32BF6833]">
+                <div className="flex items-center rounded-2xl p-5 bg-white shadow-md border border-green-100">
                   <Image src={CheckedIcon} alt="Checked icon" className="inline-block mr-4 size-6" />
-                  <p className="text-lg font-semibold text-gray-700" style={{ color }}>
+                  <p className="text-lg font-semibold text-emerald-900">
                     {t("sale.step_3")}
                   </p>
                 </div>
@@ -298,7 +299,7 @@ const SalePageClient: React.FC = () => {
               <p className="text-lg font-semibold text-center">{t("sale.limited_offers")}</p>
               <Button
                 size="lg"
-                className="mx-auto mt-10 bg-white text-[#339668] hover:text-white cursor-pointer p-5"
+                className="mx-auto mt-10 bg-white text-emerald-900 hover:bg-emerald-50 hover:text-emerald-900 cursor-pointer p-5 transition-colors border border-emerald-200"
                 onClick={() => router.push(`/${lang}/product`)}
               >
                 {t("sale.start_shopping")}

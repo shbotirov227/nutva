@@ -23,6 +23,24 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/uploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+        port: "",
+        pathname: "/vi/**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.api.nutvahealth.uz",
+        port: "",
+        pathname: "/uploads/**",
+      },
+      {
+        protocol: "https",
+        hostname: "api.nutvahealth.uz",
+        port: "",
+        pathname: "/uploads/**",
+      },
     ],
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -35,14 +53,26 @@ const nextConfig: NextConfig = {
 
   // Experimental features for performance
   experimental: {
-    optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react'],
     // typedRoutes: true, // Disabled for Turbopack compatibility
     // optimizeCss: true, // Disabled due to critters dependency issue
     webVitalsAttribution: ['CLS', 'LCP'],
   },
 
+  // Modern browser target to reduce legacy JavaScript
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+    reactRemoveProperties: process.env.NODE_ENV === 'production',
+  },
+
   async headers() {
     return [
+      {
+        // Aggressive caching for Next.js build assets
+        source: "/_next/static/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
       {
         // Cache static assets
         source: "/(.*)",
@@ -65,16 +95,7 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      {
-        // Cache images, fonts, and other static assets
-        source: "/(.*)\\.(png|jpg|jpeg|gif|webp|svg|woff|woff2|ttf|eot|ico)$",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
+      // Removed duplicate static extension rule (replaced by public assets rule above)
       {
         // Cache API responses briefly
         source: "/api/(.*)",

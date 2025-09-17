@@ -3,7 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import ChatBox from "./ChatBox";
+import dynamic from "next/dynamic";
+
+// Lazy-load ChatBox (and its heavy deps like react-phone-input-2) only when needed
+const ChatBox = dynamic(() => import("./ChatBox"), { ssr: false });
 
 const FloatingButtons = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);

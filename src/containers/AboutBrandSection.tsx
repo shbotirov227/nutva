@@ -29,7 +29,8 @@ export default function AboutBrandSection() {
               alt="About Brand"
               fill
               className="object-cover rounded-xl"
-              priority
+              loading="lazy"
+              decoding="async"
             />
           </div>
 

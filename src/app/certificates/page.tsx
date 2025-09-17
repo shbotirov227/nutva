@@ -103,10 +103,10 @@ export default function CertificatesPage() {
   }, [query, category]);
 
   return (
-    <div className="relative pt-24 md:pt-28 pb-12 md:pb-20 overflow-hidden">
+    <div className="relative pt-32 pb-20 overflow-hidden" style={{ backgroundColor: '#DCFCE8' }}>
       {/* Background accent */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-emerald-50 via-white to-white" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 w-[800px] h-[800px] bg-[#51FFAE]/20 blur-3xl rounded-full opacity-50 pointer-events-none" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-emerald-50/30 via-transparent to-transparent" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 w-[800px] h-[800px] bg-emerald-400/10 blur-3xl rounded-full opacity-50 pointer-events-none" />
 
       <Container>
         {/* Hero header */}
@@ -115,10 +115,10 @@ export default function CertificatesPage() {
             <ShieldCheck className="w-4 h-4" />
             {t("certificates.badge")}
           </div>
-          <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">
+          <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-emerald-900">
             {t("certificates.heroTitle")}
           </h1>
-          <p className="mt-4 text-slate-600">
+          <p className="mt-4 text-emerald-700/80">
             {t("certificates.heroSubtitle")}
           </p>
         </div>
@@ -126,19 +126,19 @@ export default function CertificatesPage() {
         {/* Search + filters */}
         <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-emerald-600" />
             <Input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={t("certificates.searchPlaceholder") as string}
-              className="pl-10 h-12 text-base placeholder:text-slate-500 dark:placeholder:text-slate-500 border-slate-200 dark:border-slate-700 focus:border-slate-300 dark:focus:border-slate-600 bg-white dark:bg-slate-900 focus:ring-0"
+              className="pl-10 h-12 text-base placeholder:text-emerald-500 border-green-200 focus:border-emerald-300 bg-white focus:ring-0"
             />
           </div>
 
           <Tabs value={category} onValueChange={(v) => setCategory(v as (typeof CATEGORIES)[number])} className="w-full sm:w-auto">
             <TabsList className="flex flex-wrap gap-2 bg-transparent p-0">
               {CATEGORIES.map((cat) => (
-                <TabsTrigger key={cat} value={cat} className="data-[state=active]:bg-slate-900 data-[state=active]:text-white cursor-pointer transition-all duration-300">
+                <TabsTrigger key={cat} value={cat} className="data-[state=active]:bg-emerald-600 data-[state=active]:text-white cursor-pointer transition-all duration-300 text-emerald-900 hover:bg-emerald-50">
                   {cat === "Все"
                     ? t("certificates.categories.all")
                     : cat === "Документация"
@@ -158,11 +158,11 @@ export default function CertificatesPage() {
         </div>
 
         {/* Results meta */}
-        <div className="mt-3 md:mt-4 text-sm text-slate-500 flex items-center gap-3">
+        <div className="mt-3 md:mt-4 text-sm text-emerald-700 flex items-center gap-3">
           <Badge variant="secondary" className="bg-emerald-100 text-emerald-700 border-emerald-200">
             {t("certificates.found", { count: filtered.length })}
           </Badge>
-          {query && <span>{t("certificates.forQuery", { query })}</span>}
+          {query && <span className="text-emerald-600">{t("certificates.forQuery", { query })}</span>}
         </div>
 
         {/* Grid */}

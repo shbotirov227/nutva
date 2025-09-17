@@ -6,6 +6,7 @@ import Script from "next/script";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
+import { Inter } from "next/font/google";
 
 import { QueryProvider } from "@/providers/queryProvider";
 import { LangProvider } from "@/context/LangContext";
@@ -21,7 +22,8 @@ import FloatingButtons from "@/components/FloatingButtons";
 import { WebVitals } from "@/components/WebVitals";
 import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistration";
 
-// Fonts are provided via system fallbacks in globals.css to avoid external fetches
+// Load Inter via next/font for zero layout shift and no render-blocking
+const inter = Inter({ subsets: ["latin", "cyrillic"], display: "swap", variable: "--font-inter" });
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -188,27 +190,26 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // Resolve lang on server from cookie; fallback to uz
   const lang = await resolveLang();
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html lang={lang} suppressHydrationWarning className={inter.variable}>
       <head>
         {/* Critical resource preloading for performance */}
-        <link
-          rel="preload"
-          href="/hero-bg2.webp"
-          as="image"
-          type="image/webp"
-        />
         <link
           rel="preload"
           href="/header-nutva-logo.png"
           as="image"
           type="image/png"
+          fetchPriority="high"
         />
         
-        {/* DNS prefetch for external domains */}
-        <link rel="dns-prefetch" href="//nutva.uz" />
-        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+        {/* Critical preconnect hints (max 4) */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://nutva.uz" />
+        
+        {/* DNS prefetch for less critical domains */}
         <link rel="dns-prefetch" href="//connect.facebook.net" />
         <link rel="dns-prefetch" href="//mc.yandex.ru" />
+        <link rel="dns-prefetch" href="//i.ytimg.com" />
+        <link rel="dns-prefetch" href="//googleads.g.doubleclick.net" />
         
         {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />
@@ -217,11 +218,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Nutva Pharm" />
         
-        {/* GTM head tag */}
-        <Script id="ga4-src" src="https://www.googletagmanager.com/gtag/js?id=G-E1CNZ3JV1T" strategy="afterInteractive" />
+        {/* Analytics Scripts - Deferred for Performance */}
+        <Script id="ga4-src" src="https://www.googletagmanager.com/gtag/js?id=G-E1CNZ3JV1T" strategy="lazyOnload" />
         <Script
           id="ga4-init"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -255,26 +256,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           fbq('track', 'PageView');`}
         </Script>
 
-        {/* Facebook Pixel */}
-        <Script
-          id="fb-pixel"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              !function(f,b,e,v,n,t,s)
-              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
-              s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
-              (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '766139842501655'); 
-              fbq('track', 'PageView');
-            `,
-          }}
-        />
-
-        {/* Yandex Metrika – optimized loading */}
+        {/* Yandex Metrika - Deferred */}
         <Script id="ym-src" src="https://mc.yandex.ru/metrika/tag.js" strategy="lazyOnload" />
         <Script
           id="ym-init"

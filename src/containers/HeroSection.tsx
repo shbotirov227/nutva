@@ -34,12 +34,19 @@ const HeroSection = () => {
 
   return (
     <div className="relative min-h-[calc(100svh-56px)] pt-[56px]">
-      {/* Global background */}
-      <div
-        className="absolute inset-0 -z-30 bg-cover bg-center md:bg-[position:62%_center] brightness-75 transform-gpu origin-center will-change-transform scale-[1.08]"
-        style={{ backgroundImage: `url(/hero-bg2.webp)` }}
-        aria-hidden
-      />
+      {/* Optimized global background using next/image instead of CSS background */}
+      <div className="absolute inset-0 -z-30 brightness-75">
+        <Image
+          src="/hero-bg2.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          priority={false}
+          loading="lazy"
+          decoding="async"
+          className="object-cover md:object-[62%_center] scale-[1.08]"
+        />
+      </div>
       {/* Background dark overlay (soft) */}
       <div className="absolute inset-0 -z-10 bg-black/15" aria-hidden />
       {/* Subtle radial glow (behind overlay for balanced contrast) */}
@@ -118,11 +125,12 @@ const HeroSection = () => {
                           alt={item?.title ? `${item.title} — banner` : `banner-${idx + 1}`}
                           width={640}
                           height={640}
-              sizes="(max-width: 768px) 65vw, 30vw"
+                          sizes="(max-width: 768px) 65vw, 30vw"
                           priority={idx === 0}
                           loading={idx === 0 ? "eager" : "lazy"}
                           decoding="async"
-              className={`w-[54vw] max-w-[420px] md:max-w-[480px] h-auto object-contain drop-shadow-2xl md:translate-y-1 ${cardOnRight ? "md:translate-x-6" : "md:-translate-x-2"}`}
+                          fetchPriority={idx === 0 ? "high" : "low"}
+                          className={`w-[54vw] max-w-[420px] md:max-w-[480px] h-auto object-contain drop-shadow-2xl md:translate-y-1 ${cardOnRight ? "md:translate-x-6" : "md:-translate-x-2"}`}
                         />
                       ) : (
                         <div className="h-64 w-64 md:h-80 md:w-80 rounded-2xl bg-white/10" />

@@ -146,6 +146,7 @@ const Header: React.FC = () => {
                 height={40}
                 className="inline-block mr-2 w-[120px] h-auto"
                 priority
+                fetchPriority="high"
               />
             </Link>
             <nav className="hidden md:flex mt-2 items-center">
@@ -215,6 +216,7 @@ const Header: React.FC = () => {
                   height={34}
                   className="w-[100px] h-auto"
                   priority
+                  fetchPriority="high"
                 />
               </Link>
               <Button
