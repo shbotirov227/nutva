@@ -4,9 +4,20 @@
 export function normalizeImageUrl(url: string): string {
   if (!url) return url;
   
-  // Convert HTTP to HTTPS for nutva.uz domain
-  if (url.startsWith('http://nutva.uz')) {
-    return url.replace('http://', 'https://');
+  // Convert HTTP to HTTPS for known Nutva domains to avoid mixed-content blocks
+  const upgradeHosts = [
+    'nutva.uz',
+    'api.nutvahealth.uz',
+    'www.api.nutvahealth.uz',
+  ];
+  try {
+    const u = new URL(url, 'https://nutva.uz');
+    if (u.protocol === 'http:' && upgradeHosts.includes(u.hostname)) {
+      u.protocol = 'https:';
+      return u.toString();
+    }
+  } catch {
+    // if URL constructor fails (e.g., relative path), return as-is
   }
   
   // Keep other URLs as is

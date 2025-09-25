@@ -6,6 +6,7 @@ import Image from "next/image";
 import Container from "@/components/Container";
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/lib/apiClient";
+import { normalizeImageUrl } from "@/lib/imageUtils";
 // import { GetAllBannerType } from "@/types/banner/getAllBanner";
 import { useLang } from "@/context/LangContext";
 
@@ -76,7 +77,7 @@ const HeroSection = () => {
         >
           {localized.map((item: any, idx: number) => {
             const images: string[] = Array.isArray(item?.imageUrls) ? item.imageUrls : [];
-            const mainImage = images[0];
+            const mainImage = normalizeImageUrl(images[0]);
             const hasLink = Boolean(item?.link);
             const isExternal = hasLink && /^https?:\/\//.test(item.link);
             // Default: place text card on the right for all slides on desktop.
@@ -130,6 +131,12 @@ const HeroSection = () => {
                           loading={idx === 0 ? "eager" : "lazy"}
                           decoding="async"
                           fetchPriority={idx === 0 ? "high" : "low"}
+                          // Bypass Next Image Optimizer to avoid 504 from remote hosts
+                          unoptimized
+                          onError={(e) => {
+                            // Graceful fallback to local placeholder if remote image fails
+                            (e.currentTarget as HTMLImageElement).src = "/seo_banner.jpg";
+                          }}
                           className={`w-[54vw] max-w-[420px] md:max-w-[480px] h-auto object-contain drop-shadow-2xl md:translate-y-1 ${cardOnRight ? "md:translate-x-6" : "md:-translate-x-2"}`}
                         />
                       ) : (
