@@ -529,8 +529,8 @@
     "chat": {
         "title": "Chat",
         "aiChat": "AI bilan suhbat",
-        "operatorChat": "Operator bilan suhbat",
-        "connectToOperator": "Operator bilan bog'lanish",
+        "operatorChat": "Mutaxassis bilan suhbat",
+        "connectToOperator": "Mutaxassis bilan bog'lanish",
         "connectToAI": "AI bilan bog'lanish",
         "startChat": "Chatni boshlash",
         "connecting": "Ulanmoqda...",

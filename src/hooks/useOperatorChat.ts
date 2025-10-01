@@ -124,7 +124,7 @@ export function useOperatorChat(enabled: boolean) {
         // && !messages.some(m => m.from === "operator" && m.text.includes(adminName))
       ) {
         // const greeting = `Assalomu aleykum, mening ismim ${adminName}. Sizga qanday yordam bera olaman?`;
-        const greeting = "Assalomu aleykum, men Nutva mutaxasisiman. Sizga qanday yordam bera olaman ?"
+        const greeting = "Assalomu aleykum, men Nutva mutaxassisiman. Sizga qanday yordam bera olaman ?"
         const greetingMessage: Message = {
           from: "operator",
           text: greeting,
