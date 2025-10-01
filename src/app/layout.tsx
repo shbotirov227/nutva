@@ -21,6 +21,7 @@ import BuyModalContainerDynamic from "@/components/BuyModalContainerDynamic";
 import FloatingButtons from "@/components/FloatingButtons";
 import { WebVitals } from "@/components/WebVitals";
 import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistration";
+// import { t } from "i18next";
 
 // Load Inter via next/font for zero layout shift and no render-blocking
 const inter = Inter({ subsets: ["latin", "cyrillic"], display: "swap", variable: "--font-inter" });
