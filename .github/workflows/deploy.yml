@@ -21,11 +21,21 @@ jobs:
       - name: Deploy via SSH
         run: |
           ssh -p 2245 -o StrictHostKeyChecking=no ntva@demo.nutva.uz << 'EOF'
-            cd ~/nutva &&
-            git fetch origin master &&
-            git checkout master &&
-            git pull origin master &&
-            npm install &&
-            npm run build &&
-            pm2 reload nutva --update-env || pm2 start npm --name nutva -- run start
+            set -e  # stop on first error
+
+            cd ~/nutva
+            git fetch origin master
+            git checkout master
+            git pull origin master
+
+            npm ci --omit=dev   # cleaner than npm install
+            npm run build       # will stop script if build fails
+
+            if pm2 list | grep -q "nutva"; then
+              pm2 reload nutva --update-env
+            else
+              pm2 start npm --name nutva -- run start
+            fi
+
+            pm2 save
           EOF
