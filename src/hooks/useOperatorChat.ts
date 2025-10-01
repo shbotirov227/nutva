@@ -94,7 +94,7 @@ export function useOperatorChat(enabled: boolean) {
       setSessionClosed(false);
       greetingSentRef.current = false;
 
-      connectWebSocket(data.id, data.admin_name);
+      connectWebSocket(data.id);
       return true;
     } catch (err) {
       addSystemMessage(t("chat.serverConnectionError"));
@@ -105,7 +105,10 @@ export function useOperatorChat(enabled: boolean) {
     }
   };
 
-  const connectWebSocket = (sessionId: string, adminName: string) => {
+  const connectWebSocket = (
+    sessionId: string,
+    // adminName: string
+  ) => {
     if (socketRef.current) {
       socketRef.current.close();
     }
@@ -116,8 +119,12 @@ export function useOperatorChat(enabled: boolean) {
       setIsConnected(true);
       addSystemMessage(t("chat.connectedToSession"));
 
-      if (!greetingSentRef.current && sessionId && !messages.some(m => m.from === "operator" && m.text.includes(adminName))) {
-        const greeting = `Assalomu aleykum, mening ismim ${adminName}. Sizga qanday yordam bera olaman?`;
+      if (
+        !greetingSentRef.current && sessionId
+        // && !messages.some(m => m.from === "operator" && m.text.includes(adminName))
+      ) {
+        // const greeting = `Assalomu aleykum, mening ismim ${adminName}. Sizga qanday yordam bera olaman?`;
+        const greeting = "Assalomu aleykum, men Nutva mutaxasisiman. Sizga qanday yordam bera olaman ?"
         const greetingMessage: Message = {
           from: "operator",
           text: greeting,

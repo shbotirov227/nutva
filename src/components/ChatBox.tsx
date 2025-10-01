@@ -59,7 +59,7 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     startSession,
     isConnected,
     sessionId,
-    adminName,
+    // adminName,
     sessionClosed,
     isStartingSession,
     setMessages,
@@ -374,7 +374,8 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
       >
         <span className="text-sm font-medium">
           {operatorMode
-            ? `${t("chat.operatorChat")}${adminName ? ` - ${adminName}` : ""}`
+            ? t("chat.operatorChat")
+            // ? `${t("chat.operatorChat")}${adminName ? ` - ${adminName}` : ""}`
             : t("chat.aiChat")
           }
         </span>
