@@ -85,16 +85,19 @@ const nextConfig: NextConfig = {
             value: "on",
           },
           {
-            key: "X-Frame-Options",
-            value: "DENY",
-          },
-          {
             key: "X-Content-Type-Options",
             value: "nosniff",
           },
           {
             key: "Referrer-Policy",
             value: "origin-when-cross-origin",
+          },
+          {
+            // Allow Yandex Metrika Click Map (and only specific trusted origins) to embed the site in an iframe
+            // X-Frame-Options is removed in favor of CSP frame-ancestors
+            key: "Content-Security-Policy",
+            value:
+              "frame-ancestors 'self' https://nutva.uz https://metrika.yandex.ru https://metrika.yandex.by https://metrica.yandex.com https://metrica.yandex.com.tr https://webvisor.com https://*.webvisor.com;",
           },
         ],
       },
