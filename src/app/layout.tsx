@@ -234,6 +234,21 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           }}
         />
 
+        {/* Google Ads Conversion Tracking */}
+        <Script id="google-ads-src" src="https://www.googletagmanager.com/gtag/js?id=AW-17445920499" strategy="lazyOnload" />
+        <Script
+          id="google-ads-init"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-17445920499');
+            `,
+          }}
+        />
+
         {/* GTM head tag - optimized loading */}
         <Script id="gtm" strategy="lazyOnload">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
