@@ -218,7 +218,7 @@ export function FormModal({ children, products, btnColor }: FormModalProps) {
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="grid gap-4">
+                <form id="purchase-form" onSubmit={handleSubmit} className="grid gap-4">
                   <div className="gap-5 grid grid-cols-1">
                     <FormInputWrapper
                       error={errors.name}
