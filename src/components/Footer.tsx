@@ -41,6 +41,14 @@ const PhoneLink = ({ title, url, className }: { title: string; url: string; clas
           "transition-all delay-75 pb-1 border-b-transparent border-b-2 hover:border-b-white",
           className
         )}
+        onClick={(e) => {
+          try {
+            if (typeof window !== 'undefined' && typeof window.gtagSendEvent === 'function') {
+              e.preventDefault();
+              window.gtagSendEvent(url);
+            }
+          } catch {}
+        }}
       >
         {title}
       </Link>

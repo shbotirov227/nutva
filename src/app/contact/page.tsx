@@ -159,11 +159,32 @@ export default function ContactPage() {
         <div className="text-left space-y-4 text-[#1A3929]">
           <div>
             <p className="font-semibold mb-1 text-[#164A24]">📞 {t("form.input.phone")}:</p>
-            <Link href="tel:+998712111112" className="text-sm text-[#164A24]">
+            <Link
+              href="tel:+998712111112"
+              className="text-sm text-[#164A24]"
+              onClick={(e) => {
+                try {
+                  if (typeof window !== 'undefined' && typeof window.gtagSendEvent === 'function') {
+                    e.preventDefault();
+                    window.gtagSendEvent('tel:+998712111112');
+                  }
+                } catch {}
+              }}
+            >
               +998 71 211-11-12
             </Link>
             <p className="mt-2 text-sm text-[#164A24]">
-              <Link href="tel:1294">
+              <Link
+                href="tel:1294"
+                onClick={(e) => {
+                  try {
+                    if (typeof window !== 'undefined' && typeof window.gtagSendEvent === 'function') {
+                      e.preventDefault();
+                      window.gtagSendEvent('tel:1294');
+                    }
+                  } catch {}
+                }}
+              >
                 1294 {" "}
               </Link>
               ({t("form.shortNumber")})

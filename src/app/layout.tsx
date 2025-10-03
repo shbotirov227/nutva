@@ -217,6 +217,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
 
+        {/* Google tag (gtag.js) event - delayed navigation helper for click conversions */}
+        <Script id="ga4-delayed-nav-helper" strategy="afterInteractive">
+          {`
+            // Helper function to delay opening a URL until a gtag event is sent.
+            // Exposed globally as window.gtagSendEvent(url)
+            (function(){
+              function gtagSendEvent(url) {
+                var navigate = function () {
+                  if (typeof url === 'string') {
+                    window.location = url;
+                  }
+                };
+                try {
+                  if (typeof gtag === 'function') {
+                    // Event name kept as provided by instructions: 'tel:'
+                    gtag('event', 'tel:', {
+                      'event_callback': navigate,
+                      'event_timeout': 2000
+                    });
+                    // Fallback in case callback isn't called (network issues)
+                    setTimeout(navigate, 2100);
+                    return false;
+                  }
+                } catch (e) {}
+                // If gtag is missing, proceed immediately
+                navigate();
+                return false;
+              }
+              window.gtagSendEvent = gtagSendEvent;
+            })();
+          `}
+        </Script>
+
         {/* Google Ads Conversion */}
         <Script id="google-ads-src" src="https://www.googletagmanager.com/gtag/js?id=AW-17445920499" strategy="lazyOnload" />
         <Script

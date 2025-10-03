@@ -38,7 +38,19 @@ const FloatingButtons = () => {
         className={`fixed bottom-6 right-6 z-50 flex flex-col gap-3 transition-transform duration-300 ${visible ? "translate-x-0" : "translate-x-40"
           }`}
       >
-        <a href="tel:1294" title="Qo'ng'iroq qilish">
+        <a
+          href="tel:1294"
+          title="Qo'ng'iroq qilish"
+          onClick={(e) => {
+            try {
+              // If global helper exists, use it to delay navigation until GA event is sent
+              if (typeof window !== 'undefined' && typeof window.gtagSendEvent === 'function') {
+                e.preventDefault();
+                window.gtagSendEvent('tel:1294');
+              }
+            } catch {}
+          }}
+        >
           <Button
             variant="default"
             size="icon"
