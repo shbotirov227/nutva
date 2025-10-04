@@ -180,9 +180,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#10b981" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Nutva Pharm" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-status-bar-style" content="default" />
+        <meta name="mobile-web-app-title" content="Nutva Pharm" />
 
         {/* Google Tag Manager - GTM-WQMGD4GC (Yangi) */}
         <Script id="gtm-new" strategy="afterInteractive">
