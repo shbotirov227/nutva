@@ -81,10 +81,17 @@ interface ProductLD {
   description: string;
   image: string[];
   sku: string;
+  gtin13?: string;
   brand: { "@type": "Brand"; name: string };
   offers: OfferLD;
   aggregateRating?: AggregateRatingLD;
   review?: ReviewLD[];
+  category?: string;
+  additionalProperty?: Array<{
+    "@type": "PropertyValue";
+    name: string;
+    value: string;
+  }>;
 }
 interface BreadcrumbLD {
   "@context": "https://schema.org";
@@ -105,6 +112,7 @@ export async function generateMetadata(
   const product = await getProduct(id, lang);
 
   const rawTitle = product.metaTitle || product.name || "Mahsulot";
+  // Always prioritize metaDescription (SEO optimized) over plain description
   const rawDesc = product.metaDescription || product.description || "Mahsulot tavsifi";
   const title = trim(rawTitle, 60);
   const description = trim(rawDesc, 160);
@@ -124,6 +132,10 @@ export async function generateMetadata(
     title,
     description,
     keywords,
+    other: {
+      'product:price:amount': String(product.price ?? 0),
+      'product:price:currency': 'UZS',
+    },
     alternates: {
       canonical: localizedUrls[lang],
       languages: localizedUrls,
@@ -136,6 +148,8 @@ export async function generateMetadata(
       images: [{ url: image, width: 1200, height: 630, alt: title }],
       locale: ogLocale,
       alternateLocale: alternateLocales,
+      // Next Metadata openGraph.type union doesn't include raw 'product'; keep website here
+      type: 'website',
     },
     twitter: {
       card: "summary_large_image",
@@ -175,8 +189,54 @@ export default async function Page({ params }: { params: RouteParams }) {
 
   const priceAmount = Number(product.price ?? 0);
   const priceString = String(priceAmount);
-  const isInStock = typeof product.inStock === "boolean" ? product.inStock : true;
+  // Always show inStock true as requested (production is continuous)
+  const isInStock = true;
   const availabilitySchema = isInStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock";
+
+  // Optional future GTIN / SKU mapping (if backend adds gtin field) – placeholder logic
+  const sku = product.id; // could be replaced with product.sku if provided later
+  const priceValidUntil = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString().split("T")[0]; // 30 days
+
+  // Map product-specific structured extras (gtin13, certifications, TU, serial, ingredients)
+  function getStructuredExtras(name?: string): { gtin13?: string; additionalProperty?: { '@type': 'PropertyValue'; name: string; value: string; }[] } {
+    if (!name) return {};
+    const n = name.toLowerCase();
+    const baseSerial = '001';
+    if (n.includes('complex extra')) {
+      return {
+        gtin13: '4780143600027',
+        additionalProperty: [
+          { '@type': 'PropertyValue', name: 'Certifications', value: 'ISO 22000:2018; ISO 9001:2015' },
+          { '@type': 'PropertyValue', name: 'TU', value: 'TU 310113257-006:2025' },
+          { '@type': 'PropertyValue', name: 'Serial Number', value: baseSerial },
+        ],
+      };
+    }
+    if (n.includes('complex') && !n.includes('extra')) {
+      return {
+        gtin13: '4780143600096',
+        additionalProperty: [
+          { '@type': 'PropertyValue', name: 'Certifications', value: 'ISO 22000:2018; ISO 9001:2015' },
+          { '@type': 'PropertyValue', name: 'TU', value: 'TU 310113257-006:2025' },
+          { '@type': 'PropertyValue', name: 'Serial Number', value: baseSerial },
+        ],
+      };
+    }
+    if (n.includes('gelmin kids')) {
+      return {
+        gtin13: '4780143600089',
+        additionalProperty: [
+          { '@type': 'PropertyValue', name: 'Certifications', value: 'ISO 22000:2018; ISO 9001:2015' },
+          { '@type': 'PropertyValue', name: 'TU', value: 'TU 310713257-006:2025' },
+          { '@type': 'PropertyValue', name: 'Serial Number', value: baseSerial },
+          { '@type': 'PropertyValue', name: 'Capsules', value: '60 pcs (0.26 g each), Net weight 15.6 g' },
+          { '@type': 'PropertyValue', name: 'Ingredients', value: 'Indov (Rukola) 136.7 mg; Qora sedana ~46 mg; Uora andiz 37.7 mg; Bo‘ymodaron 12.5 mg; Qovoq urug‘i 12.4 mg; Makkai sano (Senna) 12.2 mg; Dastarbosh (Pizhma) 11.7 mg' },
+        ],
+      };
+    }
+    return {};
+  }
+  const extras = getStructuredExtras(product.name);
 
   const productJsonLd: ProductLD = {
     "@context": "https://schema.org/",
@@ -184,7 +244,8 @@ export default async function Page({ params }: { params: RouteParams }) {
     name: title,
     description,
     image: [image],
-    sku: product.id,
+    sku,
+    gtin13: extras.gtin13,
     brand: { "@type": "Brand", name: "Nutva" },
     offers: {
       "@type": "Offer",
@@ -194,7 +255,10 @@ export default async function Page({ params }: { params: RouteParams }) {
       availability: availabilitySchema,
       itemCondition: "https://schema.org/NewCondition",
       seller: { "@type": "Organization", name: "Nutva" },
+      priceValidUntil,
     },
+    category: 'Dietary Supplements',
+    additionalProperty: extras.additionalProperty,
   };
 
   if (typeof product.ratingValue === "number" && typeof product.ratingCount === "number" && product.ratingCount > 0) {
