@@ -156,7 +156,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const lang = await resolveLang();
 
   return (
-    <html lang={lang} suppressHydrationWarning className={inter.variable}>
+    <html lang={lang} suppressHydrationWarning className={`${inter.variable} overflow-x-hidden`}>
       <head>
         {/* Critical resource preloading */}
         <link
@@ -354,7 +354,7 @@ fbq('track', 'PageView');`}
         />
       </head>
 
-      <body className="antialiased" suppressHydrationWarning>
+  <body className="antialiased overflow-x-hidden" suppressHydrationWarning>
         {/* GTM noscript - GTM-WQMGD4GC (Yangi) */}
         <noscript>
           <iframe

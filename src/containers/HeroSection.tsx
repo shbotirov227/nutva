@@ -34,7 +34,7 @@ const HeroSection = () => {
   const localized = useTranslated(banner);
 
   return (
-    <div className="relative min-h-[calc(100svh-56px)] pt-[56px]">
+    <div className="relative min-h-[calc(100svh-56px)] pt-[56px] overflow-x-hidden">{/* overflow-x-hidden to avoid horizontal scroll caused by wide transforms */}
       {/* Optimized global background using next/image instead of CSS background */}
       <div className="absolute inset-0 -z-30 brightness-75">
         <Image

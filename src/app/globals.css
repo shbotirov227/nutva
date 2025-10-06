@@ -63,6 +63,10 @@ body {
 	); */
 }
 
+html, body {
+  overflow-x: hidden; /* Prevent unwanted horizontal scroll */
+}
+
 .swiper-button-prev::after,
 .swiper-button-next::after {
   display: none;

@@ -134,30 +134,52 @@
         "title": "Mijozlarimizning haqiqiy sharhlari",
         "subtitle": "NUTVA hayot sifatini yaxshilashga va kerakli natijalarga erishishga qanday yordam berishini bilib oling. Mahsulotimizni allaqachon sinab ko'rganlarning video sharhlari samaradorlik va sifatni tasdiqlaydi.",
 
+        "categories": {
+            "all": "Barcha sharhlar"
+        },
+
         "videoData": {
-            "1": {
-                "title": "70 yoshda raqsga tushyapman!",
-                "description": "Polliartrit, gonartroz va grijadan so'ng o'ynab yuribman![[BR]]Samarqand viloyati, Pastdarg'om tumanida 70 yoshli dehqon ayol bilan yuzma-yuz uchrashuv. Uning hayotidagi og'ir muammolar - beldagi grijalar, to'plangan poliartrit, tiza suyaklarining emirilishi, tutqanoq xurujlari va oshqozon yarasini engishda Nutva Complex qanday yordam berdi?[[BR]]Bu video -  dard bilan kurashayotganlar uchun haqiqiy ilhom manbai!"
+            "complex": {
+                "1": {
+                    "title": "🩺 4-daraja koksartroz edi. Hassa bilan yurishga uyalardim",
+                    "description": "Yillar davomida og'riqdan aziyat chekdim, 4-daraja koksartroz sabab yurish ham azob bo'lgan. Endi esa og'riqsiz, erkin yuraman — hayotim butunlay o'zgardi."
+                },
+                "2": {
+                    "title": "🏃‍♀️ Koksartrozdan yura olmaganman — endi yuguraman!",
+                    "description": "Bir paytlar oddiy yurish ham mashaqqat edi. To'g'ri davolanish bilan nafaqat yurishga, balki yugurishga ham qaytdim. Hayot sifatim butunlay o'zgardi."
+                },
+                "3": {
+                    "title": "💪 Grija yillab yashadim",
+                    "description": "Yillar davomida grija bilan yashadim — og'riq, noqulaylik, cheklovlar. Ammo to'g'ri tashxis va davolanishdan so'ng hayotim yengillashdi — endi og'riqsiz yashayapman."
+                }
             },
-
-            "2": {
-                "title": "Spondiloartrozdan operasiyasiz tuzaldi",
-                "description": "Surxondaryolik opamizda 6 ta umurtqa suyagida jarohat aniqlangan edi.[[BR]]Shifokorlar operasiyani maslahat bergan. Ammo u umidini yo'qotmadi. U operasiyasiz shifo topdi![[BR]]🎥 Bu hikoya - operasiyasiz shifo topish mumkinligiga ishonch beradi.[[BR]]To'liq videoni ko'ring va o'zingiz xulosa chiqaring![[BR]]Ko'z yosh bilan boshlangan hikoya - raqs bilan tugadi."
+            "complexExtra": {
+                "1": {
+                    "title": "Complex Extra - Mijoz sharhi 1",
+                    "description": "Mijozlarimizning Complex Extra mahsuloti haqidagi haqiqiy sharhi"
+                },
+                "2": {
+                    "title": "Complex Extra - Mijoz sharhi 2",
+                    "description": "Mijozlarimizning Complex Extra mahsuloti haqidagi haqiqiy sharhi"
+                },
+                "3": {
+                    "title": "Complex Extra - Mijoz sharhi 3",
+                    "description": "Mijozlarimizning Complex Extra mahsuloti haqidagi haqiqiy sharhi"
+                }
             },
-
-            "3": {
-                "title": "Samarqandda shifo - Nutva Complex natijalari",
-                "description": "Nutva asoschisi Alijon G'aybullaev va shifokorlar jamoasi Samarqandda 100 dan ortiq yurtdoshimizni qabul qildi.[[BR]]Ularga professional maslahatlar va tibbiy tekshiruvlar o'tkazildi.[[BR]]Alijon G'aybullaev shaxsan bemorlar bilan suhbatlashdi va Nutva Complexni qabul qilgandan keyingi real o'zgarishlari, yurakdan chiqqan so'zlari va umid bilan to'lgan taassurotlarini tingladi."
-            },
-
-            "4": {
-                "title": "Falajlik, Morfin, Aseptik Nekroz - barchasi ortda qoldi",
-                "description": "Farg'ona viloyati, Furqat tumanidan bo'lgan Gulchehra opa og'ir xatolik tufayli falaj holatiga tushib qolgan edi. Oyoqlari harakatdan to'xtagan, yotoqqa mixlanib qolgan bu ayolni nafaqat og'riq, balki umidsizlik ham qiynagan.[[BR]]Bugun esa u yurishga yaqin, hayotga bo'lgan ishonchi tiklangan. Tabib Alijon G'aybullaev, Bahora Qodiralieva va jurnalist Oybek Rixsibekov Gulchehra opaning holidan xabardor bo'lib, xonadonlariga tashrif buyurdi."
-            },
-
-            "5": {
-                "title": "Otinoyi 3 yillik oyoq og'rig'idan halos bo'ldi",
-                "description": "Bu giyoh zo'r ekan , engil bo'ldim! Naxotki,  og'riqlardan qutuldim[[BR]]Toshkent viloyati Bekobod tumanidan bo'lgan Xoji Onamiz bizni nechi oydan beri kutgan ekan. Tabib Alijon bilan gaplashib , rahmatimni , minnatdorchligimni o'zim aytaman deb niyat qilgan ekan. 3 yildan beri tizza va  oyoq og'rig'i uxlashga ham qo'ymagan. Zinalarda yurolmasdim hatto endi mana davo topdim deb  Nutva jamoasi va Tabibga samimiy tashakkurlar bildirdi."
+            "gelmin": {
+                "1": {
+                    "title": "🧬 Gijja va parazitlar haqida siz bilmagan 5 haqiqat",
+                    "description": "Gijja va parazitlar haqida siz bilmagan 5 haqiqat"
+                },
+                "2": {
+                    "title": "⚖️ Gijjalar haqida tarqalgan yolg'onlar fosh etildi: haqiqatni bilib oling!",
+                    "description": "Gijjalar haqida tarqalgan yolg'onlar fosh etildi: haqiqatni bilib oling!"
+                },
+                "3": {
+                    "title": "👨‍👩‍👦 Uch aka-ukaning hikoyasi: 1 oyda gijjalardan xalos bo'lishdi!",
+                    "description": "Uch aka-ukaning hikoyasi: 1 oyda gijjalardan xalos bo'lishdi!"
+                }
             }
         }
     },

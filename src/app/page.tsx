@@ -56,9 +56,9 @@ export default function HomePage() {
       <main>
         <HeroSection />
         <Products isAviableBackground />
-        <Blogs />
-        <AboutBrandSection />
         <Reviews />
+         <AboutBrandSection />
+        <Blogs />
         <SaleSection />
       </main>
       <DiscountPopup isVisible={showDiscount} onClose={() => setShowDiscount(false)} />

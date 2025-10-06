@@ -134,30 +134,52 @@
         "title": "Real feedback from our customers",
         "subtitle": "Find out how NUTVA helps to improve the quality of life and achieve the desired results. Video reviews from those who have already tried our product confirm the effectiveness and quality.",
 
+        "categories": {
+            "all": "All reviews"
+        },
+
         "videoData": {
-            "1": {
-                "title": "Dancing at the age of 70!",
-                "description": "After polyarthritis, gonarthrosis, and a herniated disc, I'm moving freely again![[BR]]A face-to-face meeting with a 70-year-old female farmer from the Pastdargom district of Samarkand region. Her serious health issues — spinal hernias, accumulated polyarthritis, knee joint degradation, seizures, and stomach ulcers — were all overcome with the help of Nutva Complex.[[BR]]This video is a true source of inspiration for those fighting pain!"
+            "complex": {
+                "1": {
+                    "title": "🩺 Had stage 4 coxarthrosis. Was embarrassed to walk with a cane",
+                    "description": "For years I suffered from stage 4 coxarthrosis. I was embarrassed to walk with a cane. Now I move freely — no pain, no limits."
+                },
+                "2": {
+                    "title": "🏃‍♀️ Couldn't walk due to coxarthrosis — now I'm running!",
+                    "description": "There was a time I could barely walk. After proper treatment, I'm not just walking — I'm running again and living fully."
+                },
+                "3": {
+                    "title": "💪 Lived with hernia for years",
+                    "description": "I lived with a hernia for years, battling constant pain and discomfort. After treatment, I'm back to an active, pain-free life."
+                }
             },
-
-            "2": {
-                "title": "Recovered from spondyloarthrosis without surgery",
-                "description": "Our sister from Surkhandarya had injuries in 6 vertebrae.[[BR]]Doctors recommended surgery. But she didn't lose hope — and recovered without an operation![[BR]]🎥 This story proves that healing without surgery is possible.[[BR]]Watch the full video and draw your own conclusions![[BR]]A story that started with tears ended with a dance."
+            "complexExtra": {
+                "1": {
+                    "title": "Complex Extra - Customer Review 1",
+                    "description": "Real customer feedback about Complex Extra product"
+                },
+                "2": {
+                    "title": "Complex Extra - Customer Review 2",
+                    "description": "Real customer feedback about Complex Extra product"
+                },
+                "3": {
+                    "title": "Complex Extra - Customer Review 3",
+                    "description": "Real customer feedback about Complex Extra product"
+                }
             },
-
-            "3": {
-                "title": "Healing in Samarkand — Nutva Complex results",
-                "description": "Nutva founder Alijon G'aybullaev and his team of doctors welcomed over 100 people in Samarkand.[[BR]]They provided professional consultations and medical check-ups.[[BR]]Alijon G'aybullaev personally met with patients and listened to their heartfelt testimonials and real improvements after using Nutva Complex."
-            },
-
-            "4": {
-                "title": "Paralysis, Morphine, Aseptic Necrosis — all left behind",
-                "description": "Gulchehra apa from Furqat district of Fergana region became paralyzed due to a serious medical mistake. Her legs stopped moving, and she was bedridden, suffering not only from pain but also hopelessness.[[BR]]Today she is close to walking again and has regained faith in life. Healer Alijon G'aybullaev, Bahora Qodiralieva, and journalist Oybek Rixsibekov visited her at home to check on her condition."
-            },
-
-            "5": {
-                "title": "Otinoyi relieved of 3-year leg pain",
-                "description": "This herb is amazing, I feel lighter! I can't believe I got rid of the pain![[BR]]Our grandmother from Bekobod district, Tashkent region, had been waiting for us for months. She said she wanted to personally thank healer Alijon. For 3 years, she suffered from knee and leg pain that wouldn't even let her sleep. She couldn't climb stairs, but now she says she found healing and sincerely thanked the Nutva team and the healer."
+            "gelmin": {
+                "1": {
+                    "title": "🧬 5 shocking facts about parasites you never knew",
+                    "description": "5 shocking facts about parasites you never knew"
+                },
+                "2": {
+                    "title": "⚖️ Parasite myths exposed — here's the real truth!",
+                    "description": "Parasite myths exposed — here's the real truth!"
+                },
+                "3": {
+                    "title": "👨‍👩‍👦 How three brothers beat parasites in just one month!",
+                    "description": "How three brothers beat parasites in just one month!"
+                }
             }
         }
     },
