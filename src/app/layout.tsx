@@ -44,6 +44,43 @@ export async function generateMetadata(): Promise<Metadata> {
   const pathname = h.get("x-pathname") || `/${lang}`;
   const localizedUrls = buildLocalizedUrls(pathname, baseUrl);
 
+  // Localized, trimmed keyword sets (Google ignores them, Yandex may still read).
+  const keywordsByLang: Record<"uz" | "ru" | "en", string[]> = {
+    uz: [
+      "Nutva", "Nutva Pharm",
+      "Nutva Complex", "Nutva Complex Extra", "Gelmin Kids",
+      "biologik faol qo‘shimcha", "vitamin kompleks",
+      "immunitetni qo‘llab-quvvatlash", "antioksidantlar",
+      "bo‘g‘im va suyaklar", "energiya va holsizlik",
+      "bolalar uchun qo‘shimcha", "gijjaga qarshi bolalar",
+      "parazitga qarshi", "o‘simlik ekstraktlari",
+      "dorixona", "Toshkent", "Uzbekistan",
+      "narx", "tarkibi", "qanday qabul qilish", "original mahsulot"
+    ],
+    ru: [
+      "Nutva", "Nutva Pharm",
+      "Nutva Complex", "Nutva Complex Extra", "Gelmin Kids",
+      "БАД", "биологически активная добавка", "витаминный комплекс",
+      "поддержка иммунитета", "антиоксиданты",
+      "суставы и кости", "энергия и усталость",
+      "детская добавка", "от глистов детям", "против паразитов",
+      "растительные экстракты",
+      "аптека", "Ташкент", "Узбекистан",
+      "цена", "состав", "как принимать", "оригинальная продукция"
+    ],
+    en: [
+      "Nutva", "Nutva Pharm",
+      "Nutva Complex", "Nutva Complex Extra", "Gelmin Kids",
+      "dietary supplement", "multivitamin complex",
+      "immune support", "antioxidants",
+      "joint and bone support", "energy and fatigue",
+      "kids supplement", "anti-helminth support", "parasite defense",
+      "herbal extracts",
+      "pharmacy", "Tashkent", "Uzbekistan",
+      "price", "ingredients", "how to use", "original product"
+    ],
+  };
+
   return {
     metadataBase: new URL(baseUrl),
     title: {
@@ -56,47 +93,7 @@ export async function generateMetadata(): Promise<Metadata> {
       'preload-hero-bg': '/hero-bg2.webp',
       'preload-logo': '/header-nutva-logo.png',
     },
-    keywords: [
-      "Nutva", "Нутва",
-      "Nutva Pharm", "Нутва Фарм",
-      "nutva.uz", "nutva uz", "Нутва УЗ",
-      "Nutva Complex", "Нутва Комплекс",
-      "Nutva Extra", "Нутва Экстра",
-      "Nutva Gelmin Kids", "Нутва Гельмин Кидс",
-      "Nutva Fertilia Women", "Нутва Фертилия Вумен",
-      "Nutva Viris Men", "Нутва Вирис Мен",
-      "Nutva Complex Extra", "Нутва Комплекс Экстра",
-      "biologik faol qo'shimchalar", "биологик фаол қўшимчалар",
-      "bioaktiv qo'shimchalar", "биоактив қўшимчалар",
-      "BAT", "БАТ", "BAA", "БАА",
-      "o'simlik ekstraktlari", "ўсимлик экстрактлари",
-      "vitaminlar", "витаминлар",
-      "mineral qo'shimchalar", "минерал қўшимчалар",
-      "bio aktivnye dobavki",
-      "bio aktivnye dobavki tashkent",
-      "бады в ташкенте",
-      "купить бады ташкент",
-      "бады для восстановления суставов",
-      "бады цена",
-      "бады в узбекистан",
-      "заказать бады в ташкенте",
-      "витамины бады",
-      "витамины и бады для суставов",
-      "бад узбекистон",
-      "эффективные бады для суставов",
-      "бад в ташкент",
-      "витамины бады ташкент",
-      "купить бады",
-      "бады для костей",
-      "заказать бады",
-      "бады для лечения суставов",
-      "бады витамины",
-      "бады ташкент",
-      "бады для суставов",
-      "бады купить ташкент",
-      "бады купить",
-      "бады для роста костей",
-    ],
+    keywords: keywordsByLang[lang as "uz" | "ru" | "en"] ?? keywordsByLang.uz,
     authors: [{ name: "Nutva Pharm", url: "https://nutva.uz" }],
     creator: "Nutva Pharm",
     publisher: "Nutva Pharm",
