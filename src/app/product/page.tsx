@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ProductsClient from "./ProductsClient";
 import { resolveLang, getOgLocale, getAlternateLocales, buildLocalizedUrls, type Lang } from "@/lib/langUtils";
+import type { GetAllProductsType } from "@/types/products/getAllProducts";
 
 interface ProductPageContent {
   title: string;
@@ -60,6 +61,41 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function Page() {
-  return <ProductsClient />;
+export default async function Page() {
+  const lang = await resolveLang();
+  // Fetch a small subset for ItemList; avoid heavy data
+  let products: { id: string; name: string; imageUrls?: string[] }[] = [];
+  try {
+    const base = "https://nutva.uz/api";
+    const res = await fetch(`${base}/Product?lang=${lang}`, { next: { revalidate: 60 } });
+    const list: GetAllProductsType = res.ok ? await res.json() : [] as unknown as GetAllProductsType;
+    products = (Array.isArray(list) ? list : []).slice(0, 24).map((p, i) => ({
+      id: p.id,
+      name: p.name,
+      imageUrls: p.imageUrls,
+      position: i + 1,
+    }));
+  } catch {}
+
+  const base = "https://nutva.uz";
+  const itemListElements = products.map((p, idx) => ({
+    "@type": "ListItem",
+    position: idx + 1,
+    url: `${base}/${lang}/product/${p.id}`,
+    name: p.name,
+    image: Array.isArray(p.imageUrls) && p.imageUrls[0] ? p.imageUrls[0] : undefined,
+  }));
+
+  const itemListLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: itemListElements,
+  };
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }} />
+      <ProductsClient />
+    </>
+  );
 }

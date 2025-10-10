@@ -68,7 +68,7 @@ interface OfferLD {
   "@type": "Offer";
   url: string;
   priceCurrency: string;
-  price: string;
+  price: number;
   availability: string; // schema URL
   itemCondition: "https://schema.org/NewCondition" | string;
   seller: { "@type": "Organization"; name: string };
@@ -77,6 +77,7 @@ interface OfferLD {
 interface ProductLD {
   "@context": "https://schema.org/";
   "@type": "Product";
+  "@id"?: string;
   name: string;
   description: string;
   image: string[];
@@ -92,6 +93,7 @@ interface ProductLD {
     name: string;
     value: string;
   }>;
+  mainEntityOfPage?: string;
 }
 interface BreadcrumbLD {
   "@context": "https://schema.org";
@@ -184,13 +186,15 @@ export default async function Page({ params }: { params: RouteParams }) {
 
   const localizedUrls = buildLocalizedUrls(`/product/${id}`);
   const url = localizedUrls[lang];
-  const rawImage = product.imageUrls?.[0] || "https://nutva.uz/seo_banner.jpg";
-  const image = ensureHttps(rawImage) || "https://nutva.uz/seo_banner.jpg";
+  // Prefer all images if available, ensure HTTPS for nutva.uz assets
+  const images = (product.imageUrls || [])
+    .map((u) => ensureHttps(u))
+    .filter((u): u is string => Boolean(u));
+  const image = images[0] || "https://nutva.uz/seo_banner.jpg";
 
   const priceAmount = Number(product.price ?? 0);
-  const priceString = String(priceAmount);
-  // Always show inStock true as requested (production is continuous)
-  const isInStock = true;
+  // Reflect availability if provided by API, otherwise default to in stock
+  const isInStock = typeof product.inStock === 'boolean' ? Boolean(product.inStock) : true;
   const availabilitySchema = isInStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock";
 
   // Optional future GTIN / SKU mapping (if backend adds gtin field) – placeholder logic
@@ -241,9 +245,11 @@ export default async function Page({ params }: { params: RouteParams }) {
   const productJsonLd: ProductLD = {
     "@context": "https://schema.org/",
     "@type": "Product",
+    // Stable ID to link references of the same entity
+    "@id": `${url}#product`,
     name: title,
     description,
-    image: [image],
+    image: images.length ? images : [image],
     sku,
     gtin13: extras.gtin13,
     brand: { "@type": "Brand", name: "Nutva" },
@@ -251,7 +257,7 @@ export default async function Page({ params }: { params: RouteParams }) {
       "@type": "Offer",
       url,
       priceCurrency: "UZS",
-      price: priceString,
+  price: priceAmount,
       availability: availabilitySchema,
       itemCondition: "https://schema.org/NewCondition",
       seller: { "@type": "Organization", name: "Nutva" },
@@ -259,6 +265,10 @@ export default async function Page({ params }: { params: RouteParams }) {
     },
     category: 'Dietary Supplements',
     additionalProperty: extras.additionalProperty,
+    // Help search engines connect the Product with this page entity
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore: mainEntityOfPage not in our local type
+    mainEntityOfPage: url,
   };
 
   if (typeof product.ratingValue === "number" && typeof product.ratingCount === "number" && product.ratingCount > 0) {
