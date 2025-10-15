@@ -683,4 +683,17 @@
             }
         }
     }
+    ,
+    "installment": {
+        "badge": "Maxsus taklif",
+        "title": "Nutva mahsulotlarini Uzum Marketdan nasiya savdo asosida sotib oling",
+        "subtitle": "Muddatli to'lov (nasiya) orqali qulay shartlarda va qo'shimcha to'lovsiz xarid qiling.",
+        "features": [
+            "0% komissiyasiz",
+            "12 oygacha muddatli to'lov",
+            "Darhol tasdiq"
+        ],
+        "cta": "Uzum Marketda xarid qiling",
+        "imageAlt": "Uzum Market - muddatli to'lov"
+    }
 }

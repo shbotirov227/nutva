@@ -686,4 +686,17 @@
                             }
                 }
         }
+    ,
+    "installment": {
+        "badge": "Special offer",
+        "title": "Buy Nutva products in installments on Uzum Market",
+        "subtitle": "Purchase on convenient installment terms — no extra fees or overpayments.",
+        "features": [
+            "0% commission",
+            "Installments up to 12 months",
+            "Instant approval"
+        ],
+        "cta": "Shop on Uzum Market",
+        "imageAlt": "Uzum Market — installment purchase"
+    }
 }
