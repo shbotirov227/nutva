@@ -3,22 +3,21 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useTranslation } from "react-i18next";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
 import Container from "@/components/Container";
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/lib/apiClient";
 import { normalizeImageUrl } from "@/lib/imageUtils";
 // import { GetAllBannerType } from "@/types/banner/getAllBanner";
 import { useLang } from "@/context/LangContext";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
-// import { GetOneBannerType } from "@/types/banner/getOneBanner";
 import { useTranslated } from "@/hooks/useTranslated";
-import "swiper/css";
-import "swiper/css/pagination";
+// import { GetOneBannerType } from "@/types/banner/getOneBanner";
 import "swiper/css/effect-fade";
-import Link from "next/link";
-import { useTranslation } from "react-i18next";
+import "swiper/css/pagination";
+import "swiper/css";
 
 const HeroSection = () => {
   const { lang } = useLang();
@@ -34,7 +33,7 @@ const HeroSection = () => {
   const localized = useTranslated(banner);
 
   return (
-    <div className="relative min-h-[calc(100svh-56px)] pt-[56px] overflow-x-hidden">{/* overflow-x-hidden to avoid horizontal scroll caused by wide transforms */}
+    <div className="relative min-h-[calc(100svh-56px)] pt-[56px] !overflow-x-hidden"> {/* overflow-x-hidden to avoid horizontal scroll caused by wide transforms */}
       {/* Optimized global background using next/image instead of CSS background */}
       <div className="absolute inset-0 -z-30 brightness-75">
         <Image
