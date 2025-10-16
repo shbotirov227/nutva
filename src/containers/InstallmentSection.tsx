@@ -142,7 +142,7 @@ const InstallmentSection = () => {
                 <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-emerald-400/10 to-sky-400/10 opacity-70 blur-2xl transition-all duration-500 group-hover:opacity-100 group-hover:-inset-6" />
                 
                 {/* Card Container */}
-                <div className="relative rounded-3xl border border-emerald-200/60 bg-white/90 p-6 backdrop-blur">
+                <div className="relative rounded-3xl border border-emerald-200/60 bg-none p-6 backdrop-none">
                   {/* Corner Accents */}
                   <div className="absolute -top-1 -left-1 size-8 border-t-2 border-l-2 border-emerald-500/50 rounded-tl-3xl" />
                   <div className="absolute -top-1 -right-1 size-8 border-t-2 border-r-2 border-emerald-500/50 rounded-tr-3xl" />
