@@ -152,7 +152,7 @@ const InstallmentSection = () => {
                   {/* Image - Uzum logo */}
                   <div className="relative size-48 sm:size-64 lg:size-72 flex items-center justify-center">
                     <Image
-                      src="/uzum.png"
+                      src="/uzumm.png"
                       alt={t("installment.imageAlt")}
                       width={300}
                       height={300}
