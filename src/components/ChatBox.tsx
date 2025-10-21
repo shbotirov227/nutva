@@ -3,13 +3,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 import { useMutation } from "@tanstack/react-query";
-import { apiClient } from "@/lib/apiClient";
-import { useOperatorChat } from "@/hooks/useOperatorChat";
+import { apiClient } from "../lib/apiClient";
+import { useOperatorChat } from "../hooks/useOperatorChat";
 import { cn } from "@/lib/utils";
-import { ListFilter, X } from "lucide-react";
+import { ListFilter, X, Send, MessageCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { FormInputWrapper } from "./FormInputWrapper";
 import PhoneField from "./PhoneField";
@@ -44,7 +44,7 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
   const [phoneError, setPhoneError] = useState("");
 
   const [position, setPosition] = useState({ x: window.innerWidth - 400, y: window.innerHeight - 540 });
-  const [size, setSize] = useState({ width: 340, height: 460 });
+  const [size, setSize] = useState({ width: 380, height: 520 });
 
   const resizingRef = useRef<ResizeDirection | null>(null);
   const startRef = useRef<any>(null);
@@ -59,7 +59,6 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     startSession,
     isConnected,
     sessionId,
-    // adminName,
     sessionClosed,
     isStartingSession,
     setMessages,
@@ -99,7 +98,6 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     setInput("");
   };
 
-
   const validateName = (name: string): string => {
     if (!name.trim()) {
       return t("form.errors.nameRequired");
@@ -120,11 +118,7 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     if (!phone.trim()) {
       return t("form.errors.phoneRequired");
     }
-    // if (!/^\+\d{1,4}\d{6,12}$/.test(phone)) {
-    //   return t("form.errors.phoneNotValid");
-    // }
     return "";
-    
   };
 
   const handleStartSession = async () => {
@@ -160,24 +154,6 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     setMessages([]);
     console.log("Chat data cleared, messages:", operatorMessages, chatMessages);
   };
-
-  // const handleModeSwitch = () => {
-  //   if (operatorMode) {
-  //     setOperatorMode(false);
-  //     setShowSessionForm(false);
-  //     setSessionError("");
-  //     setNameError("");
-  //     setPhoneError("");
-  //   } else {
-  //     setOperatorMode(true);
-  //     if (!sessionId || sessionClosed) {
-  //       setShowSessionForm(true);
-  //     }
-  //     setSessionError("");
-  //     setNameError("");
-  //     setPhoneError("");
-  //   }
-  // };
 
   const setCookie = (name: string, value: string, days: number = 30) => {
     const expires = new Date();
@@ -270,8 +246,8 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
           newY += deltaY;
         }
 
-        newWidth = Math.max(280, Math.min(newWidth, windowWidth - newX));
-        newHeight = Math.max(300, Math.min(newHeight, windowHeight - newY));
+        newWidth = Math.max(320, Math.min(newWidth, windowWidth - newX));
+        newHeight = Math.max(400, Math.min(newHeight, windowHeight - newY));
 
         setSize({ width: newWidth, height: newHeight });
         setPosition({ x: newX, y: newY });
@@ -300,8 +276,8 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
     const isMobile = screenWidth <= 600;
 
     setSize({
-      width: isMobile ? screenWidth - 20 : 340,
-      height: isMobile ? screenHeight - 100 : 460,
+      width: isMobile ? screenWidth - 20 : 380,
+      height: isMobile ? screenHeight - 100 : 520,
     });
 
     setPosition({
@@ -351,16 +327,19 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
   return (
     <div
       ref={boxRef}
-      className="fixed z-50 rounded-md border shadow-lg flex flex-col bg-white overflow-hidden"
+      className="fixed z-50 rounded-xl border-0 shadow-2xl flex flex-col overflow-hidden"
       style={{
         left: position.x,
         top: position.y,
         width: size.width,
         height: size.height,
+        backgroundColor: '#ffffff',
       }}
     >
+      {/* Header */}
       <div
-        className="bg-primary text-primary-foreground px-4 py-2 flex justify-between items-center cursor-move"
+        className="px-5 py-4 flex justify-between items-center cursor-move"
+        style={{ backgroundColor: '#12332D' }}
         onMouseDown={(e) => {
           const target = e.target as HTMLElement;
           if (target.closest(".resize-handle")) return;
@@ -372,51 +351,149 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
           };
         }}
       >
-        <span className="text-sm font-medium">
-          {operatorMode
-            ? t("chat.operatorChat")
-            // ? `${t("chat.operatorChat")}${adminName ? ` - ${adminName}` : ""}`
-            : t("chat.aiChat")
-          }
-        </span>
-        <Button size="icon" variant="ghost" className="text-white cursor-pointer" onClick={onClose}>
+        <div className="flex items-center gap-3">
+          <div className="relative">
+            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+              <MessageCircle className="w-5 h-5 text-white" />
+            </div>
+            {/* Online Status Indicator */}
+            {operatorMode && !showSessionForm && isConnected && (
+              <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 flex items-center justify-center"
+                   style={{ backgroundColor: '#10b981', borderColor: '#12332D' }}>
+                <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+              </div>
+            )}
+            {operatorMode && !showSessionForm && !isConnected && !sessionClosed && sessionId && (
+              <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2"
+                   style={{ backgroundColor: '#f59e0b', borderColor: '#12332D' }} />
+            )}
+            {operatorMode && !showSessionForm && sessionClosed && (
+              <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2"
+                   style={{ backgroundColor: '#ef4444', borderColor: '#12332D' }} />
+            )}
+          </div>
+          <div className="flex flex-col">
+            <span className="text-white font-medium">
+              {operatorMode ? t("chat.operatorChat") : t("chat.aiChat")}
+            </span>
+            {/* Operator Status Text */}
+            {operatorMode && !showSessionForm && (
+              <span className="text-xs text-white/80">
+                {isConnected ? (
+                  <span className="flex items-center gap-1">
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                    Online
+                  </span>
+                ) : sessionClosed ? (
+                  "Offline"
+                ) : sessionId ? (
+                  "Connecting..."
+                ) : (
+                  "Not connected"
+                )}
+              </span>
+            )}
+          </div>
+        </div>
+        <Button 
+          size="icon" 
+          variant="ghost" 
+          className="text-white hover:bg-white/20 cursor-pointer h-8 w-8 rounded-full" 
+          onClick={onClose}
+        >
           <X className="w-4 h-4" />
         </Button>
       </div>
 
+      {/* Connection Status Bar */}
+      {operatorMode && !showSessionForm && (
+        <div 
+          className="px-4 py-2.5 text-xs font-medium text-center transition-all"
+          style={{ 
+            backgroundColor: isConnected ? '#dcfce7' : sessionClosed ? '#fee2e2' : '#fef3c7'
+          }}
+        >
+          {isConnected ? (
+            <span className="flex items-center justify-center gap-2" style={{ color: '#166534' }}>
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                      style={{ backgroundColor: '#10b981' }} />
+                <span className="relative inline-flex rounded-full h-2 w-2"
+                      style={{ backgroundColor: '#10b981' }} />
+              </span>
+              {t("chat.connected")}
+            </span>
+          ) : sessionClosed ? (
+            <span style={{ color: '#991b1b' }}>⚠️ {t("chat.sessionEnded")}</span>
+          ) : sessionId ? (
+            <span style={{ color: '#92400e' }}>⏳ {t("chat.connecting")}</span>
+          ) : (
+            <span style={{ color: '#6b7280' }}>● {t("chat.sessionNotStarted")}</span>
+          )}
+        </div>
+      )}
+
+      {/* Session Form */}
       {operatorMode && showSessionForm && (
-        <div className="p-4 border-b bg-gray-50">
-          <h3 className="text-sm font-medium mb-3">{t("chat.connectToOperator")}</h3>
-          <div className="space-y-2">
-            <Input
-              placeholder={t("chat.enterName")}
-              value={userName}
-              onChange={(e) => {
-                setUserName(e.target.value);
-                setNameError(validateName(e.target.value));
-              }}
-              className={`w-full !py-5 rounded-lg border-gray-300 ${nameError ? "border-red-500" : ""}`}
-            />
-            {nameError && <p className="text-red-500 text-xs">{nameError}</p>}
-
-            <FormInputWrapper>
-              <PhoneField
-                placeholder={t("form.input.phone")}
-                phone={userPhone}
-                setPhone={(value) => {
-                  setUserPhone(value as string);
-                  setPhoneError(validatePhone(value as string));
+        <div className="p-6 border-b" style={{ backgroundColor: '#f9fafb' }}>
+          <div className="flex items-center gap-2 mb-4">
+            <div 
+              className="w-10 h-10 rounded-full flex items-center justify-center"
+              style={{ backgroundColor: '#12332D' }}
+            >
+              <MessageCircle className="w-5 h-5 text-white" />
+            </div>
+            <h3 className="font-medium" style={{ color: '#12332D' }}>
+              {t("chat.connectToOperator")}
+            </h3>
+          </div>
+          <div className="space-y-3">
+            <div>
+              <Input
+                placeholder={t("chat.enterName")}
+                value={userName}
+                onChange={(e) => {
+                  setUserName(e.target.value);
+                  setNameError(validateName(e.target.value));
                 }}
-                className={phoneError ? "border-red-500" : ""}
+                className={cn(
+                  "w-full py-5 rounded-lg border-gray-300 focus:ring-2 transition-all",
+                  nameError ? "border-red-400 focus:ring-red-200" : "focus:ring-[#12332D]/20"
+                )}
+                style={!nameError ? { borderColor: '#d1d5db' } : {}}
               />
-            </FormInputWrapper>
-            {phoneError && <p className="text-red-500 text-xs">{phoneError}</p>}
+              {nameError && <p className="text-red-500 text-xs mt-1">{nameError}</p>}
+            </div>
 
-            {sessionError && <p className="text-red-500 text-xs">{sessionError}</p>}
+            <div>
+              <FormInputWrapper>
+                <PhoneField
+                  placeholder={t("form.input.phone")}
+                  phone={userPhone}
+                  setPhone={(value) => {
+                    setUserPhone(value as string);
+                    setPhoneError(validatePhone(value as string));
+                  }}
+                  className={cn(
+                    "w-full py-5 rounded-lg border-gray-300 focus:ring-2 transition-all",
+                    phoneError ? "border-red-400 focus:ring-red-200" : "focus:ring-[#12332D]/20"
+                  )}
+                />
+              </FormInputWrapper>
+              {phoneError && <p className="text-red-500 text-xs mt-1">{phoneError}</p>}
+            </div>
+
+            {sessionError && (
+              <div className="p-3 rounded-lg bg-red-50 border border-red-200">
+                <p className="text-red-600 text-xs">{sessionError}</p>
+              </div>
+            )}
+
             <Button
               onClick={handleStartSession}
               disabled={isStartingSession || !!nameError || !!phoneError || !userName.trim() || !userPhone.trim()}
-              className="w-full cursor-pointer"
+              className="w-full cursor-pointer py-5 rounded-lg transition-all hover:opacity-90"
+              style={{ backgroundColor: '#12332D', color: 'white' }}
             >
               {isStartingSession ? t("chat.connecting") : t("chat.startChat")}
             </Button>
@@ -424,84 +501,110 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
         </div>
       )}
 
-      {operatorMode && !showSessionForm && (
-        <div className="px-4 py-1 bg-gray-100 text-xs text-center">
-          {isConnected ? (
-            <span className="text-green-600">{t("chat.connected")}</span>
-          ) : sessionClosed ? (
-            <span className="text-red-600">{t("chat.sessionEnded")}</span>
-          ) : sessionId ? (
-            <span className="text-yellow-600">{t("chat.connecting")}</span>
-          ) : (
-            <span className="text-gray-600">{t("chat.sessionNotStarted")}</span>
-          )}
-        </div>
-      )}
-
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-3 space-y-2 text-sm bg-muted">
+      <div 
+        className="flex-1 overflow-y-auto p-4 space-y-3 text-sm"
+        style={{ backgroundColor: '#f3f4f6' }}
+      >
+        {allMessages.length === 0 && !showSessionForm && (
+          <div className="flex items-center justify-center h-full text-gray-400 text-center px-4">
+            <div>
+              <MessageCircle className="w-12 h-12 mx-auto mb-2 opacity-50" />
+              <p>Start a conversation...</p>
+            </div>
+          </div>
+        )}
+        
         {allMessages.map((msg, i) => (
           <div
             key={i}
             className={cn(
-              "w-fit max-w-[80%] px-3 py-2 rounded-lg shadow-md break-words whitespace-pre-wrap",
-              msg.from === "user"
-                ? "bg-blue-200 ml-auto text-right"
-                : msg.from === "system"
-                  ? "bg-yellow-100 mx-auto text-center text-xs"
-                  : "bg-gray-200 mr-auto text-left"
+              "flex",
+              msg.from === "user" ? "justify-end" : msg.from === "system" ? "justify-center" : "justify-start"
             )}
           >
-            <div>{msg.text}</div>
-            {msg.from !== "system" && (
-              <div className="text-[10px] text-gray-500 mt-1">
-                {new Date(msg.timestamp).toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}{" "}
-                | {new Date(msg.timestamp).toLocaleDateString()}
-              </div>
-            )}
+            <div
+              className={cn(
+                "max-w-[75%] px-4 py-3 rounded-2xl shadow-sm break-words whitespace-pre-wrap",
+                msg.from === "user"
+                  ? "rounded-br-md"
+                  : msg.from === "system"
+                    ? "text-center text-xs max-w-[90%] py-2"
+                    : "rounded-bl-md"
+              )}
+              style={{
+                backgroundColor: 
+                  msg.from === "user" 
+                    ? '#12332D'
+                    : msg.from === "system"
+                      ? '#fef3c7'
+                      : '#ffffff',
+                color: msg.from === "user" ? '#ffffff' : msg.from === "system" ? '#92400e' : '#1f2937'
+              }}
+            >
+              <div>{msg.text}</div>
+              {msg.from !== "system" && (
+                <div 
+                  className="text-[10px] mt-1.5 opacity-70"
+                  style={{ color: msg.from === "user" ? '#ffffff' : '#6b7280' }}
+                >
+                  {new Date(msg.timestamp).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </div>
+              )}
+            </div>
           </div>
         ))}
 
         {isPending && !operatorMode && (
-          <div className="text-xs text-gray-500 italic">{t("chat.typing")}</div>
+          <div className="flex justify-start">
+            <div className="bg-white px-4 py-3 rounded-2xl rounded-bl-md shadow-sm">
+              <div className="flex gap-1">
+                <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '0ms' }} />
+                <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '150ms' }} />
+                <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '300ms' }} />
+              </div>
+            </div>
+          </div>
         )}
         <div ref={bottomRef} />
       </div>
 
+      {/* Input Area */}
       {!(operatorMode && showSessionForm) && (
-        <div className="p-3 border-t bg-white flex items-center gap-2">
-          <Input
-            placeholder={t("chat.typeMessage")}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleSend()}
-            disabled={operatorMode ? (!sessionId || sessionClosed) : isPending}
-          />
-          <Button
-            className="bg-primary text-primary-foreground cursor-pointer"
-            onClick={handleSend}
-            disabled={operatorMode ? (!sessionId || sessionClosed) : isPending}
-          >
-            {t("chat.send")}
-          </Button>
+        <div className="p-4 border-t bg-white">
+          <div className="flex items-center gap-2">
+            <Input
+              placeholder={t("chat.typeMessage")}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSend()}
+              disabled={operatorMode ? (!sessionId || sessionClosed) : isPending}
+              className="flex-1 py-5 rounded-lg border-gray-300 focus:ring-2 transition-all"
+              style={{ 
+                borderColor: '#d1d5db',
+                outlineColor: '#12332D'
+              }}
+            />
+            <Button
+              className="cursor-pointer rounded-lg px-4 py-5 transition-all hover:opacity-90"
+              style={{ backgroundColor: '#12332D', color: 'white' }}
+              onClick={handleSend}
+              disabled={operatorMode ? (!sessionId || sessionClosed) : isPending}
+            >
+              <Send className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
       )}
 
-      <div className="flex items-center justify-center p-2 border-t bg-white text-center">
-        {/* <Button
-          onClick={handleModeSwitch}
-          className="text-sm text-blue-500 hover:underline cursor-pointer"
-          variant="link"
-        >
-          {operatorMode ? t("chat.connectToAI") : t("chat.connectToOperator")}
-        </Button> */}
-
+      {/* Footer */}
+      <div className="px-4 py-2 border-t bg-white text-center">
         <Button
           onClick={clearChatData}
-          className="text-sm text-red-500 hover:underline cursor-pointer ml-4"
+          className="text-xs text-gray-500 hover:text-red-600 cursor-pointer transition-colors"
           variant="link"
           size="sm"
         >
@@ -509,13 +612,19 @@ const ChatBox = ({ onClose }: { onClose: () => void }) => {
         </Button>
       </div>
 
+      {/* Resize Handles */}
       {resizeHandles.map(({ dir, className, rotate }) => (
         <div
           key={dir}
           onMouseDown={startResizing(dir)}
           className={`absolute ${className} z-10 resize-handle`}
         >
-          {rotate && <ListFilter className={cn("w-3 h-3 text-gray-400", rotate)} />}
+          {rotate && (
+            <ListFilter 
+              className={cn("w-3 h-3", rotate)} 
+              style={{ color: '#9ca3af' }}
+            />
+          )}
         </div>
       ))}
     </div>
