@@ -43,7 +43,7 @@ export default function CartPage() {
           <h1 className="mt-6 text-2xl font-extrabold text-emerald-900">{t("common.emptyCart")}</h1>
           <p className="text-emerald-800/70 mt-2 text-sm">{t("common.emptyCartHint")}</p>
           <Link
-            href={`/${lang}`}
+            href={`/${lang}/product`}
             className="mt-6 inline-flex items-center gap-2 rounded-xl border border-emerald-300 px-4 py-2 text-emerald-900 hover:bg-emerald-50 font-semibold"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -125,7 +125,7 @@ export default function CartPage() {
           </div>
 
           <Link
-            href={`/${lang}`}
+            href={`/${lang}/product`}
             className="mt-4 inline-flex items-center gap-2 text-emerald-900 hover:text-emerald-800 font-semibold"
           >
             <ChevronLeft className="w-5 h-5" />
