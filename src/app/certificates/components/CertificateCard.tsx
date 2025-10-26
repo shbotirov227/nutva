@@ -1,10 +1,17 @@
-import { useState } from "react";
+"use client";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Image, { type StaticImageData } from "next/image";
 import { Building, Eye, Download, Award, Shield } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import * as pdfjsLib from "pdfjs-dist/webpack.mjs";
+
+// Configure PDF.js worker
+if (typeof window !== "undefined") {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+}
 
 interface Certificate {
   id: number;
@@ -23,12 +30,19 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
   const { t } = useTranslation();
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [open, setOpen] = useState(false);
+  const [pdfPreviewUrl, setPdfPreviewUrl] = useState<string | null>(null);
+  const [pdfLoading, setPdfLoading] = useState(false);
+  const [pdfModalOpen, setPdfModalOpen] = useState(false);
+  // const canvasRef = useRef<HTMLCanvasElement>(null);
+
   const imageSrc = typeof certificate.image === "string" ? certificate.image : certificate.image.src;
   const isPdf = imageSrc.toLowerCase().endsWith(".pdf");
   const itemKey = String(certificate.id);
+
   const displayTitle = t(`certificates.items.${itemKey}.title`, { defaultValue: certificate.title });
   const displayDesc = t(`certificates.items.${itemKey}.description`, { defaultValue: certificate.description });
   const displayIssuer = t(`certificates.items.${itemKey}.issuer`, { defaultValue: certificate.issuer });
+
   const catLabel = (() => {
     switch (certificate.category) {
       case "Документация":
@@ -44,6 +58,53 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
     }
   })();
 
+  // Load PDF preview
+  useEffect(() => {
+    if (!isPdf) return;
+
+    const loadPdfPreview = async () => {
+      setPdfLoading(true);
+      try {
+        const loadingTask = pdfjsLib.getDocument(imageSrc);
+        const pdf = await loadingTask.promise;
+        const page = await pdf.getPage(1);
+
+        // Set scale for good quality preview
+        const viewport = page.getViewport({ scale: 2 });
+
+        // Create canvas
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        if (context) {
+          const renderContext = {
+            canvasContext: context,
+            viewport: viewport,
+          };
+
+          await page.render(renderContext).promise;
+
+          // Convert canvas to image URL
+          const imageDataUrl = canvas.toDataURL("image/png", 0.95);
+          setPdfPreviewUrl(imageDataUrl);
+          setIsImageLoaded(true);
+        }
+
+        // Cleanup
+        await pdf.destroy();
+      } catch (error) {
+        console.error("Error loading PDF preview:", error);
+        setIsImageLoaded(true);
+      } finally {
+        setPdfLoading(false);
+      }
+    };
+
+    loadPdfPreview();
+  }, [isPdf, imageSrc]);
+
   return (
     <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-white/80 backdrop-blur-sm border-2 border-emerald-100 hover:border-emerald-200 rounded-2xl overflow-hidden relative">
       {/* Decorative gradient top bar */}
@@ -57,7 +118,6 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
           <Badge variant="outline" className="bg-gradient-to-r from-[#51FFAE] to-[#6DB19E] text-white border-0 shadow-md">
             {catLabel}
           </Badge>
-
         </div>
 
         <CardTitle className="leading-tight group-hover:text-emerald-700 transition-colors duration-300 flex items-start gap-2">
@@ -72,12 +132,29 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
           <div className="relative bg-gradient-to-br from-slate-50 to-emerald-50 rounded-2xl p-6 border-2 border-dashed border-emerald-200 group-hover:border-emerald-300 transition-all duration-300 group-hover:shadow-inner">
             <div className="aspect-[4/3] relative overflow-hidden rounded-xl">
               {isPdf ? (
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-slate-600">
-                  <div className="w-16 h-16 rounded-xl bg-white border-2 border-emerald-200 flex items-center justify-center shadow">
-                    <Award className="w-8 h-8 text-emerald-600" />
-                  </div>
-                  <div className="text-sm">{t("certificates.pdfDoc")}</div>
-                </div>
+                <>
+                  {pdfPreviewUrl ? (
+                    <Image
+                      src={pdfPreviewUrl}
+                      alt={displayTitle}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-contain transition-transform duration-500 group-hover:scale-105"
+                      priority={false}
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-slate-600">
+                      <div className={`w-16 h-16 rounded-xl bg-white border-2 border-emerald-200 flex items-center justify-center shadow ${pdfLoading ? 'animate-pulse' : ''}`}>
+                        <Award className="w-8 h-8 text-emerald-600" />
+                      </div>
+                      <div className="text-sm">
+                        {pdfLoading
+                          ? t("certificates.loading", { defaultValue: "Yuklanmoqda..." })
+                          : t("certificates.pdfDoc")}
+                      </div>
+                    </div>
+                  )}
+                </>
               ) : (
                 <>
                   <Image
@@ -115,39 +192,27 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
                 <Building className="w-4 h-4 text-slate-600" />
                 <span>{displayIssuer}</span>
               </div>
-
             </div>
           </div>
 
           {/* Enhanced Actions */}
           <div className="flex gap-3 pt-2">
-            {isPdf ? (
-              <a
-                href={imageSrc}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1"
-              >
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-full bg-gradient-to-r from-[#51FFAE] to-[#6DB19E] text-white border-0 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
-                >
-                  <Eye className="w-4 h-4 mr-2" />
-                  {t("certificates.view")}
-                </Button>
-              </a>
-            ) : (
-              <Button
-                onClick={() => setOpen(true)}
-                variant="outline"
-                size="sm"
-                className="flex-1 bg-gradient-to-r from-[#51FFAE] to-[#6DB19E] text-white border-0 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
-              >
-                <Eye className="w-4 h-4 mr-2" />
-                {t("certificates.view")}
-              </Button>
-            )}
+            <Button
+              onClick={(e) => {
+                e.stopPropagation();
+                if (isPdf) {
+                  setPdfModalOpen(true);
+                } else {
+                  setOpen(true);
+                }
+              }}
+              variant="outline"
+              size="sm"
+              className="flex-1 bg-gradient-to-r from-[#51FFAE] to-[#6DB19E] text-white border-0 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+            >
+              <Eye className="w-4 h-4 mr-2" />
+              {t("certificates.view")}
+            </Button>
 
             <a
               href={imageSrc}
@@ -155,6 +220,7 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1"
+              onClick={(e) => e.stopPropagation()}
             >
               <Button
                 variant="secondary"
@@ -177,7 +243,6 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
                     <Shield className="w-5 h-5 text-emerald-600" />
                     {displayTitle}
                   </div>
-
                   <Button
                     size="sm"
                     variant="outline"
@@ -186,7 +251,6 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
                   >
                     {t("certificates.close")}
                   </Button>
-
                 </div>
                 <div className="p-4 overflow-auto">
                   <Image
@@ -195,6 +259,66 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
                     width={1600}
                     height={1200}
                     className="w-full h-auto rounded-lg object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* PDF Modal with iframe */}
+          {pdfModalOpen && isPdf && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+              <div
+                className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+                onClick={() => setPdfModalOpen(false)}
+              />
+              <div className="relative z-10 w-full max-w-6xl h-[90vh] bg-white rounded-xl shadow-2xl overflow-hidden border-2 border-emerald-200">
+                {/* Header */}
+                <div className="flex items-center justify-between p-4 border-b-2 border-emerald-100 bg-gradient-to-r from-emerald-50 to-white">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-[#51FFAE] to-[#6DB19E] flex items-center justify-center shadow-lg">
+                      <Shield className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-emerald-900">{displayTitle}</h3>
+                      <p className="text-sm text-emerald-600">{catLabel}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={imageSrc}
+                      download
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="border-emerald-200 text-emerald-700 hover:bg-emerald-50"
+                      >
+                        <Download className="w-4 h-4 mr-2" />
+                        {t("certificates.download")}
+                      </Button>
+                    </a>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => setPdfModalOpen(false)}
+                      className="cursor-pointer border-emerald-200 text-emerald-700 hover:bg-emerald-50"
+                    >
+                      {t("certificates.close")}
+                    </Button>
+                  </div>
+                </div>
+
+                {/* PDF Content */}
+                <div className="h-[calc(100%-5rem)] bg-slate-50">
+                  <iframe
+                    src={imageSrc}
+                    className="w-full h-full"
+                    title={displayTitle}
                   />
                 </div>
               </div>
