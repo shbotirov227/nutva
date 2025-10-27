@@ -4,7 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Image, { type StaticImageData } from "next/image";
-import { Building, Eye, Download, Award, Shield } from "lucide-react";
+import {
+  // Building, Eye,
+  Download, Award, Shield,
+  LucideSquareArrowOutUpRight
+} from "lucide-react";
 import { useTranslation } from "react-i18next";
 import * as pdfjsLib from "pdfjs-dist/webpack.mjs";
 
@@ -40,8 +44,8 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
   const itemKey = String(certificate.id);
 
   const displayTitle = t(`certificates.items.${itemKey}.title`, { defaultValue: certificate.title });
-  const displayDesc = t(`certificates.items.${itemKey}.description`, { defaultValue: certificate.description });
-  const displayIssuer = t(`certificates.items.${itemKey}.issuer`, { defaultValue: certificate.issuer });
+  // const displayDesc = t(`certificates.items.${itemKey}.description`, { defaultValue: certificate.description });
+  // const displayIssuer = t(`certificates.items.${itemKey}.issuer`, { defaultValue: certificate.issuer });
 
   const catLabel = (() => {
     switch (certificate.category) {
@@ -108,7 +112,7 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
   return (
     <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-white/80 backdrop-blur-sm border-2 border-emerald-100 hover:border-emerald-200 rounded-2xl overflow-hidden relative">
       {/* Decorative gradient top bar */}
-      <div className="h-2 bg-gradient-to-r from-[#51FFAE] to-[#6DB19E]"></div>
+      {/* <div className="h-2 bg-gradient-to-r from-[#51FFAE] to-[#6DB19E]"></div> */}
 
       <CardHeader className="pb-4 relative">
         {/* Floating gradient accent */}
@@ -129,7 +133,13 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
       <CardContent>
         <div className="space-y-5">
           {/* Certificate Preview with enhanced styling */}
-          <div className="relative bg-gradient-to-br from-slate-50 to-emerald-50 rounded-2xl p-6 border-2 border-dashed border-emerald-200 group-hover:border-emerald-300 transition-all duration-300 group-hover:shadow-inner">
+          <div
+            onClick={() => {
+              if (isPdf) {
+                window.open(imageSrc, "_blank", "noopener,noreferrer");
+              }
+            }}
+            className="relative bg-gradient-to-br from-slate-50 to-emerald-50 rounded-2xl p-6 border-2 border-dashed border-emerald-200 group-hover:border-emerald-300 transition-all duration-300 group-hover:shadow-inner cursor-pointer">
             <div className="aspect-[4/3] relative overflow-hidden rounded-xl">
               {isPdf ? (
                 <>
@@ -176,15 +186,22 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
 
               {/* Overlay on hover */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl flex items-end justify-center pb-4">
-                <div className="text-white text-sm bg-black/50 px-3 py-1 rounded-full backdrop-blur-sm cursor-pointer">
+                <div
+                  onClick={() => {
+                    if (isPdf) {
+                      window.open(imageSrc, "_blank", "noopener, noreferrer");
+                    }
+                  }}
+                  className="text-white text-sm bg-black/50 px-3 py-1 rounded-full backdrop-blur-sm cursor-pointer flex items-center">
                   {t("certificates.clickToZoom")}
+                  <LucideSquareArrowOutUpRight className="w-4 h-4 ml-2" />
                 </div>
               </div>
             </div>
           </div>
 
           {/* Certificate Info with better styling */}
-          <div className="space-y-3">
+          {/* <div className="space-y-3">
             <p className="text-slate-600 leading-relaxed">{displayDesc}</p>
 
             <div className="flex items-center gap-6 text-sm text-slate-500">
@@ -193,10 +210,10 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
                 <span>{displayIssuer}</span>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Enhanced Actions */}
-          <div className="flex gap-3 pt-2">
+          {/* <div className="flex gap-3 pt-2">
             <Button
               onClick={(e) => {
                 e.stopPropagation();
@@ -231,7 +248,7 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
                 {t("certificates.download")}
               </Button>
             </a>
-          </div>
+          </div> */}
 
           {/* Lightweight Modal - Only for non-PDF files */}
           {open && !isPdf && (
