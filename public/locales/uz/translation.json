@@ -695,5 +695,13 @@
         ],
         "cta": "Uzum Marketda xarid qiling",
         "imageAlt": "Uzum Market - muddatli to'lov"
+    },
+
+    "countdown": {
+        "title": "Aksiya yakunlanishiga",
+        "discountToday": "Bugun chegirma {{percent}}%",
+        "buyNow": "Hoziroq xarid qiling!",
+        "expiredTitle": "Chegirma tugadi!",
+        "expiredSubtitle": "Yangi aksiyalarni kuzatib boring"
     }
 }

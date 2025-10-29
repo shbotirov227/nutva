@@ -62,7 +62,7 @@ interface ProductInput {
 }
 
 function toProductInput(p: GetOneProductType): ProductInput {
-  const link = `https://nutva.uz/product/${p.id}?lang=ru`;
+  const link = `https://nutva.uz/ru/product/${p.id}`;
   const primaryImage = (p.imageUrls?.[0] || '').replace('http://nutva.uz', 'https://nutva.uz');
   const additionalImageLinks = (p.imageUrls || []).slice(1).map(u => u.replace('http://nutva.uz', 'https://nutva.uz'));
   const gtins = mapGtins(p);
