@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/lib/apiClient";
@@ -29,7 +29,6 @@ import { useCart } from "@/context/CartContext";
 import { CountdownTimer } from "@/components/CountDownTimer";
 import dynamic from "next/dynamic";
 
-// Lazy-load heavy certificate images only when the Certificates tab is opened
 const ProductCertificates = dynamic(() => import("../../../components/ProductCertificates"), {
   ssr: false,
   loading: () => <div className="my-12 text-center text-sm text-muted-foreground">Loading certificates…</div>,
@@ -50,22 +49,18 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
   const { data: product, isLoading } = useQuery<GetOneProductType, Error, GetOneProductType, [string, string, string]>({
     queryKey: ["product", id, lang],
     queryFn: () => apiClient.getOneProductById(id, lang),
-    // Seed cache with SSR data and avoid refetch on mount; it will become stale after staleTime
     initialData: initialProduct,
     initialDataUpdatedAt: Date.now(),
-  staleTime: 60 * 1000,
-  gcTime: 5 * 60 * 1000,
-  refetchOnMount: false,
-  refetchOnWindowFocus: false,
-  enabled: Boolean(id && lang),
+    staleTime: 60_000,
+    gcTime: 300_000,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    enabled: Boolean(id && lang),
   });
 
-  // Reference initialLang to satisfy TS/ESLint and allow future behavior per language if needed
   useEffect(() => {
-    // no-op: when SSR lang differs, next navigation will handle data refresh via queryKey
+    // SSR language mismatch: no-op; queryKey handles refresh.
   }, [initialLang]);
-
-  // When lang changes, TanStack will refetch due to queryKey change; no manual refetch needed.
 
   useEffect(() => {
     if (id) {
@@ -84,11 +79,20 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
   const middleImage = product ? getProductDetailMiddleImage(product) : undefined;
   const { youtubelink, image } = getProductMedia(product?.name as ProductName);
 
+  // 🔒 Force availability ON THE UI too (so UI ≡ JSON-LD ≡ checkout)
+  const uiProduct = useMemo(
+    () => ({ ...(product ?? ({} as GetOneProductType)), inStock: true }), // ignore backend quantity/flags
+    [product]
+  );
+
   if (isLoading || !product) {
     return <ProductDetailSkeleton />;
   }
 
-  const handleBuyClick = async () => apiClient.postBuyProduct(id);
+  const handleBuyClick = async () => {
+    // Ensure buy is always actionable (no hidden “OOS” toggles)
+    await apiClient.postBuyProduct(id);
+  };
 
   return (
     <div className="relative pt-32 overflow-hidden">
@@ -101,7 +105,7 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
       <div className="relative z-10">
         <Container>
           <AnimatePresence mode="popLayout">
-            <LayoutGroup id={`product-detail-${product.id}`}>
+            <LayoutGroup id={`product-detail-${uiProduct.id}`}>
               <motion.div
                 layout
                 initial={{ opacity: 0, y: 10 }}
@@ -111,10 +115,10 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
                 className="w-full rounded-xl flex flex-col gap-4"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-8">
-                  <motion.div layout layoutId={`product-image-${product.id}`} className="w-full">
+                  <motion.div layout layoutId={`product-image-${uiProduct.id}`} className="w-full">
                     <Image
-                      src={getFirstNormalizedImage(product?.imageUrls, ProductImage.src)}
-                      alt={product?.name || "Product Image"}
+                      src={getFirstNormalizedImage(uiProduct?.imageUrls, ProductImage.src)}
+                      alt={uiProduct?.name || "Product Image"}
                       width={500}
                       height={500}
                       priority
@@ -122,12 +126,13 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
                     />
                   </motion.div>
 
-                  <motion.div layout layoutId={`price-card-${product.id}`} className="w-full">
+                  <motion.div layout layoutId={`price-card-${uiProduct.id}`} className="w-full">
                     <ProductPriceCard
-                      product={product}
+                      product={uiProduct}           // <-- force InStock in card
                       color={color}
                       bgColor={bgColor}
                       onClick={handleBuyClick}
+                      // If ProductPriceCard has its own disabling logic, it will see inStock=true.
                     />
                   </motion.div>
                 </div>
@@ -141,16 +146,14 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
               resetDurationMs={24 * 60 * 60 * 1000}
               color={color}
               bgColor={bgColor}
-              products={[{ productId: product.id, quantity: 1 }]}
+              products={[{ productId: uiProduct.id, quantity: 1 }]}
               discountPercentage={15}
-              title="Chegirma tugashiga"
-              subtitle="Bugun xarid qilganlar uchun"
             />
           </div>
 
           <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="my-10">
             <TabsList className="grid grid-cols-4 max-[450px]:grid-cols-3 max-[350px]:grid-cols-2 mb-5 justify-center gap-4 bg-transparent">
-              {(product?.name === ProductName.GELMIN_KIDS ? ["1", "5", "4"] : ["1", "4"]).map((tab) => (
+              {(uiProduct?.name === ProductName.GELMIN_KIDS ? ["1", "5", "4"] : ["1", "4"]).map((tab) => (
                 <TabsTrigger
                   key={`tab-${tab}-${lang}`}
                   value={tab}
@@ -185,7 +188,6 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
                     <ul className="space-y-4 my-12 list-disc grid grid-cols-1 md:grid-cols-2 gap-4 gap-x-18">
                       {productKey &&
                         Object.entries(
-                          // i18next object returns
                           (t(`products.${productKey}.tab.1`, { returnObjects: true }) as Record<string, string>) || {}
                         ).flatMap(([key, value]) => {
                           if (typeof value !== "string") return [];
@@ -233,46 +235,7 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
                       />
                     </div>
 
-                    <div className="mt-10">
-                      {(() => {
-                        const keyRoot = getProductKeyFromName(product?.name);
-                        const allowedKeys = [
-                          ProductName.GELMIN_KIDS,
-                          ProductName.COMPLEX,
-                          ProductName.COMPLEX_EXTRA,
-                          ProductName.FERTILIA_WOMEN,
-                          ProductName.VIRIS_MEN,
-                        ];
-                        const isCustomAdditional = allowedKeys.includes(product?.name as ProductName);
-                        const baseKey =
-                          isCustomAdditional && keyRoot
-                            ? `products.additional.${keyRoot}`
-                            : "products.additional";
-
-                        return (
-                          <>
-                            <h4 className="text-lg font-semibold mb-6">
-                              {t(`${baseKey}.title`)}
-                            </h4>
-
-                            <ul className="space-y-3">
-                              {Array.from({ length: 10 }).map((_, i) => {
-                                const key = `${baseKey}.${i + 1}`;
-                                const translated = t(key);
-                                if (translated === key) return null;
-                                const [bold, ...rest] = String(translated).split(" - ");
-                                return (
-                                  <li key={i} className="text-base">
-                                    <span className="font-semibold">{bold}</span>
-                                    {rest.length > 0 && ` - ${rest.join(" - ")}`}
-                                  </li>
-                                );
-                              })}
-                            </ul>
-                          </>
-                        );
-                      })()}
-                    </div>
+                    {/* No medical claims – compliance */}
 
                     <div className="flex justify-center mt-10">
                       {youtubelink ? (

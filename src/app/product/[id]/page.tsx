@@ -5,6 +5,8 @@ import type { GetOneProductType } from "@/types/products/getOneProduct";
 import { resolveLang, getOgLocale, getAlternateLocales, buildLocalizedUrls, type Lang } from "@/lib/langUtils";
 import { cache } from "react";
 
+/* ---------- helpers ---------- */
+
 type RouteParams = Promise<{ id: string }>;
 
 function ensureHttps(url?: string): string | undefined {
@@ -24,7 +26,6 @@ function ensureHttps(url?: string): string | undefined {
 const trim = (s: string, n: number) =>
   s.length > n ? s.slice(0, n - 1).trimEnd() + "…" : s;
 
-// Optional fields you may add to your API without breaking types
 interface ProductOptionalFields {
   inStock?: boolean;
   ratingValue?: number;
@@ -44,14 +45,15 @@ const getProduct = cache(async function getProduct(
 ): Promise<GetOneProductType & ProductOptionalFields> {
   const base = "https://nutva.uz/api";
   const res = await fetch(`${base}/Product/${id}?lang=${lang}`, {
-    // Reuse result within the same request and revalidate periodically in production
-    next: { revalidate: 60 },
+    // 5 minutes is fine; we’re not reading stock from backend anyway.
+    next: { revalidate: 300 },
   });
   if (!res.ok) throw new Error("Failed to fetch product");
   return res.json();
 });
 
-/** ---- JSON-LD types ---- */
+/* ---------- JSON-LD types ---------- */
+
 interface AggregateRatingLD {
   "@type": "AggregateRating";
   ratingValue: number;
@@ -69,7 +71,7 @@ interface OfferLD {
   url: string;
   priceCurrency: string;
   price: number;
-  availability: string; // schema URL
+  availability: string;
   itemCondition: "https://schema.org/NewCondition" | string;
   seller: { "@type": "Organization"; name: string };
   priceValidUntil?: string;
@@ -106,6 +108,8 @@ interface BreadcrumbLD {
   }>;
 }
 
+/* ---------- metadata ---------- */
+
 export async function generateMetadata(
   { params }: { params: RouteParams }
 ): Promise<Metadata> {
@@ -113,11 +117,23 @@ export async function generateMetadata(
   const lang = await resolveLang();
   const product = await getProduct(id, lang);
 
-  const rawTitle = product.metaTitle || product.name || "Mahsulot";
-  // Always prioritize metaDescription (SEO optimized) over plain description
-  const rawDesc = product.metaDescription || product.description || "Mahsulot tavsifi";
-  const title = trim(rawTitle, 60);
-  const description = trim(rawDesc, 160);
+  // Strip risky medical claims (RU)
+  function cleanSeoText(input: string): string {
+    const patterns = [
+      /лечит\w*/gi, /лечение\w*/gi, /снимает\s+боль/gi, /при\s+[а-яё]+/gi,
+      /артроз\w*/gi, /гастрит\w*/gi, /грыж\w*/gi, /остеохондроз\w*/gi,
+      /гепатит\w*/gi, /цистит\w*/gi, /простатит\w*/gi, /бесплод\w*/gi,
+      /паразит\w*/gi, /гельминт\w*/gi,
+    ];
+    let s = input;
+    patterns.forEach((re) => { s = s.replace(re, ""); });
+    return s.replace(/\s{2,}/g, " ").replace(/\s+([,.;:!?])/g, "$1").trim();
+  }
+
+  const rawTitle = product.metaTitle || product.name || "Товар";
+  const rawDesc = product.metaDescription || product.description || "Описание товара";
+  const title = cleanSeoText(trim(rawTitle, 60));
+  const description = cleanSeoText(trim(rawDesc, 160));
 
   const ogLocale = getOgLocale(lang);
   const alternateLocales = getAlternateLocales(lang);
@@ -150,7 +166,6 @@ export async function generateMetadata(
       images: [{ url: image, width: 1200, height: 630, alt: title }],
       locale: ogLocale,
       alternateLocale: alternateLocales,
-      // Next Metadata openGraph.type union doesn't include raw 'product'; keep website here
       type: 'website',
     },
     twitter: {
@@ -174,35 +189,54 @@ export async function generateMetadata(
   };
 }
 
+/* ---------- page ---------- */
+
 export default async function Page({ params }: { params: RouteParams }) {
   const { id } = await params;
   const lang = await resolveLang();
   const product = await getProduct(id, lang);
 
-  const rawTitle = product.metaTitle || product.name || "Mahsulot";
-  const rawDesc = product.metaDescription || product.description || "Mahsulot tavsifi";
-  const title = trim(rawTitle, 60);
-  const description = trim(rawDesc, 160);
+  // Same SEO sanitize as metadata
+  function cleanSeoText(input: string): string {
+    const patterns = [
+      /лечит\w*/gi, /лечение\w*/gi, /снимает\s+боль/gi, /при\s+[а-яё]+/gi,
+      /артроз\w*/gi, /гастрит\w*/gi, /грыж\w*/gi, /остеохондроз\w*/gi,
+      /гепатит\w*/gi, /цистит\w*/gi, /простатит\w*/gi, /бесплод\w*/gi,
+      /паразит\w*/gi, /гельминт\w*/gi,
+    ];
+    let s = input;
+    patterns.forEach((re) => { s = s.replace(re, ""); });
+    return s.replace(/\s{2,}/g, " ").replace(/\s+([,.;:!?])/g, "$1").trim();
+  }
+
+  const rawTitle = product.metaTitle || product.name || "Товар";
+  const rawDesc = product.metaDescription || product.description || "Описание товара";
+  const title = cleanSeoText(trim(rawTitle, 60));
+  const description = cleanSeoText(trim(rawDesc, 160));
 
   const localizedUrls = buildLocalizedUrls(`/product/${id}`);
   const url = localizedUrls[lang];
-  // Prefer all images if available, ensure HTTPS for nutva.uz assets
+
+  // Ensure HTTPS for all images
   const images = (product.imageUrls || [])
     .map((u) => ensureHttps(u))
     .filter((u): u is string => Boolean(u));
   const image = images[0] || "https://nutva.uz/seo_banner.jpg";
 
   const priceAmount = Number(product.price ?? 0);
-  // Reflect availability if provided by API, otherwise default to in stock
-  const isInStock = typeof product.inStock === 'boolean' ? Boolean(product.inStock) : true;
-  const availabilitySchema = isInStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock";
 
-  // Optional future GTIN / SKU mapping (if backend adds gtin field) – placeholder logic
-  const sku = product.id; // could be replaced with product.sku if provided later
-  const priceValidUntil = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString().split("T")[0]; // 30 days
+  // 🔒 Force InStock for JSON-LD (must match UI & checkout)
+  const availabilitySchema = "https://schema.org/InStock";
 
-  // Map product-specific structured extras (gtin13, certifications, TU, serial, ingredients)
-  function getStructuredExtras(name?: string): { gtin13?: string; additionalProperty?: { '@type': 'PropertyValue'; name: string; value: string; }[] } {
+  const sku = product.id;
+  const priceValidUntil = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
+    .toISOString()
+    .split("T")[0];
+
+  function getStructuredExtras(name?: string): {
+    gtin13?: string;
+    additionalProperty?: { '@type': 'PropertyValue'; name: string; value: string }[];
+  } {
     if (!name) return {};
     const n = name.toLowerCase();
     const baseSerial = '001';
@@ -234,7 +268,7 @@ export default async function Page({ params }: { params: RouteParams }) {
           { '@type': 'PropertyValue', name: 'TU', value: 'TU 310713257-006:2025' },
           { '@type': 'PropertyValue', name: 'Serial Number', value: baseSerial },
           { '@type': 'PropertyValue', name: 'Capsules', value: '60 pcs (0.26 g each), Net weight 15.6 g' },
-          { '@type': 'PropertyValue', name: 'Ingredients', value: 'Indov (Rukola) 136.7 mg; Qora sedana ~46 mg; Uora andiz 37.7 mg; Bo‘ymodaron 12.5 mg; Qovoq urug‘i 12.4 mg; Makkai sano (Senna) 12.2 mg; Dastarbosh (Pizhma) 11.7 mg' },
+          { '@type': 'PropertyValue', name: 'Ingredients', value: "Indov (Rukola) 136.7 mg; Qora sedana ~46 mg; Uora andiz 37.7 mg; Bo‘ymodaron 12.5 mg; Qovoq urug‘i 12.4 mg; Makkai sano (Senna) 12.2 mg; Dastarbosh (Pizhma) 11.7 mg" },
         ],
       };
     }
@@ -245,7 +279,6 @@ export default async function Page({ params }: { params: RouteParams }) {
   const productJsonLd: ProductLD = {
     "@context": "https://schema.org/",
     "@type": "Product",
-    // Stable ID to link references of the same entity
     "@id": `${url}#product`,
     name: title,
     description,
@@ -257,17 +290,15 @@ export default async function Page({ params }: { params: RouteParams }) {
       "@type": "Offer",
       url,
       priceCurrency: "UZS",
-  price: priceAmount,
-      availability: availabilitySchema,
+      price: priceAmount,
+      availability: availabilitySchema,      // <-- always InStock
       itemCondition: "https://schema.org/NewCondition",
       seller: { "@type": "Organization", name: "Nutva" },
       priceValidUntil,
     },
-    category: 'Dietary Supplements',
+    category: "Dietary Supplements",
     additionalProperty: extras.additionalProperty,
-    // Help search engines connect the Product with this page entity
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore: mainEntityOfPage not in our local type
+
     mainEntityOfPage: url,
   };
 
@@ -278,18 +309,7 @@ export default async function Page({ params }: { params: RouteParams }) {
       ratingCount: product.ratingCount,
     };
   }
-  if (Array.isArray(product.reviews) && product.reviews.length > 0) {
-    productJsonLd.review = product.reviews.slice(0, 20).map((r) => ({
-      "@type": "Review",
-      author: r.author ? { "@type": "Person", name: r.author } : undefined,
-      datePublished: r.datePublished,
-      reviewRating:
-        typeof r.ratingValue === "number"
-          ? { "@type": "Rating", ratingValue: r.ratingValue, bestRating: 5 }
-          : undefined,
-      reviewBody: r.reviewBody,
-    }));
-  }
+
   const breadcrumbsLD: BreadcrumbLD | null =
     Array.isArray(product.breadcrumb) && product.breadcrumb.length > 0
       ? {
@@ -299,7 +319,7 @@ export default async function Page({ params }: { params: RouteParams }) {
             "@type": "ListItem",
             position: i + 1,
             name: b.name,
-            item: b.url,
+            item: b.url.startsWith("http") ? b.url : `https://nutva.uz${b.url}`,
           })),
         }
       : null;

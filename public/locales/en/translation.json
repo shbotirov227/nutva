@@ -698,5 +698,13 @@
         ],
         "cta": "Shop on Uzum Market",
         "imageAlt": "Uzum Market — installment purchase"
+    },
+
+    "countdown": {
+        "title": "Offer ends in",
+        "discountToday": "Today's discount is {{percent}}%",
+        "buyNow": "Shop now!",
+        "expiredTitle": "Discount ended!",
+        "expiredSubtitle": "Stay tuned for new offers"
     }
 }
