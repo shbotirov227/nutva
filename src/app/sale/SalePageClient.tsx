@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import Container from "@/components/Container";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
@@ -22,6 +22,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import Script from "next/script";
 import { useLang } from "@/context/LangContext";
+import { useDiscount } from "@/hooks/useDiscount";
+import { ProductName } from "@/types/enums";
 
 const SalePageClient: React.FC = () => {
   const { t } = useTranslation();
@@ -29,89 +31,220 @@ const SalePageClient: React.FC = () => {
   const router = useRouter();
   const { lang } = useLang();
 
-  const productsDataThree = [
-    {
-      title: t("sale.products_data.1.title"),
-      image: SaleCardImg1,
-      itemData: [
-        {
-          title: "Complex",
-          discountPrice: "990 000",
-          originalPrice: "1 170 000",
-          productImage: ProductGreen,
+  // const productsDataThree = [
+  //   {
+  //     title: t("sale.products_data.1.title"),
+  //     image: SaleCardImg1,
+  //     itemData: [
+  //       {
+  //         title: "Complex",
+  //         discountPrice: "990 000",
+  //         originalPrice: "1 170 000",
+  //         productImage: ProductGreen,
+  //       },
+  //       {
+  //         title: "Complex",
+  //         discountPrice: "990 000",
+  //         originalPrice: "1 170 000",
+  //         productImage: ProductGreen,
+  //       },
+  //     ],
+  //     totalPriceSection: {
+  //       totalPrice: "1 980 000",
+  //       originalPrice: "2 340 000",
+  //       discountPrice: "360 000",
+  //     },
+  //   },
+  //   {
+  //     title: t("sale.products_data.2.title"),
+  //     image: SaleCardImg2,
+  //     itemData: [
+  //       {
+  //         title: "Complex",
+  //         discountPrice: "640 000",
+  //         originalPrice: "1 170 000",
+  //         productImage: ProductGreen,
+  //       },
+  //       {
+  //         title: "Complex Extra",
+  //         discountPrice: "640 000",
+  //         originalPrice: "1 170 000",
+  //         productImage: ProductRed,
+  //       },
+  //       {
+  //         title: "Gelmin Kids",
+  //         discountPrice: "290 000",
+  //         originalPrice: "490 000",
+  //         productImage: ProductOrange,
+  //       },
+  //     ],
+  //     totalPriceSection: {
+  //       totalPrice: "1 570 000",
+  //       originalPrice: "2 830 000",
+  //       discountPrice: "1 260 000",
+  //     },
+  //   },
+  //   {
+  //     title: t("sale.products_data.3.title"),
+  //     image: SaleCardImg3,
+  //     itemData: [
+  //       {
+  //         title: `Complex 2 ${t("common.pcs")}`,
+  //         discountPrice: "560 000",
+  //         originalPrice: "1 170 000",
+  //         productImage: ProductGreen,
+  //       },
+  //       {
+  //         title: `Complex Extra 2 ${t("common.pcs")}`,
+  //         discountPrice: "560 000",
+  //         originalPrice: "1 170 000",
+  //         productImage: ProductRed,
+  //       },
+  //       {
+  //         title: "Gelmin Kids",
+  //         discountPrice: "220 000",
+  //         originalPrice: "490 000",
+  //         productImage: ProductOrange,
+  //       },
+  //     ],
+  //     totalPriceSection: {
+  //       totalPrice: "2 460 000",
+  //       originalPrice: "5 170 000",
+  //       discountPrice: "2 710 000",
+  //     },
+  //   },
+  // ];
+
+
+const complex1 = useDiscount(ProductName.COMPLEX, 1);
+  const complex2 = useDiscount(ProductName.COMPLEX, 2);
+  const complex3 = useDiscount(ProductName.COMPLEX, 3);
+  const complex5 = useDiscount(ProductName.COMPLEX, 5);
+
+  const extra1 = useDiscount(ProductName.COMPLEX_EXTRA, 1);
+  const extra3 = useDiscount(ProductName.COMPLEX_EXTRA, 3);
+  const extra5 = useDiscount(ProductName.COMPLEX_EXTRA, 5);
+
+  const gelmin1 = useDiscount(ProductName.GELMIN_KIDS, 1);
+  const gelmin3 = useDiscount(ProductName.GELMIN_KIDS, 3);
+  const gelmin5 = useDiscount(ProductName.GELMIN_KIDS, 5);
+
+  const productsDataThree = useMemo(() => {
+    const fmt = (n: number) => n.toLocaleString("uz-UZ");
+
+    return [
+      {
+        title: t("sale.products_data.1.title"),
+        image: SaleCardImg1,
+        itemData: [
+          {
+            title: "Complex",
+            discountPrice: fmt(complex2.pricePerUnit),
+            originalPrice: fmt(complex1.basePrice),
+            productImage: ProductGreen,
+          },
+          {
+            title: "Complex",
+            discountPrice: fmt(complex2.pricePerUnit),
+            originalPrice: fmt(complex1.basePrice),
+            productImage: ProductGreen,
+          },
+        ],
+        totalPriceSection: {
+          totalPrice: fmt(complex2.totalPrice),
+          originalPrice: fmt(complex1.basePrice * 2),
+          discountPrice: fmt((complex1.basePrice * 2) - complex2.totalPrice),
         },
-        {
-          title: "Complex",
-          discountPrice: "990 000",
-          originalPrice: "1 170 000",
-          productImage: ProductGreen,
-        },
-      ],
-      totalPriceSection: {
-        totalPrice: "1 980 000",
-        originalPrice: "2 340 000",
-        discountPrice: "360 000",
       },
-    },
-    {
-      title: t("sale.products_data.2.title"),
-      image: SaleCardImg2,
-      itemData: [
-        {
-          title: "Complex",
-          discountPrice: "640 000",
-          originalPrice: "1 170 000",
-          productImage: ProductGreen,
+
+      {
+        title: t("sale.products_data.2.title"),
+        image: SaleCardImg2,
+        itemData: [
+          {
+            title: "Complex",
+            discountPrice: fmt(complex3.pricePerUnit),
+            originalPrice: fmt(complex1.basePrice),
+            productImage: ProductGreen,
+          },
+          {
+            title: "Complex Extra",
+            discountPrice: fmt(extra3.pricePerUnit),
+            originalPrice: fmt(extra1.basePrice),
+            productImage: ProductRed,
+          },
+          {
+            title: "Gelmin Kids",
+            discountPrice: fmt(gelmin3.pricePerUnit),
+            originalPrice: fmt(gelmin1.basePrice),
+            productImage: ProductOrange,
+          },
+        ],
+        totalPriceSection: {
+          totalPrice: fmt(
+            complex3.pricePerUnit + extra3.pricePerUnit + gelmin3.pricePerUnit
+          ),
+          originalPrice: fmt(
+            complex1.basePrice + extra1.basePrice + gelmin1.basePrice
+          ),
+          discountPrice: fmt(
+            (complex1.basePrice + extra1.basePrice + gelmin1.basePrice) -
+            (complex3.pricePerUnit + extra3.pricePerUnit + gelmin3.pricePerUnit)
+          ),
         },
-        {
-          title: "Complex Extra",
-          discountPrice: "640 000",
-          originalPrice: "1 170 000",
-          productImage: ProductRed,
-        },
-        {
-          title: "Gelmin Kids",
-          discountPrice: "290 000",
-          originalPrice: "490 000",
-          productImage: ProductOrange,
-        },
-      ],
-      totalPriceSection: {
-        totalPrice: "1 570 000",
-        originalPrice: "2 830 000",
-        discountPrice: "1 260 000",
       },
-    },
-    {
-      title: t("sale.products_data.3.title"),
-      image: SaleCardImg3,
-      itemData: [
-        {
-          title: `Complex 2 ${t("common.pcs")}`,
-          discountPrice: "560 000",
-          originalPrice: "1 170 000",
-          productImage: ProductGreen,
+
+      {
+        title: t("sale.products_data.3.title"),
+        image: SaleCardImg3,
+        itemData: [
+          {
+            title: `Complex 2 ${t("common.pcs")}`,
+            discountPrice: fmt(complex5.pricePerUnit),
+            originalPrice: fmt(complex1.basePrice),
+            productImage: ProductGreen,
+          },
+          {
+            title: `Complex Extra 2 ${t("common.pcs")}`,
+            discountPrice: fmt(extra5.pricePerUnit),
+            originalPrice: fmt(extra1.basePrice),
+            productImage: ProductRed,
+          },
+          {
+            title: "Gelmin Kids",
+            discountPrice: fmt(gelmin5.pricePerUnit),
+            originalPrice: fmt(gelmin1.basePrice),
+            productImage: ProductOrange,
+          },
+        ],
+        totalPriceSection: {
+          totalPrice: fmt(
+            complex5.pricePerUnit + extra5.pricePerUnit + gelmin5.pricePerUnit
+          ),
+          originalPrice: fmt(
+            complex1.basePrice + extra1.basePrice + gelmin1.basePrice
+          ),
+          discountPrice: fmt(
+            (complex1.basePrice + extra1.basePrice + gelmin1.basePrice) -
+            (complex5.pricePerUnit + extra5.pricePerUnit + gelmin5.pricePerUnit)
+          ),
         },
-        {
-          title: `Complex Extra 2 ${t("common.pcs")}`,
-          discountPrice: "560 000",
-          originalPrice: "1 170 000",
-          productImage: ProductRed,
-        },
-        {
-          title: "Gelmin Kids",
-          discountPrice: "220 000",
-          originalPrice: "490 000",
-          productImage: ProductOrange,
-        },
-      ],
-      totalPriceSection: {
-        totalPrice: "2 460 000",
-        originalPrice: "5 170 000",
-        discountPrice: "2 710 000",
       },
-    },
-  ];
+    ];
+  }, [
+    t,
+    complex1,
+    complex2,
+    complex3,
+    complex5,
+    extra1,
+    extra3,
+    extra5,
+    gelmin1,
+    gelmin3,
+    gelmin5,
+  ]);
+
 
   const jsonLd = {
     "@context": "https://schema.org",
