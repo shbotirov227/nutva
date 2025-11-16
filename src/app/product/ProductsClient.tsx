@@ -15,6 +15,7 @@ import {
   Sparkles,
   ShoppingCart,
   ChevronRight,
+  Star,
 } from "lucide-react";
 
 import { apiClient } from "@/lib/apiClient";
@@ -39,6 +40,46 @@ type P = {
   price?: number;
   // ixtiyoriy: agar backendda eski narx bo'lsa −% ko'rsatamiz
   oldPrice?: number;
+};
+
+type HighlightBadge =
+  | { type: "bestSeller" }
+  | { type: "discount"; value: number };
+
+const getStaticHighlightForTitle = (title: string): HighlightBadge | null => {
+  const normalized = title.toLowerCase();
+
+  if (normalized.includes("complex extra")) {
+    return { type: "discount", value: 45 };
+  }
+
+  if (normalized.includes("gelmin kids")) {
+    return { type: "discount", value: 55 };
+  }
+
+  if (normalized.includes("complex")) {
+    return { type: "bestSeller" };
+  }
+
+  return null;
+};
+
+const getStaticReviewInfoForTitle = (title: string) => {
+  const normalized = title.toLowerCase();
+
+  if (normalized.includes("complex extra")) {
+    return { rating: 4.5, count: 187 };
+  }
+
+  if (normalized.includes("gelmin kids")) {
+    return { rating: 4.6, count: 214 };
+  }
+
+  if (normalized.includes("complex")) {
+    return { rating: 4.9, count: 321 };
+  }
+
+  return { rating: 4.8, count: 96 };
 };
 
 export default function ProductsClient() {
@@ -121,6 +162,9 @@ export default function ProductsClient() {
                   ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
                   : null;
 
+              const titleHighlight = getStaticHighlightForTitle(product.name);
+              const reviewInfo = getStaticReviewInfoForTitle(product.name);
+
               return (
                 <motion.article
                   key={product.id}
@@ -153,18 +197,35 @@ export default function ProductsClient() {
                     <div className="absolute -right-10 -top-10 h-48 w-48 rounded-full blur-3xl opacity-40 bg-emerald-400" />
                     <div className="absolute right-0 bottom-0 h-32 w-32 rounded-full blur-2xl opacity-30 bg-emerald-300" />
 
-                    {/* Discount / trust badge */}
-                    <div className="absolute left-3 top-3 z-20 flex flex-col gap-2">
-                      {pct ? (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-rose-600 text-white px-2.5 py-1 text-xs font-bold shadow-md">
-                          <Sparkles className="w-3.5 h-3.5" />
-                          −{pct}%
-                        </span>
-                      ) : null}
-                      <span className="inline-flex items-center gap-1 rounded-full bg-white/90 text-emerald-900 px-2.5 py-1 text-[11px] font-semibold shadow">
+                    {/* Highlight badge (right) + Halal (left) */}
+                    <div className="absolute inset-x-3 top-3 z-20 flex items-start justify-between gap-3">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-white/95 text-emerald-900 px-2.5 py-1 text-[11px] font-semibold shadow">
                         <BadgeCheck className="w-3.5 h-3.5" />
                         {t("product.halal", "Halal")}
                       </span>
+
+                      <div className="flex flex-col items-end gap-1">
+                        {titleHighlight?.type === "bestSeller" && (
+                          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500 text-emerald-950 px-3 py-1 text-xs font-extrabold shadow-md">
+                            <Sparkles className="w-3.5 h-3.5" />
+                            {t("product.bestSeller", "Best seller")}
+                          </span>
+                        )}
+
+                        {titleHighlight?.type === "discount" && (
+                          <span className="inline-flex items-center gap-1 rounded-full bg-rose-600 text-white px-3 py-1 text-xs font-bold shadow-md">
+                            <Sparkles className="w-3.5 h-3.5" />
+                            −{titleHighlight.value}% {t("product.discount", "chegirma")}
+                          </span>
+                        )}
+
+                        {!titleHighlight && pct ? (
+                          <span className="inline-flex items-center gap-1 rounded-full bg-rose-600 text-white px-3 py-1 text-xs font-bold shadow-md">
+                            <Sparkles className="w-3.5 h-3.5" />
+                            −{pct}%
+                          </span>
+                        ) : null}
+                      </div>
                     </div>
 
                     <motion.div
@@ -198,6 +259,24 @@ export default function ProductsClient() {
                     <p className="text-[15px] text-emerald-900/90 mt-3 line-clamp-2">
                       {product.description}
                     </p>
+
+                    {/* Reviews row (static mapping by title) */}
+                    <div className="mt-3 flex items-center gap-2 text-[13px] text-emerald-900/80">
+                      <div className="flex items-center gap-0.5">
+                        {Array.from({ length: 5 }).map((_, idx) => (
+                          <Star
+                            key={idx}
+                            className="w-4 h-4 text-amber-400 fill-amber-400"
+                          />
+                        ))}
+                      </div>
+                      <span className="font-semibold tabular-nums">
+                        {reviewInfo.rating.toFixed(1)}
+                      </span>
+                      <span className="text-emerald-800/70">
+                        · {reviewInfo.count}+ {t("product.reviews", "izohlar")}
+                      </span>
+                    </div>
 
                     {/* Price row */}
                     <div className="mt-4 flex items-end gap-3">

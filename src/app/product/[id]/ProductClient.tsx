@@ -27,6 +27,7 @@ import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { getProductMedia } from "@/helper/getProductMedia";
 import { useCart } from "@/context/CartContext";
 import { CountdownTimer } from "@/components/CountDownTimer";
+import ProductReviewSlider from "@/components/ProductReviewSlider";
 import dynamic from "next/dynamic";
 
 const ProductCertificates = dynamic(() => import("../../../components/ProductCertificates"), {
@@ -39,6 +40,8 @@ type Props = {
   initialProduct: GetOneProductType;
   initialLang: "uz" | "ru" | "en";
 };
+
+// old inline static review logic removed in favor of ProductReviewSlider
 
 export default function ProductDetailClient({ id, initialProduct, initialLang }: Props) {
   const [activeTab, setActiveTab] = useState("1");
@@ -185,6 +188,8 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
               >
                 <Container>
                   <TabsContent value="1">
+                    <ProductReviewSlider productName={uiProduct.name} />
+
                     <ul className="space-y-4 my-12 list-disc grid grid-cols-1 md:grid-cols-2 gap-4 gap-x-18">
                       {productKey &&
                         Object.entries(
