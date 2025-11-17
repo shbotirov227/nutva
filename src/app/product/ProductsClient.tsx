@@ -68,11 +68,11 @@ const getStaticReviewInfoForTitle = (title: string) => {
   const normalized = title.toLowerCase();
 
   if (normalized.includes("complex extra")) {
-    return { rating: 4.5, count: 187 };
+    return { rating: 4.8, count: 187 };
   }
 
   if (normalized.includes("gelmin kids")) {
-    return { rating: 4.6, count: 214 };
+    return { rating: 4.7, count: 214 };
   }
 
   if (normalized.includes("complex")) {
