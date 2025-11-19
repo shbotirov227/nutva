@@ -12,7 +12,6 @@ import {
   ShieldCheck,
   Leaf,
   Truck,
-  Sparkles,
   ShoppingCart,
   ChevronRight,
   Star,
@@ -42,23 +41,24 @@ type P = {
   oldPrice?: number;
 };
 
-type HighlightBadge =
-  | { type: "bestSeller" }
-  | { type: "discount"; value: number };
+type HighlightBadge = {
+  type: "hit";
+  value: number;
+};
 
 const getStaticHighlightForTitle = (title: string): HighlightBadge | null => {
   const normalized = title.toLowerCase();
 
   if (normalized.includes("complex extra")) {
-    return { type: "discount", value: 45 };
+    return { type: "hit", value: 45 };
   }
 
   if (normalized.includes("gelmin kids")) {
-    return { type: "discount", value: 55 };
+    return { type: "hit", value: 55 };
   }
 
   if (normalized.includes("complex")) {
-    return { type: "bestSeller" };
+    return { type: "hit", value: 50 };
   }
 
   return null;
@@ -205,25 +205,34 @@ export default function ProductsClient() {
                       </span>
 
                       <div className="flex flex-col items-end gap-1">
-                        {titleHighlight?.type === "bestSeller" && (
-                          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500 text-emerald-950 px-3 py-1 text-xs font-extrabold shadow-md">
-                            <Sparkles className="w-3.5 h-3.5" />
-                            {t("product.bestSeller", "Best seller")}
-                          </span>
-                        )}
-
-                        {titleHighlight?.type === "discount" && (
-                          <span className="inline-flex items-center gap-1 rounded-full bg-rose-600 text-white px-3 py-1 text-xs font-bold shadow-md">
-                            <Sparkles className="w-3.5 h-3.5" />
-                            −{titleHighlight.value}% {t("product.discount", "chegirma")}
-                          </span>
+                        {titleHighlight?.type === "hit" && (
+                          <div 
+                            className="relative bg-emerald-600 text-white px-4 py-2 shadow-lg"
+                            style={{
+                              clipPath: "polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%)",
+                              transform: "skewX(-5deg)"
+                            }}
+                          >
+                            <div className="absolute left-2 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-white rounded-full" />
+                            <span className="relative text-xs font-extrabold uppercase tracking-wide" style={{ transform: "skewX(5deg)", display: "inline-block" }}>
+                              ХИТ -{titleHighlight.value}%
+                            </span>
+                          </div>
                         )}
 
                         {!titleHighlight && pct ? (
-                          <span className="inline-flex items-center gap-1 rounded-full bg-rose-600 text-white px-3 py-1 text-xs font-bold shadow-md">
-                            <Sparkles className="w-3.5 h-3.5" />
-                            −{pct}%
-                          </span>
+                          <div 
+                            className="relative bg-emerald-600 text-white px-4 py-2 shadow-lg"
+                            style={{
+                              clipPath: "polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%)",
+                              transform: "skewX(-5deg)"
+                            }}
+                          >
+                            <div className="absolute left-2 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-white rounded-full" />
+                            <span className="relative text-xs font-extrabold uppercase tracking-wide" style={{ transform: "skewX(5deg)", display: "inline-block" }}>
+                              ХИТ -{pct}%
+                            </span>
+                          </div>
                         ) : null}
                       </div>
                     </div>
@@ -278,6 +287,18 @@ export default function ProductsClient() {
                       </span>
                     </div>
 
+                    {/* Batafsil link */}
+                    <div className="mt-3">
+                      <button
+                        onClick={() => router.push(`/${lang}/product/${product.id}`)}
+                        className="group inline-flex items-center text-sm font-semibold text-emerald-700 hover:text-emerald-900 cursor-pointer transition-colors"
+                        aria-label={`${product.name} haqida batafsil`}
+                      >
+                        {t("common.more")}
+                        <ChevronRight className="ml-0.5 w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                      </button>
+                    </div>
+
                     {/* Price row */}
                     <div className="mt-4 flex items-end gap-3">
                       {product.price != null && (
@@ -305,30 +326,15 @@ export default function ProductsClient() {
                       </span>
                     </div>
 
-                    {/* CTAs */}
-                    <div className="mt-5 flex gap-2">
+                    {/* Savatga qo'shish button */}
+                    <div className="mt-4">
                       <Button
                         size="lg"
-                        className="group flex-1 font-bold cursor-pointer"
-                        style={{
-                          background: "linear-gradient(90deg, #10B981, #34D399)",
-                          color: "#fff",
-                        }}
-                        onClick={() => router.push(`/${lang}/product/${product.id}`)}
-                        aria-label={`${product.name} haqida batafsil`}
-                      >
-                        {t("common.more")}
-                        <ChevronRight className="ml-1 w-5 h-5 transition-transform group-hover:translate-x-0.5" />
-                      </Button>
-
-                      <Button
-                        size="lg"
-                        variant="outline"
                         onClick={() => handleAdd(product)}
-                        className="flex-1 border-emerald-300 text-emerald-900 hover:bg-emerald-50 font-semibold cursor-pointer"
+                        className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold cursor-pointer h-12"
                         aria-label={`${product.name} savatga qo'shish`}
                       >
-                        <ShoppingCart className="mr-0 w-5 h-5" />
+                        <ShoppingCart className="mr-2 w-5 h-5" />
                         {t("product.addToCart")}
                       </Button>
                     </div>
