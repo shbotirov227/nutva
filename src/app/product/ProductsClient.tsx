@@ -157,10 +157,10 @@ export default function ProductsClient() {
             {products.map((product) => {
               const cover = getFirstNormalizedImage(product.imageUrls, NoImage.src);
 
-              const pct =
-                product.oldPrice && product.price && product.oldPrice > product.price
-                  ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
-                  : null;
+              // const pct =
+              //   product.oldPrice && product.price && product.oldPrice > product.price
+              //     ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
+              //     : null;
 
               const titleHighlight = getStaticHighlightForTitle(product.name);
               const reviewInfo = getStaticReviewInfoForTitle(product.name);
@@ -198,30 +198,36 @@ export default function ProductsClient() {
                     <div className="absolute right-0 bottom-0 h-32 w-32 rounded-full blur-2xl opacity-30 bg-emerald-300" />
 
                     {/* Highlight badge (right) + Halal (left) */}
-                    <div className="absolute inset-x-3 top-3 z-20 flex items-start justify-between gap-3">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-white/95 text-emerald-900 px-2.5 py-1 text-[11px] font-semibold shadow">
+                    <div className="absolute inset-x-3 right-1 top-1 z-20 flex items-start justify-between gap-3">
+                      <span className="inline-flex items-center mt-4 gap-1 rounded-full bg-white/95 text-emerald-900 px-2.5 py-1 text-[11px] font-semibold shadow">
                         <BadgeCheck className="w-3.5 h-3.5" />
                         {t("product.halal", "Halal")}
                       </span>
 
                       <div className="flex flex-col items-end gap-1">
                         {titleHighlight?.type === "hit" && (
-                          <div 
-                            className="relative bg-emerald-600 text-white px-4 py-2 shadow-lg"
-                            style={{
-                              clipPath: "polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%)",
-                              transform: "skewX(-5deg)"
-                            }}
-                          >
-                            <div className="absolute left-2 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-white rounded-full" />
-                            <span className="relative text-xs font-extrabold uppercase tracking-wide" style={{ transform: "skewX(5deg)", display: "inline-block" }}>
-                              ХИТ -{titleHighlight.value}%
-                            </span>
+                          <div className="absolute -top-1 -right-1 z-10">
+                            <div className="relative inline-block">
+                              {/* SVG Flag/Bookmark Badge */}
+                              <svg width="70" height="90" viewBox="0 0 70 90" className="drop-shadow-lg">
+                                <path
+                                  d="M 5,0 L 65,0 C 67.76,0 70,2.24 70,5 L 70,90 L 35,75 L 0,90 L 0,5 C 0,2.24 2.24,0 5,0 Z"
+                                  fill="#059669"
+                                />
+                              </svg>
+                              {/* Text overlay */}
+                              <div className="absolute inset-0 flex flex-col items-center justify-start pt-4 text-white font-bold">
+                                <div className="text-xs tracking-wider">ХИТ</div>
+                                <div className="text-xl leading-tight mt-1">-{titleHighlight.value}%</div>
+                              </div>
+                            </div>
                           </div>
                         )}
 
-                        {!titleHighlight && pct ? (
-                          <div 
+
+
+                        {/* {!titleHighlight && pct ? (
+                          <div
                             className="relative bg-emerald-600 text-white px-4 py-2 shadow-lg"
                             style={{
                               clipPath: "polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%)",
@@ -233,7 +239,7 @@ export default function ProductsClient() {
                               ХИТ -{pct}%
                             </span>
                           </div>
-                        ) : null}
+                        ) : null} */}
                       </div>
                     </div>
 
