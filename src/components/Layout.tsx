@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import Snowfall from "./Snowfall";
 
 const Layout = ({ children }: { children: ReactNode }) => {
 	const pathname = usePathname();
@@ -14,6 +15,9 @@ const Layout = ({ children }: { children: ReactNode }) => {
 
 	return (
 		<div className="flex flex-col min-h-screen">
+			{/* New Year Snowfall Animation */}
+			<Snowfall />
+
 			{!isAdminRoute && !isTaplinksRoute && <Header />}
 
 			<AnimatePresence mode="wait">
