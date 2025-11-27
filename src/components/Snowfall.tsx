@@ -11,12 +11,14 @@ interface Snowflake {
   opacity: number;
 }
 
+const SNOWFLAKE_COUNT = 50;
+
 const Snowfall = () => {
   const [snowflakes, setSnowflakes] = useState<Snowflake[]>([]);
 
   useEffect(() => {
     // Generate snowflakes only on client side
-    const flakes: Snowflake[] = Array.from({ length: 50 }, (_, i) => ({
+    const flakes: Snowflake[] = Array.from({ length: SNOWFLAKE_COUNT }, (_, i) => ({
       id: i,
       left: Math.random() * 100,
       animationDuration: 5 + Math.random() * 10,
