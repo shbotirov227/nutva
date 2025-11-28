@@ -13,6 +13,7 @@ import { useCart } from "@/context/CartContext";
 // import { AnimatePresence } from "framer-motion";
 import { useLang } from "@/context/LangContext";
 
+
 const NavLink = ({
   href,
   children,
@@ -136,58 +137,59 @@ const Header: React.FC = () => {
           ${visible ? "translate-y-0" : "-translate-y-full"}
         `}
       >
-        <Container>
-          <div className="flex items-center justify-between">
-            <Link href={`/${lang}`} className="flex items-center">
-              <Image
-                src="/nutva-logo.png"
-                alt="Logo"
-                width={120}
-                height={40}
-                className="inline-block mr-2 w-[120px] h-auto"
-                priority
-                fetchPriority="high"
-              />
-            </Link>
-            <nav className="hidden md:flex mt-2 items-center">
-              <ul className="flex space-x-5">
-                {navLinks.map((item) => (
-                  <li key={`${item.href}-${item.label}`}>
-                    <NavLink href={item.href}>{item.label}</NavLink>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-            <div className="flex items-center justify-between gap-5">
-              {/* <div className="flex items-center justify-between"> */}
-              <Link href={`/${lang}/cart`} className="relative">
-                <ShoppingCart className="cursor-pointer" size={25} />
-                {cartCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                    {cartCount}
-                  </span>
-                )}
+        <div className="relative w-full">
+          <Container>
+            <div className="relative z-10 flex items-center justify-between">
+              <Link href={`/${lang}`} className="flex items-center">
+                <Image
+                  src="/nutva-logo.png"
+                  alt="Logo"
+                  width={120}
+                  height={40}
+                  className="inline-block mr-2 w-[120px] h-auto"
+                  priority
+                  fetchPriority="high"
+                />
               </Link>
-              <LanguageSwitcher />
-              {/* </div> */}
-              <Button
-                size={"icon"}
-                className="md:hidden flex items-center justify-center border p-2 cursor-pointer"
-                onClick={() => setMobileMenu(true)}
-                aria-label="Open menu"
-              >
-                <Menu size={32} />
-              </Button>
+              <nav className="hidden md:flex mt-2 items-center">
+                <ul className="flex space-x-5">
+                  {navLinks.map((item) => (
+                    <li key={`${item.href}-${item.label}`}>
+                      <NavLink href={item.href}>{item.label}</NavLink>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+              <div className="flex items-center justify-between gap-5">
+                {/* <div className="flex items-center justify-between"> */}
+                <Link href={`/${lang}/cart`} className="relative">
+                  <ShoppingCart className="cursor-pointer" size={25} />
+                  {cartCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                      {cartCount}
+                    </span>
+                  )}
+                </Link>
+                <LanguageSwitcher />
+                {/* </div> */}
+                <Button
+                  size={"icon"}
+                  className="md:hidden flex items-center justify-center border p-2 cursor-pointer"
+                  onClick={() => setMobileMenu(true)}
+                  aria-label="Open menu"
+                >
+                  <Menu size={32} />
+                </Button>
+              </div>
             </div>
-
-
-          </div>
-        </Container>
+          </Container>
+        </div>
       </header>
       {mobileMenu && (
         <AnimatePresence mode="wait">
           {/* Fon qorayishi */}
           <motion.div
+            key="mobile-menu-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -198,6 +200,7 @@ const Header: React.FC = () => {
 
           {/* Menyu o‘zi */}
           <motion.div
+            key="mobile-menu-panel"
             ref={menuRef}
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
@@ -245,21 +248,6 @@ const Header: React.FC = () => {
           </motion.div>
         </AnimatePresence>
       )}
-      {/* <style jsx global>{`
-        @keyframes fadein {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fadein {
-          animation: fadein 0.35s cubic-bezier(0.7, 0, 0.2, 1);
-        }
-      `}</style> */}
     </>
   );
 };

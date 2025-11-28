@@ -188,7 +188,11 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
               >
                 <Container>
                   <TabsContent value="1">
-                    <ProductReviewSlider productName={uiProduct.name} />
+                    <ProductReviewSlider
+                      productName={uiProduct.name}
+                      accentColor={color}
+                      surfaceColor={bgColor}
+                    />
 
                     <ul className="space-y-4 my-12 list-disc grid grid-cols-1 md:grid-cols-2 gap-4 gap-x-18">
                       {productKey &&

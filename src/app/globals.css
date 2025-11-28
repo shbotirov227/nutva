@@ -259,3 +259,44 @@ html, body {
   margin-bottom: 10px !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
+/* Seasonal snow overlay */
+.snowfall-overlay {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: 60;
+	overflow: hidden;
+	mix-blend-mode: screen;
+}
+
+.snowflake {
+	position: absolute;
+	top: -10px;
+	border-radius: 50%;
+	background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.05) 70%);
+	box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+	animation-name: snowfall-fall;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	will-change: transform;
+}
+
+.snowflake:nth-of-type(odd) {
+	filter: blur(0.5px);
+}
+
+@keyframes snowfall-fall {
+	0% {
+		transform: translate3d(0, -5vh, 0);
+	}
+	100% {
+		transform: translate3d(var(--snow-drift, 0), 110vh, 0);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.snowfall-overlay {
+		display: none;
+	}
+}

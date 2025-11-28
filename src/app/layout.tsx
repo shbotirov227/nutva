@@ -21,6 +21,7 @@ import BuyModalContainerDynamic from "@/components/BuyModalContainerDynamic";
 import FloatingButtons from "@/components/FloatingButtons";
 import { WebVitals } from "@/components/WebVitals";
 import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistration";
+import Snowfall from "@/components/Snowfall";
 
 const inter = Inter({ subsets: ["latin", "cyrillic"], display: "swap", variable: "--font-inter" });
 
@@ -404,6 +405,7 @@ fbq('track', 'PageView');`}
             <RawCartProvider>
               <BuyProvider>
                 <Layout>
+                  <Snowfall />
                   <ServiceWorkerRegistration />
                   <WebVitals />
                   <TrackVisit />

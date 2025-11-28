@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
 import { useLang } from "@/context/LangContext";
@@ -17,6 +17,25 @@ export type ProductReviewSlide = {
 
 type ProductReviewSliderProps = {
   productName?: string | null;
+  accentColor?: string;
+  surfaceColor?: string;
+};
+
+const hexToRgba = (hexColor?: string, alpha = 1) => {
+  if (!hexColor) return `rgba(0, 0, 0, ${alpha})`;
+  let hex = hexColor.trim().replace("#", "");
+  if (![3, 6].includes(hex.length)) return `rgba(0, 0, 0, ${alpha})`;
+  if (hex.length === 3) {
+    hex = hex
+      .split("")
+      .map((char) => char + char)
+      .join("");
+  }
+  const num = parseInt(hex, 16);
+  const r = (num >> 16) & 255;
+  const g = (num >> 8) & 255;
+  const b = num & 255;
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 };
 
 const getSlidesForProduct = (name?: string | null): ProductReviewSlide[] => {
@@ -113,7 +132,7 @@ const getSlidesForProduct = (name?: string | null): ProductReviewSlide[] => {
   return [];
 };
 
-export default function ProductReviewSlider({ productName }: ProductReviewSliderProps) {
+export default function ProductReviewSlider({ productName, accentColor, surfaceColor }: ProductReviewSliderProps) {
   const { lang } = useLang();
   const slides = useMemo(() => getSlidesForProduct(productName), [productName]);
 
@@ -122,85 +141,110 @@ export default function ProductReviewSlider({ productName }: ProductReviewSlider
   if (!slides.length) return null;
 
   const current = slides[index];
+  const accent = accentColor || "#047857";
+  const surface = surfaceColor || "#ECFDF5";
+  const softAccent = hexToRgba(accent, 0.2);
+  const borderColor = hexToRgba(accent, 0.35);
+  const reviewTagBg = hexToRgba(accent, 0.1);
+  const gradientBg = `linear-gradient(135deg, rgba(255,255,255,0.96), ${hexToRgba(surface, 0.82)})`;
 
   const handleNext = () => setIndex((prev) => (prev + 1) % slides.length);
   const handlePrev = () => setIndex((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
-    <div className="mb-10 w-full max-w-3xl rounded-3xl bg-white shadow-lg border border-emerald-100/80 p-5 sm:p-7">
-      <div className="flex items-center justify-between gap-3 mb-3">
-        <div>
-          <p className="text-xs sm:text-sm uppercase tracking-[0.18em] text-emerald-500 font-semibold">
-            {productName}
-          </p>
-          <p className="inline-flex mt-2 items-center rounded-full bg-emerald-50 px-4 py-1.5 text-[11px] sm:text-xs font-semibold text-emerald-700">
-            {current.tag}
-          </p>
-        </div>
-        <div className="flex flex-col items-end gap-1">
-          <div className="flex items-center gap-0.5">
-            {Array.from({ length: 5 }).map((_, idx) => (
-              <Star key={idx} className="w-4 h-4 text-amber-400 fill-amber-400" />
-            ))}
-          </div>
-          <span className="text-sm font-semibold text-emerald-900 tabular-nums">
-            {current.rating.toFixed(1)}
-          </span>
-          <span className="text-[11px] text-emerald-800/70">
-            {lang === "ru" ? "Отзывы" : lang === "en" ? "Reviews" : "Izohlar"}
-          </span>
-        </div>
-      </div>
+    <div
+      className="relative mb-10 w-full max-w-4xl overflow-hidden rounded-3xl border px-5 py-6 sm:px-8 sm:py-9 shadow-[0_20px_60px_rgba(0,0,0,0.08)] backdrop-blur"
+      style={{
+        borderColor,
+        background: gradientBg,
+      }}
+    >
+      <div
+        className="pointer-events-none absolute inset-y-0 -right-16 hidden sm:block w-64 rounded-full blur-3xl"
+        style={{ background: softAccent }}
+      />
 
-      <AnimatePresence mode="wait">
-        <motion.p
-          key={current.id}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.25 }}
-          className="text-sm sm:text-base leading-relaxed text-emerald-900/90 min-h-[90px]"
-        >
-          {current.body}
-        </motion.p>
-      </AnimatePresence>
-
-      <div className="mt-4 flex items-center justify-between gap-3">
-        <p className="text-xs sm:text-sm font-medium text-emerald-700/90">
-          {current.author}
-        </p>
-        <div className="flex items-center gap-2">
-          <Button
-            type="button"
-            size="icon"
-            variant="outline"
-            className="h-9 w-9 rounded-full border-emerald-200 text-emerald-700 hover:bg-emerald-50"
-            onClick={handlePrev}
-            aria-label="Previous review"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </Button>
-          <div className="flex items-center gap-1">
-            {slides.map((slide, i) => (
-              <span
-                key={slide.id}
-                className={
-                  "h-1.5 w-1.5 rounded-full transition-colors " +
-                  (i === index ? "bg-emerald-500" : "bg-emerald-200")
-                }
-              />
-            ))}
+      <div className="relative z-10 flex flex-col gap-6">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="text-[11px] sm:text-xs uppercase tracking-[0.28em] font-semibold" style={{ color: accent }}>
+              {productName}
+            </p>
+            <p
+              className="inline-flex mt-3 items-center rounded-full px-4 py-1.5 text-[11px] sm:text-xs font-semibold"
+              style={{ background: reviewTagBg, color: accent }}
+            >
+              {current.tag}
+            </p>
           </div>
-          <Button
-            type="button"
-            size="icon"
-            variant="outline"
-            className="h-9 w-9 rounded-full border-emerald-200 text-emerald-700 hover:bg-emerald-50"
-            onClick={handleNext}
-            aria-label="Next review"
+          <div className="flex items-center gap-3 rounded-2xl bg-white/80 px-4 py-2 text-slate-900 shadow-inner">
+            <div className="flex items-center gap-1">
+              {Array.from({ length: 5 }).map((_, idx) => (
+                <Star key={idx} className="w-4 h-4" style={{ color: accent }} fill={accent} />
+              ))}
+            </div>
+            <div className="flex flex-col leading-none">
+              <span className="text-lg font-semibold text-slate-800 tabular-nums">
+                {current.rating.toFixed(1)}
+              </span>
+              <span className="text-[11px] uppercase tracking-wide text-slate-500">
+                {lang === "ru" ? "Отзывы" : lang === "en" ? "Reviews" : "Izohlar"}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={current.id}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25 }}
+            className="text-base sm:text-lg leading-relaxed text-slate-900/90"
           >
-            <ChevronRight className="w-4 h-4" />
-          </Button>
+            {current.body}
+          </motion.p>
+        </AnimatePresence>
+
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm font-semibold text-slate-700/90">{current.author}</p>
+          <div className="flex items-center gap-2">
+            <Button
+              type="button"
+              size="icon"
+              variant="ghost"
+              className="h-10 w-10 rounded-full border"
+              style={{ borderColor, color: accent }}
+              onClick={handlePrev}
+              aria-label="Previous review"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </Button>
+            <div className="flex items-center gap-2">
+              {slides.map((slide, i) => (
+                <span
+                  key={slide.id}
+                  className="h-1.5 w-6 rounded-full transition-all"
+                  style={{
+                    background: i === index ? accent : softAccent,
+                    opacity: i === index ? 1 : 0.6,
+                  }}
+                />
+              ))}
+            </div>
+            <Button
+              type="button"
+              size="icon"
+              variant="ghost"
+              className="h-10 w-10 rounded-full border"
+              style={{ borderColor, color: accent }}
+              onClick={handleNext}
+              aria-label="Next review"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
       </div>
     </div>
