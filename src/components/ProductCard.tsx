@@ -6,13 +6,11 @@ import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import NoImage from "@/assets/images/noimage.webp";
 import { Button } from "./ui/button";
-import { useCart } from "@/context/CartContext";
 import { GetOneProductType } from "@/types/products/getOneProduct";
 // import { ProductName } from "@/types/enums";
 import { FormModal } from "./FormModal";
 import { useLang } from "@/context/LangContext";
-import { BadgeCheck, Leaf, Truck, ShoppingCart } from "lucide-react";
-import { toast } from "react-toastify";
+import { BadgeCheck, Leaf, Truck, Star } from "lucide-react";
 import { getFirstNormalizedImage } from "@/lib/imageUtils";
 
 type ProductCardProps = {
@@ -46,7 +44,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
   activeColor,
   product,
 }) => {
-  const { addToCart } = useCart();
   const { t } = useTranslation();
   const { lang } = useLang();
 
@@ -63,14 +60,49 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const toAlpha = (hsl: string, a: number) => hsl.replace("hsl", "hsla").replace(")", `, ${a})`);
   const buttonGradient = `linear-gradient(90deg, ${accentColor}, ${accentColorDark})`;
 
-  const handleAddToCart = () => {
-    if (!product) return;
-    addToCart({ ...product, quantity: 1 });
-    toast.success(t("product.addedToCart"), {
-      position: "top-center",
-      autoClose: 1200,
-    });
+  // Reviews info by product title (same as ProductsClient)
+  const getReviewInfo = () => {
+    if (!product) return { rating: 4.8, count: 96 };
+    const lowerTitle = product.name.toLowerCase();
+    
+    if (lowerTitle.includes("extra")) {
+      return { rating: 4.8, count: 187 };
+    }
+    
+    if (lowerTitle.includes("complex") && !lowerTitle.includes("extra")) {
+      return { rating: 4.9, count: 321 };
+    }
+    
+    if (lowerTitle.includes("gelmin")) {
+      return { rating: 4.7, count: 214 };
+    }
+    
+    return { rating: 4.8, count: 96 };
   };
+
+  const reviewInfo = getReviewInfo();
+
+  // Get XIT badge info (same logic as ProductsClient)
+  const getHighlightBadge = () => {
+    if (!product) return null;
+    const normalized = product.name.toLowerCase();
+
+    if (normalized.includes("complex extra")) {
+      return { type: "hit" as const, value: 45 };
+    }
+
+    if (normalized.includes("gelmin kids")) {
+      return { type: "hit" as const, value: 55 };
+    }
+
+    if (normalized.includes("complex")) {
+      return { type: "hit" as const, value: 50 };
+    }
+
+    return null;
+  };
+
+  const titleHighlight = getHighlightBadge();
 
   return (
     <div
@@ -82,17 +114,25 @@ const ProductCard: React.FC<ProductCardProps> = ({
         `backdrop-blur-[6px] bg-white/5 ${className ?? ""}`
       }
     >
-      {/* Floating Add to Cart icon */}
-      {product ? (
-        <button
-          type="button"
-          onClick={handleAddToCart}
-          aria-label={t("product.addToCart")}
-          className="absolute top-3 right-3 z-20 rounded-full bg-white text-slate-900 p-2 lg:p-2.5 shadow-md hover:shadow-lg ring-1 ring-black/5"
-        >
-          <ShoppingCart className="w-5 h-5" />
-        </button>
-      ) : null}
+      {/* XIT Badge - Top Right */}
+      {titleHighlight?.type === "hit" && (
+        <div className="absolute top-0 right-3 z-20">
+          <div className="relative inline-block">
+            {/* SVG Flag/Bookmark Badge with dynamic color */}
+            <svg width="65" height="85" viewBox="0 0 70 90" className="drop-shadow-lg">
+              <path
+                d="M 5,0 L 65,0 C 67.76,0 70,2.24 70,5 L 70,90 L 35,75 L 0,90 L 0,5 C 0,2.24 2.24,0 5,0 Z"
+                fill={accentColor}
+              />
+            </svg>
+            {/* Text overlay */}
+            <div className="absolute inset-0 flex flex-col items-center justify-start pt-3 text-white font-bold">
+              <div className="text-[11px] tracking-wider">{t("product.hit", lang === "uz" ? "XIT" : lang === "ru" ? "ХИТ" : "HIT")}</div>
+              <div className="text-lg leading-tight mt-0.5">-{titleHighlight.value}%</div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Gradient glow frame */}
       <div
@@ -112,6 +152,26 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <h2 className="text-white text-3xl sm:text-4xl font-extrabold tracking-tight drop-shadow mb-3">{title}</h2>
           <span className="text-white/90 text-lg sm:text-xl mb-3 block">{slug}</span>
           <p className="text-white/90 text-sm sm:text-base leading-relaxed">{description}</p>
+          
+          {/* Reviews Stars */}
+          {product && (
+            <div className="mt-4 flex items-center gap-2 text-sm text-white/90">
+              <div className="flex items-center gap-0.5">
+                {Array.from({ length: 5 }).map((_, idx) => (
+                  <Star
+                    key={idx}
+                    className="w-4 h-4 text-amber-400 fill-amber-400"
+                  />
+                ))}
+              </div>
+              <span className="font-semibold tabular-nums">
+                {reviewInfo.rating.toFixed(1)}
+              </span>
+              <span className="text-white/70">
+                · {reviewInfo.count}+ {t("product.reviews", "izohlar")}
+              </span>
+            </div>
+          )}
         </div>
 
         {product ? (
