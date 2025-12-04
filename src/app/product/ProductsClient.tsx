@@ -217,7 +217,7 @@ export default function ProductsClient() {
                               </svg>
                               {/* Text overlay */}
                               <div className="absolute inset-0 flex flex-col items-center justify-start pt-4 text-white font-bold">
-                                <div className="text-xs tracking-wider">ХИТ</div>
+                                <div className="text-xs tracking-wider">{t("product.hit", lang === "uz" ? "XIT" : lang === "ru" ? "ХИТ" : "HIT")}</div>
                                 <div className="text-xl leading-tight mt-1">-{titleHighlight.value}%</div>
                               </div>
                             </div>
@@ -236,7 +236,7 @@ export default function ProductsClient() {
                           >
                             <div className="absolute left-2 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-white rounded-full" />
                             <span className="relative text-xs font-extrabold uppercase tracking-wide" style={{ transform: "skewX(5deg)", display: "inline-block" }}>
-                              ХИТ -{pct}%
+                              {t("product.hit", lang === "uz" ? "XIT" : lang === "ru" ? "ХИТ" : "HIT")} -{pct}%
                             </span>
                           </div>
                         ) : null} */}

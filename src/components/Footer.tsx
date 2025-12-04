@@ -7,6 +7,7 @@ import Link from "next/link";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { useLang } from "@/context/LangContext";
+import { Phone, Mail } from "lucide-react";
 
 const SocialLinks = [
   { id: 1, title: "Youtube", url: "https://www.youtube.com/@NutvaUz" },
@@ -34,11 +35,11 @@ const FooterLink = ({ title, url, className }: { title: string; url: string; cla
 
 const PhoneLink = ({ title, url, className }: { title: string; url: string; className?: string }) => {
   return (
-    <li className="mb-0 py-1 list-disc ml-3">
+    <li className="mb-0 py-1 list-none ml-3">
       <Link
         href={url}
         className={clsx(
-          "transition-all delay-75 pb-1 border-b-transparent border-b-2 hover:border-b-white",
+          "transition-all delay-75 pb-1 border-b-transparent border-b-2 hover:border-b-white inline-flex items-center gap-1.5",
           className
         )}
         onClick={(e) => {
@@ -50,6 +51,7 @@ const PhoneLink = ({ title, url, className }: { title: string; url: string; clas
           } catch {}
         }}
       >
+        {url.startsWith('tel:') && <Phone size={14} className="text-green-400" />}
         {title}
       </Link>
     </li>
@@ -100,7 +102,8 @@ const Footer = () => {
 
             <li>
               <span className="block font-medium text-white">{t("common.email")}:</span>
-              <Link href="mailto:info@nutva.uz" className="ml-4 underline">
+              <Link href="mailto:info@nutva.uz" className="ml-4 underline inline-flex items-center gap-1.5">
+                <Mail size={14} className="text-blue-400" />
                 info@nutva.uz
               </Link>
             </li>
@@ -114,7 +117,12 @@ const Footer = () => {
               <span className="block font-medium text-white">{t("common.cooperationIssues")}:</span>
               <ul className="ml-4 space-y-1">
                 <PhoneLink title="+998 95 185-10-01" url="tel:+998951851001" />
-                <PhoneLink title="info@nutva.uz" url="mailto:info@nutva.uz" />
+                <li className="mb-0 py-1 list-none">
+                  <Link href="mailto:info@nutva.uz" className="transition-all delay-75 pb-1 border-b-transparent border-b-2 hover:border-b-white inline-flex items-center gap-1.5">
+                    <Mail size={14} className="text-blue-400" />
+                    info@nutva.uz
+                  </Link>
+                </li>
               </ul>
             </li>
           </ul>
