@@ -4,6 +4,7 @@ type BitrixFormData = {
   name: string;
   phone: string;
   comment?: string;
+  source?: "popup" | "contact";
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;

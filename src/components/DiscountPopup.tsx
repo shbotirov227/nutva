@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Leaf, Clock, Gift, Shield, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
-import { FormModal } from "./FormModal";
+import { ContactPopupForm } from "./ContactPopupForm";
 
 interface DiscountPopupProps {
   isVisible: boolean;
@@ -175,12 +175,12 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
                 transition={{ delay: 0.7 }}
                 className="px-6 pb-6 space-y-3"
               >
-                <FormModal>
+                <ContactPopupForm onClose={onClose}>
                   <Button className="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white py-6 text-lg font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-[1.02] cursor-pointer">
                     <Gift className="w-5 h-5 mr-2" />
                     {t("discountPopup.claimDiscount", "Chegirmani olish")}
                   </Button>
-                </FormModal>
+                </ContactPopupForm>
                 
                 <Button
                   variant="ghost"

@@ -142,6 +142,8 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_API_URL: "https://nutva.uz/api",
     NEXT_TELEGRAM_API: "https://nutva.uz/telegram-api",
     NEXT_WEBSOCK_API: "wss://nutva.uz/telegram-api/ws",
+    TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN || "",
+    TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID || "",
 
     // NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
     // NEXTAUTH_URL: process.env.NEXTAUTH_URL,

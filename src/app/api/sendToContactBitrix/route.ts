@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   const body = await req.json();
 
-  const { name, phone } = body;
+  const { name, phone, comment, source = "popup" } = body;
 
   if (!name || !phone) {
     return NextResponse.json(
@@ -70,6 +70,10 @@ export async function POST(req: NextRequest) {
   const dealId = dealData.result;
 
   // Add timeline comment
+  const bitrixComment = comment 
+    ? `📝 Vebsaytdan yangi kontakt so'rovi\n👤 Ism: ${name}\n📞 Telefon: +${phone}\n💬 Izoh: ${comment}`
+    : `📝 Vebsaytdan yangi kontakt so'rovi\n👤 Ism: ${name}\n📞 Telefon: +${phone}`;
+  
   await fetch(`${baseUrl}/crm.timeline.comment.add.json`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -77,10 +81,40 @@ export async function POST(req: NextRequest) {
       fields: {
         ENTITY_ID: dealId,
         ENTITY_TYPE: "deal",
-        COMMENT: `📝 Vebsaytdan yangi kontakt so'rovi\n👤 Ism: ${name}\n📞 Telefon: +${phone}`
+        COMMENT: bitrixComment
       }
     })
   });
+
+  // Send to Telegram
+  const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN;
+  const telegramChatId = process.env.TELEGRAM_CHAT_ID;
+
+  if (telegramBotToken && telegramChatId) {
+    try {
+      const sourceText = source === "contact" ? "Contact Page" : "Popup (Chegirma)";
+      let telegramMessage = `🔔 Yangi kontakt so'rovi\n\n👤 Ism: ${name}\n📞 Telefon: +${phone}`;
+      
+      if (comment) {
+        telegramMessage += `\n💬 Izoh: ${comment}`;
+      }
+      
+      telegramMessage += `\n\n🌐 Manba: ${sourceText}`;
+      
+      await fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: telegramChatId,
+          text: telegramMessage,
+          parse_mode: "HTML"
+        })
+      });
+    } catch (error) {
+      console.error("Telegram xabar yuborishda xatolik:", error);
+      // Don't fail the request if Telegram fails
+    }
+  }
 
   return NextResponse.json({ success: true, dealId });
 }

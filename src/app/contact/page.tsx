@@ -49,6 +49,7 @@ export default function ContactPage() {
       name: name,
       phone,
       comment: comment || "",
+      source: "contact",
       utm_source: searchParams.get("utm_source") || undefined,
       utm_medium: searchParams.get("utm_medium") || undefined,
       utm_campaign: searchParams.get("utm_campaign") || undefined,

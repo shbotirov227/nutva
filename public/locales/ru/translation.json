@@ -261,13 +261,19 @@
         "subtitle": "Оставьте свой номер-наши врачи скоро свяжутся за бесплатной консультацией."
     },
 
+    "contactPopup": {
+        "title": "Связаться",
+        "subtitle": "Оставьте ваше имя и номер телефона"
+    },
+
     "button": {
         "heroButton": "Оформить заказ",
         "consultationButton": "Получить консультацию",
         "freeConsultation": "Бесплатная консультация",
         "formButton": "Оставить заявку",
         "cancelButton": "Отменить",
-        "sendMessage": "Отправить сообщение"
+        "sendMessage": "Отправить сообщение",
+        "submitButton": "Отправить"
     },
 
     "products": {

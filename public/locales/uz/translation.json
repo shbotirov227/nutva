@@ -240,13 +240,19 @@
         "subtitle": "Raqamingizni qoldiring - shifokorlarimiz bepul maslahat uchun tez orada bog'lanadi."
     },
 
+    "contactPopup": {
+        "title": "Bog'lanish",
+        "subtitle": "Ism va telefon raqamingizni qoldiring"
+    },
+
     "button": {
         "heroButton": "Buyurtma berish",
         "consultationButton": "Konsultatsiya olish",
         "freeConsultation": "Bepul konsultatsiya",
         "formButton": "Ariza qoldirish",
         "cancelButton": "Bekor qilish",
-        "sendMessage": "Xabarni yuborish"
+        "sendMessage": "Xabarni yuborish",
+        "submitButton": "Yuborish"
     },
 
     "products": {

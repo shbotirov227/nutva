@@ -240,13 +240,19 @@
         "subtitle": "Leave your phone number and our operators will contact you as soon as possible."
     },
 
+    "contactPopup": {
+        "title": "Contact Us",
+        "subtitle": "Leave your name and phone number"
+    },
+
     "button": {
         "heroButton": "Order",
         "consultationButton": "Consultation",
         "freeConsultation": "Free consultation",
         "formButton": "Leave an application",
         "cancelButton": "Cancel",
-        "sendMessage": "Send message"
+        "sendMessage": "Send message",
+        "submitButton": "Submit"
     },
 
     "products": {
