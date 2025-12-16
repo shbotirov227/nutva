@@ -175,7 +175,7 @@ export default function ProductsClient() {
                   transition={{ duration: 0.35, ease: "easeOut" }}
                   className={clsx(
                     "group relative overflow-hidden rounded-2xl border border-emerald-200/60 bg-white/80 shadow-xl",
-                    "backdrop-blur supports-[backdrop-filter]:bg-white/70"
+                    "backdrop-blur supports-backdrop-filter:bg-white/70"
                   )}
                 >
                   {/* Gradient border glow */}
@@ -358,7 +358,7 @@ export default function ProductsClient() {
             width={0}
             height={0}
             sizes="100vw"
-            className="w-full m-auto max-w-[350px] h-full object-contain rounded-xl border-none"
+            className="w-full m-auto max-w-87.5 h-full object-contain rounded-xl border-none"
           />
           <p className="text-muted-foreground text-xl text-center mt-10">
             {t("errors.emptyProducts")}

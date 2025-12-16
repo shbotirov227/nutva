@@ -163,7 +163,7 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
                   asChild
                   className={clsx(
                     "cursor-pointer shadow-md px-4 py-2 max-[450px]:px-2 max-[450px]:py-1 rounded-lg",
-                    activeTab === tab ? "!bg-black text-white" : ""
+                    activeTab === tab ? "bg-black! text-white" : ""
                   )}
                 >
                   <Button
@@ -240,7 +240,7 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
                         alt="Product Image"
                         width={500}
                         height={500}
-                        className="w-[600px] rounded-xl h-auto"
+                        className="w-150 rounded-xl h-auto"
                       />
                     </div>
 
@@ -250,11 +250,11 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
                       {youtubelink ? (
                         <YouTubeEmbed
                           link={youtubelink}
-                          className="w-[650px] rounded-xl h-[500px] object-cover"
+                          className="w-162.5 rounded-xl h-125 object-cover"
                         />
                       ) : (
                         <Image
-                          className="w-[650px] rounded-xl h-[500px] object-cover"
+                          className="w-162.5 rounded-xl h-125 object-cover"
                           src={image}
                           width={500}
                           alt="Product Detail Image"

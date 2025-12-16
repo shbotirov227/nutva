@@ -339,7 +339,7 @@ const complex1 = useDiscount(ProductName.COMPLEX, 1);
                   className="w-full mx-auto my-10 bg-white rounded-2xl shadow-lg border border-green-200 overflow-hidden"
                 >
                   <li
-                    className="text-xl font-bold px-5 py-7 text-white !list-disc"
+                    className="text-xl font-bold px-5 py-7 text-white list-disc!"
                     style={{ background: 'linear-gradient(135deg, #10b981, #059669)' }}
                   >
                     {item.title}
