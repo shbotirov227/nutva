@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 
-type BitrixFormData = {
+export type BitrixFormData = {
   name: string;
   phone: string;
   comment?: string;

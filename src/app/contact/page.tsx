@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import PhoneField from "@/components/PhoneField";
 import { cn } from "@/lib/utils";
-import { useContactBitrixMutation } from "@/hooks/useContactBitrixMutation";
+import { BitrixFormData, useContactBitrixMutation } from "@/hooks/useContactBitrixMutation";
 import Link from "next/link";
 
 export default function ContactPage() {
@@ -45,7 +45,7 @@ export default function ContactPage() {
     e.preventDefault();
 
     const searchParams = new URLSearchParams(window.location.search);
-    const formData = {
+    const formData: BitrixFormData = {
       name: name,
       phone,
       comment: comment || "",
