@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Leaf, Clock, Gift, Shield, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
 import { ContactPopupForm } from "./ContactPopupForm";
+import { useLowPowerMode } from "@/hooks/useLowPowerMode";
 
 interface DiscountPopupProps {
   isVisible: boolean;
@@ -15,6 +16,7 @@ interface DiscountPopupProps {
 export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
   const [timeLeft, setTimeLeft] = useState({ hours: 2, minutes: 30, seconds: 0 });
   const { t } = useTranslation();
+  const lowPowerMode = useLowPowerMode();
 
   useEffect(() => {
     if (!isVisible) return;
@@ -108,8 +110,8 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-white/0 via-white/10 to-white/0" />
                   
                   <motion.div
-                    animate={{ scale: [1, 1.05, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
+                    animate={lowPowerMode ? undefined : { scale: [1, 1.05, 1] }}
+                    transition={lowPowerMode ? undefined : { duration: 2, repeat: Infinity }}
                   >
                     <Sparkles className="w-8 h-8 mx-auto mb-3 text-yellow-300" />
                     <div className="text-4xl font-bold tracking-tight mb-2">

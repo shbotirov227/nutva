@@ -1,6 +1,7 @@
 "use client";
 
 import { CSSProperties, useMemo } from "react";
+import { useLowPowerMode } from "@/hooks/useLowPowerMode";
 
 const FLAKE_COUNT = 80;
 
@@ -27,7 +28,10 @@ const buildFlake = (id: number): SnowflakeConfig => ({
 });
 
 export default function Snowfall() {
+  const lowPowerMode = useLowPowerMode();
   const flakes = useMemo(() => Array.from({ length: FLAKE_COUNT }, (_, id) => buildFlake(id)), []);
+
+  if (lowPowerMode) return null;
 
   return (
     <div className="snowfall-overlay" aria-hidden="true">

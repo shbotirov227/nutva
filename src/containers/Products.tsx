@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { NavigationOptions, Swiper as SwiperType } from "swiper/types";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import { useProductVisuals } from "@/hooks/useProductVisuals";
 import { apiClient } from "@/lib/apiClient";
 import { ProductName } from "@/types/enums";
@@ -122,7 +122,7 @@ const Products = ({ isAviableBackground }: { isAviableBackground?: boolean }) =>
 
       <Swiper
         key={products.length}
-        modules={[Autoplay, Navigation]}
+        modules={[Navigation]}
         slidesPerView={"auto"}
         centeredSlides={true}
         spaceBetween={0}

@@ -8,6 +8,7 @@ import SaleSection from "@/containers/SaleSection";
 import InstallmentSection from "@/containers/InstallmentSection";
 import { useEffect, useState } from "react";
 import { DiscountPopup } from "@/components/DiscountPopup";
+import { useLowPowerMode } from "@/hooks/useLowPowerMode";
 
 // SEO uchun to‘g‘ri metadata export qilinmoqda
 // export const metadata = {
@@ -46,11 +47,13 @@ import { DiscountPopup } from "@/components/DiscountPopup";
 
 export default function HomePage() {
   const [showDiscount, setShowDiscount] = useState(false);
+  const lowPowerMode = useLowPowerMode();
 
   useEffect(() => {
+    if (lowPowerMode) return;
     const timer = setTimeout(() => setShowDiscount(true), 5000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [lowPowerMode]);
 
   return (
     <>

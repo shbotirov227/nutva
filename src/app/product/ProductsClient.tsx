@@ -24,6 +24,7 @@ import { formatPrice } from "@/lib/formatPrice";
 import NoImage from "@/assets/images/noimage.webp";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
+import { FormModal } from "@/components/FormModal";
 import { toast } from "react-toastify";
 import EmptyCartImg from "@/assets/images/empty-cart-img.png";
 import Container from "@/components/Container";
@@ -332,8 +333,18 @@ export default function ProductsClient() {
                       </span>
                     </div>
 
-                    {/* Savatga qo'shish button */}
-                    <div className="mt-4">
+                    {/* Sotib olish + Savatga qo'shish */}
+                    <div className="mt-4 flex flex-col gap-2">
+                      <FormModal products={[{ productId: product.id, quantity: 1 }]} btnColor="#059669">
+                        <Button
+                          size="lg"
+                          className="w-full bg-emerald-900 hover:bg-emerald-950 text-white font-semibold cursor-pointer h-12"
+                          aria-label={`${product.name} sotib olish`}
+                        >
+                          {t("common.buy")}
+                        </Button>
+                      </FormModal>
+
                       <Button
                         size="lg"
                         onClick={() => handleAdd(product)}

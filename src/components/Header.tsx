@@ -72,15 +72,36 @@ const Header: React.FC = () => {
   }, [t, lang]);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let rafId = 0;
+
+    const compute = () => {
       const currentScrollY = window.scrollY;
-      if (currentScrollY <= 0) setVisible(true);
-      else if (currentScrollY > lastScrollY.current) setVisible(false);
-      else if (currentScrollY < lastScrollY.current) setVisible(true);
+      const nextVisible =
+        currentScrollY <= 0
+          ? true
+          : currentScrollY > lastScrollY.current
+            ? false
+            : true;
+
       lastScrollY.current = currentScrollY;
+      setVisible((prev) => (prev === nextVisible ? prev : nextVisible));
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    const handleScroll = () => {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(() => {
+        rafId = 0;
+        compute();
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    compute();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafId) window.cancelAnimationFrame(rafId);
+    };
   }, []);
 
   useEffect(() => {

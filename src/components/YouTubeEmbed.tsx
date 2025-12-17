@@ -35,7 +35,7 @@ export default function YouTubeEmbed({ link, className, onPlay }: Props) {
   }
 
   return (
-    <div className={cn("relative aspect-video overflow-hidden rounded-lg bg-black", className)}>
+    <div className={cn("relative w-full h-full overflow-hidden bg-black", className)}>
       {!activated && (
         <button
           type="button"
