@@ -67,12 +67,14 @@ const Reviews = () => {
 
       {/* Video slider */}
       <Swiper
+        key={lowPowerMode ? "reviews-lp" : "reviews"}
         modules={lowPowerMode ? [] : [Autoplay]}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         loop={!lowPowerMode && filteredVideos.length > 3}
         slidesPerView={1}
         spaceBetween={20}
         centeredSlides={false}
+        roundLengths
         watchOverflow
         touchStartPreventDefault={false}
         speed={700}

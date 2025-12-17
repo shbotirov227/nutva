@@ -47,7 +47,8 @@ import { useLowPowerMode } from "@/hooks/useLowPowerMode";
 
 export default function HomePage() {
   const [showDiscount, setShowDiscount] = useState(false);
-  const lowPowerMode = useLowPowerMode();
+  // Show popup on mobile too; only skip for reduced-motion / data-saver / slow network.
+  const lowPowerMode = useLowPowerMode({ includeSmallScreen: false });
 
   useEffect(() => {
     if (lowPowerMode) return;
