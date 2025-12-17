@@ -7,10 +7,12 @@ import { Button } from "@/components/ui/button";
 import { ArrowUpRight, CreditCard, TrendingUp, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { useLowPowerMode } from "@/hooks/useLowPowerMode";
 
 const InstallmentSection = () => {
   const [isHovered, setIsHovered] = useState(false);
   const { t } = useTranslation();
+  const lowPowerMode = useLowPowerMode();
 
   const featuresTexts = t("installment.features", { returnObjects: true }) as unknown;
   const featuresArray: string[] = Array.isArray(featuresTexts) ? (featuresTexts as string[]) : [];
@@ -163,8 +165,12 @@ const InstallmentSection = () => {
 
                   {/* Floating Elements */}
                   <motion.div
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    animate={lowPowerMode ? undefined : { y: [0, -10, 0] }}
+                    transition={
+                      lowPowerMode
+                        ? undefined
+                        : { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                    }
                     className="absolute -top-4 -right-4 rounded-full bg-gradient-to-br from-emerald-600 to-emerald-500 p-3 shadow-lg shadow-emerald-500/40"
                   >
                     <CreditCard className="size-6 text-white" />

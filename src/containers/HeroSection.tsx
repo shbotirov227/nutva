@@ -14,6 +14,7 @@ import { normalizeImageUrl } from "@/lib/imageUtils";
 // import { GetAllBannerType } from "@/types/banner/getAllBanner";
 import { useLang } from "@/context/LangContext";
 import { useTranslated } from "@/hooks/useTranslated";
+import { useLowPowerMode } from "@/hooks/useLowPowerMode";
 // import { GetOneBannerType } from "@/types/banner/getOneBanner";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
@@ -22,6 +23,7 @@ import "swiper/css";
 const HeroSection = () => {
   const { lang } = useLang();
   const { t } = useTranslation();
+  const lowPowerMode = useLowPowerMode();
 
   const { data: banner = [], isLoading } = useQuery({
     queryKey: ["banner", lang],
@@ -66,8 +68,8 @@ const HeroSection = () => {
         </Container>
       ) : (
         <Swiper
-          modules={[Autoplay, Pagination]}
-          autoplay={{ delay: 3500, disableOnInteraction: false }}
+          modules={lowPowerMode ? [Pagination] : [Autoplay, Pagination]}
+          autoplay={lowPowerMode ? false : { delay: 3500, disableOnInteraction: false }}
           loop
           speed={700}
           slidesPerView={1}

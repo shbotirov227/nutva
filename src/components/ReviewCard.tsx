@@ -24,7 +24,7 @@ const ReviewCard = ({ url, title, onPlay }: ReviewCardProps) => {
   // };
 
   return (
-    <Card className="group relative w-full max-w-[280px] aspect-[9/16] bg-gradient-to-b from-gray-900 via-gray-800 to-black shadow-2xl overflow-hidden mx-auto border-none rounded-3xl transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+    <Card className="group relative w-full max-w-[280px] aspect-[9/16] bg-gradient-to-b from-gray-900 via-gray-800 to-black shadow-2xl overflow-hidden mx-auto border-none rounded-3xl transition-transform duration-300 sm:hover:scale-[1.02] sm:hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
       {/* Video Background - Full Card */}
       <div className="absolute inset-0 w-full h-full">
         {url ? (

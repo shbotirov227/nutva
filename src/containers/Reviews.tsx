@@ -8,11 +8,13 @@ import Container from "@/components/Container";
 import ReviewCard from "@/components/ReviewCard";
 import "swiper/css";
 import { useReviewVideos } from "@/constants/reviewsVideos";
+import { useLowPowerMode } from "@/hooks/useLowPowerMode";
 
 const Reviews = () => {
   const { t } = useTranslation();
   const allVideos = useReviewVideos();
   const swiperRef = useRef<SwiperClass | null>(null);
+  const lowPowerMode = useLowPowerMode();
 
   // Hozircha barcha videolar to'liq ko'rsatiladi (kategoriya filtri o'chirilgan)
   const filteredVideos = allVideos;
@@ -65,24 +67,36 @@ const Reviews = () => {
 
       {/* Video slider */}
       <Swiper
-        modules={[Autoplay]}
+        modules={lowPowerMode ? [] : [Autoplay]}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
-        loop={filteredVideos.length > 3}
+        loop={!lowPowerMode && filteredVideos.length > 3}
         slidesPerView={1}
         spaceBetween={20}
         centeredSlides={false}
+        watchOverflow
+        touchStartPreventDefault={false}
         speed={700}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
-        breakpoints={{
-          480: { slidesPerView: 1.5, centeredSlides: true, spaceBetween: 20 },
-          640: { slidesPerView: 1.7, centeredSlides: true, spaceBetween: 25 },
-          768: { slidesPerView: 2.4, centeredSlides: false, spaceBetween: 30 },
-          1024: { slidesPerView: 3, centeredSlides: false, spaceBetween: 20 },
-          1280: { slidesPerView: 3, centeredSlides: false, spaceBetween: 24 },
-        }}
+        autoplay={
+          lowPowerMode
+            ? false
+            : {
+                delay: 5000,
+                disableOnInteraction: false,
+              }
+        }
+        breakpoints={
+          lowPowerMode
+            ? {
+                0: { slidesPerView: 1, centeredSlides: false, spaceBetween: 16 },
+              }
+            : {
+                480: { slidesPerView: 1.5, centeredSlides: true, spaceBetween: 20 },
+                640: { slidesPerView: 1.7, centeredSlides: true, spaceBetween: 25 },
+                768: { slidesPerView: 2.4, centeredSlides: false, spaceBetween: 30 },
+                1024: { slidesPerView: 3, centeredSlides: false, spaceBetween: 20 },
+                1280: { slidesPerView: 3, centeredSlides: false, spaceBetween: 24 },
+              }
+        }
         aria-label="Отзывы клиентов"
         className="mySwiper cursor-grab active:cursor-grabbing px-4 sm:px-6 lg:px-8 py-5"
       >
@@ -95,7 +109,7 @@ const Reviews = () => {
               <ReviewCard
                 url={item.url}
                 title={item.title}
-                onPlay={() => swiperRef.current?.autoplay.stop()}
+                onPlay={() => swiperRef.current?.autoplay?.stop?.()}
               />
             </div>
           </SwiperSlide>

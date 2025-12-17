@@ -25,7 +25,25 @@ export default function InjectPixelScript() {
       }
     };
 
-    runOnce();
+    // Defer heavy/unknown third-party scripts to idle time to reduce TBT.
+    const w = window as unknown as {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+
+    let idleId: number | null = null;
+    const timeoutId = window.setTimeout(() => runOnce(), 4000);
+
+    if (typeof w.requestIdleCallback === "function") {
+      idleId = w.requestIdleCallback(() => runOnce(), { timeout: 5000 });
+    }
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      if (idleId != null && typeof w.cancelIdleCallback === "function") {
+        w.cancelIdleCallback(idleId);
+      }
+    };
   }, []);
 
   return null;
