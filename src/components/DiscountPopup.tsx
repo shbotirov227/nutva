@@ -58,13 +58,13 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 50 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-lg mx-4"
+            className="fixed left-1/2 top-1/2 z-50 w-[calc(100vw-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2"
           >
-            <div className="relative bg-gradient-to-br from-white via-emerald-50 to-green-50 rounded-3xl shadow-2xl overflow-hidden border-2 border-emerald-300">
+            <div className="relative max-h-[calc(100vh-2rem)] overflow-x-hidden overflow-y-auto overscroll-contain rounded-3xl border-2 border-emerald-300 bg-gradient-to-br from-white via-emerald-50 to-green-50 shadow-2xl">
               {/* Close Button */}
               <button
                 onClick={onClose}
-                className="absolute right-4 top-4 z-10 p-2 rounded-full bg-white hover:bg-gray-50 transition-colors shadow-md cursor-pointer border border-gray-200"
+                className="absolute right-3 top-3 z-10 cursor-pointer rounded-full border border-gray-200 bg-white p-2 shadow-md transition-colors hover:bg-gray-50 sm:right-4 sm:top-4"
               >
                 <X className="w-5 h-5 text-gray-600" />
               </button>
@@ -75,12 +75,12 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-emerald-100 to-green-100 rounded-full opacity-10 blur-3xl" />
               
               {/* Header with Logo */}
-              <div className="relative px-6 pt-10 pb-4 text-center">
+              <div className="relative px-4 pb-4 pt-8 text-center sm:px-6 sm:pt-10">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
                   animate={{ opacity: 1, scale: 1, rotate: 0 }}
                   transition={{ duration: 0.5, type: "spring" }}
-                  className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-green-500 shadow-lg"
+                  className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-green-500 shadow-lg sm:h-20 sm:w-20"
                 >
                   <Gift className="w-10 h-10 text-white" />
                 </motion.div>
@@ -89,22 +89,22 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  <h2 className="text-2xl font-bold bg-gradient-to-r from-emerald-700 to-green-600 bg-clip-text text-transparent">
+                  <h2 className="text-xl font-bold bg-gradient-to-r from-emerald-700 to-green-600 bg-clip-text text-transparent sm:text-2xl">
                     {t("discountPopup.title", "🎉 Maxsus Taklif!")}
                   </h2>
-                  <p className="mt-2 text-base text-gray-600 font-medium">
+                  <p className="mt-2 text-sm font-medium text-gray-600 sm:text-base">
                     {t("discountPopup.subtitle", "Chegirma olish uchun ma'lumotlaringizni qoldiring")}
                   </p>
                 </motion.div>
               </div>
 
               {/* Discount Section */}
-              <div className="px-6 py-2">
+              <div className="px-4 py-2 sm:px-6">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
-                  className="relative rounded-2xl bg-gradient-to-br from-emerald-500 via-green-500 to-emerald-600 p-8 text-center text-white shadow-xl"
+                  className="relative rounded-2xl bg-gradient-to-br from-emerald-500 via-green-500 to-emerald-600 p-5 text-center text-white shadow-xl sm:p-8"
                 >
                   {/* Shine effect */}
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-white/0 via-white/10 to-white/0" />
@@ -114,15 +114,15 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
                     transition={lowPowerMode ? undefined : { duration: 2, repeat: Infinity }}
                   >
                     <Sparkles className="w-8 h-8 mx-auto mb-3 text-yellow-300" />
-                    <div className="text-4xl font-bold tracking-tight mb-2">
+                    <div className="mb-2 text-3xl font-bold tracking-tight sm:text-4xl">
                       {t("discountPopup.discountLabel", "25% CHEGIRMA")}
                     </div>
-                    <div className="text-lg font-medium opacity-95">
+                    <div className="text-base font-medium opacity-95 sm:text-lg">
                       {t("discountPopup.discountForFirst", "🎁 Birinchi buyurtmangiz uchun")}
                     </div>
                   </motion.div>
                   
-                  <div className="mt-4 flex items-center justify-center gap-3 text-emerald-50 text-sm">
+                  <div className="mt-4 flex items-center justify-center gap-3 text-sm text-emerald-50">
                     <div className="flex items-center gap-1">
                       <Leaf className="h-4 w-4" />
                       <span>{t("discountPopup.natural", "Tabiiy")}</span>
@@ -141,7 +141,7 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="px-6 py-4"
+                className="px-4 py-4 sm:px-6"
               >
                 <div className="flex items-center justify-center gap-2 text-gray-700 mb-4">
                   <Clock className="w-5 h-5 text-emerald-600" />
@@ -161,8 +161,8 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.6 + index * 0.1 }}
                     >
-                      <div className="bg-gradient-to-br from-emerald-600 to-green-600 text-white rounded-xl px-4 py-3 min-w-[3.5rem] text-center shadow-lg">
-                        <div className="text-2xl font-bold leading-none">{item.value.toString().padStart(2, '0')}</div>
+                      <div className="min-w-[3.25rem] rounded-xl bg-gradient-to-br from-emerald-600 to-green-600 px-3 py-3 text-center text-white shadow-lg sm:min-w-[3.5rem] sm:px-4">
+                        <div className="text-xl font-bold leading-none sm:text-2xl">{item.value.toString().padStart(2, '0')}</div>
                       </div>
                       <div className="text-xs text-gray-600 mt-2 font-medium">{item.label}</div>
                     </motion.div>
@@ -175,10 +175,10 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 }}
-                className="px-6 pb-6 space-y-3"
+                className="space-y-3 px-4 pb-6 sm:px-6"
               >
                 <ContactPopupForm onClose={onClose}>
-                  <Button className="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white py-6 text-lg font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-[1.02] cursor-pointer">
+                  <Button className="w-full cursor-pointer rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 py-5 text-base font-bold text-white shadow-xl transition-all hover:scale-[1.02] hover:from-emerald-700 hover:to-green-700 hover:shadow-2xl sm:py-6 sm:text-lg">
                     <Gift className="w-5 h-5 mr-2" />
                     {t("discountPopup.claimDiscount", "Chegirmani olish")}
                   </Button>
@@ -187,7 +187,7 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
                 <Button
                   variant="ghost"
                   onClick={onClose}
-                  className="w-full text-gray-600 hover:bg-gray-100 py-3 cursor-pointer font-medium"
+                  className="w-full cursor-pointer py-3 font-medium text-gray-600 hover:bg-gray-100"
                 >
                   {t("discountPopup.later", "Keyinroq qarayman")}
                 </Button>
@@ -198,7 +198,7 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.8 }}
-                className="px-6 pb-8"
+                className="px-4 pb-8 sm:px-6"
               >
                 <div className="bg-gradient-to-r from-emerald-50 to-green-50 rounded-2xl p-4 border border-emerald-200">
                   <div className="grid grid-cols-3 gap-4 text-center">
@@ -206,7 +206,7 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
                       className="flex flex-col items-center"
                       whileHover={{ scale: 1.05 }}
                     >
-                      <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-green-500 rounded-full flex items-center justify-center mb-2 shadow-md">
+                      <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-green-500 shadow-md sm:h-12 sm:w-12">
                         <span className="text-2xl">🌱</span>
                       </div>
                       <span className="text-xs text-gray-700 font-semibold">{t("discountPopup.benefitNatural", "100% Tabiiy")}</span>
@@ -215,7 +215,7 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
                       className="flex flex-col items-center"
                       whileHover={{ scale: 1.05 }}
                     >
-                      <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-green-500 rounded-full flex items-center justify-center mb-2 shadow-md">
+                      <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-green-500 shadow-md sm:h-12 sm:w-12">
                         <span className="text-2xl">✅</span>
                       </div>
                       <span className="text-xs text-gray-700 font-semibold">{t("discountPopup.benefitQuality", "Halol")}</span>
@@ -224,7 +224,7 @@ export function DiscountPopup({ isVisible, onClose }: DiscountPopupProps) {
                       className="flex flex-col items-center"
                       whileHover={{ scale: 1.05 }}
                     >
-                      <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-green-500 rounded-full flex items-center justify-center mb-2 shadow-md">
+                      <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-green-500 shadow-md sm:h-12 sm:w-12">
                         <span className="text-2xl">🚚</span>
                       </div>
                       <span className="text-xs text-gray-700 font-semibold">{t("discountPopup.benefitFreeDelivery", "Bepul yetkazish")}</span>
