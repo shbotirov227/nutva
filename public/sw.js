@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nutva-v1.1.0';
+const CACHE_NAME = 'nutva-v1.1.1';
 const STATIC_ASSETS = [
 	'/',
 	'/manifest.json',
@@ -30,6 +30,11 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+	// Never cache Next.js build assets. Caching these can cause ChunkLoadError after deploys.
+	if (event.request.url.includes('/_next/')) {
+		event.respondWith(fetch(event.request));
+		return;
+	}
 
 	if (event.request.method !== 'GET') return;
 
