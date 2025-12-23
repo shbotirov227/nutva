@@ -1,88 +1,115 @@
-const CACHE_NAME = 'nutva-v1.1.1';
+/* ================================
+   Nutva Service Worker (PROD)
+   ================================ */
+
+const CACHE_NAME = 'nutva-v1.1.2';
+
+// Faqat 100% mavjud bo‘lishi shart bo‘lgan assetlar
 const STATIC_ASSETS = [
-	'/',
-	'/manifest.json',
-	'/hero-bg2.webp',
-	'/header-nutva-logo.png',
-	'/favicon.ico',
+  '/',
+  '/manifest.json',
+  '/favicon.ico',
 ];
 
+/* ================================
+   INSTALL
+   ================================ */
 self.addEventListener('install', (event) => {
-	event.waitUntil(
-		caches.open(CACHE_NAME)
-			.then((cache) => cache.addAll(STATIC_ASSETS))
-			.then(() => self.skipWaiting())
-	);
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) =>
+      // Bitta asset 404 bo‘lsa ham SW yiqilmasin
+      Promise.allSettled(
+        STATIC_ASSETS.map((asset) => cache.add(asset))
+      )
+    )
+  );
+
+  self.skipWaiting();
 });
 
+/* ================================
+   ACTIVATE
+   ================================ */
 self.addEventListener('activate', (event) => {
-	event.waitUntil(
-		caches.keys()
-			.then((cacheNames) => {
-				return Promise.all(
-					cacheNames
-						.filter((name) => name !== CACHE_NAME)
-						.map((name) => caches.delete(name))
-				);
-			})
-			.then(() => self.clients.claim())
-	);
+  event.waitUntil(
+    caches.keys().then((cacheNames) =>
+      Promise.all(
+        cacheNames
+          .filter((name) => name !== CACHE_NAME)
+          .map((name) => caches.delete(name))
+      )
+    )
+  );
+
+  self.clients.claim();
 });
 
+/* ================================
+   FETCH
+   ================================ */
 self.addEventListener('fetch', (event) => {
-	// Never cache Next.js build assets. Caching these can cause ChunkLoadError after deploys.
-	if (event.request.url.includes('/_next/')) {
-		event.respondWith(fetch(event.request));
-		return;
-	}
+  const { request } = event;
 
-	if (event.request.method !== 'GET') return;
+  // Faqat GET requestlar
+  if (request.method !== 'GET') {
+    event.respondWith(fetch(request));
+    return;
+  }
 
-	// Cache strategy for static assets
-	if (event.request.destination === 'image' ||
-		event.request.url.includes('.webp') ||
-		event.request.url.includes('.png') ||
-		event.request.url.includes('.jpg') ||
-		event.request.url.includes('.svg')) {
-		event.respondWith(
-			caches.open(CACHE_NAME).then((cache) => {
-				return cache.match(event.request).then((response) => {
-					if (response) {
-						return response;
-					}
-					return fetch(event.request).then((networkResponse) => {
-						cache.put(event.request, networkResponse.clone());
-						return networkResponse;
-					});
-				});
-			})
-		);
-	}
+  // Next.js build assetlarini HECH QACHON cache qilma
+  if (request.url.includes('/_next/')) {
+    event.respondWith(fetch(request));
+    return;
+  }
 
-	// Network-first strategy for API calls
-	else if (event.request.url.includes('/api/')) {
-		event.respondWith(
-			fetch(event.request).catch(() => {
-				return caches.match(event.request);
-			})
-		);
-	}
+  // API — network first (cache optional fallback)
+  if (request.url.includes('/api/')) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          // xohlasang cache qilish mumkin
+          return response;
+        })
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
 
-	// Stale-while-revalidate for other requests
-	else {
-		event.respondWith(
-			caches.match(event.request).then((response) => {
-				const fetchPromise = fetch(event.request).then((networkResponse) => {
-					if (networkResponse.ok) {
-						const responseClone = networkResponse.clone();
-						caches.open(CACHE_NAME).then((cache) => {
-							cache.put(event.request, responseClone);
-						});
-					}
-					return networkResponse;
-				});
-				return response || fetchPromise;
-			})
-		);
-	}
+  // Rasmlar — cache first
+  if (
+    request.destination === 'image' ||
+    request.url.match(/\.(webp|png|jpg|jpeg|svg)$/)
+  ) {
+    event.respondWith(
+      caches.open(CACHE_NAME).then((cache) =>
+        cache.match(request).then((cached) => {
+          if (cached) return cached;
+
+          return fetch(request).then((response) => {
+            if (response.ok) {
+              cache.put(request, response.clone());
+            }
+            return response;
+          });
+        })
+      )
+    );
+    return;
+  }
+
+  // Boshqa sahifalar — stale-while-revalidate
+  event.respondWith(
+    caches.match(request).then((cached) => {
+      const networkFetch = fetch(request).then((response) => {
+        if (response.ok) {
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(request, response.clone());
+          });
+        }
+        return response;
+      });
+
+      return cached || networkFetch;
+    })
+  );
 });
