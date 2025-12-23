@@ -27,7 +27,7 @@
         "total": "Total",
         "yourCart": "Your Cart",
         "emptyCart": "Your cart is empty",
-    "blogs": "News",
+        "blogs": "News",
         "soon": "It will soon go on sale...",
         "send": "Send",
         "typing": "Typing...",
@@ -43,19 +43,19 @@
         "addressValue": "Uzbekistan, Tashkent",
         "cooperationIssues": "On cooperation issues",
         "quickLinks": "Quick links",
-    "socialNetwork": "Social networks",
-    "emptyCartHint": "Browse products and add them to your cart.",
-    "continueShopping": "Continue shopping",
-    "inCart": "in cart",
-    "decreaseQuantity": "Decrease quantity",
-    "increaseQuantity": "Increase quantity",
-    "share": "Share",
-    "copied": "Copied",
-    "copyLink": "Copy link",
-    "views": "views",
-    "minRead": "min read",
-    "tableOfContents": "Table of contents",
-    "nutvaNews": "Nutva News"
+        "socialNetwork": "Social networks",
+        "emptyCartHint": "Browse products and add them to your cart.",
+        "continueShopping": "Continue shopping",
+        "inCart": "in cart",
+        "decreaseQuantity": "Decrease quantity",
+        "increaseQuantity": "Increase quantity",
+        "share": "Share",
+        "copied": "Copied",
+        "copyLink": "Copy link",
+        "views": "views",
+        "minRead": "min read",
+        "tableOfContents": "Table of contents",
+        "nutvaNews": "Nutva News"
     },
 
     "errors": {
@@ -507,8 +507,8 @@
         "ready_for_discounts": "Ready for amazing discounts?",
         "limited_offers": "Take advantage of limited offers!",
         "start_shopping": "Start Shopping",
-    "price_per_unit_badge": "per unit",
-    "price_per_unit_tooltip": "Indicates price per unit in a multi-pack",
+        "price_per_unit_badge": "per unit",
+        "price_per_unit_tooltip": "Indicates price per unit in a multi-pack",
 
         "products_data": {
             "1": {
@@ -627,7 +627,8 @@
         "free": "Free",
         "calculatedAtNext": "Calculated at next step",
         "secureCheckout": "Payment is secure and encrypted.",
-        "saved": "Saved"
+        "saved": "Saved",
+        "complexBonus": "Since you have selected <1>3 or more Complex products, </1> <3>{{count}} Complex Extra</3> items will be added for free!"
     }
 ,
     "blogSidebar": {
