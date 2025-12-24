@@ -16,6 +16,9 @@ import { BlogMediaType } from "@/types/blogs/getOneBlog";
 import DefaultImg from "@/assets/images/default-img.png";
 import { useTranslation } from "react-i18next";
 import { useLang } from "@/context/LangContext";
+import dynamic from "next/dynamic";
+
+const YouTubeEmbed = dynamic(() => import("./YouTubeEmbed"), { ssr: false });
 
 type BlogCardProps = {
   id: string;
@@ -46,12 +49,19 @@ function youTubeThumb(url: string) {
 const BlogCard = ({ id, media, title, content }: BlogCardProps) => {
   const { t } = useTranslation();
   const { lang } = useLang();
-  const isYouTube = media?.mediaType === "YoutubeUrl" && !!media.url;
+  
+  // Auto-detect YouTube even if backend sends wrong mediaType
+  const isYouTube = media?.url && (
+    media.mediaType === "YoutubeUrl" || 
+    media.url.includes("youtube.com") || 
+    media.url.includes("youtu.be")
+  );
+  
   const isImage =
     media?.mediaType === "Image" || media?.mediaType === "ImageUrl";
 
   const cover =
-    (isYouTube && youTubeThumb(media!.url!)) ||
+    (isYouTube && youTubeThumb(media.url)) ||
     (isImage && media?.url) ||
     (DefaultImg as unknown as string);
 
@@ -89,20 +99,32 @@ const BlogCard = ({ id, media, title, content }: BlogCardProps) => {
           className="relative block overflow-hidden rounded-b-none"
         >
           <div className="relative aspect-[16/9] w-full">
-            <Image
-              src={cover || (DefaultImg as unknown as string)}
-              alt={media?.altText || "Blog cover"}
-              fill
-              sizes="(max-width: 768px) 100vw, 33vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-              priority={false}
-            />
-
-            {/* Play overlay for YouTube */}
-            {isYouTube && (
-              <div className="absolute inset-0 grid place-items-center bg-black/0 transition-colors duration-300 group-hover:bg-black/10">
-                <PlayCircle className="w-14 h-14 text-white drop-shadow-lg opacity-90 group-hover:scale-105 transition-transform" />
+            {isYouTube && media?.url ? (
+              // Render YouTube embed for preview
+              <div className="absolute inset-0 pointer-events-none">
+                <YouTubeEmbed 
+                  link={media.url} 
+                  className="w-full h-full"
+                />
               </div>
+            ) : (
+              <>
+                <Image
+                  src={cover || (DefaultImg as unknown as string)}
+                  alt={media?.altText || "Blog cover"}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  priority={false}
+                />
+
+                {/* Play overlay for YouTube fallback (if thumbnail used) */}
+                {isYouTube && (
+                  <div className="absolute inset-0 grid place-items-center bg-black/0 transition-colors duration-300 group-hover:bg-black/10">
+                    <PlayCircle className="w-14 h-14 text-white drop-shadow-lg opacity-90 group-hover:scale-105 transition-transform" />
+                  </div>
+                )}
+              </>
             )}
           </div>
         </Link>

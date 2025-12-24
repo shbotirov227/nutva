@@ -6,12 +6,15 @@ import Image from "next/image";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import type { GetOneBlogType } from "@/types/blogs/getOneBlog";
-import BlogsComponent from "@/containers/Blogs";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { ArrowLeft, CalendarDays, Eye, Share2, Timer, Link as LinkIcon, Copy, Tag, Instagram, X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
 import { shareInstagramStoryWeb, shareFacebookWeb, shareTelegramWeb } from "@/lib/share";
 import dynamic from "next/dynamic";
 const YouTubeEmbed = dynamic(() => import("@/components/YouTubeEmbed"), { ssr: false });
+const BlogsComponent = dynamic(() => import("@/containers/Blogs"), { 
+  ssr: false,
+  loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-lg" />
+});
 import { useLang } from "@/context/LangContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -209,15 +212,30 @@ const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onClose, images, curren
 export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlogType; id: string }) {
   const [mounted, setMounted] = useState(false);
   const [blog, setBlog] = useState<GetOneBlogType>(initialBlog);
-  const [safeHtml, setSafeHtml] = useState<string>(formatContentToHtml(initialBlog?.content || ""));
-  const [toc, setToc] = useState<TocItem[]>([]);
   const [progress, setProgress] = useState(0);
   const [copied, setCopied] = useState(false);
   
   // Image modal states
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [galleryImages, setGalleryImages] = useState<string[]>([]);
+  
+  // Memoize safeHtml to avoid re-computing on every render
+  const safeHtml = useMemo(() => {
+    return formatContentToHtml(blog?.content || "");
+  }, [blog?.content]);
+  
+  // Memoize TOC to avoid re-computing
+  const toc = useMemo(() => {
+    return buildTocFromHtml(safeHtml);
+  }, [safeHtml]);
+  
+  // Memoize gallery images
+  const galleryImages = useMemo(() => {
+    if (!blog?.media) return [];
+    return blog.media
+      .filter((m) => m.mediaType === "Image" || m.mediaType === "ImageUrl")
+      .map((m) => absMedia(m.url));
+  }, [blog?.media]);
 
   const contentRef = useRef<HTMLDivElement | null>(null);
   const { lang, isLoading } = useLang();
@@ -259,7 +277,7 @@ export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlog
 
   // Refetch blog data on language change with improved error handling
   useEffect(() => {
-    if (!mounted || !id) return;
+    if (!mounted || !id || isLoading) return;
     
     const fetchBlogData = async () => {
       try {
@@ -283,7 +301,6 @@ export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlog
         
         const data: GetOneBlogType = await response.json();
         setBlog(data);
-        setSafeHtml(formatContentToHtml(data?.content || ""));
       } catch (error) {
         console.error("Error fetching blog data:", error);
         // Keep existing data on error to avoid blank screen
@@ -292,18 +309,16 @@ export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlog
 
     const currentLang = searchParams.get("lang") || "uz";
     
-    if (lang !== currentLang) {
+    // Only fetch if language actually changed
+    if (lang !== currentLang && mounted) {
       const newSearchParams = new URLSearchParams(searchParams.toString());
       newSearchParams.set("lang", lang);
       router.push(`?${newSearchParams.toString()}`, { scroll: false });
       fetchBlogData();
-    } else if (initialBlog?.content) {
-      setSafeHtml(formatContentToHtml(initialBlog.content));
     }
-  }, [lang, isLoading, mounted, id, initialBlog?.content, router, searchParams]);
+  }, [lang, mounted, id, router, searchParams, isLoading]);
 
-  // TOC + progress
-  useEffect(() => setToc(buildTocFromHtml(safeHtml)), [safeHtml]);
+  // Progress tracking
   useEffect(() => {
     const onScroll = () => {
       const el = contentRef.current;
@@ -323,23 +338,31 @@ export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlog
 
   const pageUrl = typeof window !== "undefined" ? window.location.href : `${process.env.NEXT_PUBLIC_SITE_URL || "https://nutva.uz"}/blog/${id}?lang=${lang}`;
   
+  // First media - can be image or YouTube
+  const firstMedia = useMemo(() => {
+    return blog?.media?.[0] || null;
+  }, [blog?.media]);
+  
+  const isFirstMediaYouTube = useMemo(() => {
+    if (!firstMedia?.url) return false;
+    const url = absMedia(firstMedia.url);
+    return firstMedia.mediaType === "YoutubeUrl" || 
+           url.includes("youtube.com") || 
+           url.includes("youtu.be");
+  }, [firstMedia]);
+  
   const coverUrl = useMemo(() => {
     const first = blog?.media?.find((m) => m.mediaType === "Image" || m.mediaType === "ImageUrl");
     return first ? absMedia(first.url) : null;
-  }, [blog]);
-  
-  // Set up gallery images
-  useEffect(() => {
-    if (blog?.media) {
-      const imageUrls = blog.media
-        .filter((m) => m.mediaType === "Image" || m.mediaType === "ImageUrl")
-        .map((m) => absMedia(m.url));
-      setGalleryImages(imageUrls);
-    }
   }, [blog?.media]);
   
-  const firstVideo = blog?.media?.find((m) => m.mediaType === "Video" || m.mediaType === "YoutubeUrl");
-  const readingMin = estimateReadingTime(blog?.content || "");
+  const firstVideo = useMemo(() => {
+    return blog?.media?.find((m) => m.mediaType === "Video" || m.mediaType === "YoutubeUrl");
+  }, [blog?.media]);
+  
+  const readingMin = useMemo(() => {
+    return estimateReadingTime(blog?.content || "");
+  }, [blog?.content]);
 
   // Image modal handlers
   const openImageModal = useCallback((imageIndex: number) => {
@@ -461,11 +484,16 @@ export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlog
   }
 
   // ---------- JSON-LD (Article + optional Video + Breadcrumbs) ----------
+  const plainTextContent = stripHtml(blog?.content || "");
+  const wordCount = plainTextContent.split(/\s+/).filter(Boolean).length;
+  
   const articleLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: blog.title,
     description: blog.metaDescription || undefined,
+    articleBody: plainTextContent.slice(0, 1000), // First 1000 chars for snippet
+    wordCount: wordCount,
     datePublished: blog.createdAt || undefined,
     dateModified: blog.updatedAt || blog.createdAt || undefined,
     mainEntityOfPage: pageUrl,
@@ -476,6 +504,7 @@ export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlog
       name: "Nutva",
       logo: { "@type": "ImageObject", url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://nutva.uz"}/logo.png` },
     },
+    inLanguage: lang === "uz" ? "uz-UZ" : lang === "ru" ? "ru-RU" : "en-US",
   };
 
   const videoLd =
@@ -583,7 +612,14 @@ export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlog
 
         {/* Hero */}
         <div className={clsx("relative overflow-hidden rounded-3xl border bg-gradient-to-br from-emerald-50 to-white", "shadow-[0_10px_40px_rgba(16,185,129,0.15)]")}>
-          {coverUrl && (
+          {isFirstMediaYouTube && firstMedia?.url ? (
+            <div className="relative aspect-[16/9] md:aspect-[16/8] w-full">
+              <YouTubeEmbed 
+                link={absMedia(firstMedia.url)} 
+                className="absolute inset-0 h-full w-full"
+              />
+            </div>
+          ) : coverUrl ? (
             <div 
               className="relative aspect-[16/9] md:aspect-[16/8] w-full cursor-pointer group"
               onClick={() => openImageModal(0)}
@@ -601,9 +637,9 @@ export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlog
                 <Maximize2 className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg" />
               </div>
             </div>
-          )}
+          ) : null}
 
-          <div className={clsx("p-5 sm:p-8 lg:p-10", coverUrl ? "lg:-mt-24 relative z-10" : "")}>
+          <div className={clsx("p-5 sm:p-8 lg:p-10", (coverUrl || isFirstMediaYouTube) ? "lg:-mt-24 relative z-10" : "")}>
             <Card className="mx-auto w-full max-w-5xl rounded-2xl border-0 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/80">
               <CardHeader>
                 <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
@@ -660,12 +696,20 @@ export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlog
                   <div className={clsx("mb-6 grid gap-4", blog.media.length === 2 ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3")}>
                     {blog.media.slice(1).map((m, idx) => {
                       const src = absMedia(m.url);
+                      
+                      // Auto-detect YouTube URL even if mediaType is wrong
+                      const isYouTubeUrl = m.mediaType === "YoutubeUrl" || 
+                                          src.includes("youtube.com") || 
+                                          src.includes("youtu.be");
+                      
                       const isImage = m.mediaType === "Image" || m.mediaType === "ImageUrl";
+                      const isVideo = m.mediaType === "Video" && !isYouTubeUrl;
+                      
                       const galleryIndex = blog.media
                         .filter((media) => media.mediaType === "Image" || media.mediaType === "ImageUrl")
                         .findIndex((media) => media === m);
 
-                      if (m.mediaType === "YoutubeUrl") {
+                      if (isYouTubeUrl) {
                         return (
                           <div key={idx} className="group relative aspect-video overflow-hidden rounded-xl border shadow-sm hover:shadow-md transition-shadow">
                             <YouTubeEmbed link={src} className="absolute inset-0 h-full w-full" />
@@ -673,7 +717,7 @@ export default function BlogDetail({ blog: initialBlog, id }: { blog: GetOneBlog
                         );
                       }
                       
-                      if (m.mediaType === "Video") {
+                      if (isVideo) {
                         return (
                           <div key={idx} className="group relative aspect-video overflow-hidden rounded-xl border shadow-sm hover:shadow-md transition-shadow">
                             <video 

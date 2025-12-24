@@ -10,16 +10,16 @@ interface BlogPageContent {
 function getBlogPageContent(lang: Lang): BlogPageContent {
   const content = {
     uz: {
-      title: "Nutva — Yangiliklar",
-      description: "So'nggi maqolalar va sog'liq bo'yicha maslahatlar"
+      title: "Nutva — Blog va Yangiliklar",
+      description: "Sog'liqni saqlash, immunitetni mustahkamlash, vitaminlar va biologik faol qo'shimchalar haqida foydali maqolalar. Nutva mahsulotlari, mutaxassislar maslahatlari va ilmiy tadqiqotlar."
     },
     ru: {
-      title: "Nutva — Новости", 
-      description: "Последние статьи и советы о здоровье"
+      title: "Nutva — Блог и Новости", 
+      description: "Полезные статьи о здоровье, укреплении иммунитета, витаминах и биологически активных добавках. Продукция Nutva, советы специалистов и научные исследования."
     },
     en: {
-      title: "Nutva — News",
-      description: "Latest articles and health tips"
+      title: "Nutva — Blog & News",
+      description: "Useful articles about health, immune support, vitamins and dietary supplements. Nutva products, expert advice and scientific research."
     }
   };
   
@@ -36,7 +36,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: content.title,
     description: content.description,
-    keywords: "news, yangiliklar, maqola, nutva, sog'liq, wellness",
+    keywords: lang === "uz" 
+      ? "blog, yangiliklar, maqola, nutva, sog'liq, immunitet, vitamin, biologik faol qo'shimcha, salomatlik, nutva complex, gelmin kids, tibbiy maslahatlar"
+      : lang === "ru"
+      ? "блог, новости, статьи, nutva, здоровье, иммунитет, витамины, БАД, здравоохранение, nutva complex, gelmin kids, медицинские советы"
+      : "blog, news, articles, nutva, health, immunity, vitamins, dietary supplements, wellness, nutva complex, gelmin kids, medical advice",
     alternates: {
       canonical: localizedUrls[lang],
       languages: localizedUrls,
@@ -47,7 +51,7 @@ export async function generateMetadata(): Promise<Metadata> {
       url: localizedUrls[lang],
       type: "website",
       siteName: "Nutva Pharm",
-      images: [{ url: "https://nutva.uz/seo_banner.jpg", width: 1200, height: 630 }],
+      images: [{ url: "https://nutva.uz/seo_banner.jpg", width: 1200, height: 630, alt: "Nutva Blog" }],
       locale: ogLocale,
       alternateLocale: alternateLocales,
     },
@@ -57,7 +61,17 @@ export async function generateMetadata(): Promise<Metadata> {
       description: content.description,
       images: ["https://nutva.uz/seo_banner.jpg"],
     },
-    robots: "index, follow",
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
   };
 }
 

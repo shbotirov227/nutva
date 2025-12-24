@@ -98,16 +98,16 @@ export interface MultilingualContent {
 export function getHomePageContent(lang: Lang): MultilingualContent {
   const content = {
     uz: {
-      title: "Nutva Pharm — Ilmiy asoslangan biofaol qo'shimchalar",
-      description: "Nutva Pharm — ilmiy asoslangan, sifatli va tabiiy biofaol qo'shimchalar. Har bir mahsulot salomatligingizni tiklashga va mustahkamlashga qaratilgan aniq yechimdir."
+      title: "Nutva Pharm — Bo'g'im va suyak uchun biofaol qo'shimchalar",
+      description: "Bel og'rig'iga, bo'g'im va suyak og'rig'iga yordam beruvchi tabiiy qo'shimchalar. Kollagen, xondroitin, gialuron kislotasi. Artrit, osteoxondroz va bo'g'imlarni mustahkamlash uchun. Nutva Complex — suyak va tog'ay tiklanishi uchun ilmiy asoslangan kompleks."
     },
     ru: {
-      title: "Nutva Pharm — Научно обоснованные биологически активные добавки",
-      description: "Nutva Pharm — научно обоснованные, сертифицированные и натуральные БАДы. Каждый продукт — точное решение для восстановления и укрепления здоровья."
+      title: "Nutva Pharm — БАДы для суставов и костей",
+      description: "Натуральные добавки для лечения боли в спине, суставах и костях. Коллаген, хондроитин, гиалуроновая кислота. При артрите, остеохондрозе и укреплении суставов. Nutva Complex — научно обоснованный комплекс для восстановления костей и хрящей."
     },
     en: {
-      title: "Nutva Pharm — Science‑backed dietary supplements",
-      description: "Nutva Pharm — science‑backed, certified and natural supplements. Each product is a precise solution to restore and strengthen your health."
+      title: "Nutva Pharm — Dietary supplements for joints and bones",
+      description: "Natural supplements for back pain, joint and bone pain relief. Collagen, chondroitin, hyaluronic acid. For arthritis, osteochondrosis and joint strengthening. Nutva Complex — science-backed complex for bone and cartilage recovery."
     }
   };
   
