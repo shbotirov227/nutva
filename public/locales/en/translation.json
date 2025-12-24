@@ -57,7 +57,11 @@
         "tableOfContents": "Table of contents",
         "nutvaNews": "Nutva News"
     },
-
+    "complexPromo": {
+        "title": "🎁 Special Offer!",
+        "description": "Buy 3 Nutva Complex products, get 2 Nutva Complex Extra as a gift for free!",
+        "hint": "⭐ Discount is automatically applied"
+    },
     "errors": {
         "notFound": "Page not found",
         "serverError": "Internal server error",
@@ -109,6 +113,14 @@
         },
 
         "checkboxLabel": "Select more than 3 products",
+        "complexBonusMessage": "50% discount for you and 2 Nutva Extra included",
+        "complexBonusMessagePart1": "50% discount for you and ",
+        "complexBonusMessagePart2": "2 Nutva Extra",
+        "complexBonusMessagePart3": " included",
+        "complexSaleTitle": "SPECIAL OFFER! Buy 3 Nutva Complex products, get 2 Nutva Extra products as a gift",
+        "complexSaleTitlePart1": "SPECIAL OFFER! Buy 3 Nutva Complex products, get ",
+        "complexSaleTitlePart2": "2 Nutva Extra products",
+        "complexSaleTitlePart3": " as a gift",
         "consultation": "Free consultation",
         "addToCart": "Add to cart",
         "remoreFromCart": "Remove from cart",
@@ -597,20 +609,20 @@
     }
 ,
     "discountPopup": {
-        "title": "Special discount for you",
-        "subtitle": "High-quality supplements for your health",
-        "ariaDiscount": "25% discount – for your first order, click to view products",
-        "discountLabel": "25% discount",
-        "discountForFirst": "For your first order",
+        "title": "🎁 3+2 Promo!",
+        "subtitle": "Buy 3 Nutva Complex, get 2 Nutva Extra free!",
+        "ariaDiscount": "3+2 promo – buy 3 Nutva Complex, get 2 Nutva Extra free",
+        "discountLabel": "3 + 2 FREE",
+        "discountForFirst": "🎁 Nutva Complex + Nutva Extra gift",
         "qualityGuarantee": "High quality guarantee",
-        "limitedTimeOffer": "Limited time offer",
+        "limitedTimeOffer": "⏰ Promo ends:",
         "hours": "Hours",
         "minutes": "Min",
         "seconds": "Sec",
-        "claimDiscount": "Claim discount",
+        "claimDiscount": "Get Promo",
         "later": "Later",
         "benefitNatural": "Natural",
-        "benefitQuality": "Quality",
+        "benefitQuality": "Halal",
         "benefitFreeDelivery": "Free delivery"
     }
 ,

@@ -58,6 +58,12 @@
     "nutvaNews": "Nutva Yangiliklar"
     },
 
+    "complexPromo": {
+        "title": "🎁 Maxsus Taklif!",
+        "description": "3 ta Nutva Complex mahsulot sotib oling, 2 ta Nutva Complex Extra sovg'a sifatida bepul oling!",
+        "hint": "⭐ Chegirma avtomatik ravishda qo'llaniladi"
+    },
+
     "errors": {
         "notFound": "Sahifa topilmadi",
         "serverError": "Ichki server xatosi",
@@ -109,6 +115,14 @@
         },
 
         "checkboxLabel": "3 tadan ko'p mahsulot tanlash",
+        "complexBonusMessage": "Siz uchun 50% chegirma va 2ta Nutva Extra qo'shib beriladi",
+        "complexBonusMessagePart1": "Siz uchun 50% chegirma va ",
+        "complexBonusMessagePart2": "2ta Nutva Extra",
+        "complexBonusMessagePart3": " qo'shib beriladi",
+        "complexSaleTitle": "MAXSUS TAKLIF! 3ta Nutva Complex mahsuloti olsangiz 2ta Nutva Extra mahsuloti qo'shib beriladi",
+        "complexSaleTitlePart1": "MAXSUS TAKLIF! 3ta Nutva Complex mahsuloti olsangiz ",
+        "complexSaleTitlePart2": "2ta Nutva Extra",
+        "complexSaleTitlePart3": " mahsuloti qo'shib beriladi",
         "consultation": "Bepul konsultatsiya",
         "addToCart": "Savatga qo'shish",
         "remoreFromCart": "Savatdan o'chirish",
@@ -596,20 +610,20 @@
     }
 ,
     "discountPopup": {
-        "title": "Siz uchun maxsus chegirma",
-        "subtitle": "Sog'lig'ingiz uchun sifatli qo'shimchalar",
-        "ariaDiscount": "25% chegirma – birinchi buyurtmangiz uchun, bosib mahsulotlarga o'ting",
-        "discountLabel": "25% chegirma",
-        "discountForFirst": "Birinchi buyurtmangiz uchun",
+        "title": "🎁 3+2 Aksiya!",
+        "subtitle": "3 ta Nutva Complex oling, 2 ta Nutva Extra bepul!",
+        "ariaDiscount": "3+2 aksiya – 3 ta Nutva Complex mahsulot oling, 2 ta Nutva Extra bepul",
+        "discountLabel": "3 + 2 BEPUL",
+        "discountForFirst": "🎁 Nutva Complex + Nutva Extra sovg'a",
         "qualityGuarantee": "Yuqori sifat kafolati",
-        "limitedTimeOffer": "Cheklangan vaqt taklifi",
+        "limitedTimeOffer": "⏰ Aksiya tugaydi:",
         "hours": "Soat",
         "minutes": "Daq",
         "seconds": "Son",
-        "claimDiscount": "Chegirmani oling",
+        "claimDiscount": "Aksiyani olish",
         "later": "Keyinroq",
         "benefitNatural": "Tabiiy",
-        "benefitQuality": "Sifatli",
+        "benefitQuality": "Halol",
         "benefitFreeDelivery": "Bepul yetkazish"
     },
     "blogSidebar": {

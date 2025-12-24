@@ -29,6 +29,7 @@ import { useCart } from "@/context/CartContext";
 import { CountdownTimer } from "@/components/CountDownTimer";
 import ProductReviewSlider from "@/components/ProductReviewSlider";
 import dynamic from "next/dynamic";
+import { ComplexPromoBanner } from "@/components/ComplexPromoBanner";
 
 const ProductCertificates = dynamic(() => import("../../../components/ProductCertificates"), {
   ssr: false,
@@ -143,7 +144,14 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
             </LayoutGroup>
           </AnimatePresence>
 
-          <div className="space-y-4">
+          {/* Complex Promo Banner - Above discount counter */}
+          {uiProduct?.name === ProductName.COMPLEX && (
+            <div className="mt-6">
+              <ComplexPromoBanner color={color} bgColor={bgColor} />
+            </div>
+          )}
+
+          <div className="space-y-4 mt-6">
             <CountdownTimer
               storageKey={`countdown:product:${id}`}
               resetDurationMs={24 * 60 * 60 * 1000}
