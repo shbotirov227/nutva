@@ -35,7 +35,11 @@ function ytIdFromUrl(u: string): string | null {
 const getBlog = cache(async (id: string, lang: Lang): Promise<GetOneBlogType> => {
   const base = process.env.NEXT_PUBLIC_API_URL;
   const res = await fetch(`${base}/BlogPost/${id}?lang=${lang}`, {
-    next: { revalidate: 60 },
+    next: { revalidate: 300 }, // 5 minutes instead of 60 seconds
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
   });
   if (!res.ok) throw new Error("Failed to fetch blog post");
   return res.json();
@@ -64,12 +68,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const imageUrls =
       post.media
         ?.filter((m) => m.mediaType === "Image" || m.mediaType === "ImageUrl")
-        .map((m) => absoluteMediaUrl(m.url)) ?? [];
+        .map((m, index) => ({
+          url: absoluteMediaUrl(m.url),
+          alt: m.altText || `${post.title} - ${index === 0 ? 'cover image' : `image ${index + 1}`}`
+        })) ?? [];
 
-    const ogImages = (imageUrls.length ? imageUrls : [ABS("/og-default.jpg")]).map((url) => ({
-      url,
-      alt: post.title,
-    }));
+    const ogImages = (imageUrls.length 
+      ? imageUrls 
+      : [{ url: ABS("/og-default.jpg"), alt: post.title }]
+    );
 
     // VIDEO (native or YouTube)
     const vid = post.media?.find((m) => m.mediaType === "Video" || m.mediaType === "YoutubeUrl");

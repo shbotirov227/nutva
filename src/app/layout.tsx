@@ -50,9 +50,17 @@ export async function generateMetadata(): Promise<Metadata> {
     uz: [
       "Nutva", "Nutva Pharm",
       "Nutva Complex", "Nutva Complex Extra", "Gelmin Kids",
-      "biologik faol qo‘shimcha", "vitamin kompleks",
-      "immunitetni qo‘llab-quvvatlash", "antioksidantlar",
-      "bo‘g‘im va suyaklar", "energiya va holsizlik",
+      // Bo'g'im va suyak keywordlari (TRENDDAGI)
+      "bel og'rig'iga davo", "bo'g'im og'rig'iga dori", "suyak uchun vitaminlar",
+      "kollagen va xondroitin", "suyaklarni mustahkamlash", "bo'g'imlar uchun qo'shimchalar",
+      "gialuron kislotasi", "osteoxondroz davosi", "artrit uchun vosita",
+      "bo'g'im og'rig'ini kamaytirish", "suyak og'rig'iga tabiiy davo",
+      "suyak va tog'ay tiklanishi", "harakatni yengillashtiruvchi qo'shimcha",
+      "bo'g'imlarni sog'lom saqlash", "poliartrit", "tog'ay yemirilishi",
+      // Umumiy keywordlar
+      "biologik faol qo'shimcha", "vitamin kompleks",
+      "immunitetni qo'llab-quvvatlash", "antioksidantlar",
+      "energiya va holsizlik",
       "bolalar uchun qo‘shimcha", "gijjaga qarshi bolalar",
       "parazitga qarshi", "o‘simlik ekstraktlari",
       "dorixona", "Toshkent", "Uzbekistan",
@@ -61,9 +69,17 @@ export async function generateMetadata(): Promise<Metadata> {
     ru: [
       "Nutva", "Nutva Pharm",
       "Nutva Complex", "Nutva Complex Extra", "Gelmin Kids",
+      // Для суставов и костей (ТРЕНДЫ)
+      "боль в спине лечение", "препарат для суставов", "витамины для костей",
+      "коллаген и хондроитин", "укрепление костей", "добавки для суставов",
+      "гиалуроновая кислота", "остеохондроз лечение", "средство от артрита",
+      "снизить боль в суставах", "натуральное средство для костей",
+      "восстановление костей и хрящей", "улучшение подвижности",
+      "здоровье суставов", "полиартрит", "износ хрящей",
+      // Общие ключевые слова
       "БАД", "биологически активная добавка", "витаминный комплекс",
       "поддержка иммунитета", "антиоксиданты",
-      "суставы и кости", "энергия и усталость",
+      "энергия и усталость",
       "детская добавка", "от глистов детям", "против паразитов",
       "растительные экстракты",
       "аптека", "Ташкент", "Узбекистан",
@@ -72,9 +88,17 @@ export async function generateMetadata(): Promise<Metadata> {
     en: [
       "Nutva", "Nutva Pharm",
       "Nutva Complex", "Nutva Complex Extra", "Gelmin Kids",
+      // Joint and bone keywords (TRENDING)
+      "back pain relief", "joint pain medicine", "vitamins for bones",
+      "collagen and chondroitin", "bone strengthening", "joint supplements",
+      "hyaluronic acid", "osteochondrosis treatment", "arthritis remedy",
+      "reduce joint pain", "natural bone pain relief",
+      "bone and cartilage recovery", "mobility supplement",
+      "joint health", "polyarthritis", "cartilage wear",
+      // General keywords
       "dietary supplement", "multivitamin complex",
       "immune support", "antioxidants",
-      "joint and bone support", "energy and fatigue",
+      "energy and fatigue",
       "kids supplement", "anti-helminth support", "parasite defense",
       "herbal extracts",
       "pharmacy", "Tashkent", "Uzbekistan",
