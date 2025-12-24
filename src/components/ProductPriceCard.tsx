@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 // import { useLang } from "@/context/LangContext";
 import { GetOneProductType } from "@/types/products/getOneProduct";
 import { useTranslation } from "react-i18next";
+import { ProductName } from "@/types/enums";
 // import { useLocalizedProduct } from "@/hooks/useLocalizedProduct";
 import { formatPrice } from "@/lib/formatPrice";
 import { Flame, Minus, Plus } from "lucide-react";
@@ -133,7 +134,15 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
                   <h2 className="text-4xl font-bold">{product?.name}</h2>
                   <p className="text-xl mt-1 text-gray-800">{product?.slug}</p>
                 </div>
-                  <p className="text-xl mt-1 text-red-600 font-semibold">{t("product.saleTitle")}</p>
+                  <p className="text-xl mt-1 font-semibold" style={{ color }}>
+                    {product?.name === ProductName.COMPLEX ? (
+                      <>
+                        {t("product.complexSaleTitlePart1", "MAXSUS TAKLIF! 3ta Complex mahsuloti olsangiz ")}
+                        <span className="text-red-600">{t("product.complexSaleTitlePart2", "2ta Extra")}</span>
+                        {t("product.complexSaleTitlePart3", " mahsuloti qo'shib beriladi")}
+                      </>
+                    ) : t("product.saleTitle")}
+                  </p>
 
                 <Collapse show={discountPercent > 0} className="mb-4">
                   <div className="flex gap-2 items-center">
@@ -158,11 +167,29 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
                   transition={{ duration: 0.3, layout: { duration: 0.25 } }}
                   className="w-full rounded-xl flex flex-col gap-4"
                 >
-                  <Collapse show={discountPercent > 0}>
+                  <Collapse show={discountPercent > 0 && !(product?.name === ProductName.COMPLEX && selectedQuantity >= 3)}>
                     <div className="flex items-center text-base font-semibold text-red-600 gap-1 mb-4 bg-white p-4 rounded-lg">
                       <Flame className="w-4 h-4" />
                       {t("common.forYou")} {discountPercent}% {t("common.sale")} • {isChecked ? count : quantity} {t("common.quantity")}
                     </div>
+                  </Collapse>
+
+                  {/* Complex bonus message when quantity >= 3 */}
+                  <Collapse show={product?.name === ProductName.COMPLEX && selectedQuantity >= 3}>
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3 }}
+                      className="flex items-center text-base font-bold gap-2 mb-4 bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-lg border-2 shadow-md"
+                      style={{ borderColor: color, color }}
+                    >
+                      <span className="text-2xl">🎁</span>
+                      <span>
+                        {t("product.complexBonusMessagePart1", "Siz uchun 50% chegirma va ")}
+                        <span className="text-red-600 font-extrabold">{t("product.complexBonusMessagePart2", "2ta extra")}</span>
+                        {t("product.complexBonusMessagePart3", " qo'shib beriladi")}
+                      </span>
+                    </motion.div>
                   </Collapse>
                 </motion.div>
               </AnimatePresence>
