@@ -1,41 +1,41 @@
 // middleware.ts
 import { NextRequest, NextResponse } from "next/server";
 
-const STRIP_PARAMS = new Set(["etext", "ybaip"]);
+const SEO_PARAMS = new Set(["etext", "ybaip"]);
+
+function isBot(userAgent: string) {
+  const ua = userAgent.toLowerCase();
+  return (
+    ua.includes("googlebot") ||
+    ua.includes("yandex") ||
+    ua.includes("bingbot") ||
+    ua.includes("duckduckbot") ||
+    ua.includes("slurp")
+  );
+}
 
 export function middleware(req: NextRequest) {
-  const url = req.nextUrl;
+  const url = req.nextUrl.clone();
+  const ua = req.headers.get("user-agent") || "";
 
-  // Skip Next internals + api
-  if (
-    url.pathname.startsWith("/_next") ||
-    url.pathname.startsWith("/api") ||
-    url.pathname.startsWith("/admin")
-  ) {
-    return NextResponse.next();
+  // FAQAT robotlar uchun tozalash
+  if (isBot(ua)) {
+    let changed = false;
+    for (const p of SEO_PARAMS) {
+      if (url.searchParams.has(p)) {
+        url.searchParams.delete(p);
+        changed = true;
+      }
+    }
+    if (changed) {
+      return NextResponse.redirect(url, 308);
+    }
   }
 
-  let changed = false;
-
-  STRIP_PARAMS.forEach((p) => {
-    if (url.searchParams.has(p)) {
-      url.searchParams.delete(p);
-      changed = true;
-    }
-  });
-
-  if (!changed) return NextResponse.next();
-
-  // If no params left, remove trailing "?"
-  const clean = new URL(url.toString());
-  clean.search = url.searchParams.toString();
-
-  return NextResponse.redirect(clean, 301);
+  // Odamlar uchun hech narsa qilmaymiz
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: [
-    // run on everything except next internals / static files
-    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml).*)",
-  ],
+  matcher: ["/((?!_next|api|.*\\..*).*)"],
 };

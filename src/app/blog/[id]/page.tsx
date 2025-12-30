@@ -205,7 +205,7 @@ export default async function BlogPostPage({ params }: Props) {
 
     return (
       <Container className="pt-28 pb-24 max-w-6xl">
-        <BlogDetail blog={blog} id={id} />
+        <BlogDetail blog={blog} id={id} routeLang={lang} />
       </Container>
     );
   } catch (e) {
