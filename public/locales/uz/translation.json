@@ -27,7 +27,7 @@
         "total": "Jami",
         "yourCart": "Sizning savatingiz",
         "emptyCart": "Sizning savatingiz bo'sh",
-    "blogs": "Yangiliklar",
+        "blogs": "Yangiliklar",
         "soon": "Tez orada sotuvga chiqadi...",
         "send": "Yuborish",
         "typing": "Yozmoqda...",
@@ -42,28 +42,26 @@
         "address": "Manzil",
         "addressValue": "Uzbekiston, Toshkent",
         "cooperationIssues": "Hamkorlik masalalari bo'yicha",
-    "quickLinks": "Tezkor havolalar",
-    "socialNetwork": "Ijtimoiy tarmoqlar",
-    "emptyCartHint": "Mahsulotlarni ko'rib chiqing va savatga qo'shing.",
-    "continueShopping": "Xarid qilishni davom etish",
-    "inCart": "savatda",
-    "decreaseQuantity": "Miqdorni kamaytirish",
-    "increaseQuantity": "Miqdorni oshirish",
-    "share": "Ulashish",
-    "copied": "Nusxa olindi",
-    "copyLink": "Havolani nusxalash",
-    "views": "ko'rish",
-    "minRead": "daq. o'qish",
-    "tableOfContents": "Mundarija",
-    "nutvaNews": "Nutva Yangiliklar"
+        "quickLinks": "Tezkor havolalar",
+        "socialNetwork": "Ijtimoiy tarmoqlar",
+        "emptyCartHint": "Mahsulotlarni ko'rib chiqing va savatga qo'shing.",
+        "continueShopping": "Xarid qilishni davom etish",
+        "inCart": "savatda",
+        "decreaseQuantity": "Miqdorni kamaytirish",
+        "increaseQuantity": "Miqdorni oshirish",
+        "share": "Ulashish",
+        "copied": "Nusxa olindi",
+        "copyLink": "Havolani nusxalash",
+        "views": "ko'rish",
+        "minRead": "daq. o'qish",
+        "tableOfContents": "Mundarija",
+        "nutvaNews": "Nutva Yangiliklar"
     },
-
     "complexPromo": {
         "title": "🎁 Maxsus Taklif!",
         "description": "3 ta Nutva Complex mahsulot sotib oling, 2 ta Nutva Complex Extra sovg'a sifatida bepul oling!",
         "hint": "⭐ Chegirma avtomatik ravishda qo'llaniladi"
     },
-
     "errors": {
         "notFound": "Sahifa topilmadi",
         "serverError": "Ichki server xatosi",
@@ -76,20 +74,17 @@
         "ageError": "Iltimos, haqiqiy yosh kiriting (1-120)",
         "emptyProducts": "Mahsulotlar mavjud emas"
     },
-    
     "nav": {
         "home": "Bosh sahifa",
         "about": "Biz haqimizda",
         "products": "Mahsulotlar",
         "certificates": "Sertifikatlar",
-    "blog": "Yangiliklar",
+        "blog": "Yangiliklar",
         "contact": "Aloqa"
     },
-
     "footer": {
         "title": "Nutva Pharm - bu sog'lom hayot tarzi uchun yaratilgan, tabiiy va samarali biofaol qo'shimchalar ishlab chiqaruvchi zamonaviy brend."
     },
-
     "blog": {
         "date": "Sana",
         "search": "Qidirish...",
@@ -98,14 +93,12 @@
         "clearFilter": "Filtrni tozalash",
         "noResults": "Natija topilmadi",
         "loadMore": "Ko'proq yuklash",
-    "noBlogs": "Yangiliklar mavjud emas",
-    "popular": "Mashhur yangiliklar",
-    "latest": "So'nggi yangiliklar",
-    "subtitle": "Sog'liq va salomatlik haqida so'nggi ma'lumotlar"
+        "noBlogs": "Yangiliklar mavjud emas",
+        "popular": "Mashhur yangiliklar",
+        "latest": "So'nggi yangiliklar",
+        "subtitle": "Sog'liq va salomatlik haqida so'nggi ma'lumotlar"
     },
-
     "product": {
-        
         "tab": {
             "1": "Tavsif",
             "2": "Tarkibi",
@@ -113,7 +106,6 @@
             "4": "Sertifikatlar",
             "5": "Gijjalar"
         },
-
         "checkboxLabel": "3 tadan ko'p mahsulot tanlash",
         "complexBonusMessage": "Siz uchun 50% chegirma va 2ta Nutva Extra qo'shib beriladi",
         "complexBonusMessagePart1": "Siz uchun 50% chegirma va ",
@@ -128,30 +120,25 @@
         "remoreFromCart": "Savatdan o'chirish",
         "addedToCart": "Savatga qo'shildi",
         "noProducts": "Mahsulotlar mavjud emas",
-    "saleTitle": "MAXSUS TAKLIF! Qancha ko'p olsangiz — shuncha ko'p tejaysiz!",
-    "officialProduct": "Rasmiy mahsulot",
-    "natural": "100% tabiiy",
-    "fastDelivery": "Tez yetkazish"
+        "saleTitle": "MAXSUS TAKLIF! Qancha ko'p olsangiz — shuncha ko'p tejaysiz!",
+        "officialProduct": "Rasmiy mahsulot",
+        "natural": "100% tabiiy",
+        "fastDelivery": "Tez yetkazish"
     },
-
     "aboutBrand": {
         "title": "Brend haqida",
         "text": "Nutva Pharm - bu sog'lom hayot tarzi uchun yaratilgan, tabiiy va samarali biofaol qo'shimchalar ishlab chiqaruvchi zamonaviy brend. Bizning asosiy maqsadimiz - inson salomatligini qo'llab-quvvatlash, immunitetni mustahkamlash va organizmga zarar yetkazmasdan foyda beradigan yechimlarni taqdim etishdir. 2020-yilda Nutva Pharm o'zining ilk mahsuloti - Nutva Complex orqali O'zbekiston, O'rta Osiyo va Rossiya bozorlarida e'tirof etila boshladi. Dastlab mahalliy bozorni o'rganib, mijozlar ehtiyojiga mos maxsus tarkiblar asosida mahsulotlar yaratildi. Bugungi kunga kelib, Nutva Pharm assortimentida bolalar, ayollar, erkaklar va keksa yoshdagilar uchun alohida liniyalar mavjud. Biz har bir mahsulotni puxta ilmiy yondashuv, ekologik toza xomashyo va xalq tabobatining eng yaxshi an'analari asosida ishlab chiqamiz. Nutva Pharm - bu shunchaki biofaol qo'shimcha emas, bu - tabiat va ilm uyg'unligidagi sog'lom yashash falsafasi."
     },
-
     "aboutUs": {
         "title": "Sog'lig'ingizga g'amxo'rlik qiling",
         "subtitle": "Sog'lomlashtirish majmuasi"
     },
-
     "reviewSection": {
         "title": "Mijozlarimizning haqiqiy sharhlari",
         "subtitle": "NUTVA hayot sifatini yaxshilashga va kerakli natijalarga erishishga qanday yordam berishini bilib oling. Mahsulotimizni allaqachon sinab ko'rganlarning video sharhlari samaradorlik va sifatni tasdiqlaydi.",
-
         "categories": {
             "all": "Barcha sharhlar"
         },
-
         "videoData": {
             "complex": {
                 "1": {
@@ -197,17 +184,14 @@
             }
         }
     },
-
     "saleSection": {
         "title": "Hoziroq chegirmaga ega bo'ling",
         "subtitle": "NUTVA-bo'g'imlar, suyaklar, ovqat hazm qilish va immunitetni qo'llab-quvvatlash uchun tabiiy komplekslar. Arizani to'ldiring va bugun sog'lomlashtirish kursiga chegirma oling.",
         "button": "Arizani yuboring"
     },
-
     "form": {
         "title": "Bolangiz salomatligi uchun bugunoq buyurtma bering",
         "subtitle": "🚚 O'zbekiston bo'ylab bepul yetkazib berish",
-
         "input": {
             "name": "Ism",
             "phone": "Telefon raqam",
@@ -220,7 +204,6 @@
             "quantity": "Miqdori",
             "message": "Xabar"
         },
-
         "errors": {
             "nameRequired": "Ism kiritilishi shart",
             "phoneRequired": "Telefon raqami to'liq bo'lishi kerak",
@@ -234,7 +217,6 @@
             "nameTooShort": "Ism kamida 2 harf bo'lishi kerak",
             "nameInvalid": "Ism faqat harflar bo'lishi kerak"
         },
-
         "success": "Buyurtma muvaffaqiyatli qabul qilindi",
         "applicationSuccess": "Ariza muvaffaqiyatli yuborildi",
         "fillAllFields": "Barcha maydonlarni to'ldiring",
@@ -243,22 +225,18 @@
         "email": "Email",
         "shortNumber": "Qisqa raqami"
     },
-
     "formModal": {
         "title": "To'liq ma'lumot va buyurtma uchun:",
         "subtitle": "Ismingiz va telefon raqamingiz hamda quyidagi ma'lumotlarni qoldiring - mutaxassislarimiz siz bilan bog'lanadi!"
     },
-
     "contactModal": {
         "title": "Salomatligingiz bo'yicha savolingiz bormi?",
         "subtitle": "Raqamingizni qoldiring - shifokorlarimiz bepul maslahat uchun tez orada bog'lanadi."
     },
-
     "contactPopup": {
         "title": "Bog'lanish",
         "subtitle": "Ism va telefon raqamingizni qoldiring"
     },
-
     "button": {
         "heroButton": "Buyurtma berish",
         "consultationButton": "Konsultatsiya olish",
@@ -268,45 +246,41 @@
         "sendMessage": "Xabarni yuborish",
         "submitButton": "Yuborish"
     },
-
     "products": {
         "complex": {
             "tab": {
                 "1": {
                     "1": "Bu biologik faol qo'shimcha - dorivor o'tlarning noyob jamlanmasi asosida yaratilgan va ularning tabiiy kuchi va qiymatini yuqori darajada saqlash imkonini beruvchi innovatsion texnologiyadan foydalangan holda ishlab chiqarilgan tabiiy mahsulot.",
                     "2": "Ayiqquloq - 51,7 mg, Makkaisano - 51,2 mg, Gulxayri ildizi - 41,4 mg, Jo'xori popugi - 40,8 mg, Zig'ir urug'i - 39,6 mg, Qariqiz ildizi - 32,7 mg, Qora andiz - 29,3 mg, Bosvellia - 28,7 mg, Gubbaxt daraxt po'stlog'i - 26,4 mg, Juka - 20,4 mg, Ekinezya - 16,8 mg, Zanjabil - 16,4 mg, Anis (arpobodiyon) - 16,2 mg, Namatak - 15,9 mg, Glyukozamin - 12,9 mg, Kollagen - 12,8 mg, Gialuron kislotasi - 11,8 mg, Xondroitin sulfat - 10,3 mg, Bo'yimodaron - 5,8 mg, Vitamin B6 - 2,1 mg, Melatonin - 1,5 mg.",
-                    "3": "Kechqurun 2 dona kapsuladan, ovqatdan 30 daqiqa keyin qabul qilinadi. Mahsulotni 3-6 oy davomida uzoq kurslarda qabul qilish tavsiya etiladi.",
+                    "3": "Kechqurun 2 dona kapsuladan, ovqatdan 30 daqiqa keyin qabul qilinadi. Mahsulotni 6-12 oy davomida uzoq kurslarda qabul qilish tavsiya etiladi.",
                     "4": {
                         "image": "/img/products/nutva-complex/certificate.jpg"
                     }
                 }
             }
         },
-
         "complexExtra": {
             "tab": {
                 "1": {
                     "1": "Bu biologik faol qo'shimcha - dorivor o'tlarning noyob jamlanmasi asosida yaratilgan va ularning tabiiy kuchi va qiymatini yuqori darajada saqlash imkonini beruvchi innovatsion texnologiyadan foydalangan holda ishlab chiqarilgan tabiiy mahsulot.",
                     "2": "Ayiqquloq – 41,7 mg, Gulxayri ildizi – 41,4 mg, Makkaisano – 41,2 mg, Jo'xori popugi – 40,8 mg, Zig'ir urug'i – 39,6 mg, Qariqiz ildizi – 32,7 mg, Qora andiz- 29,3 mg, Bosvellia – 28,7 mg, Gubbaxt daraxt po'stlog'i – 26,4 mg, Alfa lipoik kislotasi – 24,7 mg, Juka – 20,4 mg, Ekinezya – 16,8 mg, Zanjabil – 16,4 mg, Anis (Arpabodiyon) – 16,2 mg, Na’matak – 15,9 mg, Vitamin B8 – 14,8 mg, Vitamin E – 14,6 mg, Bo'yimodaron – 5,8 mg, Vitamin B5 – 2,9 mg, Vitamin B2 - 1,5 mg, Vitamin B6 - 1,5 mg, Vitamin A - 0,5 mg, Vitamin B9 – 0,3 mg, Kaliy yodid – 0,127 mg, Vitamin D3 – 15 mkg, Vitamin B7 (Biotin) – 0,015 mg, Selen – 0,01 mg, Vitamin B12 – 9 mkg.",
-                    "3": "Ertalab 2 dona kapsuladan, ovqatdan 30 daqiqa oldin ichiladi. Mahsulotni 3-6 oy davomida uzoq kurslarda qabul qilish tavsiya etiladi.",
+                    "3": "Ertalab 2 dona kapsuladan, ovqatdan 30 daqiqa keyin ichiladi. Mahsulotni 6-12 oy davomida uzoq kurslarda qabul qilish tavsiya etiladi.",
                     "4": {
                         "image": "/img/products/nutva-complex-extra/certificate.jpg"
                     }
                 }
             }
         },
-
         "gelminKids": {
             "tab": {
                 "1": {
                     "1": "Bolalar uchun mo'ljallangan tabiiy parazitlarga qarshi kompleks. Gijjalar, toksinlar va teri muammolarini bartaraf etishda yordam beradi.",
                     "2": "Indov – 136,7 mg, Qora sedana – 46,7 mg, Qora andiz – 37,7 mg, Bo’yimodaron – 12,5 mg, Qovoq urug’I – 12,4 mg, Makkaisano – 12,2 mg, Dastarbosh – 11,7 mg.",
-                    "3": "2-5 yosh: 1 kapsula. 5-16 yosh: 2 kapsula. 16+ yosh: 3 kapsula. Kechki ovqatdan avval qabul qilinadi. Mahsulotni 3-6 oy davomida uzoq kurslarda qabul qilish tavsiya etiladi.",
+                    "3": "2-5 yosh: 1 kapsula. 5-16 yosh: 2 kapsula. 16+ yosh: 3 kapsula. Kechki ovqatdan avval qabul qilinadi. Mahsulotni 6-12 oy davomida uzoq kurslarda qabul qilish tavsiya etiladi.",
                     "4": {
                         "image": "/img/products/nutva-gelmin-kids/certificate.jpg"
                     }
                 },
-
                 "gijjalar": {
                     "1": {
                         "title": "Gijjalar:",
@@ -324,7 +298,6 @@
                 }
             }
         },
-
         "fertiliaWomen": {
             "tab": {
                 "1": {
@@ -336,20 +309,18 @@
                 }
             }
         },
-
         "virisMen": {
             "tab": {
                 "1": {
                     "1": "Erkaklar salomatligi uchun kompleks. Immunitetni oshiradi, spermatozoid sifatini va jinsiy faollikni tiklaydi.",
                     "2": "L-arginin - 125 mg, L-karnitin - 74,6 mg, Glutation - 48,4 mg, Magniy - 28,7 mg, Koenzim Q10 - 24,4 mg, Evrikoma ekstrakti - 19,2 mg, Vitamin E - 18,75 mg, Rux - 14,6 mg, Kaltsiy - 12,5 mg, Tribulus ekstrakti - 12,5 mg, Levzeya ekstrakti - 12,5 mg, Qariqiz ildizi - 7,5 mg, Ekinezya - 7,5 mg, Viteks ekstrakti - 7,5 mg, Marganets - 2,5 mg, Vitamin A - 0,225 mg, Vitamin B9 - 0,2 mg, Vitamin D3 - 15 mg, Kaliy yodid - 0,0655 mg, Selen - 0,0075 mg.",
-                    "3": "Ertalab 2 kapsuladan, ovqatdan 30 daqiqa oldin. Mahsulotni 3-6 oy davomida uzoq kurslarda qabul qilish tavsiya etiladi.\n\n⚕️ Erkaklar jinsiy salomatligi:\n• Prostatit, uretrit, prostata adenomasi - siydikda qiyinchilik, jinsiy zaiflik.\n• Varikosel, erektil disfunktsiya - urug' sifati pasayishi, bepushtlik xavfi.\n• Balanit, epididimit, orxit - infeksiyalar va yallig'lanishlar bilan bog'liq muammolar.\n\n👨‍⚕️ Yechim: murakkab yallig'lanish holatlari va gormonal buzilishlarni tiklash uchun kompleks qo'llanilishi mumkin.\n\n🧠 Asab tizimi va stress: muntazam qabul qilish orqali umumiy quvvat, testosteron, sperma harakatchanligi va ruhiy barqarorlikka ijobiy ta'sir ko'rsatadi.",
+                    "3": "Ertalab 2 kapsuladan, ovqatdan 30 daqiqa oldin. Mahsulotni 6-12 oy davomida uzoq kurslarda qabul qilish tavsiya etiladi.\n\n⚕️ Erkaklar jinsiy salomatligi:\n• Prostatit, uretrit, prostata adenomasi - siydikda qiyinchilik, jinsiy zaiflik.\n• Varikosel, erektil disfunktsiya - urug' sifati pasayishi, bepushtlik xavfi.\n• Balanit, epididimit, orxit - infeksiyalar va yallig'lanishlar bilan bog'liq muammolar.\n\n👨‍⚕️ Yechim: murakkab yallig'lanish holatlari va gormonal buzilishlarni tiklash uchun kompleks qo'llanilishi mumkin.\n\n🧠 Asab tizimi va stress: muntazam qabul qilish orqali umumiy quvvat, testosteron, sperma harakatchanligi va ruhiy barqarorlikka ijobiy ta'sir ko'rsatadi.",
                     "4": {
                         "image": "/img/products/nutva-viris/certificate.jpg"
                     }
                 }
             }
         },
-
         "additional": {
             "title": "Qo'shimcha:",
             "1": "Quyidagi kasalliklarda samarali yordam beradi:",
@@ -358,7 +329,6 @@
             "4": "Gonartroz - tizza bo'g'imining surunkali degenerativ kasalligi;",
             "5": "Poliartrit - bo'g'imlarning yallig'lanishi;",
             "6": "Osteoporoz - suyaklarning sinishi osonligi;",
-
             "complex": {
                 "title": "Quyidagi kasalliklarda samarali yordam beradi:",
                 "1": "Koksartroz - son bo'g'imining yemirilishi, yurishda og'riq va harakat cheklanishi bilan kechadi;",
@@ -367,7 +337,6 @@
                 "4": "Grija - umurtqa oraliq diskining chiqib ketishi, asabni siqib, qo'l-oyoqda og'riq va uvishishga sabab bo'ladi;",
                 "5": "Poliartrit - bir nechta bo'g'imlarning yallig'lanishi, shish, qattiqlik va harakatda og'riq bilan kechadi."
             },
-
             "gelminKids": {
                 "title": "Quyidagi kasalliklarda samarali yordam beradi:",
                 "1": "Ostritsa (Enterobioz) - Eng ko'p uchraydigan gijja turi, ayniqsa bolalarda. Tunda orqa chiqaruv yo'li atrofida qichishish, bezovtalik, ishtahasizlik bilan namoyon bo'ladi. Juda yuqumli.",
@@ -376,7 +345,6 @@
                 "4": "Toksokara (Toksokaroz) - Ichakda yashovchi mikroskopik parazit. Asosan it va mushuklardan yuqadi. Inson tanasida ko'chib yuradi. Belgilari: qattiq allergik reaksiya, isitma, ko'z va ichki a'zolarga zarar yetkazishi mumkin.",
                 "5": "Lentasimon gijja - uzun, tasmaga o'xshash gijja turi bo'lib, pishmagan go'sht orqali yuqadi; belgilari: qorin og'rig'i, ozib ketish, bosh aylanish, najasda gijja bo'laklari; xavfi - organizmda ozuqa moddalar yetishmovchiligi, kamqonlik va kuchsizlanish."
             },
-
             "complexExtra": {
                 "title": "Quyidagi kasalliklarda samarali yordam beradi:",
                 "1": "Gepatoz - Jigar hujayralariga yog' to'planishi (yog'li gepatoz). Ko'pincha noqulay ovqatlanish, kamharakat hayot tarzi va semizlikdan kelib chiqadi. Jigar funksiyasi pasayadi.",
@@ -387,7 +355,6 @@
                 "6": "Ich qotishi (qabziyat) - Hajmi kam va qattiq axlat chiqishi. Sababi: kam suv ichish, kamharakat, ovqatda vitaminlar yetishmasligi. Noqulaylik, shish va uyqusizlikka olib keladi.",
                 "7": "Ichak faoliyati buzilishi - Diareya, shishish, og'riq, qabziyat - ichakning noto'g'ri ishlash belgilaridir. Sababi: stress, infeksiya yoki noto'g'ri ovqatlanish."
             },
-
             "fertiliaWomen": {
                 "title": "Quyidagi kasalliklarda samarali yordam beradi:",
                 "1": "Vaginit - Qin devorining yallig'lanishi. Odatda infeksiya yoki gormonal o'zgarishlar sababli yuzaga keladi. Belgilari: ajralma, qichishish, achishish.",
@@ -405,7 +372,6 @@
                 "13": "Funksional kista - Tuxumdon funksiyasi bilan bog'liq bo'lgan oddiy kistalar. Gormonal nomutanosiblik sababli yuzaga keladi.",
                 "14": "Infeksion kasalliklar - Jinsiy yo'l bilan yuqadigan yoki ichki jinsiy a'zolarga zarar yetkazuvchi bakterial, virusli yoki zamburug'li infeksiyalar."
             },
-
             "virisMen": {
                 "title": "Quyidagi kasalliklarda samarali yordam beradi:",
                 "1": "Sistit - Siydik pufagi yallig'lanishi. Ayollarda ko'p uchrasa-da, erkaklarda ham og'riqli siyish va tez-tez siyishga olib keladi.",
@@ -422,29 +388,23 @@
             }
         }
     },
-    
     "about": {
         "features": "Xususiyatlari",
         "whyChoose": "Nutvani  nima uchun tanlash kerak?",
-
         "accordionQuestions": {
             "1": "Tabiiy tarkib",
             "2": "Natijasi isbotlangan",
             "3": "Shifokorlar bilan hamkorlik",
             "4": "Ishonchli va qulay"
         },
-
         "accordionContent": {
             "1": "Barcha mahsulotlarimiz o'simlik ekstraktlari, minerallar va foydali vitaminlar asosida yaratilgan. Bo'yoqlar, antibiotiklar va konservantlar yo'q.",
             "2": "Yurtimiz bo'ylab minglab odamlar Nutva bilan sog'lig'ini tikladi. Ularning hikoyalari - bizning faxrimiz va biz ularni YouTube kanalimizga joylab boramiz.",
             "3": "Nutva mahsulotlari tajribali mutaxassislar bilan birgalikda  ishlab chiqilgan bo'lib, u malakali shifokorlar tomonidan tavsiya etilmoqda.Mijozlarimiz doimiy tibbiy nazorat ostida va viloyatlararo bepul ko'riklar tashkil qilinib kelinmoqda",
             "4": "Mahsulotlarimiz xalqaro sifat standartlariga javob beradi. Qadoqlari esa tushunarli va foydalanishga qulay."
         },
-
         "faqTitle": "Ko'p so'raladigan savollar",
-
         "faq": {
-
             "title": {
                 "1": "Nutva nima uchun ichiladi?",
                 "2": "Tarkibida kimyoviy moddalar yoki gormon bormi?",
@@ -457,7 +417,6 @@
                 "9": "Homiladorlar yoki emizikli ayollar ichishi mumkinmi?",
                 "10": "Qayerdan xarid qilish mumkin?"
             },
-
             "content": {
                 "1": "Bu mahsulot suyak, bo'g'im kasalliklari  uchun iste'mol qilinadi.",
                 "2": "Yo'q. Faqatgina tabiiy giyohlarni ekstraktlari, gormon va kimyoviy moddalarsiz tayyorlangan.",
@@ -472,23 +431,19 @@
             }
         }
     },
-
     "contact": {
         "title": "Biz bilan bog'laning",
         "subtitle": "Mahsulot va xizmatlarimiz bo'yicha savollaringizga javob berishdan mamnunmiz."
     },
-
     "sale": {
         "title": "MAXSUS TAKLIF!",
         "subtitle": "Qancha ko'p olsangiz — shuncha ko'p tejaysiz!",
         "saveFor": "tejab qoling",
         "button": "Ushbu chegirma asosida xarid qilish",
         "notSalePrice": "chegirmasiz narx",
-
         "table": {
             "title": "Qancha ko'p xarid — shuncha katta chegirma!",
             "products_label": "Mahsulotlar:",
-
             "items": [
                 {
                     "quantity": "1 dona mahsulot",
@@ -508,7 +463,6 @@
                 }
             ]
         },
-
         "special_offers": "🎯 Chegirmadagi Maxsus Takliflar",
         "buy_more_save_more": "Kop miqdorda xarid qiling — 55% gacha tejang!",
         "best_price_quality": "Eng yaxshi narx va sifat kafolati!",
@@ -520,9 +474,8 @@
         "ready_for_discounts": "Ajoyib chegirmalarga tayyormisiz?",
         "limited_offers": "Cheklangan takliflardan foydalanib qoling!",
         "start_shopping": "Xaridni boshlash",
-    "price_per_unit_badge": "1 dona narxi",
-    "price_per_unit_tooltip": "Ko'plik to'plamdagi mahsulotning bir dona narxi",
-
+        "price_per_unit_badge": "1 dona narxi",
+        "price_per_unit_tooltip": "Ko'plik to'plamdagi mahsulotning bir dona narxi",
         "products_data": {
             "1": {
                 "title": "2 ta Complex: 990 000 x 2 = 1 980 000 so'm (chegirmasiz narx: 2 340 000 so'm)",
@@ -535,7 +488,6 @@
                     }
                 ]
             },
-
             "2": {
                 "title": "1ta Complex + 1ta Complex Extra + 1ta Gelmin Kids = 1 570 000 so'm (chegirmasiz narxi: 2 830 000 so'm)",
                 "items": [
@@ -550,7 +502,6 @@
                     }
                 ]
             },
-
             "3": {
                 "title": "2ta Complex + 2ta Complex Extra + 1ta Gelmin Kids = 2 460 000 so'm (chegirmasiz narxi: 5 170 000 so'm)",
                 "items": [
@@ -567,7 +518,6 @@
             }
         }
     },
-
     "chat": {
         "title": "Chat",
         "aiChat": "AI bilan suhbat",
@@ -607,8 +557,7 @@
         "send": "Yuborish",
         "clearHistory": "Tarixni tozalash",
         "startSessionFailed": "Sessiya boshlashda xatolik yuz berdi."
-    }
-,
+    },
     "discountPopup": {
         "title": "🎁 3+2 Aksiya!",
         "subtitle": "3 ta Nutva Complex oling, 2 ta Nutva Extra bepul!",
@@ -647,8 +596,7 @@
         "secureCheckout": "To'lov xavfsiz va shifrlangan.",
         "saved": "Tejaldi",
         "complexBonus": "Siz <1>3 ta va undan ortiq Complex</1> mahsulotini tanlaganingiz sababli <3>{{count}} ta Complex Extra</3> mahsuloti bepul qo'shib beriladi!"
-    }
-    ,
+    },
     "certificates": {
         "badge": "Sertifikatlar va sifat",
         "heroTitle": "Nutva Pharm sifat tasdiqlangan",
@@ -685,8 +633,7 @@
                 "title": "SES xulosasi",
                 "description": "Sanitariya-epidemiologik xulosa.",
                 "issuer": "SES"
-            }
-            ,
+            },
             "4": {
                 "title": "Halal sertifikati — Nutva Pharm",
                 "description": "Nutva Pharm mahsulotlari uchun Halal sertifikati.",
@@ -703,8 +650,7 @@
                 "issuer": "Sertifikatlash organi"
             }
         }
-    }
-    ,
+    },
     "installment": {
         "badge": "Maxsus taklif",
         "title": "Nutva mahsulotlarini Uzum Marketdan nasiya savdo asosida sotib oling",
@@ -717,7 +663,6 @@
         "cta": "Uzum Marketda xarid qiling",
         "imageAlt": "Uzum Market - muddatli to'lov"
     },
-
     "countdown": {
         "title": "Aksiya yakunlanishiga",
         "discountToday": "Bugun chegirma {{percent}}%",
