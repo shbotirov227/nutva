@@ -23,7 +23,7 @@ import { Card } from "@/components/ui/card";
 export default function CartPage() {
   const { t } = useTranslation();
   const { lang } = useLang();
-  const { cart, total, originalTotal, hasComplexBonus, complexBonusQty } = useCartWithDiscounts();
+  const { cart, total, originalTotal } = useCartWithDiscounts();
   const { removeAll } = useCart();
 
   // Free shipping logic (thresholdni real qiymatingizga moslang)
@@ -32,7 +32,7 @@ export default function CartPage() {
   const leftForFree = Math.max(0, FREE_SHIPPING_THRESHOLD - total);
   const savings = useMemo(() => Math.max(0, originalTotal - total), [originalTotal, total]);
 
-  console.log("hasComplexBonus", hasComplexBonus)
+
 
   if (cart.length === 0) {
     return (
@@ -106,33 +106,7 @@ export default function CartPage() {
         </div>
       </div>
 
-      {/* Complex bonus alert */}
-      <AnimatePresence initial={false}>
-        {hasComplexBonus && (
-          <motion.div
-            key="bonus-alert"
-            initial={{ opacity: 0, y: -10, height: 0 }}
-            animate={{ opacity: 1, y: 0, height: "auto" }}
-            exit={{ opacity: 0, y: -10, height: 0 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className="overflow-hidden"
-          >
-            <Card className="mb-4 border border-emerald-300 bg-emerald-50 px-4 py-4 text-lg font-semibold text-emerald-800">
-              <div className="flex items-center justify-center gap-2">
-                <Gift className="w-5 h-5 text-emerald-700" />
-                <Trans
-                  i18nKey="cart.complexBonus"
-                  count={complexBonusQty}
-                  components={{
-                    1: <b />,
-                    3: <b />,
-                  }}
-                />
-              </div>
-            </Card>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
 
 
 

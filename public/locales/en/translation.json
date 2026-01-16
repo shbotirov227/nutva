@@ -559,21 +559,21 @@
         "startSessionFailed": "Failed to start session."
     },
     "discountPopup": {
-        "title": "🎁 3+2 Promo!",
-        "subtitle": "Buy 3 Nutva Complex, get 2 Nutva Extra free!",
-        "ariaDiscount": "3+2 promo – buy 3 Nutva Complex, get 2 Nutva Extra free",
-        "discountLabel": "3 + 2 FREE",
-        "discountForFirst": "🎁 Nutva Complex + Nutva Extra gift",
+        "title": "🎁 Special Offer!",
+        "subtitle": "Special prices for today only!",
+        "ariaDiscount": "Special Offer – Discount on all products",
+        "discountLabel": "20% SALE",
+        "discountForFirst": "🎁 On all products",
         "qualityGuarantee": "High quality guarantee",
-        "limitedTimeOffer": "⏰ Promo ends:",
+        "limitedTimeOffer": "⏰ Hurry, time is running out:",
         "hours": "Hours",
         "minutes": "Min",
         "seconds": "Sec",
-        "claimDiscount": "Get Promo",
+        "claimDiscount": "Get Discount",
         "later": "Later",
         "benefitNatural": "Natural",
         "benefitQuality": "Halal",
-        "benefitFreeDelivery": "Free delivery"
+        "benefitFreeDelivery": "Delivery"
     },
     "cart": {
         "freeShippingActive": "Free shipping activated!",

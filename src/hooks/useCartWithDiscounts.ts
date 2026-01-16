@@ -1,7 +1,7 @@
 type RawCartItem = GetOneProductType & { quantity: number };
 
 import { useMemo } from "react";
-import { BONUS_RULE, useCart } from "@/context/CartContext";
+import { useCart } from "@/context/CartContext";
 import { GetOneProductType } from "@/types/products/getOneProduct";
 import { getDiscount } from "@/lib/getDiscount";
 import { ProductName } from "@/types/enums";
@@ -20,8 +20,6 @@ type UseCartWithDiscountsResult = {
   cart: EnrichedCartItem[];
   total: number;
   originalTotal: number;
-  hasComplexBonus: boolean;
-  complexBonusQty: number;
 };
 
 
@@ -60,22 +58,9 @@ export function useCartWithDiscounts(): UseCartWithDiscountsResult {
 
 
 
-  const complexQty = useMemo(
-    () =>
-      cart
-        .filter(item => item.name === ProductName.COMPLEX)
-        .reduce((sum, item) => sum + item.quantity, 0),
-    [cart]
-  );
-
-  const hasComplexBonus = complexQty >= 3;
-
-
   return {
     cart: enrichedCart,
     total,
     originalTotal,
-    hasComplexBonus,
-    complexBonusQty: hasComplexBonus ? BONUS_RULE.bonusQty : 0,
   };
 }

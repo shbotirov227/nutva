@@ -559,21 +559,21 @@
         "startSessionFailed": "Sessiya boshlashda xatolik yuz berdi."
     },
     "discountPopup": {
-        "title": "🎁 3+2 Aksiya!",
-        "subtitle": "3 ta Nutva Complex oling, 2 ta Nutva Extra bepul!",
-        "ariaDiscount": "3+2 aksiya – 3 ta Nutva Complex mahsulot oling, 2 ta Nutva Extra bepul",
-        "discountLabel": "3 + 2 BEPUL",
-        "discountForFirst": "🎁 Nutva Complex + Nutva Extra sovg'a",
+        "title": "🎁 Maxsus Taklif!",
+        "subtitle": "Faqat bugun uchun maxsus narxlar!",
+        "ariaDiscount": "Maxsus aksiya – barcha mahsulotlarga chegirma",
+        "discountLabel": "20% SALE",
+        "discountForFirst": "🎁 Barcha mahsulotlarga",
         "qualityGuarantee": "Yuqori sifat kafolati",
-        "limitedTimeOffer": "⏰ Aksiya tugaydi:",
+        "limitedTimeOffer": "⏰ Shoshiling, vaqt ketmoqda:",
         "hours": "Soat",
         "minutes": "Daq",
         "seconds": "Son",
-        "claimDiscount": "Aksiyani olish",
+        "claimDiscount": "Chegirmani olish",
         "later": "Keyinroq",
         "benefitNatural": "Tabiiy",
         "benefitQuality": "Halol",
-        "benefitFreeDelivery": "Bepul yetkazish"
+        "benefitFreeDelivery": "Yetkazish"
     },
     "blogSidebar": {
         "title": "Sizga mos mahsulotni tanlang",
