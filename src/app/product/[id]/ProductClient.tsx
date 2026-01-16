@@ -29,7 +29,7 @@ import { useCart } from "@/context/CartContext";
 import { CountdownTimer } from "@/components/CountDownTimer";
 import ProductReviewSlider from "@/components/ProductReviewSlider";
 import dynamic from "next/dynamic";
-import { ComplexPromoBanner } from "@/components/ComplexPromoBanner";
+
 
 const ProductCertificates = dynamic(() => import("../../../components/ProductCertificates"), {
   ssr: false,
@@ -136,7 +136,7 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
                       color={color}
                       bgColor={bgColor}
                       onClick={handleBuyClick}
-                      // If ProductPriceCard has its own disabling logic, it will see inStock=true.
+                    // If ProductPriceCard has its own disabling logic, it will see inStock=true.
                     />
                   </motion.div>
                 </div>
@@ -145,11 +145,7 @@ export default function ProductDetailClient({ id, initialProduct, initialLang }:
           </AnimatePresence>
 
           {/* Complex Promo Banner - Above discount counter */}
-          {uiProduct?.name === ProductName.COMPLEX && (
-            <div className="mt-6">
-              <ComplexPromoBanner color={color} bgColor={bgColor} />
-            </div>
-          )}
+
 
           <div className="space-y-4 mt-6">
             <CountdownTimer

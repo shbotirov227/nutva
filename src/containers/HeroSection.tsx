@@ -16,7 +16,7 @@ import { useLang } from "@/context/LangContext";
 import { useTranslated } from "@/hooks/useTranslated";
 import { useLowPowerMode } from "@/hooks/useLowPowerMode";
 // import { GetOneBannerType } from "@/types/banner/getOneBanner";
-import "swiper/css/effect-fade";
+
 import "swiper/css/pagination";
 import "swiper/css";
 
@@ -121,7 +121,7 @@ const HeroSection = () => {
                       <div className={`absolute ${cardOnRight ? "-left-8 -top-8" : "-right-8 -top-8"} h-40 w-40 rounded-full blur-3xl opacity-40 bg-emerald-400`} aria-hidden />
                       <div className={`absolute ${cardOnRight ? "left-0 bottom-0" : "right-0 bottom-0"} h-28 w-28 rounded-full blur-2xl opacity-30 bg-sky-400`} aria-hidden />
 
-            {mainImage ? (
+                      {mainImage ? (
                         <Image
                           src={mainImage}
                           alt={item?.title ? `${item.title} — banner` : `banner-${idx + 1}`}
