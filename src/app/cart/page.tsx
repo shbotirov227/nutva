@@ -5,7 +5,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import CartItem from "@/components/CartItem";
 import Container from "@/components/Container";
@@ -14,11 +14,9 @@ import { useCartWithDiscounts } from "@/hooks/useCartWithDiscounts";
 import { formatPrice } from "@/lib/formatPrice";
 import EmptyCartImg from "@/assets/images/empty-cart-img.png";
 import { useCart } from "@/context/CartContext";
-import { Trash2, ChevronLeft, ShieldCheck, Truck, Leaf, Gift } from "lucide-react";
+import { Trash2, ChevronLeft, ShieldCheck, Truck, Leaf } from "lucide-react";
 import clsx from "clsx";
 import { useLang } from "@/context/LangContext";
-import { AnimatePresence, motion } from "framer-motion";
-import { Card } from "@/components/ui/card";
 
 export default function CartPage() {
   const { t } = useTranslation();

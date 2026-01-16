@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { useCart } from "@/context/CartContext";
 import { GetOneProductType } from "@/types/products/getOneProduct";
 import { getDiscount } from "@/lib/getDiscount";
-import { ProductName } from "@/types/enums";
+
 
 type EnrichedCartItem = RawCartItem & {
   translatedName: string;

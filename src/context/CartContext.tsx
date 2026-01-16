@@ -8,7 +8,7 @@ import React, {
   useState,
 } from "react";
 import { GetOneProductType } from "@/types/products/getOneProduct";
-import { ProductName } from "@/types/enums";
+
 // import { useDiscount } from "@/hooks/useDiscount";
 // import { useTranslated } from "@/hooks/useTranslated";
 
