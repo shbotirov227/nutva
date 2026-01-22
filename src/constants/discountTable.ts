@@ -47,7 +47,7 @@ export const DISCOUNT_TABLE: Record<
   COMPLEX: {
     1: { price: 1170000, discount: 0, boxPrice: 1170000 },
     2: { price: 820000, discount: 30, boxPrice: 1640000 },
-    3: { price: 560000, discount: 50, boxPrice: 1680000 },
+    3: { price: 500000, discount: 57, boxPrice: 1500000 },
     // 5: { price: 560000, discount: 52, boxPrice: 2800000 },
   },
   COMPLEX_EXTRA: {

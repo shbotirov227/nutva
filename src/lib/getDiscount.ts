@@ -44,20 +44,38 @@ export function getDiscount(
 
   // const totalPrice = discountedPrice * quantity;
 
-      let quantityKey = 1;
-    if (quantity >= 5 && table[5]) quantityKey = 5;
-    else if (quantity >= 3 && table[3]) quantityKey = 3;
-    else if (quantity >= 2 && table[2]) quantityKey = 2;
-
-    const selected = table[quantityKey];
+  // Complex mahsuloti uchun maxsus logika: 3+ dona 500,000 so'm/dona
+  if (productKey === "COMPLEX" && quantity >= 3) {
     const basePrice = table[1].price;
-
-      const discountPercent =
-      selected.discount ??
-      Math.round(((basePrice - selected.price) / basePrice) * 100);
-
-    const pricePerUnit = selected.price;
+    const pricePerUnit = 500000;
     const totalPrice = pricePerUnit * quantity;
+    const discountPercent = Math.round(
+      ((basePrice - pricePerUnit) / basePrice) * 100
+    );
+
+    return {
+      basePrice,
+      pricePerUnit,
+      totalPrice,
+      discountPercent,
+    };
+  }
+
+  // Boshqa mahsulotlar uchun oddiy logika
+  let quantityKey = 1;
+  if (quantity >= 5 && table[5]) quantityKey = 5;
+  else if (quantity >= 3 && table[3]) quantityKey = 3;
+  else if (quantity >= 2 && table[2]) quantityKey = 2;
+
+  const selected = table[quantityKey];
+  const basePrice = table[1].price;
+
+  const discountPercent =
+    selected.discount ??
+    Math.round(((basePrice - selected.price) / basePrice) * 100);
+
+  const pricePerUnit = selected.price;
+  const totalPrice = pricePerUnit * quantity;
 
   return {
     basePrice,
