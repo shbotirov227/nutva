@@ -59,6 +59,7 @@ const nextConfig: NextConfig = {
     // typedRoutes: true, // Disabled for Turbopack compatibility
     // optimizeCss: true, // Disabled due to critters dependency issue
     webVitalsAttribution: ['CLS', 'LCP'],
+    // @ts-expect-error - legacyBuild is not in types yet but is supported in Next.js 15
     legacyBuild: true, // Next.js 15 Node.js environment fix
   },
 
