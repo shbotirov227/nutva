@@ -59,6 +59,7 @@ const nextConfig: NextConfig = {
     // typedRoutes: true, // Disabled for Turbopack compatibility
     // optimizeCss: true, // Disabled due to critters dependency issue
     webVitalsAttribution: ['CLS', 'LCP'],
+    legacyBuild: true, // Next.js 15 Node.js environment fix
   },
 
   // Modern browser target to reduce legacy JavaScript
