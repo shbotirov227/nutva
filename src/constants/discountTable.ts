@@ -53,8 +53,8 @@ export const DISCOUNT_TABLE: Record<
   COMPLEX_EXTRA: {
     1: { price: 990000, discount: 0, boxPrice: 990000 },
     2: { price: 730000, discount: 26, boxPrice: 1460000 },
-    3: { price: 520000, discount: 47, boxPrice: 1560000 },
-    // 5: { price: 520000, discount: 50, boxPrice: 1560000 },
+    3: { price: 500000, discount: 49, boxPrice: 1500000 },
+    // 5: { price: 500000, discount: 49, boxPrice: 2500000 },
   },
   GELMIN_KIDS: {
     1: { price: 490000, discount: 0 },

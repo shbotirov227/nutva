@@ -161,7 +161,7 @@ export default function ProductPriceCard({ product, bgColor, color, onClick }: P
                   transition={{ duration: 0.3, layout: { duration: 0.25 } }}
                   className="w-full rounded-xl flex flex-col gap-4"
                 >
-                  <Collapse show={discountPercent > 0 && !(product?.name === ProductName.COMPLEX && selectedQuantity >= 3)}>
+                  <Collapse show={discountPercent > 0 && !((product?.name === ProductName.COMPLEX || product?.name === ProductName.COMPLEX_EXTRA) && selectedQuantity >= 3)}>
                     <div className="flex items-center text-base font-semibold text-red-600 gap-1 mb-4 bg-white p-4 rounded-lg">
                       <Flame className="w-4 h-4" />
                       {t("common.forYou")} {discountPercent}% {t("common.sale")} • {isChecked ? count : quantity} {t("common.quantity")}

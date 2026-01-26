@@ -44,8 +44,8 @@ export function getDiscount(
 
   // const totalPrice = discountedPrice * quantity;
 
-  // Complex mahsuloti uchun maxsus logika: 3+ dona 500,000 so'm/dona
-  if (productKey === "COMPLEX" && quantity >= 3) {
+  // Complex va Complex Extra mahsulotlari uchun maxsus logika: 3+ dona 500,000 so'm/dona
+  if ((productKey === "COMPLEX" || productKey === "COMPLEX_EXTRA") && quantity >= 3) {
     const basePrice = table[1].price;
     const pricePerUnit = 500000;
     const totalPrice = pricePerUnit * quantity;
