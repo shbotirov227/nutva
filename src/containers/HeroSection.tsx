@@ -30,6 +30,35 @@ const HeroSection = () => {
 
   const localized = useTranslated(banner);
 
+  // Language-specific banner IDs
+  const BANNER_IDS = {
+    uz: [
+      "92bea674-3a97-40cd-932d-8f805eb857e8",
+      "ae8e63e3-2b45-4356-82b5-8f7320a9a529"
+    ],
+    ru: [
+      "3f9fd7b3-b421-4924-9a20-a7b12faece9c",
+      "016b47d3-2665-47c3-85a7-27e9e95c874f"
+    ]
+  };
+
+  // Filter banners based on language
+  const filteredBanners = React.useMemo(() => {
+    if (lang === "en") {
+      // Show all banners for English
+      return localized;
+    }
+
+    const allowedIds = BANNER_IDS[lang as keyof typeof BANNER_IDS];
+    if (!allowedIds) {
+      // If language not in the list, show all banners
+      return localized;
+    }
+
+    // Filter banners by allowed IDs
+    return localized.filter((item: any) => allowedIds.includes(item.id));
+  }, [localized, lang]);
+
   return (
     <div className="relative pt-[56px] overflow-hidden md:min-h-[calc(100svh-56px)]">
       {isLoading ? (
@@ -43,18 +72,18 @@ const HeroSection = () => {
           loop
           speed={1000}
           slidesPerView={1}
-          pagination={{ 
+          pagination={{
             clickable: true,
             bulletClass: "swiper-pagination-bullet !bg-white/60",
             bulletActiveClass: "swiper-pagination-bullet-active !bg-white"
           }}
           className="w-full md:h-[calc(100svh-56px)] hero-swiper"
         >
-          {localized.map((item: any, idx: number) => {
+          {filteredBanners.map((item: any, idx: number) => {
             const images: string[] = Array.isArray(item?.imageUrls) ? item.imageUrls : [];
             const mainImage = normalizeImageUrl(images[0]);
             const hasLink = Boolean(item?.link);
-            
+
             return (
               <SwiperSlide key={item.id || idx}>
                 <div className="relative w-full aspect-[16/9] md:aspect-auto md:h-[calc(100svh-56px)]">
@@ -110,7 +139,7 @@ const HeroSection = () => {
           })}
         </Swiper>
       )}
-      
+
       {/* Custom Swiper Styles */}
       <style jsx global>{`
         .hero-swiper .swiper-pagination {
